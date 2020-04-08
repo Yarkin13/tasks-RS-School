@@ -1,23 +1,33 @@
+body {
+    margin: 0;
+    background-repeat: no-repeat;
+    background-position: center 180px;
+    overflow-x: hidden;
+    font-family: Roboto;
+}
+
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+    min-height: 100vh;
 }
 
 .container-header {
     display: flex;
-    position: relative;
     width: 100%;
-    margin: 0 auto;
+    max-width: 1350px;
+    margin: 40px auto 0;
 }
+
 
 nav {
     position: relative;
 }
 
 .burgerMenu__checkbox {
+    position: relative;
     opacity: 0;
     width: 35px;
     height: 35px;
+    z-index: 10;
 }
 
 .burgerMenu {
@@ -37,6 +47,7 @@ nav {
     left: 50%;
     margin-left: -15px;
     border-radius: 5%;
+    z-index: 5;
 }
 
 .burgerLine::before, .burgerLine::after {
@@ -69,4 +80,21 @@ nav {
     right: 0;
 }
 
-/* перключатель */
+/* меню */
+.menu {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    width: 300px;
+    background-color: honeydew;
+    margin: -80px 0 0;
+    height: 100vh;
+    left: -700px;
+    padding: 200px 40px 40px;
+    transition: 0.5s;
+}
+
+
+.showMenu {
+    left: calc(675px - 50vw);
+}
