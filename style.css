@@ -1,0 +1,72 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container-header {
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+nav {
+    position: relative;
+}
+
+.burgerMenu__checkbox {
+    opacity: 0;
+    width: 35px;
+    height: 35px;
+}
+
+.burgerMenu {
+    width: 40px;
+    height: 40px;
+}
+
+/* кнопка */
+
+.burgerLine, .burgerLine::before, .burgerLine::after {
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background-color: #cdcdcd;
+    top: 50%;
+    margin-top: -1.5px;
+    left: 50%;
+    margin-left: -15px;
+    border-radius: 5%;
+}
+
+.burgerLine::before, .burgerLine::after {
+    content: " ";
+    transition: 0.3s;
+}
+
+.burgerLine::before {
+    transform: translateY(-8px);
+}
+
+.burgerLine::after {
+    transform: translateY(8px);
+}
+
+.burgerMenu_active::before {
+    transform: rotate(45deg);
+}
+
+.burgerMenu_active {
+    height: 0;
+}
+
+.burgerMenu_active::after {
+    transform: rotate(-45deg);
+}
+
+.switch-mode {
+    position: absolute;
+    right: 0;
+}
+
+/* перключатель */
