@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -10,19 +11,19 @@
     <div class="container">
         <div class="container-header">
             <nav role="navigation">
-                <div class="burgerMenu" id='burgerMenu'>
-                    <input type="checkbox" id="burger-checkbox" class="burgerMenu__checkbox">
-                    <span class="burgerLine"></span>
-                    <ul class="menu">
-                        <a href="#/" class="menu_item">Main page</a>
-                        <a href="#/cards" class="menu_item">Action (set A)</a>
-                        <a href="#/cards" class="menu_item">Action (set B)</a>
-                        <a href="#/cards" class="menu_item">Action (set C)</a>
-                        <a href="#/cards" class="menu_item">Adjective</a>
-                        <a href="#/cards" class="menu_item">Animal (set A)</a>
-                        <a href="#/cards" class="menu_item">Animal (set B)</a>
-                        <a href="#/cards" class="menu_item">Clothes</a>
-                        <a href="#/cards" class="menu_item">Emotion</a>
+                <div class="burger-menu" id='burgerMenu'>
+                    <input type="checkbox" id="burger-checkbox" class="burger-menu__checkbox">
+                    <span class="burger-line"></span>
+                    <ul class="burger-menu__menu">
+                        <a href="#/" class="menu__item">Main page</a>
+                        <a href="#/cards" class="menu__item">Action (set A)</a>
+                        <a href="#/cards" class="menu__item">Action (set B)</a>
+                        <a href="#/cards" class="menu__item">Action (set C)</a>
+                        <a href="#/cards" class="menu__item">Adjective</a>
+                        <a href="#/cards" class="menu__item">Animal (set A)</a>
+                        <a href="#/cards" class="menu__item">Animal (set B)</a>
+                        <a href="#/cards" class="menu__item">Clothes</a>
+                        <a href="#/cards" class="menu__item">Emotion</a>
                     </ul>
                 </div>
             </nav>
@@ -31,6 +32,54 @@
             </div>
         </div>
         <div class="container-cards">
+            <a>
+                <div class="container-card__items">
+                    <img src="img/dive.jpg" alt="dive" class="container-card__items__img">
+                    <p>Action (set A)</p>
+                </div>
+            </a>
+            <a>
+                <div class="container-card__items">
+                    <img src="img/run.jpg" alt="run" class="container-card__items__img">
+                    <p>Action (set B)</p>
+                </div>
+            </a>
+            <a>
+                <div class="container-card__items">
+                    <img src="img/build.jpg" alt="dive" class="container-card__items__img">
+                    <p>Action (set C)</p>
+                </div>
+            </a>
+            <a>
+                <div class="container-card__items">
+                    <img src="img/small.jpg" alt="dive" class="container-card__items__img">
+                    <p>Adjective</p>
+                </div>
+            </a>
+            <a>
+                <div class="container-card__items">
+                    <img src="img/dog.jpg" alt="dive" class="container-card__items__img">
+                    <p>Animal (set A)</p>
+                </div>
+            </a>
+            <a>
+                <div class="container-card__items">
+                    <img src="img/lion.jpg" alt="dive" class="container-card__items__img">
+                    <p>Animal (set B)</p>
+                </div>
+            </a>
+            <a>
+                <div class="container-card__items">
+                    <img src="img/coat.jpg" alt="dive" class="container-card__items__img">
+                    <p>Clothes</p>
+                </div>
+            </a>
+            <a>
+                <div class="container-card__items">
+                    <img src="img/smile.jpg" alt="dive" class="container-card__items__img">
+                    <p>Emotion</p>
+                </div>
+            </a>
         </div>
     </div>
 <script src="script.js"></script>
