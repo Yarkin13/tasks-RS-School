@@ -17,13 +17,25 @@ SWITCH_MODE.addEventListener('click', (event) => {
   if (event.target.checked === true) {
     document.querySelectorAll('.container-card__items').forEach(el => el.classList.add('container-card__items_mode-play'));
     MODE.innerHTML = 'Mode:  exam';
-    document.querySelector('.burger-menu__menu').classList.add('burger-menu__menu_mode-play')
-    document.querySelector('.switch-mode__for').classList.add('switch-mode__for_mode-play')
+    document.querySelector('.burger-menu__menu').classList.add('burger-menu__menu_mode-play');
+    document.querySelector('.switch-mode__for').classList.add('switch-mode__for_mode-play');
   } else {
     document.querySelectorAll('.container-card__items').forEach(el => el.classList.remove('container-card__items_mode-play'));
-    MODE.innerHTML = 'Mode: train'
-    document.querySelector('.burger-menu__menu').classList.remove('burger-menu__menu_mode-play')
-    document.querySelector('.switch-mode__for').classList.remove('switch-mode__for_mode-play')
+    MODE.innerHTML = 'Mode: train';
+    document.querySelector('.burger-menu__menu').classList.remove('burger-menu__menu_mode-play');
+    document.querySelector('.switch-mode__for').classList.remove('switch-mode__for_mode-play');
   }
 });
-console.log(object.name)
+
+const MENU_LIST = document.querySelector('.burger-menu__menu');
+MENU_LIST.addEventListener('click', (event) => {
+  sessionStorage.setItem('category', event.target.innerHTML);
+});
+const CARDS = document.querySelector('.container-cards');
+CARDS.addEventListener('click', (event) => {
+  if (event.target.tagName === 'IMG') {
+    sessionStorage.setItem('category', event.target.nextElementSibling.innerHTML);
+  } else {
+    sessionStorage.setItem('category', event.target.querySelector('p').innerHTML);
+  }
+});

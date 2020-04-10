@@ -126,43 +126,36 @@ nav {
 
 }
 
-.container-cards a {
-    text-decoration: none;
-}
-
-.container-card__items {
+.container-card__items-in-section {
     margin: 17px 17px;
     width: 300px;
     height: 250px;
-    border-radius: 10%;
-    background: linear-gradient(#f2d3cb, #f7f6cb);
+    border-radius: 5%;
+    background-color: white;
     box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
     transition-duration: 0.5s;
     cursor: pointer;
+    overflow: hidden;
 }
 
-.container-card__items:hover {
+.container-card__items-in-section:hover {
     box-shadow: 0 0 15px 10px #c7c1c1
 }
 
 .container-card__items__img {
     position: relative;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 10px solid #fcfce6;
-    left: calc(150px - 70px);
-    top: 25px;
+    width: 100%;
+    height: 80%;
     object-fit: cover;
 }
 
-.container-card__items p {
+.container-card__items-in-section  p {
     font-family: 'Lato', sans-serif;
     color: #2a3831;
     font-size: 30px;
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 0;
 }
 
 /* переключатель */
@@ -307,18 +300,12 @@ nav {
         left: calc(110px - 50vw);
     }
 
-    .container-card__items {
+    .container-card__items-in-section {
         width: 200px;
     }
 
     .burger-menu__menu {
         width: calc(100vw - 80px);
-    }
-
-    .container-card__items__img {
-        width: 100px;
-        height: 100px;
-        left: calc(100px - 60px);
     }
 
     .switch-mode {
