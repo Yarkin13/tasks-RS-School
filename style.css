@@ -173,6 +173,7 @@ nav {
 .switch-mode__checkbox:checked + .switch-mode__for::before {
     right: -55px;
 }
+
 .switch-mode__for {
     position: relative;
     cursor: pointer;

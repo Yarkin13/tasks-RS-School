@@ -136,6 +136,7 @@ nav {
     transition-duration: 0.5s;
     cursor: pointer;
     overflow: hidden;
+    position: relative;
 }
 
 .container-card__items-in-section:hover {
@@ -156,6 +157,29 @@ nav {
     display: flex;
     justify-content: center;
     margin-top: 0;
+}
+
+.rotate {
+    transform: rotateY(180deg);
+}
+
+.class-name:not(:hover){
+    transform: rotateY(0deg);
+}
+
+.container-card__items_rotate {
+    rotate: 90deg;
+    background-image: url(./img/rotate.png);
+    width: 50px;
+    height: 50px;
+    margin-top: -70px;
+    margin-left: 240px;
+    object-fit: cover;
+    background-size: 100%;
+}
+
+.hide {
+    opacity: 0;
 }
 
 /* переключатель */

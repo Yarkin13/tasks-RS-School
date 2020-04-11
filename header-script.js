@@ -33,8 +33,11 @@ MENU_LIST.addEventListener('click', (event) => {
 });
 const CARDS = document.querySelector('.container-cards');
 CARDS.addEventListener('click', (event) => {
+  if (event.target.classList.contains('container-card__items_rotate')) return;
   if (event.target.tagName === 'IMG') {
     sessionStorage.setItem('category', event.target.nextElementSibling.innerHTML);
+  } else if (event.target.tagName === 'P') {
+    sessionStorage.setItem('category', event.target.innerHTML);
   } else {
     sessionStorage.setItem('category', event.target.querySelector('p').innerHTML);
   }
