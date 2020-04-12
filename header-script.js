@@ -62,7 +62,7 @@ CARDS.addEventListener('click', (event) => { //запоминаем катего
     sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
   }
 });
-if (sessionStorage.length > 1) { //берем режим если вернулись с другой страницы
+if (typeof sessionStorage['stateNow'] !== "undefined") { //берем режим если вернулись с другой страницы
   stateNow = JSON.parse(sessionStorage.getItem('stateNow'));
   mode = stateNow.mode;
 }
