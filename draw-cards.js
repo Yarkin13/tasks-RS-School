@@ -6,13 +6,13 @@ if (mode === 'exam') { //принмиаем свойства в зависимо
   document.querySelectorAll('.container-card__items__img').forEach(el => el.classList.add('container-card__items__img_exam'))
   document.querySelector('.burger-menu__menu').classList.add('burger-menu__menu_mode-play');
   document.querySelector('.switch-mode__for').classList.add('switch-mode__for_mode-play');
-  document.querySelector('.game-options').classList.add('show');
+  document.querySelector('.game-options-start').classList.add('show');
   document.querySelector('.switch-mode__for').innerHTML = 'Exam';
 } else {
   document.getElementById('switch-mode').checked = false;
   stateNow.mode = 'train';
   document.querySelectorAll('.container-card__items__img').forEach(el => el.classList.remove('container-card__items__img_exam'));
-  document.querySelector('.game-options').classList.remove('show');
+  document.querySelector('.game-options-start').classList.remove('show');
   document.querySelector('.switch-mode__for').innerHTML = 'Train';
 };
 const indexCategory = cards[0].indexOf(stateNow.category); //определяем индекс категории из общего объекта

@@ -25,9 +25,9 @@ SWITCH_MODE.addEventListener('click', (event) => { //переключатель
     document.querySelector('.switch-mode__for').classList.add('switch-mode__for_mode-play');
     document.querySelector('.switch-mode__for').innerHTML = 'Exam';
     stateNow.mode = 'exam'; //фиксируем состояние
-    if (stateNow.category !== 'Main page') { // работает только для стринцы с карточками
+    if (stateNow.category !== 'Main page') { // работает только для страницы с карточками
       CARDS.querySelectorAll('img').forEach(el => el.classList.add('container-card__items__img_exam'));
-      document.querySelector('.game-options').classList.add('show');
+      document.querySelector('.game-options-start').classList.add('show');
     }
   } else {
     document.querySelectorAll('.container-card__items').forEach(el => el.classList.remove('container-card__items_mode-play'));
@@ -37,7 +37,12 @@ SWITCH_MODE.addEventListener('click', (event) => { //переключатель
     stateNow.mode = 'train';
     if (stateNow.category !== 'Main page') {
       CARDS.querySelectorAll('img').forEach(el => el.classList.remove('container-card__items__img_exam'));
-      document.querySelector('.game-options').classList.remove('show');
+      document.querySelector('.game-options-start').classList.remove('show');
+      document.getElementById('repeat').classList.remove('show'); //убираем производство от exam
+      document.querySelectorAll('.star-error').forEach(el => el.remove());
+      document.querySelectorAll('.star').forEach(el => el.remove());
+      document.querySelectorAll('img').forEach(el => el.classList.remove('inactive'));
+      document.querySelectorAll('.container-card__items-in-section').forEach(el => el.classList.remove('inactive-block'));
     }
   }
 });

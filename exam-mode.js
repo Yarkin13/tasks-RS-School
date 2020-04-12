@@ -41,15 +41,20 @@ function* generator() { //генератор для выдачи последо�
 
 const exam = generator();
 
-document.querySelector('.game-options').addEventListener('click', () => {
+let k = 0
+
+document.querySelector('.game-options-start').addEventListener('click', () => {
   arrayCards.sort(() => Math.random() - 0.5);
-  let i = 0;
-  oneItemAudio(i);
+  oneItemAudio(k);
+  event.target.classList.add('delete');
+  const repeat = document.getElementById('repeat');
+  repeat.classList.add('show');
   CARDS.addEventListener('click', (event) => {
+    if (stateNow.mode === 'train') return;
     if (event.target.classList.contains('container-cards')) return;
-    if (event.target.nextElementSibling.innerHTML === arrayCards[i].word) {
+    if (event.target.nextElementSibling.innerHTML === arrayCards[k].word) {
       exam.next();
-      i += 1;
+      k += 1;
       addStar();
       audioCorrect();
       event.target.classList.add('inactive');
@@ -58,6 +63,10 @@ document.querySelector('.game-options').addEventListener('click', () => {
       addStarError();
       audioError();
     }
-    if (i === 8) document.location.href = 'index.html';
+    if (k === 8) document.location.href = 'index.html';
   });
 });
+
+document.getElementById('repeat').addEventListener('click', (event) => {
+  oneItemAudio(k);
+})

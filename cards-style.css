@@ -261,7 +261,7 @@ nav {
     overflow-x: hidden;
 }
 
-.game-options {
+.game-options-start {
     display: flex;
     opacity: 0;
     justify-content: center;
@@ -278,6 +278,23 @@ nav {
     cursor: pointer;
     transition-duration: .5s;
     pointer-events: none;
+}
+
+.game-options-repeat {
+    display: flex;
+    opacity: 0;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    margin-top: 30px;
+    background-image: url(./img/repeat.svg), linear-gradient(#d8daf0, #898eb3);;
+    background-size: 60%, cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    cursor: pointer;
+    transition-duration: .5s;
+    pointer-events: none;
+    background-position: 50%;
 }
 
 .star {
@@ -306,6 +323,10 @@ nav {
 .show {
     opacity: 1;
     pointer-events: auto;
+}
+
+.delete {
+    display: none;
 }
 
 @media(max-width: 1335px) {
