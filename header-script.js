@@ -25,7 +25,7 @@ SWITCH_MODE.addEventListener('click', (event) => { //переключатель
     document.querySelector('.switch-mode__for').classList.add('switch-mode__for_mode-play');
     document.querySelector('.switch-mode__for').innerHTML = 'Exam';
     stateNow.mode = 'exam'; //фиксируем состояние
-    if (stateNow.category !== 'Main page' && typeof sessionStorage['stateNow'] !== "undefined") { // работает только для стринцы с карточками
+    if (stateNow.category !== 'Main page') { // работает только для стринцы с карточками
       CARDS.querySelectorAll('img').forEach(el => el.classList.add('container-card__items__img_exam'));
       document.querySelector('.game-options').classList.add('show');
     }
@@ -35,7 +35,7 @@ SWITCH_MODE.addEventListener('click', (event) => { //переключатель
     document.querySelector('.switch-mode__for').classList.remove('switch-mode__for_mode-play');
     document.querySelector('.switch-mode__for').innerHTML = 'Train';
     stateNow.mode = 'train';
-    if (stateNow.category !== 'Main page' && typeof sessionStorage['stateNow'] !== "undefined") {
+    if (stateNow.category !== 'Main page') {
       CARDS.querySelectorAll('img').forEach(el => el.classList.remove('container-card__items__img_exam'));
       document.querySelector('.game-options').classList.remove('show');
     }
