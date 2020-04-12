@@ -1,5 +1,4 @@
-CARDS.addEventListener('click', (event) => {
-  if(stateNow.mode === 'exam') return;
+CARDS.addEventListener('click', (event) => { //добавление звука
   if (event.target.classList.contains('container-card__items_rotate')) return;
   if (event.target.tagName === 'IMG') {
     stateNow.currentCard = event.target.nextElementSibling.innerHTML;
@@ -7,6 +6,7 @@ CARDS.addEventListener('click', (event) => {
   if (event.target.tagName === 'P') {
     stateNow.currentCard = event.target.innerHTML;
   }
+  if(stateNow.mode === 'exam') return;
   const searchAudio = stateNow.currentCard;
   if (/[а-я]+/.test(searchAudio)) return;
   const card = cards[indexCategory + 1].find(el => el.word === searchAudio);
@@ -16,7 +16,7 @@ CARDS.addEventListener('click', (event) => {
   audio.play();
 });
 
-CARDS.addEventListener('click', (event) => {
+CARDS.addEventListener('click', (event) => { //флип
   if (event.target.classList.contains('container-card__items_rotate')) {
     const searchTranslate = event.target.parentNode.querySelector('p').innerHTML;
     const card = cards[indexCategory + 1].find(el => el.word === searchTranslate);

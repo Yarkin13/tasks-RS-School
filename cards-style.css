@@ -79,7 +79,7 @@ nav {
 
 .switch-mode {
     order:999;
-    margin-left: 27%;
+    margin-left: calc(100% - 160px);
 }
 
 /* меню */
@@ -186,6 +186,10 @@ nav {
     opacity: 0;
 }
 
+.full-hide {
+    display: none;
+}
+
 /* переключатель */
 .switch-mode__checkbox{
     display: none;
@@ -200,15 +204,6 @@ nav {
     font-family: 'Lato', sans-serif;
     color: #cdcdcd;
     font-size: 25px;
-}
-
-.container-header p {
-    font-family: 'Lato', sans-serif;
-    color: #cdcdcd;
-    font-size: 25px;
-    justify-content: center;
-    margin: 0;
-    margin-left: 42%;
 }
 
 .switch-mode__for:after {
@@ -254,6 +249,7 @@ nav {
     background: linear-gradient(#d8daf0, #898eb3);
 }
 
+
 /* exam */
 .result {
     display: flex;
@@ -262,11 +258,12 @@ nav {
     max-width: 1350px;
     margin: 0 auto;
     justify-content: flex-end;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .game-options {
     display: flex;
+    opacity: 0;
     justify-content: center;
     align-items: center;
     width: 200px;
@@ -279,6 +276,36 @@ nav {
     color: #2a3831;
     font-size: 25px;
     cursor: pointer;
+    transition-duration: .5s;
+    pointer-events: none;
+}
+
+.star {
+    width: 40px;
+    height: 40px;
+    background-image: url(./img/star.jpg);
+    background-size: 100%;
+    flex-shrink: 0;
+}
+.star-error {
+    width: 40px;
+    height: 40px;
+    background-image: url(./img/star-eror.jpg);
+    background-size: 100%;
+    flex-shrink: 0;
+}
+
+.inactive {
+    opacity: 0.5;
+}
+
+.inactive-block {
+    pointer-events: none;
+}
+
+.show {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 @media(max-width: 1335px) {
@@ -291,7 +318,7 @@ nav {
     }
 
     .switch-mode {
-        margin-left: 20%;
+        margin-left: calc(100% - 160px);
     }
 
     .container-header p {
@@ -312,13 +339,7 @@ nav {
         max-width: 650px;
     }
 
-    .switch-mode {
-        margin-left: 7%;
-        margin-top: 1%;
-    }
-
     .container-header p {
-        margin-left: 33%;
         margin-top: 1%;
     }
 
@@ -341,12 +362,7 @@ nav {
     }
 
     .switch-mode {
-        margin-left: 15%;
         margin-top: 2%;
-    }
-
-    .container-header p {
-        display: none;
     }
 
     .show-menu {
@@ -363,10 +379,6 @@ nav {
         max-width: 220px;
     }
 
-    .switch-mode__for {
-        font-size: 0px;
-    }
-
     .show-menu {
         left: calc(110px - 50vw);
     }
@@ -380,7 +392,7 @@ nav {
     }
 
     .switch-mode {
-        margin-left: 47%;
-        margin-top: -5%;
+        margin-left: 25%;
+        margin-top: 2%;
     }
 }

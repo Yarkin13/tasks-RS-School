@@ -1,11 +1,12 @@
 const BURGER_BTN = document.getElementById('burger-checkbox');
 const MODE = document.getElementById('mode');
-let stateNow = {
+let stateNow = { // объект текущего состояния
   category: '',
-  mode: '',
+  mode: 'train',
   currentCard: ''
 };
-BURGER_BTN.addEventListener('click', (event) => {
+
+BURGER_BTN.addEventListener('click', (event) => { // меню
   const target = event.target;
   if (target.tagName === 'SPAN' || target.tagName === 'INPUT') {
     if (document.querySelector('span').classList.contains('burger-menu_active')) {
@@ -17,26 +18,26 @@ BURGER_BTN.addEventListener('click', (event) => {
   } else document.querySelector('.burger-menu__menu').classList.add('show-menu');
 });
 const SWITCH_MODE = document.getElementById('switch-mode');
-SWITCH_MODE.addEventListener('click', (event) => {
+SWITCH_MODE.addEventListener('click', (event) => { //переключатель
   if (event.target.checked === true) {
     document.querySelectorAll('.container-card__items').forEach(el => el.classList.add('container-card__items_mode-play'));
-    MODE.innerHTML = 'Mode:  exam';
     document.querySelector('.burger-menu__menu').classList.add('burger-menu__menu_mode-play');
     document.querySelector('.switch-mode__for').classList.add('switch-mode__for_mode-play');
-    stateNow.mode = 'exam';
-    if (stateNow.category !== 'Main page') {
+    document.querySelector('.switch-mode__for').innerHTML = 'Exam';
+    stateNow.mode = 'exam'; //фиксируем состояние
+    if (stateNow.category !== 'Main page' && sessionStorage.length !== 1) { // работает только для стринцы с карточками
       CARDS.querySelectorAll('img').forEach(el => el.classList.add('container-card__items__img_exam'));
-      document.querySelector('.game-options').classList.remove('hide');
+      document.querySelector('.game-options').classList.add('show');
     }
   } else {
     document.querySelectorAll('.container-card__items').forEach(el => el.classList.remove('container-card__items_mode-play'));
-    MODE.innerHTML = 'Mode: train';
     document.querySelector('.burger-menu__menu').classList.remove('burger-menu__menu_mode-play');
     document.querySelector('.switch-mode__for').classList.remove('switch-mode__for_mode-play');
+    document.querySelector('.switch-mode__for').innerHTML = 'Train';
     stateNow.mode = 'train';
-    if (stateNow.category !== 'Main page') {
+    if (stateNow.category !== 'Main page' && sessionStorage.length !== 1) {
       CARDS.querySelectorAll('img').forEach(el => el.classList.remove('container-card__items__img_exam'));
-      document.querySelector('.game-options').classList.add('hide');
+      document.querySelector('.game-options').classList.remove('show');
     }
   }
 });
@@ -48,7 +49,7 @@ MENU_LIST.addEventListener('click', (event) => {
   sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
 });
 const CARDS = document.querySelector('.container-cards');
-CARDS.addEventListener('click', (event) => {
+CARDS.addEventListener('click', (event) => { //запоминаем категорию для генерации страницы
   if (event.target.classList.contains('container-card__items_rotate')) return;
   if (event.target.tagName === 'IMG') {
     stateNow.category = event.target.nextElementSibling.innerHTML;
@@ -61,18 +62,20 @@ CARDS.addEventListener('click', (event) => {
     sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
   }
 });
-stateNow = JSON.parse(sessionStorage.getItem('stateNow'));
-mode = stateNow.mode;
-if (stateNow.mode === 'exam') {
+if (sessionStorage.length > 1) { //берем режим если вернулись с другой страницы
+  stateNow = JSON.parse(sessionStorage.getItem('stateNow'));
+  mode = stateNow.mode;
+}
+if (stateNow.mode === 'exam') { // меняем свойства в зависимости от режима
   document.getElementById('switch-mode').checked = true;
   document.querySelectorAll('.container-card__items').forEach(el => el.classList.add('container-card__items_mode-play'));
-  MODE.innerHTML = 'Mode:  exam';
   document.querySelector('.burger-menu__menu').classList.add('burger-menu__menu_mode-play');
   document.querySelector('.switch-mode__for').classList.add('switch-mode__for_mode-play');
+  document.querySelector('.switch-mode__for').innerHTML = 'Exam';
 } else {
   document.getElementById('switch-mode').checked = false;
   document.querySelectorAll('.container-card__items').forEach(el => el.classList.remove('container-card__items_mode-play'));
-  MODE.innerHTML = 'Mode: train';
   document.querySelector('.burger-menu__menu').classList.remove('burger-menu__menu_mode-play');
   document.querySelector('.switch-mode__for').classList.remove('switch-mode__for_mode-play');
+  document.querySelector('.switch-mode__for').innerHTML = 'Train';
 }

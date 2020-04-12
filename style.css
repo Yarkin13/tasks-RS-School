@@ -79,7 +79,7 @@ nav {
 
 .switch-mode {
     order:999;
-    margin-left: 27%;
+    margin-left: calc(100% - 170px);
 }
 
 /* меню */
@@ -182,15 +182,6 @@ nav {
     font-size: 25px;
 }
 
-.container-header p {
-    font-family: 'Lato', sans-serif;
-    color: #cdcdcd;
-    font-size: 25px;
-    justify-content: center;
-    margin: 0;
-    margin-left: 42%;
-}
-
 .switch-mode__for:after {
     content: " ";
     width: 50px;
@@ -239,14 +230,6 @@ nav {
         max-width: 1000px;
     }
 
-    .switch-mode {
-        margin-left: 20%;
-    }
-
-    .container-header p {
-        margin-left: 40%;
-    }
-
     .show-menu {
         left: calc(500px - 50vw);
     }
@@ -258,12 +241,10 @@ nav {
     }
 
     .switch-mode {
-        margin-left: 7%;
         margin-top: 1%;
     }
 
     .container-header p {
-        margin-left: 33%;
         margin-top: 1%;
     }
 
@@ -282,12 +263,7 @@ nav {
     }
 
     .switch-mode {
-        margin-left: 15%;
         margin-top: 2%;
-    }
-
-    .container-header p {
-        display: none;
     }
 
     .show-menu {
@@ -298,10 +274,6 @@ nav {
 @media(max-width: 340px) {
     .container-header {
         max-width: 220px;
-    }
-
-    .switch-mode__for {
-        font-size: 0px;
     }
 
     .show-menu {
@@ -323,7 +295,7 @@ nav {
     }
 
     .switch-mode {
-        margin-left: 47%;
-        margin-top: -5%;
+        margin-left: 26%;
+        margin-top: 2%;
     }
 }
