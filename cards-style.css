@@ -117,7 +117,6 @@ nav {
 /* карточки */
 
 .container-cards {
-    padding-top: 50px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -148,6 +147,11 @@ nav {
     width: 100%;
     height: 80%;
     object-fit: cover;
+    transition-duration: 0.3s;
+}
+
+.container-card__items__img_exam {
+    height: 100%;
 }
 
 .container-card__items-in-section  p {
@@ -250,8 +254,39 @@ nav {
     background: linear-gradient(#d8daf0, #898eb3);
 }
 
+/* exam */
+.result {
+    display: flex;
+    padding-top: 10px;
+    height: 40px;
+    max-width: 1350px;
+    margin: 0 auto;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.game-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 30px;
+    height: 50px;
+    background: linear-gradient(#d8daf0, #898eb3);
+    border-radius: 10px;
+    font-family: 'Lato', sans-serif;
+    color: #2a3831;
+    font-size: 25px;
+    cursor: pointer;
+}
+
 @media(max-width: 1335px) {
     .container-header {
+        max-width: 1000px;
+    }
+
+    .result {
         max-width: 1000px;
     }
 
@@ -270,6 +305,10 @@ nav {
 
 @media(max-width: 1000px) {
     .container-header {
+        max-width: 650px;
+    }
+
+    .result {
         max-width: 650px;
     }
 
@@ -293,6 +332,10 @@ nav {
         max-width: 300px;
     }
 
+    .result {
+        max-width: 300px;
+    }
+
     .burger-menu__menu {
         width: 300px;
     }
@@ -313,6 +356,10 @@ nav {
 
 @media(max-width: 340px) {
     .container-header {
+        max-width: 220px;
+    }
+
+    .result {
         max-width: 220px;
     }
 

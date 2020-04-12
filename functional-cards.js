@@ -1,13 +1,12 @@
-const category = sessionStorage.getItem('category');
 CARDS.addEventListener('click', (event) => {
   if (event.target.classList.contains('container-card__items_rotate')) return;
   if (event.target.tagName === 'IMG') {
-    sessionStorage.setItem('card', event.target.nextElementSibling.innerHTML);
+    stateNow.currentCard = event.target.nextElementSibling.innerHTML;
   }
   if (event.target.tagName === 'P') {
-    sessionStorage.setItem('card', event.target.innerHTML);
+    stateNow.currentCard = event.target.innerHTML;
   }
-  const searchAudio = sessionStorage.getItem('card');
+  const searchAudio = stateNow.currentCard;
   if (/[а-я]+/.test(searchAudio)) return;
   const card = cards[indexCategory + 1].find(el => el.word === searchAudio);
   const audio = new Audio();
