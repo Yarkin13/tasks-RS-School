@@ -1,4 +1,5 @@
 CARDS.addEventListener('click', (event) => {
+  if(stateNow.mode === 'exam') return;
   if (event.target.classList.contains('container-card__items_rotate')) return;
   if (event.target.tagName === 'IMG') {
     stateNow.currentCard = event.target.nextElementSibling.innerHTML;

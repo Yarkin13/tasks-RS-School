@@ -1,6 +1,6 @@
 const BURGER_BTN = document.getElementById('burger-checkbox');
 const MODE = document.getElementById('mode');
-let state = {
+let stateNow = {
   category: '',
   mode: '',
   currentCard: ''
@@ -23,7 +23,7 @@ SWITCH_MODE.addEventListener('click', (event) => {
     MODE.innerHTML = 'Mode:  exam';
     document.querySelector('.burger-menu__menu').classList.add('burger-menu__menu_mode-play');
     document.querySelector('.switch-mode__for').classList.add('switch-mode__for_mode-play');
-    state.mode = 'exam';
+    stateNow.mode = 'exam';
     if (stateNow.category !== 'Main page') {
       CARDS.querySelectorAll('img').forEach(el => el.classList.add('container-card__items__img_exam'));
       document.querySelector('.game-options').classList.remove('hide');
@@ -33,7 +33,7 @@ SWITCH_MODE.addEventListener('click', (event) => {
     MODE.innerHTML = 'Mode: train';
     document.querySelector('.burger-menu__menu').classList.remove('burger-menu__menu_mode-play');
     document.querySelector('.switch-mode__for').classList.remove('switch-mode__for_mode-play');
-    state.mode = 'train';
+    stateNow.mode = 'train';
     if (stateNow.category !== 'Main page') {
       CARDS.querySelectorAll('img').forEach(el => el.classList.remove('container-card__items__img_exam'));
       document.querySelector('.game-options').classList.add('hide');
@@ -44,27 +44,35 @@ SWITCH_MODE.addEventListener('click', (event) => {
 
 const MENU_LIST = document.querySelector('.burger-menu__menu');
 MENU_LIST.addEventListener('click', (event) => {
-  state.category = event.target.innerHTML;
-  sessionStorage.setItem('state', JSON.stringify(state));
+  stateNow.category = event.target.innerHTML;
+  sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
 });
 const CARDS = document.querySelector('.container-cards');
 CARDS.addEventListener('click', (event) => {
   if (event.target.classList.contains('container-card__items_rotate')) return;
   if (event.target.tagName === 'IMG') {
-    state.category = event.target.nextElementSibling.innerHTML;
-    sessionStorage.setItem('state', JSON.stringify(state));
+    stateNow.category = event.target.nextElementSibling.innerHTML;
+    sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
   } else if (event.target.tagName === 'P') {
-    state.category = event.target.innerHTML;
-    sessionStorage.setItem('state', JSON.stringify(state));
+    stateNow.category = event.target.innerHTML;
+    sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
   } else {
-    state.category = event.target.querySelector('p').innerHTML;
-    sessionStorage.setItem('state', JSON.stringify(state));
+    stateNow.category = event.target.querySelector('p').innerHTML;
+    sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
   }
 });
-stateNow = JSON.parse(sessionStorage.getItem('state'));
+stateNow = JSON.parse(sessionStorage.getItem('stateNow'));
 mode = stateNow.mode;
 if (stateNow.mode === 'exam') {
   document.getElementById('switch-mode').checked = true;
+  document.querySelectorAll('.container-card__items').forEach(el => el.classList.add('container-card__items_mode-play'));
+  MODE.innerHTML = 'Mode:  exam';
+  document.querySelector('.burger-menu__menu').classList.add('burger-menu__menu_mode-play');
+  document.querySelector('.switch-mode__for').classList.add('switch-mode__for_mode-play');
 } else {
   document.getElementById('switch-mode').checked = false;
+  document.querySelectorAll('.container-card__items').forEach(el => el.classList.remove('container-card__items_mode-play'));
+  MODE.innerHTML = 'Mode: train';
+  document.querySelector('.burger-menu__menu').classList.remove('burger-menu__menu_mode-play');
+  document.querySelector('.switch-mode__for').classList.remove('switch-mode__for_mode-play');
 }

@@ -1,4 +1,4 @@
-stateNow = JSON.parse(sessionStorage.getItem('state'));
+stateNow = JSON.parse(sessionStorage.getItem('stateNow'));
 mode = stateNow.mode;
 if (mode === 'exam') {
   document.getElementById('switch-mode').checked = true;
