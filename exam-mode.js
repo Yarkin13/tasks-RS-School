@@ -43,13 +43,12 @@ const exam = generator();
 
 let k = 0
 
-document.querySelector('.game-options-start').addEventListener('click', () => {
+START_BTN.addEventListener('click', () => {
   arrayCards.sort(() => Math.random() - 0.5);
   oneItemAudio(k);
   event.target.classList.add('delete');
-  const repeat = document.getElementById('repeat');
-  repeat.classList.add('show');
-  CARDS.addEventListener('click', (event) => {
+  REPEAT_BTN.classList.add('show');
+  CARDS_CONTAINER.addEventListener('click', (event) => {
     if (stateNow.mode === 'train') return;
     if (event.target.classList.contains('container-cards')) return;
     if (event.target.nextElementSibling.innerHTML === arrayCards[k].word) {
@@ -67,6 +66,6 @@ document.querySelector('.game-options-start').addEventListener('click', () => {
   });
 });
 
-document.getElementById('repeat').addEventListener('click', (event) => {
+REPEAT_BTN.addEventListener('click', (event) => {
   oneItemAudio(k);
 })

@@ -1,19 +1,20 @@
 stateNow = JSON.parse(sessionStorage.getItem('stateNow')); //берем категорию
 mode = stateNow.mode;
+
 if (mode === 'exam') { //принмиаем свойства в зависимости от режима
-  document.getElementById('switch-mode').checked = true;
+  SWITCH_MODE.checked = true;
   stateNow.mode = 'exam';
   document.querySelectorAll('.container-card__items__img').forEach(el => el.classList.add('container-card__items__img_exam'))
-  document.querySelector('.burger-menu__menu').classList.add('burger-menu__menu_mode-play');
-  document.querySelector('.switch-mode__for').classList.add('switch-mode__for_mode-play');
-  document.querySelector('.game-options-start').classList.add('show');
-  document.querySelector('.switch-mode__for').innerHTML = 'Exam';
+  BURGER_MENU.classList.add('burger-menu__menu_mode-play');
+  SWITCH_MODE_LABEL.classList.add('switch-mode__for_mode-play');
+  START_BTN.classList.add('show');
+  SWITCH_MODE_LABEL.innerHTML = 'Exam';
 } else {
-  document.getElementById('switch-mode').checked = false;
+  SWITCH_MODE.checked = false;
   stateNow.mode = 'train';
   document.querySelectorAll('.container-card__items__img').forEach(el => el.classList.remove('container-card__items__img_exam'));
-  document.querySelector('.game-options-start').classList.remove('show');
-  document.querySelector('.switch-mode__for').innerHTML = 'Train';
+  START_BTN.classList.remove('show');
+  SWITCH_MODE_LABEL.innerHTML = 'Train';
 };
 const indexCategory = cards[0].indexOf(stateNow.category); //определяем индекс категории из общего объекта
 let i = 0;
