@@ -1,5 +1,10 @@
 const arrayCards = cards[indexCategory + 1];
 const resultLine = document.querySelector('.result');
+const MODAL = document.createElement('div');
+MODAL.className = 'modal';
+function returnMainPage() {
+  return document.location.href = 'index.html';
+}
 function oneItemAudio(i) {
   const audio = new Audio();
   audio.preload = 'auto';
@@ -42,8 +47,11 @@ function* generator() { //генератор для выдачи последо�
 const exam = generator();
 
 let k = 0
+let error = 0;
 
 START_BTN.addEventListener('click', () => {
+  k = 0;
+  error = 0;
   arrayCards.sort(() => Math.random() - 0.5);
   oneItemAudio(k);
   event.target.classList.add('delete');
@@ -61,8 +69,30 @@ START_BTN.addEventListener('click', () => {
     } else {
       addStarError();
       audioError();
+      error += 1;
     }
-    if (k === 8) document.location.href = 'index.html';
+    if (k === 8) {
+      if(error === 0) {
+      const audio = new Audio();
+      audio.preload = 'auto';
+      audio.src = './audio/success.mp3';
+      audio.play();
+      document.querySelector('.container').classList.add('delete');
+      MODAL.className = 'modal-success'
+      document.body.append(MODAL);
+      setTimeout (returnMainPage, 4000);
+      } else {
+        const audio = new Audio();
+        audio.preload = 'auto';
+        audio.src = './audio/failure.mp3';
+        audio.play();
+        document.querySelector('.container').classList.add('delete');
+        MODAL.className = 'modal-failure'
+        MODAL.innerText = `Errors: ${error}`;
+        document.body.append(MODAL);
+        setTimeout (returnMainPage, 4000);
+      }
+    }
   });
 });
 
