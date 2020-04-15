@@ -1,3 +1,4 @@
+
 const BURGER_BTN = document.getElementById('burger-checkbox');
 const MODE = document.getElementById('mode');
 const SPAN = document.querySelector('span');
@@ -9,7 +10,7 @@ const CARD_LIST = document.querySelectorAll('.container-card__items');
 const START_BTN = document.querySelector('.game-options-start');
 const REPEAT_BTN = document.getElementById('repeat');
 let stateNow = { // объект текущего состояния
-  category: '',
+  category: 'Main page',
   mode: 'train',
   currentCard: '',
 };
@@ -23,8 +24,14 @@ BURGER_BTN.addEventListener('click', (event) => { // меню
   }
   if (BURGER_MENU.classList.contains('show-menu')) {
     BURGER_MENU.classList.remove('show-menu');
-  } else BURGER_MENU.classList.add('show-menu');
+  } else {
+    BURGER_MENU.classList.add('show-menu');
+  }
 });
+document.addEventListener('click', (event) => {
+  if(event.target !== BURGER_BTN) BURGER_MENU.classList.remove('show-menu');
+});
+
 SWITCH_MODE.addEventListener('click', (event) => { // переключатель
   if (event.target.checked === true) {
     CARD_LIST.forEach(el => el.classList.add('container-card__items_mode-play'));
@@ -63,7 +70,7 @@ BURGER_MENU.addEventListener('click', (event) => {
 });
 CARDS_CONTAINER.addEventListener('click', (event) => { // запоминаем категорию для генерации страницы
   if (event.target.classList.contains('container-card__items_rotate')) return;
-  if (event.target.tagName === 'IMG') {
+  if (event.target.tagName === 'IMG' ) {
     stateNow.category = event.target.nextElementSibling.innerHTML;
     sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
   } else if (event.target.tagName === 'P') {
@@ -78,6 +85,11 @@ if (typeof sessionStorage.stateNow !== 'undefined') { // берем режим �
   stateNow = JSON.parse(sessionStorage.getItem('stateNow'));
   mode = stateNow.mode;
 }
+BURGER_MENU.querySelectorAll('a').forEach(el => {
+  if(el.text === stateNow.category) {
+    el.classList.add('active');
+  }
+})
 if (stateNow.mode === 'exam') { // меняем свойства в зависимости от режима
   SWITCH_MODE.checked = true;
   CARD_LIST.forEach(el => el.classList.add('container-card__items_mode-play'));

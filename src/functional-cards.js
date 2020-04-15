@@ -7,6 +7,10 @@ CARDS_CONTAINER.addEventListener('click', (event) => { //добавление з
     stateNow.currentCard = event.target.innerHTML;
   }
   if(stateNow.mode === 'exam') return;
+  arrayAnalytics = JSON.parse(localStorage.getItem('arrayAnalytics'));
+  let indexForAnalytics = arrayAnalytics.find(el => el.word === stateNow.currentCard);
+  indexForAnalytics.clicksInTrain += 1;
+  localStorage.setItem('arrayAnalytics', JSON.stringify(arrayAnalytics));
   const searchAudio = stateNow.currentCard;
   if (/[а-я]+/.test(searchAudio)) return;
   const card = cards[indexCategory + 1].find(el => el.word === searchAudio);

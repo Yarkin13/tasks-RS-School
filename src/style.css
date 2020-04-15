@@ -106,6 +106,8 @@ nav {
 .burger-menu__menu a {
     text-decoration: none;
     color:white;
+    margin: 0 auto;
+    width: 200px;
     margin-top: 20px;
     text-align: center;
 }
@@ -114,6 +116,18 @@ nav {
     left: calc(675px - 50vw);
 }
 
+.menu__item {
+    transition-duration: 0.3s;
+}
+
+.menu__item:hover {
+    color: yellow;
+}
+
+.active {
+    border: 2px solid yellow;
+    border-radius: 10px;
+}
 /* карточки */
 
 .container-cards {

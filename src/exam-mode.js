@@ -35,7 +35,7 @@ function addStarError() {
   resultLine.append(star);
 }
 
-function* generator() { //генератор для выдачи последоватльных слов
+function* generator() { // генератор для выдачи последоватльных слов
   let i = 1;
   while (i < 8) {
     oneItemAudio(i);
@@ -46,7 +46,7 @@ function* generator() { //генератор для выдачи последо�
 
 const exam = generator();
 
-let k = 0
+let k = 0;
 let error = 0;
 
 START_BTN.addEventListener('click', () => {
@@ -66,31 +66,39 @@ START_BTN.addEventListener('click', () => {
       audioCorrect();
       event.target.classList.add('inactive');
       event.target.parentNode.classList.add('inactive-block');
+      arrayAnalytics = JSON.parse(localStorage.getItem('arrayAnalytics'));
+      const indexForAnalytics = arrayAnalytics.find(el => el.word === event.target.nextElementSibling.innerHTML);
+      indexForAnalytics.correctClick += 1;
+      localStorage.setItem('arrayAnalytics', JSON.stringify(arrayAnalytics));
     } else {
       addStarError();
       audioError();
       error += 1;
+      arrayAnalytics = JSON.parse(localStorage.getItem('arrayAnalytics'));
+      const indexForAnalytics = arrayAnalytics.find(el => el.word === arrayCards[k].word);
+      indexForAnalytics.incorrectClick += 1;
+      localStorage.setItem('arrayAnalytics', JSON.stringify(arrayAnalytics));
     }
     if (k === 8) {
-      if(error === 0) {
-      const audio = new Audio();
-      audio.preload = 'auto';
-      audio.src = './audio/success.mp3';
-      audio.play();
-      document.querySelector('.container').classList.add('delete');
-      MODAL.className = 'modal-success'
-      document.body.append(MODAL);
-      setTimeout (returnMainPage, 4000);
+      if (error === 0) {
+        const audio = new Audio();
+        audio.preload = 'auto';
+        audio.src = './audio/success.mp3';
+        audio.play();
+        document.querySelector('.container').classList.add('delete');
+        MODAL.className = 'modal-success';
+        document.body.append(MODAL);
+        setTimeout(returnMainPage, 4000);
       } else {
         const audio = new Audio();
         audio.preload = 'auto';
         audio.src = './audio/failure.mp3';
         audio.play();
         document.querySelector('.container').classList.add('delete');
-        MODAL.className = 'modal-failure'
+        MODAL.className = 'modal-failure';
         MODAL.innerText = `Errors: ${error}`;
         document.body.append(MODAL);
-        setTimeout (returnMainPage, 4000);
+        setTimeout(returnMainPage, 4000);
       }
     }
   });
@@ -98,4 +106,4 @@ START_BTN.addEventListener('click', () => {
 
 REPEAT_BTN.addEventListener('click', (event) => {
   oneItemAudio(k);
-})
+});
