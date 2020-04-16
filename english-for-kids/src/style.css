@@ -247,11 +247,19 @@ nav {
     .show-menu {
         left: calc(500px - 50vw);
     }
+
+    .burger-menu__menu {
+        height: 878px;
+    }
 }
 
 @media(max-width: 1000px) {
     .container-header {
         max-width: 650px;
+    }
+
+    .burger-menu__menu {
+        height: 1020px;
     }
 
     .switch-mode {
@@ -270,6 +278,10 @@ nav {
 @media(max-width: 667px) {
     .container-header {
         max-width: 300px;
+    }
+
+    .burger-menu__menu {
+        height: 2160px;
     }
 
     .burger-menu__menu {

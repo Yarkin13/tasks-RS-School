@@ -386,6 +386,10 @@ nav {
         margin-left: 40%;
     }
 
+    .burger-menu__menu {
+        height: 930px;
+    }
+
     .show-menu {
         left: calc(500px - 50vw);
     }
@@ -402,6 +406,10 @@ nav {
 
     .container-header p {
         margin-top: 1%;
+    }
+
+    .burger-menu__menu {
+        height: 1200px;
     }
 
     .show-menu {
@@ -422,6 +430,10 @@ nav {
         padding-top: 50px;
         background-position: 50%;
         background-size: 100%;    
+    }
+
+    .burger-menu__menu {
+        height: 2335px;
     }
 
     .result {
