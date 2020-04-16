@@ -1,6 +1,6 @@
 module.exports = {
 
-  "extends": "airbnb-base",
+  "extends": ["eslint-config-airbnb-base"],
 
   "env": {
       "browser": true,
@@ -16,6 +16,6 @@ module.exports = {
       "sourceType": "module"
   },
   "rules": {
-      "linebreak-style": ["error", "windows"]
+    
   }
 };

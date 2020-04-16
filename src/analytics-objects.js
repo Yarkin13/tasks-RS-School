@@ -1,3 +1,4 @@
+
 let arrayAnalytics = [
   {
     category: 'Action (set A)',
@@ -5,7 +6,7 @@ let arrayAnalytics = [
     translate: 'плакать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set A)',
@@ -13,7 +14,7 @@ let arrayAnalytics = [
     translate: 'танцевать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set A)',
@@ -21,7 +22,7 @@ let arrayAnalytics = [
     translate: 'нырять',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set A)',
@@ -29,7 +30,7 @@ let arrayAnalytics = [
     translate: 'рисовать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set A)',
@@ -37,7 +38,7 @@ let arrayAnalytics = [
     translate: 'ловить рыбу',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set A)',
@@ -45,7 +46,7 @@ let arrayAnalytics = [
     translate: 'летать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set A)',
@@ -53,7 +54,7 @@ let arrayAnalytics = [
     translate: 'обнимать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set A)',
@@ -61,7 +62,7 @@ let arrayAnalytics = [
     translate: 'прыгать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set B)',
@@ -69,7 +70,7 @@ let arrayAnalytics = [
     translate: 'открывать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set B)',
@@ -77,7 +78,7 @@ let arrayAnalytics = [
     translate: 'открывать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set B)',
@@ -85,7 +86,7 @@ let arrayAnalytics = [
     translate: 'указывать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set B)',
@@ -93,7 +94,7 @@ let arrayAnalytics = [
     translate: 'ездить',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set B)',
@@ -101,7 +102,7 @@ let arrayAnalytics = [
     translate: 'бежать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set B)',
@@ -109,7 +110,7 @@ let arrayAnalytics = [
     translate: 'петь',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set B)',
@@ -117,7 +118,7 @@ let arrayAnalytics = [
     translate: 'пропускать, прыгать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set B)',
@@ -125,7 +126,7 @@ let arrayAnalytics = [
     translate: 'плавать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set C)',
@@ -133,7 +134,7 @@ let arrayAnalytics = [
     translate: 'спорить',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set C)',
@@ -141,7 +142,7 @@ let arrayAnalytics = [
     translate: 'строить',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set C)',
@@ -149,7 +150,7 @@ let arrayAnalytics = [
     translate: 'нести',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set C)',
@@ -157,7 +158,7 @@ let arrayAnalytics = [
     translate: 'ловить',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set C)',
@@ -165,7 +166,7 @@ let arrayAnalytics = [
     translate: 'водить машину',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set C)',
@@ -173,7 +174,7 @@ let arrayAnalytics = [
     translate: 'падать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set C)',
@@ -181,7 +182,7 @@ let arrayAnalytics = [
     translate: 'тянуть',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Action (set C)',
@@ -189,7 +190,7 @@ let arrayAnalytics = [
     translate: 'толкать',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Adjective',
@@ -197,7 +198,7 @@ let arrayAnalytics = [
     translate: 'большой',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Adjective',
@@ -205,7 +206,7 @@ let arrayAnalytics = [
     translate: 'маленький',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Adjective',
@@ -213,7 +214,7 @@ let arrayAnalytics = [
     translate: 'быстрый',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Adjective',
@@ -221,7 +222,7 @@ let arrayAnalytics = [
     translate: 'медленный',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Adjective',
@@ -229,7 +230,7 @@ let arrayAnalytics = [
     translate: 'дружелюбный',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Adjective',
@@ -237,15 +238,15 @@ let arrayAnalytics = [
     translate: 'недружелюбный',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Adjective',
-    word: 'young', 
+    word: 'young',
     translate: 'молодой',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Adjective',
@@ -253,7 +254,7 @@ let arrayAnalytics = [
     translate: 'старый',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set A)',
@@ -261,7 +262,7 @@ let arrayAnalytics = [
     translate: 'кот',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set A)',
@@ -269,7 +270,7 @@ let arrayAnalytics = [
     translate: 'цыпленок',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set A)',
@@ -277,7 +278,7 @@ let arrayAnalytics = [
     translate: 'курица',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set A)',
@@ -285,7 +286,7 @@ let arrayAnalytics = [
     translate: 'собака',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set A)',
@@ -293,15 +294,15 @@ let arrayAnalytics = [
     translate: 'лошадь',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set A)',
     word: 'pig',
-    translate: 'свинья', 
+    translate: 'свинья',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set A)',
@@ -309,7 +310,7 @@ let arrayAnalytics = [
     translate: 'кролик',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set A)',
@@ -317,7 +318,7 @@ let arrayAnalytics = [
     translate: 'овца',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set B)',
@@ -325,7 +326,7 @@ let arrayAnalytics = [
     translate: 'птица',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set B)',
@@ -333,7 +334,7 @@ let arrayAnalytics = [
     translate: 'рыба',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set B)',
@@ -341,7 +342,7 @@ let arrayAnalytics = [
     translate: 'жаба',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set B)',
@@ -349,7 +350,7 @@ let arrayAnalytics = [
     translate: 'жираф',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set B)',
@@ -357,7 +358,7 @@ let arrayAnalytics = [
     translate: 'лев',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set B)',
@@ -365,7 +366,7 @@ let arrayAnalytics = [
     translate: 'мышь',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set B)',
@@ -373,7 +374,7 @@ let arrayAnalytics = [
     translate: 'черепаха',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Animal (set B)',
@@ -381,7 +382,7 @@ let arrayAnalytics = [
     translate: 'дельфин',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Clothes',
@@ -389,7 +390,7 @@ let arrayAnalytics = [
     translate: 'юбка',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Clothes',
@@ -397,7 +398,7 @@ let arrayAnalytics = [
     translate: 'брюки',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Clothes',
@@ -405,7 +406,7 @@ let arrayAnalytics = [
     translate: 'блузка',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Clothes',
@@ -413,7 +414,7 @@ let arrayAnalytics = [
     translate: 'платье',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Clothes',
@@ -421,7 +422,7 @@ let arrayAnalytics = [
     translate: 'ботинки',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Clothes',
@@ -429,7 +430,7 @@ let arrayAnalytics = [
     translate: 'рубашка',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Clothes',
@@ -437,7 +438,7 @@ let arrayAnalytics = [
     translate: 'пальто',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Clothes',
@@ -445,7 +446,7 @@ let arrayAnalytics = [
     translate: 'туфли',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Emotions',
@@ -453,7 +454,7 @@ let arrayAnalytics = [
     translate: 'грустный',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Emotions',
@@ -461,7 +462,7 @@ let arrayAnalytics = [
     translate: 'сердитый',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Emotions',
@@ -469,7 +470,7 @@ let arrayAnalytics = [
     translate: 'счастливый',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Emotions',
@@ -477,7 +478,7 @@ let arrayAnalytics = [
     translate: 'уставщий',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Emotions',
@@ -485,7 +486,7 @@ let arrayAnalytics = [
     translate: 'удивленный',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Emotions',
@@ -493,7 +494,7 @@ let arrayAnalytics = [
     translate: 'испуганный',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Emotions',
@@ -501,7 +502,7 @@ let arrayAnalytics = [
     translate: 'улыбка',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
+    incorrectClick: 0,
   },
   {
     category: 'Emotions',
@@ -509,10 +510,9 @@ let arrayAnalytics = [
     translate: 'смех',
     clicksInTrain: 0,
     correctClick: 0,
-    incorrectClick: 0
-  }
-]
-if (typeof localStorage.arrayAnalytics === 'undefined') { 
+    incorrectClick: 0,
+  },
+];
+if (typeof localStorage.arrayAnalytics === 'undefined') {
   localStorage.setItem('arrayAnalytics', JSON.stringify(arrayAnalytics));
 }
-  

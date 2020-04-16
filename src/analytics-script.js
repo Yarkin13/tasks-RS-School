@@ -115,7 +115,7 @@ document.getElementById('1').addEventListener('click', () => {
     if (prev.category < next.category) return -1;
     if (prev.category < next.category) return 1;
   });
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 document.getElementById('2').addEventListener('click', () => {
@@ -123,7 +123,7 @@ document.getElementById('2').addEventListener('click', () => {
     if (next.category < prev.category) return -1;
     if (next.category < prev.category) return 1;
   });
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 document.getElementById('3').addEventListener('click', () => {
@@ -131,7 +131,7 @@ document.getElementById('3').addEventListener('click', () => {
     if (prev.word < next.word) return -1;
     if (prev.word < next.word) return 1;
   });
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 document.getElementById('4').addEventListener('click', () => {
@@ -139,7 +139,7 @@ document.getElementById('4').addEventListener('click', () => {
     if (next.word < prev.word) return -1;
     if (next.word < prev.word) return 1;
   });
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 document.getElementById('5').addEventListener('click', () => {
@@ -147,7 +147,7 @@ document.getElementById('5').addEventListener('click', () => {
     if (prev.translate < next.translate) return -1;
     if (prev.translate < next.translate) return 1;
   });
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 document.getElementById('6').addEventListener('click', () => {
@@ -155,47 +155,47 @@ document.getElementById('6').addEventListener('click', () => {
     if (next.translate < prev.translate) return -1;
     if (next.translate < prev.translate) return 1;
   });
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 document.getElementById('7').addEventListener('click', () => {
   arrayAnalytics.sort((prev, next) => next.clicksInTrain - prev.clicksInTrain);
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 document.getElementById('8').addEventListener('click', () => {
   arrayAnalytics.sort((prev, next) => prev.clicksInTrain - next.clicksInTrain);
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 document.getElementById('9').addEventListener('click', () => {
   arrayAnalytics.sort((prev, next) => next.correctClick - prev.correctClick);
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 document.getElementById('10').addEventListener('click', () => {
   arrayAnalytics.sort((prev, next) => prev.correctClick - next.correctClick);
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 
 document.getElementById('11').addEventListener('click', () => {
   arrayAnalytics.sort((prev, next) => next.incorrectClick - prev.incorrectClick);
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 document.getElementById('12').addEventListener('click', () => {
   arrayAnalytics.sort((prev, next) => prev.incorrectClick - next.incorrectClick);
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 
 document.getElementById('13').addEventListener('click', () => {
   arrayAnalytics.sort((prev, next) => next.percent - prev.percent);
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });
 
 document.getElementById('14').addEventListener('click', () => {
   arrayAnalytics.sort((prev, next) => prev.percent - next.percent);
-  document.querySelectorAll('tr').forEach(el => sort(el));
+  document.querySelectorAll('tr').forEach((el) => sort(el));
 });

@@ -15,8 +15,9 @@ let stateNow = { // объект текущего состояния
   currentCard: '',
 };
 
+
 BURGER_BTN.addEventListener('click', (event) => { // меню
-  const target = event.target;
+  const { target } = event;
   if (target.tagName === 'SPAN' || target.tagName === 'INPUT') {
     if (SPAN.classList.contains('burger-menu_active')) {
       SPAN.classList.remove('burger-menu_active');
@@ -29,23 +30,23 @@ BURGER_BTN.addEventListener('click', (event) => { // меню
   }
 });
 document.addEventListener('click', (event) => {
-  if(event.target !== BURGER_BTN) BURGER_MENU.classList.remove('show-menu');
+  if (event.target !== BURGER_BTN) BURGER_MENU.classList.remove('show-menu');
 });
 
 SWITCH_MODE.addEventListener('click', (event) => { // переключатель
   if (event.target.checked === true) {
-    CARD_LIST.forEach(el => el.classList.add('container-card__items_mode-play'));
+    CARD_LIST.forEach((el) => el.classList.add('container-card__items_mode-play'));
     BURGER_MENU.classList.add('burger-menu__menu_mode-play');
     SWITCH_MODE_LABEL.classList.add('switch-mode__for_mode-play');
     SWITCH_MODE_LABEL.innerHTML = 'Exam';
     stateNow.mode = 'exam'; // фиксируем состояние
     if (stateNow.category !== 'Main page' && stateNow.category !== '') { // работает только для страницы с карточками
-      CARDS_CONTAINER.querySelectorAll('img').forEach(el => el.classList.add('container-card__items__img_exam'));
+      CARDS_CONTAINER.querySelectorAll('img').forEach((el) => el.classList.add('container-card__items__img_exam'));
       START_BTN.classList.add('show');
       START_BTN.classList.remove('delete');
     }
   } else {
-    CARD_LIST.forEach(el => el.classList.remove('container-card__items_mode-play'));
+    CARD_LIST.forEach((el) => el.classList.remove('container-card__items_mode-play'));
     BURGER_MENU.classList.remove('burger-menu__menu_mode-play');
     SWITCH_MODE_LABEL.classList.remove('switch-mode__for_mode-play');
     SWITCH_MODE_LABEL.innerHTML = 'Train';
@@ -53,13 +54,13 @@ SWITCH_MODE.addEventListener('click', (event) => { // переключатель
     if (stateNow.category !== 'Main page' && stateNow.category !== '') {
       const ERROR_STARS = document.querySelectorAll('.star-error');
       const STARS = document.querySelectorAll('.star');
-      CARDS_CONTAINER.querySelectorAll('img').forEach(el => el.classList.remove('container-card__items__img_exam'));
+      CARDS_CONTAINER.querySelectorAll('img').forEach((el) => el.classList.remove('container-card__items__img_exam'));
       START_BTN.classList.remove('show');
       REPEAT_BTN.classList.remove('show'); // убираем производство от exam
-      ERROR_STARS.forEach(el => el.remove());
-      STARS.forEach(el => el.remove());
-      document.querySelectorAll('img').forEach(el => el.classList.remove('inactive'));
-      document.querySelectorAll('.container-card__items-in-section').forEach(el => el.classList.remove('inactive-block'));
+      ERROR_STARS.forEach((el) => el.remove());
+      STARS.forEach((el) => el.remove());
+      document.querySelectorAll('img').forEach((el) => el.classList.remove('inactive'));
+      document.querySelectorAll('.container-card__items-in-section').forEach((el) => el.classList.remove('inactive-block'));
     }
   }
 });
@@ -70,7 +71,7 @@ BURGER_MENU.addEventListener('click', (event) => {
 });
 CARDS_CONTAINER.addEventListener('click', (event) => { // запоминаем категорию для генерации страницы
   if (event.target.classList.contains('container-card__items_rotate')) return;
-  if (event.target.tagName === 'IMG' ) {
+  if (event.target.tagName === 'IMG') {
     stateNow.category = event.target.nextElementSibling.innerHTML;
     sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
   } else if (event.target.tagName === 'P') {
@@ -85,20 +86,20 @@ if (typeof sessionStorage.stateNow !== 'undefined') { // берем режим �
   stateNow = JSON.parse(sessionStorage.getItem('stateNow'));
   mode = stateNow.mode;
 }
-BURGER_MENU.querySelectorAll('a').forEach(el => {
-  if(el.text === stateNow.category) {
+BURGER_MENU.querySelectorAll('a').forEach((el) => {
+  if (el.text === stateNow.category) {
     el.classList.add('active');
   }
-})
+});
 if (stateNow.mode === 'exam') { // меняем свойства в зависимости от режима
   SWITCH_MODE.checked = true;
-  CARD_LIST.forEach(el => el.classList.add('container-card__items_mode-play'));
+  CARD_LIST.forEach((el) => el.classList.add('container-card__items_mode-play'));
   BURGER_MENU.classList.add('burger-menu__menu_mode-play');
   SWITCH_MODE_LABEL.classList.add('switch-mode__for_mode-play');
   SWITCH_MODE_LABEL.innerHTML = 'Exam';
 } else {
   SWITCH_MODE.checked = false;
-  CARD_LIST.forEach(el => el.classList.remove('container-card__items_mode-play'));
+  CARD_LIST.forEach((el) => el.classList.remove('container-card__items_mode-play'));
   BURGER_MENU.classList.remove('burger-menu__menu_mode-play');
   SWITCH_MODE_LABEL.classList.remove('switch-mode__for_mode-play');
   SWITCH_MODE_LABEL.innerHTML = 'Train';

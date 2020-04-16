@@ -67,7 +67,7 @@ START_BTN.addEventListener('click', () => {
       event.target.classList.add('inactive');
       event.target.parentNode.classList.add('inactive-block');
       arrayAnalytics = JSON.parse(localStorage.getItem('arrayAnalytics'));
-      const indexForAnalytics = arrayAnalytics.find(el => el.word === event.target.nextElementSibling.innerHTML);
+      const indexForAnalytics = arrayAnalytics.find((el) => el.word === event.target.nextElementSibling.innerHTML);
       indexForAnalytics.correctClick += 1;
       localStorage.setItem('arrayAnalytics', JSON.stringify(arrayAnalytics));
     } else {
@@ -75,7 +75,7 @@ START_BTN.addEventListener('click', () => {
       audioError();
       error += 1;
       arrayAnalytics = JSON.parse(localStorage.getItem('arrayAnalytics'));
-      const indexForAnalytics = arrayAnalytics.find(el => el.word === arrayCards[k].word);
+      const indexForAnalytics = arrayAnalytics.find((el) => el.word === arrayCards[k].word);
       indexForAnalytics.incorrectClick += 1;
       localStorage.setItem('arrayAnalytics', JSON.stringify(arrayAnalytics));
     }
