@@ -1,8 +1,8 @@
 
-stateNow = JSON.parse(sessionStorage.getItem('stateNow')); // берем категорию
+stateNow = JSON.parse(sessionStorage.getItem('stateNow')); // define category
 mode = stateNow.mode;
 
-if (mode === 'exam') { // принмиаем свойства в зависимости от режима
+if (mode === 'exam') { // define mode
   SWITCH_MODE.checked = true;
   stateNow.mode = 'exam';
   document.querySelectorAll('.container-card__items__img').forEach((el) => el.classList.add('container-card__items__img_exam'));
@@ -17,11 +17,11 @@ if (mode === 'exam') { // принмиаем свойства в зависим�
   START_BTN.classList.remove('show');
   SWITCH_MODE_LABEL.innerHTML = 'Train';
 }
-const indexCategory = cards[0].indexOf(stateNow.category); // определяем индекс
-// категории из общего объекта
+const indexCategory = cards[0].indexOf(stateNow.category); // define index in array cards
+
 let i = 0;
 
-document.getElementById('container-cards').querySelectorAll('img').forEach((el) => { // отрисоываем картинки и значения
+document.getElementById('container-cards').querySelectorAll('img').forEach((el) => { // draw cards
   el.src = cards[indexCategory + 1][i].image;
   i += 1;
 });

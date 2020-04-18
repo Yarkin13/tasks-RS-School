@@ -35,7 +35,7 @@ function addStarError() {
   resultLine.append(star);
 }
 
-function* generator() { // генератор для выдачи последоватльных слов
+function* generator() {
   let i = 1;
   while (i < 8) {
     oneItemAudio(i);

@@ -9,14 +9,14 @@ const CARDS_CONTAINER = document.querySelector('.container-cards');
 const CARD_LIST = document.querySelectorAll('.container-card__items');
 const START_BTN = document.querySelector('.game-options-start');
 const REPEAT_BTN = document.getElementById('repeat');
-let stateNow = { // объект текущего состояния
+let stateNow = { 
   category: 'Main page',
   mode: 'train',
   currentCard: '',
 };
 
 
-BURGER_BTN.addEventListener('click', (event) => { // меню
+BURGER_BTN.addEventListener('click', (event) => { // menu
   const { target } = event;
   if (target.tagName === 'SPAN' || target.tagName === 'INPUT') {
     if (SPAN.classList.contains('burger-menu_active')) {
@@ -33,14 +33,14 @@ document.addEventListener('click', (event) => {
   if (event.target !== BURGER_BTN) BURGER_MENU.classList.remove('show-menu');
 });
 
-SWITCH_MODE.addEventListener('click', (event) => { // переключатель
+SWITCH_MODE.addEventListener('click', (event) => { 
   if (event.target.checked === true) {
     CARD_LIST.forEach((el) => el.classList.add('container-card__items_mode-play'));
     BURGER_MENU.classList.add('burger-menu__menu_mode-play');
     SWITCH_MODE_LABEL.classList.add('switch-mode__for_mode-play');
     SWITCH_MODE_LABEL.innerHTML = 'Exam';
-    stateNow.mode = 'exam'; // фиксируем состояние
-    if (stateNow.category !== 'Main page' && stateNow.category !== '') { // работает только для страницы с карточками
+    stateNow.mode = 'exam'; 
+    if (stateNow.category !== 'Main page' && stateNow.category !== '') { // only for cards.html
       CARDS_CONTAINER.querySelectorAll('img').forEach((el) => el.classList.add('container-card__items__img_exam'));
       START_BTN.classList.add('show');
       START_BTN.classList.remove('delete');
@@ -56,7 +56,7 @@ SWITCH_MODE.addEventListener('click', (event) => { // переключатель
       const STARS = document.querySelectorAll('.star');
       CARDS_CONTAINER.querySelectorAll('img').forEach((el) => el.classList.remove('container-card__items__img_exam'));
       START_BTN.classList.remove('show');
-      REPEAT_BTN.classList.remove('show'); // убираем производство от exam
+      REPEAT_BTN.classList.remove('show'); // delete items mode exam
       ERROR_STARS.forEach((el) => el.remove());
       STARS.forEach((el) => el.remove());
       document.querySelectorAll('img').forEach((el) => el.classList.remove('inactive'));
@@ -69,7 +69,7 @@ BURGER_MENU.addEventListener('click', (event) => {
   stateNow.category = event.target.innerHTML;
   sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
 });
-CARDS_CONTAINER.addEventListener('click', (event) => { // запоминаем категорию для генерации страницы
+CARDS_CONTAINER.addEventListener('click', (event) => { // add category for draw cards
   if (event.target.classList.contains('container-card__items_rotate')) return;
   if (event.target.tagName === 'IMG') {
     stateNow.category = event.target.nextElementSibling.innerHTML;
@@ -82,7 +82,7 @@ CARDS_CONTAINER.addEventListener('click', (event) => { // запоминаем �
     sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
   }
 });
-if (typeof sessionStorage.stateNow !== 'undefined') { // берем режим если вернулись с другой страницы
+if (typeof sessionStorage.stateNow !== 'undefined') { // if first open page
   stateNow = JSON.parse(sessionStorage.getItem('stateNow'));
   mode = stateNow.mode;
 }
@@ -91,7 +91,7 @@ BURGER_MENU.querySelectorAll('a').forEach((el) => {
     el.classList.add('active');
   }
 });
-if (stateNow.mode === 'exam') { // меняем свойства в зависимости от режима
+if (stateNow.mode === 'exam') { 
   SWITCH_MODE.checked = true;
   CARD_LIST.forEach((el) => el.classList.add('container-card__items_mode-play'));
   BURGER_MENU.classList.add('burger-menu__menu_mode-play');

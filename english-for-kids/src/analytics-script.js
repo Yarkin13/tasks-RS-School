@@ -3,7 +3,7 @@ const SPAN = document.querySelector('span');
 const BURGER_MENU = document.querySelector('.burger-menu__menu');
 const stateNow = JSON.parse(sessionStorage.getItem('stateNow'));
 stateNow.mode = 'train';
-BURGER_BTN.addEventListener('click', (event) => { // меню
+BURGER_BTN.addEventListener('click', (event) => { // Menu
   if (event.target.tagName === 'SPAN' || event.target.tagName === 'INPUT') {
     if (SPAN.classList.contains('burger-menu_active')) {
       SPAN.classList.remove('burger-menu_active');
@@ -28,17 +28,17 @@ BURGER_MENU.addEventListener('click', (event) => {
   sessionStorage.setItem('stateNow', JSON.stringify(stateNow));
 });
 
-const arrayAnalytics = JSON.parse(localStorage.getItem('arrayAnalytics')); // добавляем проценты в массив
+const arrayAnalytics = JSON.parse(localStorage.getItem('arrayAnalytics')); // add percent in analytics array
 arrayAnalytics.forEach((el) => {
   el.percent = Math.round((el.correctClick / (el.correctClick + el.incorrectClick)) * 100);
   if (el.correctClick === 0 && el.incorrectClick === 0) el.percent = 0;
   if (el.correctClick !== 0 && el.incorrectClick === 0) el.percent = 100;
 });
 const arrayHeading = ['Category', 'Word', 'Translate', 'Clicks in train', 'Correct click in exam',
-  'Incorrect click in exam', '%']; // масив для хедеров таблицы
+  'Incorrect click in exam', '%']; 
 const TABLE = document.createElement('table');
 document.querySelector('.container').append(TABLE);
-for (let i = 0; i <= 64; i += 1) { // отрисовываем таблицу
+for (let i = 0; i <= 64; i += 1) { // draw table
   const TABLE_ROW = document.createElement('tr');
   TABLE.append(TABLE_ROW);
   if (i === 0) {
@@ -94,7 +94,7 @@ for (let i = 0; i <= 64; i += 1) { // отрисовываем таблицу
 }
 
 let f = -1;
-function sort(el) {
+function sort(el) { 
   if (f === 64) f = -1;
   f += 1;
   if (f === 0) return;
@@ -110,7 +110,7 @@ function sort(el) {
   }
 }
 
-document.getElementById('1').addEventListener('click', () => {
+document.getElementById('1').addEventListener('click', () => { //sort
   arrayAnalytics.sort((prev, next) => {
     if (prev.category < next.category) return -1;
     if (prev.category < next.category) return 1;

@@ -1,5 +1,5 @@
 
-CARDS_CONTAINER.addEventListener('click', (event) => { // добавление звука
+CARDS_CONTAINER.addEventListener('click', (event) => { // add audio
   if (event.target.classList.contains('container-card__items_rotate')) return;
   if (event.target.tagName === 'IMG') {
     stateNow.currentCard = event.target.nextElementSibling.innerHTML;
@@ -21,7 +21,7 @@ CARDS_CONTAINER.addEventListener('click', (event) => { // добавление �
   audio.play();
 });
 
-CARDS_CONTAINER.addEventListener('click', (event) => { // флип
+CARDS_CONTAINER.addEventListener('click', (event) => { // flip
   if (event.target.classList.contains('container-card__items_rotate')) {
     const searchTranslate = event.target.parentNode.querySelector('p').innerHTML;
     const card = cards[indexCategory + 1].find((el) => el.word === searchTranslate);
