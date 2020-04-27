@@ -1,3 +1,3 @@
 # english-for-kids
 
-https://english-for-kids-by-yarkin13.netlify.app/
+https://yarkin13-english-for-kids.netlify.app/
