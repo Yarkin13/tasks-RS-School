@@ -18,17 +18,12 @@ let stateNow = {
 
 BURGER_BTN.addEventListener('click', (event) => { // menu
   const { target } = event;
-  if (target.tagName === 'SPAN' || target.tagName === 'INPUT') {
-    if (SPAN.classList.contains('burger-menu_active')) {
-      SPAN.classList.remove('burger-menu_active');
-    } else SPAN.classList.add('burger-menu_active');
+  if (event.target.dataset.indexNumber = '1') {
+    SPAN.classList.toggle('burger-menu_active');
   }
-  if (BURGER_MENU.classList.contains('show-menu')) {
-    BURGER_MENU.classList.remove('show-menu');
-  } else {
-    BURGER_MENU.classList.add('show-menu');
-  }
+  BURGER_MENU.classList.toggle('show-menu');
 });
+
 document.addEventListener('click', (event) => {
   if (event.target !== BURGER_BTN) BURGER_MENU.classList.remove('show-menu');
 });
