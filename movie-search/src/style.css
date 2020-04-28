@@ -5,7 +5,10 @@ header {
   height: 100px;
   justify-content: center;
   align-items: center;
-  background-color: grey;
+  font-family: 'Lato', sans-serif;
+  color: #cdcdcd;
+  background:linear-gradient(red, black);
+  font-size: 20px;
 }
 
 form {
@@ -19,6 +22,11 @@ form {
 footer {
   width: 100%;
   background-color: grey;
+}
+.card-poster {
+  width: 300px;
+  background-color: grey;
+  height: 500px;
 }
 
 

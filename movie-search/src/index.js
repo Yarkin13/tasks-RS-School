@@ -1,7 +1,10 @@
 import Swiper from 'swiper';
-var mySwiper = new Swiper ('.swiper-container', {
+import {
+  getMovieInfo, drawPosters, drawTitle, drawYear, getMovieRate,getImdbID
+} from './request.js';
+
+const mySwiper = new Swiper('.swiper-container', {
   direction: 'horizontal',
-  loop: true,
   pagination: {
     el: '.swiper-pagination',
   },
@@ -12,35 +15,42 @@ var mySwiper = new Swiper ('.swiper-container', {
   scrollbar: {
     el: '.swiper-scrollbar',
   },
-  slidesPerView: 4
-})
+  breakpoints: {
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 20,
+    },
+    480: {
+      slidesPerView: 2,
+      spaceBetween: 30,
+    },
+    640: {
+      slidesPerView: 3,
+      spaceBetween: 40,
+    },
+    900: {
+      slidesPerView: 4,
+      spaceBetween: 40,
+    },
+  },
+});
 
- async function getMovieArray(page, search) {
-  const url = `https://www.omdbapi.com/?s=${search}&page=${page}&apikey=2e0bd215`;
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log(data)
-  return data
- }
-
-
- document.querySelector('button').addEventListener('click', (event) => {
+document.querySelector('button').addEventListener('click', (event) => {
   event.preventDefault();
   const text = document.querySelector('input').value;
-  const data = getMovieArray(1, text);
-  let data1
-  data.then((data1) => {
-    return data1;
+  const data = getMovieInfo(1, text);
+  data.then((data) => {
+    drawPosters(data);
+    drawTitle(data);
+    drawYear(data);
+    const idArray = getImdbID(data);
+    getMovieRate(idArray);
   })
-  console.log(data1)
-  /* const postersArray = [];
-  const slides = document.querySelector('.swiper-wrapper');
-  for (let i = 0; i < data.Search.length; i += 1) {
-    postersArray[i] = data.Search[i].Poster;
-  }
-  let j = 0;
-  slides.querySelectorAll('img').forEach((el) => {
-    el.src = postersArray[j];
-    j++
-  }) */
- })
+});
+
+mySwiper.on('reachEnd', () => {
+  const text = document.querySelector('input').value;
+  /* const data = getMovieArray(2, text); */
+  mySwiper.appendSlide('<div class="swiper-slide">Slide 10"</div>');
+  mySwiper.update();
+});

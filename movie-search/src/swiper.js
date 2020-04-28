@@ -11,11 +11,10 @@
  */
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.Swiper = factory());
-}(this, (function () { 'use strict';
-
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory()
+    : typeof define === 'function' && define.amd ? define(factory)
+      : (global = global || self, global.Swiper = factory());
+}(this, (() => {
   /**
    * SSR Window 1.0.1
    * Better handling for window object in SSR environment
@@ -27,7 +26,7 @@
    *
    * Released on: July 18, 2018
    */
-  var doc = (typeof document === 'undefined') ? {
+  const doc = (typeof document === 'undefined') ? {
     body: {},
     addEventListener: function addEventListener() {},
     removeEventListener: function removeEventListener() {},
@@ -63,7 +62,7 @@
     location: { hash: '' },
   } : document; // eslint-disable-line
 
-  var win = (typeof window === 'undefined') ? {
+  const win = (typeof window === 'undefined') ? {
     document: doc,
     navigator: {
       userAgent: '',
@@ -103,10 +102,10 @@
    * Released on: February 11, 2019
    */
 
-  var Dom7 = function Dom7(arr) {
-    var self = this;
+  const Dom7 = function Dom7(arr) {
+    const self = this;
     // Create array-like object
-    for (var i = 0; i < arr.length; i += 1) {
+    for (let i = 0; i < arr.length; i += 1) {
       self[i] = arr[i];
     }
     self.length = arr.length;
@@ -115,21 +114,21 @@
   };
 
   function $(selector, context) {
-    var arr = [];
-    var i = 0;
+    const arr = [];
+    let i = 0;
     if (selector && !context) {
       if (selector instanceof Dom7) {
         return selector;
       }
     }
     if (selector) {
-        // String
+      // String
       if (typeof selector === 'string') {
-        var els;
-        var tempParent;
-        var html = selector.trim();
+        let els;
+        let tempParent;
+        const html = selector.trim();
         if (html.indexOf('<') >= 0 && html.indexOf('>') >= 0) {
-          var toCreate = 'div';
+          let toCreate = 'div';
           if (html.indexOf('<li') === 0) { toCreate = 'ul'; }
           if (html.indexOf('<tr') === 0) { toCreate = 'tbody'; }
           if (html.indexOf('<td') === 0 || html.indexOf('<th') === 0) { toCreate = 'tr'; }
@@ -170,8 +169,8 @@
   $.Dom7 = Dom7;
 
   function unique(arr) {
-    var uniqueArray = [];
-    for (var i = 0; i < arr.length; i += 1) {
+    const uniqueArray = [];
+    for (let i = 0; i < arr.length; i += 1) {
       if (uniqueArray.indexOf(arr[i]) === -1) { uniqueArray.push(arr[i]); }
     }
     return uniqueArray;
@@ -182,18 +181,18 @@
     if (typeof className === 'undefined') {
       return this;
     }
-    var classes = className.split(' ');
-    for (var i = 0; i < classes.length; i += 1) {
-      for (var j = 0; j < this.length; j += 1) {
+    const classes = className.split(' ');
+    for (let i = 0; i < classes.length; i += 1) {
+      for (let j = 0; j < this.length; j += 1) {
         if (typeof this[j] !== 'undefined' && typeof this[j].classList !== 'undefined') { this[j].classList.add(classes[i]); }
       }
     }
     return this;
   }
   function removeClass(className) {
-    var classes = className.split(' ');
-    for (var i = 0; i < classes.length; i += 1) {
-      for (var j = 0; j < this.length; j += 1) {
+    const classes = className.split(' ');
+    for (let i = 0; i < classes.length; i += 1) {
+      for (let j = 0; j < this.length; j += 1) {
         if (typeof this[j] !== 'undefined' && typeof this[j].classList !== 'undefined') { this[j].classList.remove(classes[i]); }
       }
     }
@@ -204,16 +203,16 @@
     return this[0].classList.contains(className);
   }
   function toggleClass(className) {
-    var classes = className.split(' ');
-    for (var i = 0; i < classes.length; i += 1) {
-      for (var j = 0; j < this.length; j += 1) {
+    const classes = className.split(' ');
+    for (let i = 0; i < classes.length; i += 1) {
+      for (let j = 0; j < this.length; j += 1) {
         if (typeof this[j] !== 'undefined' && typeof this[j].classList !== 'undefined') { this[j].classList.toggle(classes[i]); }
       }
     }
     return this;
   }
   function attr(attrs, value) {
-    var arguments$1 = arguments;
+    const arguments$1 = arguments;
 
     if (arguments.length === 1 && typeof attrs === 'string') {
       // Get attr
@@ -222,7 +221,7 @@
     }
 
     // Set attrs
-    for (var i = 0; i < this.length; i += 1) {
+    for (let i = 0; i < this.length; i += 1) {
       if (arguments$1.length === 2) {
         // String
         this[i].setAttribute(attrs, value);
@@ -239,13 +238,13 @@
   }
   // eslint-disable-next-line
   function removeAttr(attr) {
-    for (var i = 0; i < this.length; i += 1) {
+    for (let i = 0; i < this.length; i += 1) {
       this[i].removeAttribute(attr);
     }
     return this;
   }
   function data(key, value) {
-    var el;
+    let el;
     if (typeof value === 'undefined') {
       el = this[0];
       // Get value
@@ -254,7 +253,7 @@
           return el.dom7ElementDataStorage[key];
         }
 
-        var dataKey = el.getAttribute(("data-" + key));
+        const dataKey = el.getAttribute((`data-${key}`));
         if (dataKey) {
           return dataKey;
         }
@@ -264,7 +263,7 @@
     }
 
     // Set value
-    for (var i = 0; i < this.length; i += 1) {
+    for (let i = 0; i < this.length; i += 1) {
       el = this[i];
       if (!el.dom7ElementDataStorage) { el.dom7ElementDataStorage = {}; }
       el.dom7ElementDataStorage[key] = value;
@@ -274,8 +273,8 @@
   // Transforms
   // eslint-disable-next-line
   function transform(transform) {
-    for (var i = 0; i < this.length; i += 1) {
-      var elStyle = this[i].style;
+    for (let i = 0; i < this.length; i += 1) {
+      const elStyle = this[i].style;
       elStyle.webkitTransform = transform;
       elStyle.transform = transform;
     }
@@ -285,8 +284,8 @@
     if (typeof duration !== 'string') {
       duration = duration + "ms"; // eslint-disable-line
     }
-    for (var i = 0; i < this.length; i += 1) {
-      var elStyle = this[i].style;
+    for (let i = 0; i < this.length; i += 1) {
+      const elStyle = this[i].style;
       elStyle.webkitTransitionDuration = duration;
       elStyle.transitionDuration = duration;
     }
@@ -294,14 +293,15 @@
   }
   // Events
   function on() {
-    var assign;
+    let assign;
 
-    var args = [], len = arguments.length;
-    while ( len-- ) args[ len ] = arguments[ len ];
-    var eventType = args[0];
-    var targetSelector = args[1];
-    var listener = args[2];
-    var capture = args[3];
+    const args = []; let
+      len = arguments.length;
+    while (len--) args[len] = arguments[len];
+    let eventType = args[0];
+    let targetSelector = args[1];
+    let listener = args[2];
+    let capture = args[3];
     if (typeof args[1] === 'function') {
       (assign = args, eventType = assign[0], listener = assign[1], capture = assign[2]);
       targetSelector = undefined;
@@ -309,38 +309,37 @@
     if (!capture) { capture = false; }
 
     function handleLiveEvent(e) {
-      var target = e.target;
+      const { target } = e;
       if (!target) { return; }
-      var eventData = e.target.dom7EventData || [];
+      const eventData = e.target.dom7EventData || [];
       if (eventData.indexOf(e) < 0) {
         eventData.unshift(e);
       }
-      if ($(target).is(targetSelector)) { listener.apply(target, eventData); }
-      else {
+      if ($(target).is(targetSelector)) { listener.apply(target, eventData); } else {
         var parents = $(target).parents(); // eslint-disable-line
-        for (var k = 0; k < parents.length; k += 1) {
+        for (let k = 0; k < parents.length; k += 1) {
           if ($(parents[k]).is(targetSelector)) { listener.apply(parents[k], eventData); }
         }
       }
     }
     function handleEvent(e) {
-      var eventData = e && e.target ? e.target.dom7EventData || [] : [];
+      const eventData = e && e.target ? e.target.dom7EventData || [] : [];
       if (eventData.indexOf(e) < 0) {
         eventData.unshift(e);
       }
       listener.apply(this, eventData);
     }
-    var events = eventType.split(' ');
-    var j;
-    for (var i = 0; i < this.length; i += 1) {
-      var el = this[i];
+    const events = eventType.split(' ');
+    let j;
+    for (let i = 0; i < this.length; i += 1) {
+      const el = this[i];
       if (!targetSelector) {
         for (j = 0; j < events.length; j += 1) {
-          var event = events[j];
+          const event = events[j];
           if (!el.dom7Listeners) { el.dom7Listeners = {}; }
           if (!el.dom7Listeners[event]) { el.dom7Listeners[event] = []; }
           el.dom7Listeners[event].push({
-            listener: listener,
+            listener,
             proxyListener: handleEvent,
           });
           el.addEventListener(event, handleEvent, capture);
@@ -348,11 +347,11 @@
       } else {
         // Live events
         for (j = 0; j < events.length; j += 1) {
-          var event$1 = events[j];
+          const event$1 = events[j];
           if (!el.dom7LiveListeners) { el.dom7LiveListeners = {}; }
           if (!el.dom7LiveListeners[event$1]) { el.dom7LiveListeners[event$1] = []; }
           el.dom7LiveListeners[event$1].push({
-            listener: listener,
+            listener,
             proxyListener: handleLiveEvent,
           });
           el.addEventListener(event$1, handleLiveEvent, capture);
@@ -362,34 +361,35 @@
     return this;
   }
   function off() {
-    var assign;
+    let assign;
 
-    var args = [], len = arguments.length;
-    while ( len-- ) args[ len ] = arguments[ len ];
-    var eventType = args[0];
-    var targetSelector = args[1];
-    var listener = args[2];
-    var capture = args[3];
+    const args = []; let
+      len = arguments.length;
+    while (len--) args[len] = arguments[len];
+    let eventType = args[0];
+    let targetSelector = args[1];
+    let listener = args[2];
+    let capture = args[3];
     if (typeof args[1] === 'function') {
       (assign = args, eventType = assign[0], listener = assign[1], capture = assign[2]);
       targetSelector = undefined;
     }
     if (!capture) { capture = false; }
 
-    var events = eventType.split(' ');
-    for (var i = 0; i < events.length; i += 1) {
-      var event = events[i];
-      for (var j = 0; j < this.length; j += 1) {
-        var el = this[j];
-        var handlers = (void 0);
+    const events = eventType.split(' ');
+    for (let i = 0; i < events.length; i += 1) {
+      const event = events[i];
+      for (let j = 0; j < this.length; j += 1) {
+        const el = this[j];
+        let handlers = (void 0);
         if (!targetSelector && el.dom7Listeners) {
           handlers = el.dom7Listeners[event];
         } else if (targetSelector && el.dom7LiveListeners) {
           handlers = el.dom7LiveListeners[event];
         }
         if (handlers && handlers.length) {
-          for (var k = handlers.length - 1; k >= 0; k -= 1) {
-            var handler = handlers[k];
+          for (let k = handlers.length - 1; k >= 0; k -= 1) {
+            const handler = handlers[k];
             if (listener && handler.listener === listener) {
               el.removeEventListener(event, handler.proxyListener, capture);
               handlers.splice(k, 1);
@@ -407,16 +407,17 @@
     return this;
   }
   function trigger() {
-    var args = [], len = arguments.length;
-    while ( len-- ) args[ len ] = arguments[ len ];
+    const args = []; let
+      len = arguments.length;
+    while (len--) args[len] = arguments[len];
 
-    var events = args[0].split(' ');
-    var eventData = args[1];
-    for (var i = 0; i < events.length; i += 1) {
-      var event = events[i];
-      for (var j = 0; j < this.length; j += 1) {
-        var el = this[j];
-        var evt = (void 0);
+    const events = args[0].split(' ');
+    const eventData = args[1];
+    for (let i = 0; i < events.length; i += 1) {
+      const event = events[i];
+      for (let j = 0; j < this.length; j += 1) {
+        const el = this[j];
+        let evt = (void 0);
         try {
           evt = new win.CustomEvent(event, {
             detail: eventData,
@@ -438,9 +439,9 @@
     return this;
   }
   function transitionEnd(callback) {
-    var events = ['webkitTransitionEnd', 'transitionend'];
-    var dom = this;
-    var i;
+    const events = ['webkitTransitionEnd', 'transitionend'];
+    const dom = this;
+    let i;
     function fireCallBack(e) {
       /* jshint validthis:true */
       if (e.target !== this) { return; }
@@ -480,13 +481,13 @@
   }
   function offset() {
     if (this.length > 0) {
-      var el = this[0];
-      var box = el.getBoundingClientRect();
-      var body = doc.body;
-      var clientTop = el.clientTop || body.clientTop || 0;
-      var clientLeft = el.clientLeft || body.clientLeft || 0;
-      var scrollTop = el === win ? win.scrollY : el.scrollTop;
-      var scrollLeft = el === win ? win.scrollX : el.scrollLeft;
+      const el = this[0];
+      const box = el.getBoundingClientRect();
+      const { body } = doc;
+      const clientTop = el.clientTop || body.clientTop || 0;
+      const clientLeft = el.clientLeft || body.clientLeft || 0;
+      const scrollTop = el === win ? win.scrollY : el.scrollTop;
+      const scrollLeft = el === win ? win.scrollX : el.scrollLeft;
       return {
         top: (box.top + scrollTop) - clientTop,
         left: (box.left + scrollLeft) - clientLeft,
@@ -500,7 +501,7 @@
     return {};
   }
   function css(props, value) {
-    var i;
+    let i;
     if (arguments.length === 1) {
       if (typeof props === 'string') {
         if (this[0]) { return win.getComputedStyle(this[0], null).getPropertyValue(props); }
@@ -527,7 +528,7 @@
     // Don't bother continuing without a callback
     if (!callback) { return this; }
     // Iterate over the current collection
-    for (var i = 0; i < this.length; i += 1) {
+    for (let i = 0; i < this.length; i += 1) {
       // If the callback returns false
       if (callback.call(this[i], i, this[i]) === false) {
         // End the loop early
@@ -538,9 +539,9 @@
     return this;
   }
   function filter(callback) {
-    var matchedItems = [];
-    var dom = this;
-    for (var i = 0; i < dom.length; i += 1) {
+    const matchedItems = [];
+    const dom = this;
+    for (let i = 0; i < dom.length; i += 1) {
       if (callback.call(dom[i], i, dom[i])) { matchedItems.push(dom[i]); }
     }
     return new Dom7(matchedItems);
@@ -551,7 +552,7 @@
       return this[0] ? this[0].innerHTML : undefined;
     }
 
-    for (var i = 0; i < this.length; i += 1) {
+    for (let i = 0; i < this.length; i += 1) {
       this[i].innerHTML = html;
     }
     return this;
@@ -565,28 +566,28 @@
       return null;
     }
 
-    for (var i = 0; i < this.length; i += 1) {
+    for (let i = 0; i < this.length; i += 1) {
       this[i].textContent = text;
     }
     return this;
   }
   function is(selector) {
-    var el = this[0];
-    var compareWith;
-    var i;
+    const el = this[0];
+    let compareWith;
+    let i;
     if (!el || typeof selector === 'undefined') { return false; }
     if (typeof selector === 'string') {
       if (el.matches) { return el.matches(selector); }
-      else if (el.webkitMatchesSelector) { return el.webkitMatchesSelector(selector); }
-      else if (el.msMatchesSelector) { return el.msMatchesSelector(selector); }
+      if (el.webkitMatchesSelector) { return el.webkitMatchesSelector(selector); }
+      if (el.msMatchesSelector) { return el.msMatchesSelector(selector); }
 
       compareWith = $(selector);
       for (i = 0; i < compareWith.length; i += 1) {
         if (compareWith[i] === el) { return true; }
       }
       return false;
-    } else if (selector === doc) { return el === doc; }
-    else if (selector === win) { return el === win; }
+    } if (selector === doc) { return el === doc; }
+    if (selector === win) { return el === win; }
 
     if (selector.nodeType || selector instanceof Dom7) {
       compareWith = selector.nodeType ? [selector] : selector;
@@ -598,8 +599,8 @@
     return false;
   }
   function index() {
-    var child = this[0];
-    var i;
+    let child = this[0];
+    let i;
     if (child) {
       i = 0;
       // eslint-disable-next-line
@@ -613,8 +614,8 @@
   // eslint-disable-next-line
   function eq(index) {
     if (typeof index === 'undefined') { return this; }
-    var length = this.length;
-    var returnIndex;
+    const { length } = this;
+    let returnIndex;
     if (index > length - 1) {
       return new Dom7([]);
     }
@@ -626,22 +627,23 @@
     return new Dom7([this[index]]);
   }
   function append() {
-    var args = [], len = arguments.length;
-    while ( len-- ) args[ len ] = arguments[ len ];
+    const args = []; let
+      len = arguments.length;
+    while (len--) args[len] = arguments[len];
 
-    var newChild;
+    let newChild;
 
-    for (var k = 0; k < args.length; k += 1) {
+    for (let k = 0; k < args.length; k += 1) {
       newChild = args[k];
-      for (var i = 0; i < this.length; i += 1) {
+      for (let i = 0; i < this.length; i += 1) {
         if (typeof newChild === 'string') {
-          var tempDiv = doc.createElement('div');
+          const tempDiv = doc.createElement('div');
           tempDiv.innerHTML = newChild;
           while (tempDiv.firstChild) {
             this[i].appendChild(tempDiv.firstChild);
           }
         } else if (newChild instanceof Dom7) {
-          for (var j = 0; j < newChild.length; j += 1) {
+          for (let j = 0; j < newChild.length; j += 1) {
             this[i].appendChild(newChild[j]);
           }
         } else {
@@ -653,11 +655,11 @@
     return this;
   }
   function prepend(newChild) {
-    var i;
-    var j;
+    let i;
+    let j;
     for (i = 0; i < this.length; i += 1) {
       if (typeof newChild === 'string') {
-        var tempDiv = doc.createElement('div');
+        const tempDiv = doc.createElement('div');
         tempDiv.innerHTML = newChild;
         for (j = tempDiv.childNodes.length - 1; j >= 0; j -= 1) {
           this[i].insertBefore(tempDiv.childNodes[j], this[i].childNodes[0]);
@@ -687,8 +689,8 @@
     return new Dom7([]);
   }
   function nextAll(selector) {
-    var nextEls = [];
-    var el = this[0];
+    const nextEls = [];
+    let el = this[0];
     if (!el) { return new Dom7([]); }
     while (el.nextElementSibling) {
       var next = el.nextElementSibling; // eslint-disable-line
@@ -701,7 +703,7 @@
   }
   function prev(selector) {
     if (this.length > 0) {
-      var el = this[0];
+      const el = this[0];
       if (selector) {
         if (el.previousElementSibling && $(el.previousElementSibling).is(selector)) {
           return new Dom7([el.previousElementSibling]);
@@ -715,8 +717,8 @@
     return new Dom7([]);
   }
   function prevAll(selector) {
-    var prevEls = [];
-    var el = this[0];
+    const prevEls = [];
+    let el = this[0];
     if (!el) { return new Dom7([]); }
     while (el.previousElementSibling) {
       var prev = el.previousElementSibling; // eslint-disable-line
@@ -729,7 +731,7 @@
   }
   function parent(selector) {
     var parents = []; // eslint-disable-line
-    for (var i = 0; i < this.length; i += 1) {
+    for (let i = 0; i < this.length; i += 1) {
       if (this[i].parentNode !== null) {
         if (selector) {
           if ($(this[i].parentNode).is(selector)) { parents.push(this[i].parentNode); }
@@ -742,7 +744,7 @@
   }
   function parents(selector) {
     var parents = []; // eslint-disable-line
-    for (var i = 0; i < this.length; i += 1) {
+    for (let i = 0; i < this.length; i += 1) {
       var parent = this[i].parentNode; // eslint-disable-line
       while (parent) {
         if (selector) {
@@ -766,10 +768,10 @@
     return closest;
   }
   function find(selector) {
-    var foundElements = [];
-    for (var i = 0; i < this.length; i += 1) {
-      var found = this[i].querySelectorAll(selector);
-      for (var j = 0; j < found.length; j += 1) {
+    const foundElements = [];
+    for (let i = 0; i < this.length; i += 1) {
+      const found = this[i].querySelectorAll(selector);
+      for (let j = 0; j < found.length; j += 1) {
         foundElements.push(found[j]);
       }
     }
@@ -777,10 +779,10 @@
   }
   function children(selector) {
     var children = []; // eslint-disable-line
-    for (var i = 0; i < this.length; i += 1) {
-      var childNodes = this[i].childNodes;
+    for (let i = 0; i < this.length; i += 1) {
+      const { childNodes } = this[i];
 
-      for (var j = 0; j < childNodes.length; j += 1) {
+      for (let j = 0; j < childNodes.length; j += 1) {
         if (!selector) {
           if (childNodes[j].nodeType === 1) { children.push(childNodes[j]); }
         } else if (childNodes[j].nodeType === 1 && $(childNodes[j]).is(selector)) {
@@ -791,20 +793,21 @@
     return new Dom7(unique(children));
   }
   function remove() {
-    for (var i = 0; i < this.length; i += 1) {
+    for (let i = 0; i < this.length; i += 1) {
       if (this[i].parentNode) { this[i].parentNode.removeChild(this[i]); }
     }
     return this;
   }
   function add() {
-    var args = [], len = arguments.length;
-    while ( len-- ) args[ len ] = arguments[ len ];
+    const args = []; let
+      len = arguments.length;
+    while (len--) args[len] = arguments[len];
 
-    var dom = this;
-    var i;
-    var j;
+    const dom = this;
+    let i;
+    let j;
     for (i = 0; i < args.length; i += 1) {
-      var toAdd = $(args[i]);
+      const toAdd = $(args[i]);
       for (j = 0; j < toAdd.length; j += 1) {
         dom[dom.length] = toAdd[j];
         dom.length += 1;
@@ -813,55 +816,55 @@
     return dom;
   }
 
-  var Methods = {
-    addClass: addClass,
-    removeClass: removeClass,
-    hasClass: hasClass,
-    toggleClass: toggleClass,
-    attr: attr,
-    removeAttr: removeAttr,
-    data: data,
-    transform: transform,
-    transition: transition,
-    on: on,
-    off: off,
-    trigger: trigger,
-    transitionEnd: transitionEnd,
-    outerWidth: outerWidth,
-    outerHeight: outerHeight,
-    offset: offset,
-    css: css,
-    each: each,
-    html: html,
-    text: text,
-    is: is,
-    index: index,
-    eq: eq,
-    append: append,
-    prepend: prepend,
-    next: next,
-    nextAll: nextAll,
-    prev: prev,
-    prevAll: prevAll,
-    parent: parent,
-    parents: parents,
-    closest: closest,
-    find: find,
-    children: children,
-    filter: filter,
-    remove: remove,
-    add: add,
-    styles: styles,
+  const Methods = {
+    addClass,
+    removeClass,
+    hasClass,
+    toggleClass,
+    attr,
+    removeAttr,
+    data,
+    transform,
+    transition,
+    on,
+    off,
+    trigger,
+    transitionEnd,
+    outerWidth,
+    outerHeight,
+    offset,
+    css,
+    each,
+    html,
+    text,
+    is,
+    index,
+    eq,
+    append,
+    prepend,
+    next,
+    nextAll,
+    prev,
+    prevAll,
+    parent,
+    parents,
+    closest,
+    find,
+    children,
+    filter,
+    remove,
+    add,
+    styles,
   };
 
-  Object.keys(Methods).forEach(function (methodName) {
+  Object.keys(Methods).forEach((methodName) => {
     $.fn[methodName] = $.fn[methodName] || Methods[methodName];
   });
 
   var Utils = {
     deleteProps: function deleteProps(obj) {
-      var object = obj;
-      Object.keys(object).forEach(function (key) {
+      const object = obj;
+      Object.keys(object).forEach((key) => {
         try {
           object[key] = null;
         } catch (e) {
@@ -875,7 +878,7 @@
       });
     },
     nextTick: function nextTick(callback, delay) {
-      if ( delay === void 0 ) delay = 0;
+      if (delay === void 0) delay = 0;
 
       return setTimeout(callback, delay);
     },
@@ -883,18 +886,18 @@
       return Date.now();
     },
     getTranslate: function getTranslate(el, axis) {
-      if ( axis === void 0 ) axis = 'x';
+      if (axis === void 0) axis = 'x';
 
-      var matrix;
-      var curTransform;
-      var transformMatrix;
+      let matrix;
+      let curTransform;
+      let transformMatrix;
 
-      var curStyle = win.getComputedStyle(el, null);
+      const curStyle = win.getComputedStyle(el, null);
 
       if (win.WebKitCSSMatrix) {
         curTransform = curStyle.transform || curStyle.webkitTransform;
         if (curTransform.split(',').length > 6) {
-          curTransform = curTransform.split(', ').map(function (a) { return a.replace(',', '.'); }).join(', ');
+          curTransform = curTransform.split(', ').map((a) => a.replace(',', '.')).join(', ');
         }
         // Some old versions of Webkit choke when 'none' is passed; pass
         // empty string instead in this case
@@ -923,15 +926,15 @@
       return curTransform || 0;
     },
     parseUrlQuery: function parseUrlQuery(url) {
-      var query = {};
-      var urlToParse = url || win.location.href;
-      var i;
-      var params;
-      var param;
-      var length;
+      const query = {};
+      let urlToParse = url || win.location.href;
+      let i;
+      let params;
+      let param;
+      let length;
       if (typeof urlToParse === 'string' && urlToParse.length) {
         urlToParse = urlToParse.indexOf('?') > -1 ? urlToParse.replace(/\S*\?/, '') : '';
-        params = urlToParse.split('&').filter(function (paramsPart) { return paramsPart !== ''; });
+        params = urlToParse.split('&').filter((paramsPart) => paramsPart !== '');
         length = params.length;
 
         for (i = 0; i < length; i += 1) {
@@ -945,17 +948,18 @@
       return typeof o === 'object' && o !== null && o.constructor && o.constructor === Object;
     },
     extend: function extend() {
-      var args = [], len$1 = arguments.length;
-      while ( len$1-- ) args[ len$1 ] = arguments[ len$1 ];
+      const args = []; let
+        len$1 = arguments.length;
+      while (len$1--) args[len$1] = arguments[len$1];
 
-      var to = Object(args[0]);
-      for (var i = 1; i < args.length; i += 1) {
-        var nextSource = args[i];
+      const to = Object(args[0]);
+      for (let i = 1; i < args.length; i += 1) {
+        const nextSource = args[i];
         if (nextSource !== undefined && nextSource !== null) {
-          var keysArray = Object.keys(Object(nextSource));
-          for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex += 1) {
-            var nextKey = keysArray[nextIndex];
-            var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+          const keysArray = Object.keys(Object(nextSource));
+          for (let nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex += 1) {
+            const nextKey = keysArray[nextIndex];
+            const desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
             if (desc !== undefined && desc.enumerable) {
               if (Utils.isObject(to[nextKey]) && Utils.isObject(nextSource[nextKey])) {
                 Utils.extend(to[nextKey], nextSource[nextKey]);
@@ -973,7 +977,7 @@
     },
   };
 
-  var Support = (function Support() {
+  const Support = (function Support() {
     return {
       touch: (win.Modernizr && win.Modernizr.touch === true) || (function checkTouch() {
         return !!((win.navigator.maxTouchPoints > 0) || ('ontouchstart' in win) || (win.DocumentTouch && doc instanceof win.DocumentTouch));
@@ -986,9 +990,9 @@
       }()),
 
       passiveListener: (function checkPassiveListener() {
-        var supportsPassive = false;
+        let supportsPassive = false;
         try {
-          var opts = Object.defineProperty({}, 'passive', {
+          const opts = Object.defineProperty({}, 'passive', {
             // eslint-disable-next-line
             get: function get() {
               supportsPassive = true;
@@ -1007,41 +1011,42 @@
     };
   }());
 
-  var SwiperClass = function SwiperClass(params) {
-    if ( params === void 0 ) params = {};
+  const SwiperClass = function SwiperClass(params) {
+    if (params === void 0) params = {};
 
-    var self = this;
+    const self = this;
     self.params = params;
 
     // Events
     self.eventsListeners = {};
 
     if (self.params && self.params.on) {
-      Object.keys(self.params.on).forEach(function (eventName) {
+      Object.keys(self.params.on).forEach((eventName) => {
         self.on(eventName, self.params.on[eventName]);
       });
     }
   };
 
-  var staticAccessors = { components: { configurable: true } };
+  const staticAccessors = { components: { configurable: true } };
 
-  SwiperClass.prototype.on = function on (events, handler, priority) {
-    var self = this;
+  SwiperClass.prototype.on = function on(events, handler, priority) {
+    const self = this;
     if (typeof handler !== 'function') { return self; }
-    var method = priority ? 'unshift' : 'push';
-    events.split(' ').forEach(function (event) {
+    const method = priority ? 'unshift' : 'push';
+    events.split(' ').forEach((event) => {
       if (!self.eventsListeners[event]) { self.eventsListeners[event] = []; }
       self.eventsListeners[event][method](handler);
     });
     return self;
   };
 
-  SwiperClass.prototype.once = function once (events, handler, priority) {
-    var self = this;
+  SwiperClass.prototype.once = function once(events, handler, priority) {
+    const self = this;
     if (typeof handler !== 'function') { return self; }
     function onceHandler() {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
+      const args = []; let
+        len = arguments.length;
+      while (len--) args[len] = arguments[len];
 
       self.off(events, onceHandler);
       if (onceHandler.f7proxy) {
@@ -1053,14 +1058,14 @@
     return self.on(events, onceHandler, priority);
   };
 
-  SwiperClass.prototype.off = function off (events, handler) {
-    var self = this;
+  SwiperClass.prototype.off = function off(events, handler) {
+    const self = this;
     if (!self.eventsListeners) { return self; }
-    events.split(' ').forEach(function (event) {
+    events.split(' ').forEach((event) => {
       if (typeof handler === 'undefined') {
         self.eventsListeners[event] = [];
       } else if (self.eventsListeners[event] && self.eventsListeners[event].length) {
-        self.eventsListeners[event].forEach(function (eventHandler, index) {
+        self.eventsListeners[event].forEach((eventHandler, index) => {
           if (eventHandler === handler || (eventHandler.f7proxy && eventHandler.f7proxy === handler)) {
             self.eventsListeners[event].splice(index, 1);
           }
@@ -1070,15 +1075,16 @@
     return self;
   };
 
-  SwiperClass.prototype.emit = function emit () {
-      var args = [], len = arguments.length;
-      while ( len-- ) args[ len ] = arguments[ len ];
+  SwiperClass.prototype.emit = function emit() {
+    const args = []; let
+      len = arguments.length;
+    while (len--) args[len] = arguments[len];
 
-    var self = this;
+    const self = this;
     if (!self.eventsListeners) { return self; }
-    var events;
-    var data;
-    var context;
+    let events;
+    let data;
+    let context;
     if (typeof args[0] === 'string' || Array.isArray(args[0])) {
       events = args[0];
       data = args.slice(1, args.length);
@@ -1088,14 +1094,14 @@
       data = args[0].data;
       context = args[0].context || self;
     }
-    var eventsArray = Array.isArray(events) ? events : events.split(' ');
-    eventsArray.forEach(function (event) {
+    const eventsArray = Array.isArray(events) ? events : events.split(' ');
+    eventsArray.forEach((event) => {
       if (self.eventsListeners && self.eventsListeners[event]) {
-        var handlers = [];
-        self.eventsListeners[event].forEach(function (eventHandler) {
+        const handlers = [];
+        self.eventsListeners[event].forEach((eventHandler) => {
           handlers.push(eventHandler);
         });
-        handlers.forEach(function (eventHandler) {
+        handlers.forEach((eventHandler) => {
           eventHandler.apply(context, data);
         });
       }
@@ -1103,11 +1109,11 @@
     return self;
   };
 
-  SwiperClass.prototype.useModulesParams = function useModulesParams (instanceParams) {
-    var instance = this;
+  SwiperClass.prototype.useModulesParams = function useModulesParams(instanceParams) {
+    const instance = this;
     if (!instance.modules) { return; }
-    Object.keys(instance.modules).forEach(function (moduleName) {
-      var module = instance.modules[moduleName];
+    Object.keys(instance.modules).forEach((moduleName) => {
+      const module = instance.modules[moduleName];
       // Extend params
       if (module.params) {
         Utils.extend(instanceParams, module.params);
@@ -1115,18 +1121,18 @@
     });
   };
 
-  SwiperClass.prototype.useModules = function useModules (modulesParams) {
-      if ( modulesParams === void 0 ) modulesParams = {};
+  SwiperClass.prototype.useModules = function useModules(modulesParams) {
+    if (modulesParams === void 0) modulesParams = {};
 
-    var instance = this;
+    const instance = this;
     if (!instance.modules) { return; }
-    Object.keys(instance.modules).forEach(function (moduleName) {
-      var module = instance.modules[moduleName];
-      var moduleParams = modulesParams[moduleName] || {};
+    Object.keys(instance.modules).forEach((moduleName) => {
+      const module = instance.modules[moduleName];
+      const moduleParams = modulesParams[moduleName] || {};
       // Extend instance methods and props
       if (module.instance) {
-        Object.keys(module.instance).forEach(function (modulePropName) {
-          var moduleProp = module.instance[modulePropName];
+        Object.keys(module.instance).forEach((modulePropName) => {
+          const moduleProp = module.instance[modulePropName];
           if (typeof moduleProp === 'function') {
             instance[modulePropName] = moduleProp.bind(instance);
           } else {
@@ -1136,7 +1142,7 @@
       }
       // Add event listeners
       if (module.on && instance.on) {
-        Object.keys(module.on).forEach(function (moduleEventName) {
+        Object.keys(module.on).forEach((moduleEventName) => {
           instance.on(moduleEventName, module.on[moduleEventName]);
         });
       }
@@ -1149,28 +1155,29 @@
   };
 
   staticAccessors.components.set = function (components) {
-    var Class = this;
+    const Class = this;
     if (!Class.use) { return; }
     Class.use(components);
   };
 
-  SwiperClass.installModule = function installModule (module) {
-      var params = [], len = arguments.length - 1;
-      while ( len-- > 0 ) params[ len ] = arguments[ len + 1 ];
+  SwiperClass.installModule = function installModule(module) {
+    const params = []; let
+      len = arguments.length - 1;
+    while (len-- > 0) params[len] = arguments[len + 1];
 
-    var Class = this;
+    const Class = this;
     if (!Class.prototype.modules) { Class.prototype.modules = {}; }
-    var name = module.name || (((Object.keys(Class.prototype.modules).length) + "_" + (Utils.now())));
+    const name = module.name || ((`${Object.keys(Class.prototype.modules).length}_${Utils.now()}`));
     Class.prototype.modules[name] = module;
     // Prototype
     if (module.proto) {
-      Object.keys(module.proto).forEach(function (key) {
+      Object.keys(module.proto).forEach((key) => {
         Class.prototype[key] = module.proto[key];
       });
     }
     // Class
     if (module.static) {
-      Object.keys(module.static).forEach(function (key) {
+      Object.keys(module.static).forEach((key) => {
         Class[key] = module.static[key];
       });
     }
@@ -1181,25 +1188,26 @@
     return Class;
   };
 
-  SwiperClass.use = function use (module) {
-      var params = [], len = arguments.length - 1;
-      while ( len-- > 0 ) params[ len ] = arguments[ len + 1 ];
+  SwiperClass.use = function use(module) {
+    const params = []; let
+      len = arguments.length - 1;
+    while (len-- > 0) params[len] = arguments[len + 1];
 
-    var Class = this;
+    const Class = this;
     if (Array.isArray(module)) {
-      module.forEach(function (m) { return Class.installModule(m); });
+      module.forEach((m) => Class.installModule(m));
       return Class;
     }
-    return Class.installModule.apply(Class, [ module ].concat( params ));
+    return Class.installModule.apply(Class, [module].concat(params));
   };
 
-  Object.defineProperties( SwiperClass, staticAccessors );
+  Object.defineProperties(SwiperClass, staticAccessors);
 
-  function updateSize () {
-    var swiper = this;
-    var width;
-    var height;
-    var $el = swiper.$el;
+  function updateSize() {
+    const swiper = this;
+    let width;
+    let height;
+    const { $el } = swiper;
     if (typeof swiper.params.width !== 'undefined') {
       width = swiper.params.width;
     } else {
@@ -1219,27 +1227,27 @@
     height = height - parseInt($el.css('padding-top'), 10) - parseInt($el.css('padding-bottom'), 10);
 
     Utils.extend(swiper, {
-      width: width,
-      height: height,
+      width,
+      height,
       size: swiper.isHorizontal() ? width : height,
     });
   }
 
-  function updateSlides () {
-    var swiper = this;
-    var params = swiper.params;
+  function updateSlides() {
+    const swiper = this;
+    const { params } = swiper;
 
-    var $wrapperEl = swiper.$wrapperEl;
-    var swiperSize = swiper.size;
-    var rtl = swiper.rtlTranslate;
-    var wrongRTL = swiper.wrongRTL;
-    var isVirtual = swiper.virtual && params.virtual.enabled;
-    var previousSlidesLength = isVirtual ? swiper.virtual.slides.length : swiper.slides.length;
-    var slides = $wrapperEl.children(("." + (swiper.params.slideClass)));
-    var slidesLength = isVirtual ? swiper.virtual.slides.length : slides.length;
-    var snapGrid = [];
-    var slidesGrid = [];
-    var slidesSizesGrid = [];
+    const { $wrapperEl } = swiper;
+    const swiperSize = swiper.size;
+    const rtl = swiper.rtlTranslate;
+    const { wrongRTL } = swiper;
+    const isVirtual = swiper.virtual && params.virtual.enabled;
+    const previousSlidesLength = isVirtual ? swiper.virtual.slides.length : swiper.slides.length;
+    const slides = $wrapperEl.children((`.${swiper.params.slideClass}`));
+    const slidesLength = isVirtual ? swiper.virtual.slides.length : slides.length;
+    let snapGrid = [];
+    const slidesGrid = [];
+    const slidesSizesGrid = [];
 
     function slidesForMargin(slideIndex) {
       if (!params.cssMode) { return true; }
@@ -1249,23 +1257,23 @@
       return true;
     }
 
-    var offsetBefore = params.slidesOffsetBefore;
+    let offsetBefore = params.slidesOffsetBefore;
     if (typeof offsetBefore === 'function') {
       offsetBefore = params.slidesOffsetBefore.call(swiper);
     }
 
-    var offsetAfter = params.slidesOffsetAfter;
+    let offsetAfter = params.slidesOffsetAfter;
     if (typeof offsetAfter === 'function') {
       offsetAfter = params.slidesOffsetAfter.call(swiper);
     }
 
-    var previousSnapGridLength = swiper.snapGrid.length;
-    var previousSlidesGridLength = swiper.snapGrid.length;
+    const previousSnapGridLength = swiper.snapGrid.length;
+    const previousSlidesGridLength = swiper.snapGrid.length;
 
-    var spaceBetween = params.spaceBetween;
-    var slidePosition = -offsetBefore;
-    var prevSlideSize = 0;
-    var index = 0;
+    let { spaceBetween } = params;
+    let slidePosition = -offsetBefore;
+    let prevSlideSize = 0;
+    let index = 0;
     if (typeof swiperSize === 'undefined') {
       return;
     }
@@ -1276,10 +1284,9 @@
     swiper.virtualSize = -spaceBetween;
 
     // reset margins
-    if (rtl) { slides.css({ marginLeft: '', marginTop: '' }); }
-    else { slides.css({ marginRight: '', marginBottom: '' }); }
+    if (rtl) { slides.css({ marginLeft: '', marginTop: '' }); } else { slides.css({ marginRight: '', marginBottom: '' }); }
 
-    var slidesNumberEvenToRows;
+    let slidesNumberEvenToRows;
     if (params.slidesPerColumn > 1) {
       if (Math.floor(slidesLength / params.slidesPerColumn) === slidesLength / swiper.params.slidesPerColumn) {
         slidesNumberEvenToRows = slidesLength;
@@ -1292,22 +1299,22 @@
     }
 
     // Calc slides
-    var slideSize;
-    var slidesPerColumn = params.slidesPerColumn;
-    var slidesPerRow = slidesNumberEvenToRows / slidesPerColumn;
-    var numFullColumns = Math.floor(slidesLength / params.slidesPerColumn);
-    for (var i = 0; i < slidesLength; i += 1) {
+    let slideSize;
+    const { slidesPerColumn } = params;
+    const slidesPerRow = slidesNumberEvenToRows / slidesPerColumn;
+    const numFullColumns = Math.floor(slidesLength / params.slidesPerColumn);
+    for (let i = 0; i < slidesLength; i += 1) {
       slideSize = 0;
-      var slide = slides.eq(i);
+      const slide = slides.eq(i);
       if (params.slidesPerColumn > 1) {
         // Set slides order
-        var newSlideOrderIndex = (void 0);
-        var column = (void 0);
-        var row = (void 0);
+        let newSlideOrderIndex = (void 0);
+        let column = (void 0);
+        let row = (void 0);
         if (params.slidesPerColumnFill === 'row' && params.slidesPerGroup > 1) {
-          var groupIndex = Math.floor(i / (params.slidesPerGroup * params.slidesPerColumn));
-          var slideIndexInGroup = i - params.slidesPerColumn * params.slidesPerGroup * groupIndex;
-          var columnsInGroup = groupIndex === 0
+          const groupIndex = Math.floor(i / (params.slidesPerGroup * params.slidesPerColumn));
+          const slideIndexInGroup = i - params.slidesPerColumn * params.slidesPerGroup * groupIndex;
+          const columnsInGroup = groupIndex === 0
             ? params.slidesPerGroup
             : Math.min(Math.ceil((slidesLength - groupIndex * slidesPerColumn * params.slidesPerGroup) / slidesPerColumn), params.slidesPerGroup);
           row = Math.floor(slideIndexInGroup / columnsInGroup);
@@ -1337,16 +1344,16 @@
           column = i - (row * slidesPerRow);
         }
         slide.css(
-          ("margin-" + (swiper.isHorizontal() ? 'top' : 'left')),
-          (row !== 0 && params.spaceBetween) && (((params.spaceBetween) + "px"))
+          (`margin-${swiper.isHorizontal() ? 'top' : 'left'}`),
+          (row !== 0 && params.spaceBetween) && ((`${params.spaceBetween}px`)),
         );
       }
       if (slide.css('display') === 'none') { continue; } // eslint-disable-line
 
       if (params.slidesPerView === 'auto') {
-        var slideStyles = win.getComputedStyle(slide[0], null);
-        var currentTransform = slide[0].style.transform;
-        var currentWebKitTransform = slide[0].style.webkitTransform;
+        const slideStyles = win.getComputedStyle(slide[0], null);
+        const currentTransform = slide[0].style.transform;
+        const currentWebKitTransform = slide[0].style.webkitTransform;
         if (currentTransform) {
           slide[0].style.transform = 'none';
         }
@@ -1360,24 +1367,24 @@
         } else {
           // eslint-disable-next-line
           if (swiper.isHorizontal()) {
-            var width = parseFloat(slideStyles.getPropertyValue('width'));
-            var paddingLeft = parseFloat(slideStyles.getPropertyValue('padding-left'));
-            var paddingRight = parseFloat(slideStyles.getPropertyValue('padding-right'));
-            var marginLeft = parseFloat(slideStyles.getPropertyValue('margin-left'));
-            var marginRight = parseFloat(slideStyles.getPropertyValue('margin-right'));
-            var boxSizing = slideStyles.getPropertyValue('box-sizing');
+            const width = parseFloat(slideStyles.getPropertyValue('width'));
+            const paddingLeft = parseFloat(slideStyles.getPropertyValue('padding-left'));
+            const paddingRight = parseFloat(slideStyles.getPropertyValue('padding-right'));
+            const marginLeft = parseFloat(slideStyles.getPropertyValue('margin-left'));
+            const marginRight = parseFloat(slideStyles.getPropertyValue('margin-right'));
+            const boxSizing = slideStyles.getPropertyValue('box-sizing');
             if (boxSizing && boxSizing === 'border-box') {
               slideSize = width + marginLeft + marginRight;
             } else {
               slideSize = width + paddingLeft + paddingRight + marginLeft + marginRight;
             }
           } else {
-            var height = parseFloat(slideStyles.getPropertyValue('height'));
-            var paddingTop = parseFloat(slideStyles.getPropertyValue('padding-top'));
-            var paddingBottom = parseFloat(slideStyles.getPropertyValue('padding-bottom'));
-            var marginTop = parseFloat(slideStyles.getPropertyValue('margin-top'));
-            var marginBottom = parseFloat(slideStyles.getPropertyValue('margin-bottom'));
-            var boxSizing$1 = slideStyles.getPropertyValue('box-sizing');
+            const height = parseFloat(slideStyles.getPropertyValue('height'));
+            const paddingTop = parseFloat(slideStyles.getPropertyValue('padding-top'));
+            const paddingBottom = parseFloat(slideStyles.getPropertyValue('padding-bottom'));
+            const marginTop = parseFloat(slideStyles.getPropertyValue('margin-top'));
+            const marginBottom = parseFloat(slideStyles.getPropertyValue('margin-bottom'));
+            const boxSizing$1 = slideStyles.getPropertyValue('box-sizing');
             if (boxSizing$1 && boxSizing$1 === 'border-box') {
               slideSize = height + marginTop + marginBottom;
             } else {
@@ -1398,9 +1405,9 @@
 
         if (slides[i]) {
           if (swiper.isHorizontal()) {
-            slides[i].style.width = slideSize + "px";
+            slides[i].style.width = `${slideSize}px`;
           } else {
-            slides[i].style.height = slideSize + "px";
+            slides[i].style.height = `${slideSize}px`;
           }
         }
       }
@@ -1432,26 +1439,24 @@
       index += 1;
     }
     swiper.virtualSize = Math.max(swiper.virtualSize, swiperSize) + offsetAfter;
-    var newSlidesGrid;
+    let newSlidesGrid;
 
     if (
       rtl && wrongRTL && (params.effect === 'slide' || params.effect === 'coverflow')) {
-      $wrapperEl.css({ width: ((swiper.virtualSize + params.spaceBetween) + "px") });
+      $wrapperEl.css({ width: (`${swiper.virtualSize + params.spaceBetween}px`) });
     }
     if (params.setWrapperSize) {
-      if (swiper.isHorizontal()) { $wrapperEl.css({ width: ((swiper.virtualSize + params.spaceBetween) + "px") }); }
-      else { $wrapperEl.css({ height: ((swiper.virtualSize + params.spaceBetween) + "px") }); }
+      if (swiper.isHorizontal()) { $wrapperEl.css({ width: (`${swiper.virtualSize + params.spaceBetween}px`) }); } else { $wrapperEl.css({ height: (`${swiper.virtualSize + params.spaceBetween}px`) }); }
     }
 
     if (params.slidesPerColumn > 1) {
       swiper.virtualSize = (slideSize + params.spaceBetween) * slidesNumberEvenToRows;
       swiper.virtualSize = Math.ceil(swiper.virtualSize / params.slidesPerColumn) - params.spaceBetween;
-      if (swiper.isHorizontal()) { $wrapperEl.css({ width: ((swiper.virtualSize + params.spaceBetween) + "px") }); }
-      else { $wrapperEl.css({ height: ((swiper.virtualSize + params.spaceBetween) + "px") }); }
+      if (swiper.isHorizontal()) { $wrapperEl.css({ width: (`${swiper.virtualSize + params.spaceBetween}px`) }); } else { $wrapperEl.css({ height: (`${swiper.virtualSize + params.spaceBetween}px`) }); }
       if (params.centeredSlides) {
         newSlidesGrid = [];
-        for (var i$1 = 0; i$1 < snapGrid.length; i$1 += 1) {
-          var slidesGridItem = snapGrid[i$1];
+        for (let i$1 = 0; i$1 < snapGrid.length; i$1 += 1) {
+          let slidesGridItem = snapGrid[i$1];
           if (params.roundLengths) { slidesGridItem = Math.floor(slidesGridItem); }
           if (snapGrid[i$1] < swiper.virtualSize + snapGrid[0]) { newSlidesGrid.push(slidesGridItem); }
         }
@@ -1462,8 +1467,8 @@
     // Remove last grid elements depending on width
     if (!params.centeredSlides) {
       newSlidesGrid = [];
-      for (var i$2 = 0; i$2 < snapGrid.length; i$2 += 1) {
-        var slidesGridItem$1 = snapGrid[i$2];
+      for (let i$2 = 0; i$2 < snapGrid.length; i$2 += 1) {
+        let slidesGridItem$1 = snapGrid[i$2];
         if (params.roundLengths) { slidesGridItem$1 = Math.floor(slidesGridItem$1); }
         if (snapGrid[i$2] <= swiper.virtualSize - swiperSize) {
           newSlidesGrid.push(slidesGridItem$1);
@@ -1478,19 +1483,18 @@
 
     if (params.spaceBetween !== 0) {
       if (swiper.isHorizontal()) {
-        if (rtl) { slides.filter(slidesForMargin).css({ marginLeft: (spaceBetween + "px") }); }
-        else { slides.filter(slidesForMargin).css({ marginRight: (spaceBetween + "px") }); }
-      } else { slides.filter(slidesForMargin).css({ marginBottom: (spaceBetween + "px") }); }
+        if (rtl) { slides.filter(slidesForMargin).css({ marginLeft: (`${spaceBetween}px`) }); } else { slides.filter(slidesForMargin).css({ marginRight: (`${spaceBetween}px`) }); }
+      } else { slides.filter(slidesForMargin).css({ marginBottom: (`${spaceBetween}px`) }); }
     }
 
     if (params.centeredSlides && params.centeredSlidesBounds) {
-      var allSlidesSize = 0;
-      slidesSizesGrid.forEach(function (slideSizeValue) {
+      let allSlidesSize = 0;
+      slidesSizesGrid.forEach((slideSizeValue) => {
         allSlidesSize += slideSizeValue + (params.spaceBetween ? params.spaceBetween : 0);
       });
       allSlidesSize -= params.spaceBetween;
-      var maxSnap = allSlidesSize - swiperSize;
-      snapGrid = snapGrid.map(function (snap) {
+      const maxSnap = allSlidesSize - swiperSize;
+      snapGrid = snapGrid.map((snap) => {
         if (snap < 0) { return -offsetBefore; }
         if (snap > maxSnap) { return maxSnap + offsetAfter; }
         return snap;
@@ -1498,27 +1502,27 @@
     }
 
     if (params.centerInsufficientSlides) {
-      var allSlidesSize$1 = 0;
-      slidesSizesGrid.forEach(function (slideSizeValue) {
+      let allSlidesSize$1 = 0;
+      slidesSizesGrid.forEach((slideSizeValue) => {
         allSlidesSize$1 += slideSizeValue + (params.spaceBetween ? params.spaceBetween : 0);
       });
       allSlidesSize$1 -= params.spaceBetween;
       if (allSlidesSize$1 < swiperSize) {
-        var allSlidesOffset = (swiperSize - allSlidesSize$1) / 2;
-        snapGrid.forEach(function (snap, snapIndex) {
+        const allSlidesOffset = (swiperSize - allSlidesSize$1) / 2;
+        snapGrid.forEach((snap, snapIndex) => {
           snapGrid[snapIndex] = snap - allSlidesOffset;
         });
-        slidesGrid.forEach(function (snap, snapIndex) {
+        slidesGrid.forEach((snap, snapIndex) => {
           slidesGrid[snapIndex] = snap + allSlidesOffset;
         });
       }
     }
 
     Utils.extend(swiper, {
-      slides: slides,
-      snapGrid: snapGrid,
-      slidesGrid: slidesGrid,
-      slidesSizesGrid: slidesSizesGrid,
+      slides,
+      snapGrid,
+      slidesGrid,
+      slidesSizesGrid,
     });
 
     if (slidesLength !== previousSlidesLength) {
@@ -1537,11 +1541,11 @@
     }
   }
 
-  function updateAutoHeight (speed) {
-    var swiper = this;
-    var activeSlides = [];
-    var newHeight = 0;
-    var i;
+  function updateAutoHeight(speed) {
+    const swiper = this;
+    const activeSlides = [];
+    let newHeight = 0;
+    let i;
     if (typeof speed === 'number') {
       swiper.setTransition(speed);
     } else if (speed === true) {
@@ -1550,12 +1554,12 @@
     // Find slides currently in view
     if (swiper.params.slidesPerView !== 'auto' && swiper.params.slidesPerView > 1) {
       if (swiper.params.centeredSlides) {
-        swiper.visibleSlides.each(function (index, slide) {
+        swiper.visibleSlides.each((index, slide) => {
           activeSlides.push(slide);
         });
       } else {
         for (i = 0; i < Math.ceil(swiper.params.slidesPerView); i += 1) {
-          var index = swiper.activeIndex + i;
+          const index = swiper.activeIndex + i;
           if (index > swiper.slides.length) { break; }
           activeSlides.push(swiper.slides.eq(index)[0]);
         }
@@ -1567,36 +1571,36 @@
     // Find new height from highest slide in view
     for (i = 0; i < activeSlides.length; i += 1) {
       if (typeof activeSlides[i] !== 'undefined') {
-        var height = activeSlides[i].offsetHeight;
+        const height = activeSlides[i].offsetHeight;
         newHeight = height > newHeight ? height : newHeight;
       }
     }
 
     // Update Height
-    if (newHeight) { swiper.$wrapperEl.css('height', (newHeight + "px")); }
+    if (newHeight) { swiper.$wrapperEl.css('height', (`${newHeight}px`)); }
   }
 
-  function updateSlidesOffset () {
-    var swiper = this;
-    var slides = swiper.slides;
-    for (var i = 0; i < slides.length; i += 1) {
+  function updateSlidesOffset() {
+    const swiper = this;
+    const { slides } = swiper;
+    for (let i = 0; i < slides.length; i += 1) {
       slides[i].swiperSlideOffset = swiper.isHorizontal() ? slides[i].offsetLeft : slides[i].offsetTop;
     }
   }
 
-  function updateSlidesProgress (translate) {
-    if ( translate === void 0 ) translate = (this && this.translate) || 0;
+  function updateSlidesProgress(translate) {
+    if (translate === void 0) translate = (this && this.translate) || 0;
 
-    var swiper = this;
-    var params = swiper.params;
+    const swiper = this;
+    const { params } = swiper;
 
-    var slides = swiper.slides;
-    var rtl = swiper.rtlTranslate;
+    const { slides } = swiper;
+    const rtl = swiper.rtlTranslate;
 
     if (slides.length === 0) { return; }
     if (typeof slides[0].swiperSlideOffset === 'undefined') { swiper.updateSlidesOffset(); }
 
-    var offsetCenter = -translate;
+    let offsetCenter = -translate;
     if (rtl) { offsetCenter = translate; }
 
     // Visible Slides
@@ -1605,15 +1609,15 @@
     swiper.visibleSlidesIndexes = [];
     swiper.visibleSlides = [];
 
-    for (var i = 0; i < slides.length; i += 1) {
-      var slide = slides[i];
-      var slideProgress = (
+    for (let i = 0; i < slides.length; i += 1) {
+      const slide = slides[i];
+      const slideProgress = (
         (offsetCenter + (params.centeredSlides ? swiper.minTranslate() : 0)) - slide.swiperSlideOffset
       ) / (slide.swiperSlideSize + params.spaceBetween);
       if (params.watchSlidesVisibility || (params.centeredSlides && params.autoHeight)) {
-        var slideBefore = -(offsetCenter - slide.swiperSlideOffset);
-        var slideAfter = slideBefore + swiper.slidesSizesGrid[i];
-        var isVisible = (slideBefore >= 0 && slideBefore < swiper.size - 1)
+        const slideBefore = -(offsetCenter - slide.swiperSlideOffset);
+        const slideAfter = slideBefore + swiper.slidesSizesGrid[i];
+        const isVisible = (slideBefore >= 0 && slideBefore < swiper.size - 1)
                   || (slideAfter > 1 && slideAfter <= swiper.size)
                   || (slideBefore <= 0 && slideAfter >= swiper.size);
         if (isVisible) {
@@ -1627,20 +1631,20 @@
     swiper.visibleSlides = $(swiper.visibleSlides);
   }
 
-  function updateProgress (translate) {
-    var swiper = this;
+  function updateProgress(translate) {
+    const swiper = this;
     if (typeof translate === 'undefined') {
-      var multiplier = swiper.rtlTranslate ? -1 : 1;
+      const multiplier = swiper.rtlTranslate ? -1 : 1;
       // eslint-disable-next-line
       translate = (swiper && swiper.translate && (swiper.translate * multiplier)) || 0;
     }
-    var params = swiper.params;
-    var translatesDiff = swiper.maxTranslate() - swiper.minTranslate();
-    var progress = swiper.progress;
-    var isBeginning = swiper.isBeginning;
-    var isEnd = swiper.isEnd;
-    var wasBeginning = isBeginning;
-    var wasEnd = isEnd;
+    const { params } = swiper;
+    const translatesDiff = swiper.maxTranslate() - swiper.minTranslate();
+    let { progress } = swiper;
+    let { isBeginning } = swiper;
+    let { isEnd } = swiper;
+    const wasBeginning = isBeginning;
+    const wasEnd = isEnd;
     if (translatesDiff === 0) {
       progress = 0;
       isBeginning = true;
@@ -1651,9 +1655,9 @@
       isEnd = progress >= 1;
     }
     Utils.extend(swiper, {
-      progress: progress,
-      isBeginning: isBeginning,
-      isEnd: isEnd,
+      progress,
+      isBeginning,
+      isEnd,
     });
 
     if (params.watchSlidesProgress || params.watchSlidesVisibility || (params.centeredSlides && params.autoHeight)) { swiper.updateSlidesProgress(translate); }
@@ -1671,21 +1675,21 @@
     swiper.emit('progress', progress);
   }
 
-  function updateSlidesClasses () {
-    var swiper = this;
+  function updateSlidesClasses() {
+    const swiper = this;
 
-    var slides = swiper.slides;
-    var params = swiper.params;
-    var $wrapperEl = swiper.$wrapperEl;
-    var activeIndex = swiper.activeIndex;
-    var realIndex = swiper.realIndex;
-    var isVirtual = swiper.virtual && params.virtual.enabled;
+    const { slides } = swiper;
+    const { params } = swiper;
+    const { $wrapperEl } = swiper;
+    const { activeIndex } = swiper;
+    const { realIndex } = swiper;
+    const isVirtual = swiper.virtual && params.virtual.enabled;
 
-    slides.removeClass(((params.slideActiveClass) + " " + (params.slideNextClass) + " " + (params.slidePrevClass) + " " + (params.slideDuplicateActiveClass) + " " + (params.slideDuplicateNextClass) + " " + (params.slideDuplicatePrevClass)));
+    slides.removeClass((`${params.slideActiveClass} ${params.slideNextClass} ${params.slidePrevClass} ${params.slideDuplicateActiveClass} ${params.slideDuplicateNextClass} ${params.slideDuplicatePrevClass}`));
 
-    var activeSlide;
+    let activeSlide;
     if (isVirtual) {
-      activeSlide = swiper.$wrapperEl.find(("." + (params.slideClass) + "[data-swiper-slide-index=\"" + activeIndex + "\"]"));
+      activeSlide = swiper.$wrapperEl.find((`.${params.slideClass}[data-swiper-slide-index="${activeIndex}"]`));
     } else {
       activeSlide = slides.eq(activeIndex);
     }
@@ -1697,22 +1701,22 @@
       // Duplicate to all looped slides
       if (activeSlide.hasClass(params.slideDuplicateClass)) {
         $wrapperEl
-          .children(("." + (params.slideClass) + ":not(." + (params.slideDuplicateClass) + ")[data-swiper-slide-index=\"" + realIndex + "\"]"))
+          .children((`.${params.slideClass}:not(.${params.slideDuplicateClass})[data-swiper-slide-index="${realIndex}"]`))
           .addClass(params.slideDuplicateActiveClass);
       } else {
         $wrapperEl
-          .children(("." + (params.slideClass) + "." + (params.slideDuplicateClass) + "[data-swiper-slide-index=\"" + realIndex + "\"]"))
+          .children((`.${params.slideClass}.${params.slideDuplicateClass}[data-swiper-slide-index="${realIndex}"]`))
           .addClass(params.slideDuplicateActiveClass);
       }
     }
     // Next Slide
-    var nextSlide = activeSlide.nextAll(("." + (params.slideClass))).eq(0).addClass(params.slideNextClass);
+    let nextSlide = activeSlide.nextAll((`.${params.slideClass}`)).eq(0).addClass(params.slideNextClass);
     if (params.loop && nextSlide.length === 0) {
       nextSlide = slides.eq(0);
       nextSlide.addClass(params.slideNextClass);
     }
     // Prev Slide
-    var prevSlide = activeSlide.prevAll(("." + (params.slideClass))).eq(0).addClass(params.slidePrevClass);
+    let prevSlide = activeSlide.prevAll((`.${params.slideClass}`)).eq(0).addClass(params.slidePrevClass);
     if (params.loop && prevSlide.length === 0) {
       prevSlide = slides.eq(-1);
       prevSlide.addClass(params.slidePrevClass);
@@ -1721,38 +1725,38 @@
       // Duplicate to all looped slides
       if (nextSlide.hasClass(params.slideDuplicateClass)) {
         $wrapperEl
-          .children(("." + (params.slideClass) + ":not(." + (params.slideDuplicateClass) + ")[data-swiper-slide-index=\"" + (nextSlide.attr('data-swiper-slide-index')) + "\"]"))
+          .children((`.${params.slideClass}:not(.${params.slideDuplicateClass})[data-swiper-slide-index="${nextSlide.attr('data-swiper-slide-index')}"]`))
           .addClass(params.slideDuplicateNextClass);
       } else {
         $wrapperEl
-          .children(("." + (params.slideClass) + "." + (params.slideDuplicateClass) + "[data-swiper-slide-index=\"" + (nextSlide.attr('data-swiper-slide-index')) + "\"]"))
+          .children((`.${params.slideClass}.${params.slideDuplicateClass}[data-swiper-slide-index="${nextSlide.attr('data-swiper-slide-index')}"]`))
           .addClass(params.slideDuplicateNextClass);
       }
       if (prevSlide.hasClass(params.slideDuplicateClass)) {
         $wrapperEl
-          .children(("." + (params.slideClass) + ":not(." + (params.slideDuplicateClass) + ")[data-swiper-slide-index=\"" + (prevSlide.attr('data-swiper-slide-index')) + "\"]"))
+          .children((`.${params.slideClass}:not(.${params.slideDuplicateClass})[data-swiper-slide-index="${prevSlide.attr('data-swiper-slide-index')}"]`))
           .addClass(params.slideDuplicatePrevClass);
       } else {
         $wrapperEl
-          .children(("." + (params.slideClass) + "." + (params.slideDuplicateClass) + "[data-swiper-slide-index=\"" + (prevSlide.attr('data-swiper-slide-index')) + "\"]"))
+          .children((`.${params.slideClass}.${params.slideDuplicateClass}[data-swiper-slide-index="${prevSlide.attr('data-swiper-slide-index')}"]`))
           .addClass(params.slideDuplicatePrevClass);
       }
     }
   }
 
-  function updateActiveIndex (newActiveIndex) {
-    var swiper = this;
-    var translate = swiper.rtlTranslate ? swiper.translate : -swiper.translate;
-    var slidesGrid = swiper.slidesGrid;
-    var snapGrid = swiper.snapGrid;
-    var params = swiper.params;
-    var previousIndex = swiper.activeIndex;
-    var previousRealIndex = swiper.realIndex;
-    var previousSnapIndex = swiper.snapIndex;
-    var activeIndex = newActiveIndex;
-    var snapIndex;
+  function updateActiveIndex(newActiveIndex) {
+    const swiper = this;
+    const translate = swiper.rtlTranslate ? swiper.translate : -swiper.translate;
+    const { slidesGrid } = swiper;
+    const { snapGrid } = swiper;
+    const { params } = swiper;
+    const previousIndex = swiper.activeIndex;
+    const previousRealIndex = swiper.realIndex;
+    const previousSnapIndex = swiper.snapIndex;
+    let activeIndex = newActiveIndex;
+    let snapIndex;
     if (typeof activeIndex === 'undefined') {
-      for (var i = 0; i < slidesGrid.length; i += 1) {
+      for (let i = 0; i < slidesGrid.length; i += 1) {
         if (typeof slidesGrid[i + 1] !== 'undefined') {
           if (translate >= slidesGrid[i] && translate < slidesGrid[i + 1] - ((slidesGrid[i + 1] - slidesGrid[i]) / 2)) {
             activeIndex = i;
@@ -1771,7 +1775,7 @@
     if (snapGrid.indexOf(translate) >= 0) {
       snapIndex = snapGrid.indexOf(translate);
     } else {
-      var skip = Math.min(params.slidesPerGroupSkip, activeIndex);
+      const skip = Math.min(params.slidesPerGroupSkip, activeIndex);
       snapIndex = skip + Math.floor((activeIndex - skip) / params.slidesPerGroup);
     }
     if (snapIndex >= snapGrid.length) { snapIndex = snapGrid.length - 1; }
@@ -1784,13 +1788,13 @@
     }
 
     // Get real index
-    var realIndex = parseInt(swiper.slides.eq(activeIndex).attr('data-swiper-slide-index') || activeIndex, 10);
+    const realIndex = parseInt(swiper.slides.eq(activeIndex).attr('data-swiper-slide-index') || activeIndex, 10);
 
     Utils.extend(swiper, {
-      snapIndex: snapIndex,
-      realIndex: realIndex,
-      previousIndex: previousIndex,
-      activeIndex: activeIndex,
+      snapIndex,
+      realIndex,
+      previousIndex,
+      activeIndex,
     });
     swiper.emit('activeIndexChange');
     swiper.emit('snapIndexChange');
@@ -1802,13 +1806,13 @@
     }
   }
 
-  function updateClickedSlide (e) {
-    var swiper = this;
-    var params = swiper.params;
-    var slide = $(e.target).closest(("." + (params.slideClass)))[0];
-    var slideFound = false;
+  function updateClickedSlide(e) {
+    const swiper = this;
+    const { params } = swiper;
+    const slide = $(e.target).closest((`.${params.slideClass}`))[0];
+    let slideFound = false;
     if (slide) {
-      for (var i = 0; i < swiper.slides.length; i += 1) {
+      for (let i = 0; i < swiper.slides.length; i += 1) {
         if (swiper.slides[i] === slide) { slideFound = true; }
       }
     }
@@ -1830,27 +1834,27 @@
     }
   }
 
-  var update = {
-    updateSize: updateSize,
-    updateSlides: updateSlides,
-    updateAutoHeight: updateAutoHeight,
-    updateSlidesOffset: updateSlidesOffset,
-    updateSlidesProgress: updateSlidesProgress,
-    updateProgress: updateProgress,
-    updateSlidesClasses: updateSlidesClasses,
-    updateActiveIndex: updateActiveIndex,
-    updateClickedSlide: updateClickedSlide,
+  const update = {
+    updateSize,
+    updateSlides,
+    updateAutoHeight,
+    updateSlidesOffset,
+    updateSlidesProgress,
+    updateProgress,
+    updateSlidesClasses,
+    updateActiveIndex,
+    updateClickedSlide,
   };
 
-  function getTranslate (axis) {
-    if ( axis === void 0 ) axis = this.isHorizontal() ? 'x' : 'y';
+  function getTranslate(axis) {
+    if (axis === void 0) axis = this.isHorizontal() ? 'x' : 'y';
 
-    var swiper = this;
+    const swiper = this;
 
-    var params = swiper.params;
-    var rtl = swiper.rtlTranslate;
-    var translate = swiper.translate;
-    var $wrapperEl = swiper.$wrapperEl;
+    const { params } = swiper;
+    const rtl = swiper.rtlTranslate;
+    const { translate } = swiper;
+    const { $wrapperEl } = swiper;
 
     if (params.virtualTranslate) {
       return rtl ? -translate : translate;
@@ -1859,22 +1863,22 @@
       return translate;
     }
 
-    var currentTranslate = Utils.getTranslate($wrapperEl[0], axis);
+    let currentTranslate = Utils.getTranslate($wrapperEl[0], axis);
     if (rtl) { currentTranslate = -currentTranslate; }
 
     return currentTranslate || 0;
   }
 
-  function setTranslate (translate, byController) {
-    var swiper = this;
-    var rtl = swiper.rtlTranslate;
-    var params = swiper.params;
-    var $wrapperEl = swiper.$wrapperEl;
-    var wrapperEl = swiper.wrapperEl;
-    var progress = swiper.progress;
-    var x = 0;
-    var y = 0;
-    var z = 0;
+  function setTranslate(translate, byController) {
+    const swiper = this;
+    const rtl = swiper.rtlTranslate;
+    const { params } = swiper;
+    const { $wrapperEl } = swiper;
+    const { wrapperEl } = swiper;
+    const { progress } = swiper;
+    let x = 0;
+    let y = 0;
+    const z = 0;
 
     if (swiper.isHorizontal()) {
       x = rtl ? -translate : translate;
@@ -1890,14 +1894,14 @@
     if (params.cssMode) {
       wrapperEl[swiper.isHorizontal() ? 'scrollLeft' : 'scrollTop'] = swiper.isHorizontal() ? -x : -y;
     } else if (!params.virtualTranslate) {
-      $wrapperEl.transform(("translate3d(" + x + "px, " + y + "px, " + z + "px)"));
+      $wrapperEl.transform((`translate3d(${x}px, ${y}px, ${z}px)`));
     }
     swiper.previousTranslate = swiper.translate;
     swiper.translate = swiper.isHorizontal() ? x : y;
 
     // Check if we need to update progress
-    var newProgress;
-    var translatesDiff = swiper.maxTranslate() - swiper.minTranslate();
+    let newProgress;
+    const translatesDiff = swiper.maxTranslate() - swiper.minTranslate();
     if (translatesDiff === 0) {
       newProgress = 0;
     } else {
@@ -1910,48 +1914,46 @@
     swiper.emit('setTranslate', swiper.translate, byController);
   }
 
-  function minTranslate () {
+  function minTranslate() {
     return (-this.snapGrid[0]);
   }
 
-  function maxTranslate () {
+  function maxTranslate() {
     return (-this.snapGrid[this.snapGrid.length - 1]);
   }
 
-  function translateTo (translate, speed, runCallbacks, translateBounds, internal) {
-    var obj;
+  function translateTo(translate, speed, runCallbacks, translateBounds, internal) {
+    let obj;
 
-    if ( translate === void 0 ) translate = 0;
-    if ( speed === void 0 ) speed = this.params.speed;
-    if ( runCallbacks === void 0 ) runCallbacks = true;
-    if ( translateBounds === void 0 ) translateBounds = true;
-    var swiper = this;
+    if (translate === void 0) translate = 0;
+    if (speed === void 0) speed = this.params.speed;
+    if (runCallbacks === void 0) runCallbacks = true;
+    if (translateBounds === void 0) translateBounds = true;
+    const swiper = this;
 
-    var params = swiper.params;
-    var wrapperEl = swiper.wrapperEl;
+    const { params } = swiper;
+    const { wrapperEl } = swiper;
 
     if (swiper.animating && params.preventInteractionOnTransition) {
       return false;
     }
 
-    var minTranslate = swiper.minTranslate();
-    var maxTranslate = swiper.maxTranslate();
-    var newTranslate;
-    if (translateBounds && translate > minTranslate) { newTranslate = minTranslate; }
-    else if (translateBounds && translate < maxTranslate) { newTranslate = maxTranslate; }
-    else { newTranslate = translate; }
+    const minTranslate = swiper.minTranslate();
+    const maxTranslate = swiper.maxTranslate();
+    let newTranslate;
+    if (translateBounds && translate > minTranslate) { newTranslate = minTranslate; } else if (translateBounds && translate < maxTranslate) { newTranslate = maxTranslate; } else { newTranslate = translate; }
 
     // Update progress
     swiper.updateProgress(newTranslate);
 
     if (params.cssMode) {
-      var isH = swiper.isHorizontal();
+      const isH = swiper.isHorizontal();
       if (speed === 0) {
         wrapperEl[isH ? 'scrollLeft' : 'scrollTop'] = -newTranslate;
       } else {
         // eslint-disable-next-line
         if (wrapperEl.scrollTo) {
-          wrapperEl.scrollTo(( obj = {}, obj[isH ? 'left' : 'top'] = -newTranslate, obj.behavior = 'smooth', obj ));
+          wrapperEl.scrollTo((obj = {}, obj[isH ? 'left' : 'top'] = -newTranslate, obj.behavior = 'smooth', obj));
         } else {
           wrapperEl[isH ? 'scrollLeft' : 'scrollTop'] = -newTranslate;
         }
@@ -1996,16 +1998,16 @@
     return true;
   }
 
-  var translate = {
-    getTranslate: getTranslate,
-    setTranslate: setTranslate,
-    minTranslate: minTranslate,
-    maxTranslate: maxTranslate,
-    translateTo: translateTo,
+  const translate = {
+    getTranslate,
+    setTranslate,
+    minTranslate,
+    maxTranslate,
+    translateTo,
   };
 
-  function setTransition (duration, byController) {
-    var swiper = this;
+  function setTransition(duration, byController) {
+    const swiper = this;
 
     if (!swiper.params.cssMode) {
       swiper.$wrapperEl.transition(duration);
@@ -2014,23 +2016,21 @@
     swiper.emit('setTransition', duration, byController);
   }
 
-  function transitionStart (runCallbacks, direction) {
-    if ( runCallbacks === void 0 ) runCallbacks = true;
+  function transitionStart(runCallbacks, direction) {
+    if (runCallbacks === void 0) runCallbacks = true;
 
-    var swiper = this;
-    var activeIndex = swiper.activeIndex;
-    var params = swiper.params;
-    var previousIndex = swiper.previousIndex;
+    const swiper = this;
+    const { activeIndex } = swiper;
+    const { params } = swiper;
+    const { previousIndex } = swiper;
     if (params.cssMode) { return; }
     if (params.autoHeight) {
       swiper.updateAutoHeight();
     }
 
-    var dir = direction;
+    let dir = direction;
     if (!dir) {
-      if (activeIndex > previousIndex) { dir = 'next'; }
-      else if (activeIndex < previousIndex) { dir = 'prev'; }
-      else { dir = 'reset'; }
+      if (activeIndex > previousIndex) { dir = 'next'; } else if (activeIndex < previousIndex) { dir = 'prev'; } else { dir = 'reset'; }
     }
 
     swiper.emit('transitionStart');
@@ -2049,22 +2049,20 @@
     }
   }
 
-  function transitionEnd$1 (runCallbacks, direction) {
-    if ( runCallbacks === void 0 ) runCallbacks = true;
+  function transitionEnd$1(runCallbacks, direction) {
+    if (runCallbacks === void 0) runCallbacks = true;
 
-    var swiper = this;
-    var activeIndex = swiper.activeIndex;
-    var previousIndex = swiper.previousIndex;
-    var params = swiper.params;
+    const swiper = this;
+    const { activeIndex } = swiper;
+    const { previousIndex } = swiper;
+    const { params } = swiper;
     swiper.animating = false;
     if (params.cssMode) { return; }
     swiper.setTransition(0);
 
-    var dir = direction;
+    let dir = direction;
     if (!dir) {
-      if (activeIndex > previousIndex) { dir = 'next'; }
-      else if (activeIndex < previousIndex) { dir = 'prev'; }
-      else { dir = 'reset'; }
+      if (activeIndex > previousIndex) { dir = 'next'; } else if (activeIndex < previousIndex) { dir = 'prev'; } else { dir = 'reset'; }
     }
 
     swiper.emit('transitionEnd');
@@ -2083,49 +2081,49 @@
     }
   }
 
-  var transition$1 = {
-    setTransition: setTransition,
-    transitionStart: transitionStart,
+  const transition$1 = {
+    setTransition,
+    transitionStart,
     transitionEnd: transitionEnd$1,
   };
 
-  function slideTo (index, speed, runCallbacks, internal) {
-    var obj;
+  function slideTo(index, speed, runCallbacks, internal) {
+    let obj;
 
-    if ( index === void 0 ) index = 0;
-    if ( speed === void 0 ) speed = this.params.speed;
-    if ( runCallbacks === void 0 ) runCallbacks = true;
-    var swiper = this;
-    var slideIndex = index;
+    if (index === void 0) index = 0;
+    if (speed === void 0) speed = this.params.speed;
+    if (runCallbacks === void 0) runCallbacks = true;
+    const swiper = this;
+    let slideIndex = index;
     if (slideIndex < 0) { slideIndex = 0; }
 
-    var params = swiper.params;
-    var snapGrid = swiper.snapGrid;
-    var slidesGrid = swiper.slidesGrid;
-    var previousIndex = swiper.previousIndex;
-    var activeIndex = swiper.activeIndex;
-    var rtl = swiper.rtlTranslate;
-    var wrapperEl = swiper.wrapperEl;
+    const { params } = swiper;
+    const { snapGrid } = swiper;
+    const { slidesGrid } = swiper;
+    const { previousIndex } = swiper;
+    const { activeIndex } = swiper;
+    const rtl = swiper.rtlTranslate;
+    const { wrapperEl } = swiper;
     if (swiper.animating && params.preventInteractionOnTransition) {
       return false;
     }
 
-    var skip = Math.min(swiper.params.slidesPerGroupSkip, slideIndex);
-    var snapIndex = skip + Math.floor((slideIndex - skip) / swiper.params.slidesPerGroup);
+    const skip = Math.min(swiper.params.slidesPerGroupSkip, slideIndex);
+    let snapIndex = skip + Math.floor((slideIndex - skip) / swiper.params.slidesPerGroup);
     if (snapIndex >= snapGrid.length) { snapIndex = snapGrid.length - 1; }
 
     if ((activeIndex || params.initialSlide || 0) === (previousIndex || 0) && runCallbacks) {
       swiper.emit('beforeSlideChangeStart');
     }
 
-    var translate = -snapGrid[snapIndex];
+    const translate = -snapGrid[snapIndex];
 
     // Update progress
     swiper.updateProgress(translate);
 
     // Normalize slideIndex
     if (params.normalizeSlideIndex) {
-      for (var i = 0; i < slidesGrid.length; i += 1) {
+      for (let i = 0; i < slidesGrid.length; i += 1) {
         if (-Math.floor(translate * 100) >= Math.floor(slidesGrid[i] * 100)) {
           slideIndex = i;
         }
@@ -2141,10 +2139,8 @@
       }
     }
 
-    var direction;
-    if (slideIndex > activeIndex) { direction = 'next'; }
-    else if (slideIndex < activeIndex) { direction = 'prev'; }
-    else { direction = 'reset'; }
+    let direction;
+    if (slideIndex > activeIndex) { direction = 'next'; } else if (slideIndex < activeIndex) { direction = 'prev'; } else { direction = 'reset'; }
 
 
     // Update Index
@@ -2165,8 +2161,8 @@
       return false;
     }
     if (params.cssMode) {
-      var isH = swiper.isHorizontal();
-      var t = -translate;
+      const isH = swiper.isHorizontal();
+      let t = -translate;
       if (rtl) {
         t = wrapperEl.scrollWidth - wrapperEl.offsetWidth - t;
       }
@@ -2175,7 +2171,7 @@
       } else {
         // eslint-disable-next-line
         if (wrapperEl.scrollTo) {
-          wrapperEl.scrollTo(( obj = {}, obj[isH ? 'left' : 'top'] = t, obj.behavior = 'smooth', obj ));
+          wrapperEl.scrollTo((obj = {}, obj[isH ? 'left' : 'top'] = t, obj.behavior = 'smooth', obj));
         } else {
           wrapperEl[isH ? 'scrollLeft' : 'scrollTop'] = t;
         }
@@ -2219,13 +2215,13 @@
     return true;
   }
 
-  function slideToLoop (index, speed, runCallbacks, internal) {
-    if ( index === void 0 ) index = 0;
-    if ( speed === void 0 ) speed = this.params.speed;
-    if ( runCallbacks === void 0 ) runCallbacks = true;
+  function slideToLoop(index, speed, runCallbacks, internal) {
+    if (index === void 0) index = 0;
+    if (speed === void 0) speed = this.params.speed;
+    if (runCallbacks === void 0) runCallbacks = true;
 
-    var swiper = this;
-    var newIndex = index;
+    const swiper = this;
+    let newIndex = index;
     if (swiper.params.loop) {
       newIndex += swiper.loopedSlides;
     }
@@ -2234,14 +2230,14 @@
   }
 
   /* eslint no-unused-vars: "off" */
-  function slideNext (speed, runCallbacks, internal) {
-    if ( speed === void 0 ) speed = this.params.speed;
-    if ( runCallbacks === void 0 ) runCallbacks = true;
+  function slideNext(speed, runCallbacks, internal) {
+    if (speed === void 0) speed = this.params.speed;
+    if (runCallbacks === void 0) runCallbacks = true;
 
-    var swiper = this;
-    var params = swiper.params;
-    var animating = swiper.animating;
-    var increment = swiper.activeIndex < params.slidesPerGroupSkip ? 1 : params.slidesPerGroup;
+    const swiper = this;
+    const { params } = swiper;
+    const { animating } = swiper;
+    const increment = swiper.activeIndex < params.slidesPerGroupSkip ? 1 : params.slidesPerGroup;
     if (params.loop) {
       if (animating) { return false; }
       swiper.loopFix();
@@ -2252,16 +2248,16 @@
   }
 
   /* eslint no-unused-vars: "off" */
-  function slidePrev (speed, runCallbacks, internal) {
-    if ( speed === void 0 ) speed = this.params.speed;
-    if ( runCallbacks === void 0 ) runCallbacks = true;
+  function slidePrev(speed, runCallbacks, internal) {
+    if (speed === void 0) speed = this.params.speed;
+    if (runCallbacks === void 0) runCallbacks = true;
 
-    var swiper = this;
-    var params = swiper.params;
-    var animating = swiper.animating;
-    var snapGrid = swiper.snapGrid;
-    var slidesGrid = swiper.slidesGrid;
-    var rtlTranslate = swiper.rtlTranslate;
+    const swiper = this;
+    const { params } = swiper;
+    const { animating } = swiper;
+    const { snapGrid } = swiper;
+    const { slidesGrid } = swiper;
+    const { rtlTranslate } = swiper;
 
     if (params.loop) {
       if (animating) { return false; }
@@ -2269,23 +2265,23 @@
       // eslint-disable-next-line
       swiper._clientLeft = swiper.$wrapperEl[0].clientLeft;
     }
-    var translate = rtlTranslate ? swiper.translate : -swiper.translate;
+    const translate = rtlTranslate ? swiper.translate : -swiper.translate;
     function normalize(val) {
       if (val < 0) { return -Math.floor(Math.abs(val)); }
       return Math.floor(val);
     }
-    var normalizedTranslate = normalize(translate);
-    var normalizedSnapGrid = snapGrid.map(function (val) { return normalize(val); });
-    var normalizedSlidesGrid = slidesGrid.map(function (val) { return normalize(val); });
+    const normalizedTranslate = normalize(translate);
+    const normalizedSnapGrid = snapGrid.map((val) => normalize(val));
+    const normalizedSlidesGrid = slidesGrid.map((val) => normalize(val));
 
-    var currentSnap = snapGrid[normalizedSnapGrid.indexOf(normalizedTranslate)];
-    var prevSnap = snapGrid[normalizedSnapGrid.indexOf(normalizedTranslate) - 1];
+    const currentSnap = snapGrid[normalizedSnapGrid.indexOf(normalizedTranslate)];
+    let prevSnap = snapGrid[normalizedSnapGrid.indexOf(normalizedTranslate) - 1];
     if (typeof prevSnap === 'undefined' && params.cssMode) {
-      snapGrid.forEach(function (snap) {
+      snapGrid.forEach((snap) => {
         if (!prevSnap && normalizedTranslate >= snap) { prevSnap = snap; }
       });
     }
-    var prevIndex;
+    let prevIndex;
     if (typeof prevSnap !== 'undefined') {
       prevIndex = slidesGrid.indexOf(prevSnap);
       if (prevIndex < 0) { prevIndex = swiper.activeIndex - 1; }
@@ -2294,40 +2290,40 @@
   }
 
   /* eslint no-unused-vars: "off" */
-  function slideReset (speed, runCallbacks, internal) {
-    if ( speed === void 0 ) speed = this.params.speed;
-    if ( runCallbacks === void 0 ) runCallbacks = true;
+  function slideReset(speed, runCallbacks, internal) {
+    if (speed === void 0) speed = this.params.speed;
+    if (runCallbacks === void 0) runCallbacks = true;
 
-    var swiper = this;
+    const swiper = this;
     return swiper.slideTo(swiper.activeIndex, speed, runCallbacks, internal);
   }
 
   /* eslint no-unused-vars: "off" */
-  function slideToClosest (speed, runCallbacks, internal, threshold) {
-    if ( speed === void 0 ) speed = this.params.speed;
-    if ( runCallbacks === void 0 ) runCallbacks = true;
-    if ( threshold === void 0 ) threshold = 0.5;
+  function slideToClosest(speed, runCallbacks, internal, threshold) {
+    if (speed === void 0) speed = this.params.speed;
+    if (runCallbacks === void 0) runCallbacks = true;
+    if (threshold === void 0) threshold = 0.5;
 
-    var swiper = this;
-    var index = swiper.activeIndex;
-    var skip = Math.min(swiper.params.slidesPerGroupSkip, index);
-    var snapIndex = skip + Math.floor((index - skip) / swiper.params.slidesPerGroup);
+    const swiper = this;
+    let index = swiper.activeIndex;
+    const skip = Math.min(swiper.params.slidesPerGroupSkip, index);
+    const snapIndex = skip + Math.floor((index - skip) / swiper.params.slidesPerGroup);
 
-    var translate = swiper.rtlTranslate ? swiper.translate : -swiper.translate;
+    const translate = swiper.rtlTranslate ? swiper.translate : -swiper.translate;
 
     if (translate >= swiper.snapGrid[snapIndex]) {
       // The current translate is on or after the current snap index, so the choice
       // is between the current index and the one after it.
-      var currentSnap = swiper.snapGrid[snapIndex];
-      var nextSnap = swiper.snapGrid[snapIndex + 1];
+      const currentSnap = swiper.snapGrid[snapIndex];
+      const nextSnap = swiper.snapGrid[snapIndex + 1];
       if ((translate - currentSnap) > (nextSnap - currentSnap) * threshold) {
         index += swiper.params.slidesPerGroup;
       }
     } else {
       // The current translate is before the current snap index, so the choice
       // is between the current index and the one before it.
-      var prevSnap = swiper.snapGrid[snapIndex - 1];
-      var currentSnap$1 = swiper.snapGrid[snapIndex];
+      const prevSnap = swiper.snapGrid[snapIndex - 1];
+      const currentSnap$1 = swiper.snapGrid[snapIndex];
       if ((translate - prevSnap) <= (currentSnap$1 - prevSnap) * threshold) {
         index -= swiper.params.slidesPerGroup;
       }
@@ -2338,14 +2334,14 @@
     return swiper.slideTo(index, speed, runCallbacks, internal);
   }
 
-  function slideToClickedSlide () {
-    var swiper = this;
-    var params = swiper.params;
-    var $wrapperEl = swiper.$wrapperEl;
+  function slideToClickedSlide() {
+    const swiper = this;
+    const { params } = swiper;
+    const { $wrapperEl } = swiper;
 
-    var slidesPerView = params.slidesPerView === 'auto' ? swiper.slidesPerViewDynamic() : params.slidesPerView;
-    var slideToIndex = swiper.clickedIndex;
-    var realIndex;
+    const slidesPerView = params.slidesPerView === 'auto' ? swiper.slidesPerViewDynamic() : params.slidesPerView;
+    let slideToIndex = swiper.clickedIndex;
+    let realIndex;
     if (params.loop) {
       if (swiper.animating) { return; }
       realIndex = parseInt($(swiper.clickedSlide).attr('data-swiper-slide-index'), 10);
@@ -2356,11 +2352,11 @@
         ) {
           swiper.loopFix();
           slideToIndex = $wrapperEl
-            .children(("." + (params.slideClass) + "[data-swiper-slide-index=\"" + realIndex + "\"]:not(." + (params.slideDuplicateClass) + ")"))
+            .children((`.${params.slideClass}[data-swiper-slide-index="${realIndex}"]:not(.${params.slideDuplicateClass})`))
             .eq(0)
             .index();
 
-          Utils.nextTick(function () {
+          Utils.nextTick(() => {
             swiper.slideTo(slideToIndex);
           });
         } else {
@@ -2369,11 +2365,11 @@
       } else if (slideToIndex > swiper.slides.length - slidesPerView) {
         swiper.loopFix();
         slideToIndex = $wrapperEl
-          .children(("." + (params.slideClass) + "[data-swiper-slide-index=\"" + realIndex + "\"]:not(." + (params.slideDuplicateClass) + ")"))
+          .children((`.${params.slideClass}[data-swiper-slide-index="${realIndex}"]:not(.${params.slideDuplicateClass})`))
           .eq(0)
           .index();
 
-        Utils.nextTick(function () {
+        Utils.nextTick(() => {
           swiper.slideTo(slideToIndex);
         });
       } else {
@@ -2384,33 +2380,33 @@
     }
   }
 
-  var slide = {
-    slideTo: slideTo,
-    slideToLoop: slideToLoop,
-    slideNext: slideNext,
-    slidePrev: slidePrev,
-    slideReset: slideReset,
-    slideToClosest: slideToClosest,
-    slideToClickedSlide: slideToClickedSlide,
+  const slide = {
+    slideTo,
+    slideToLoop,
+    slideNext,
+    slidePrev,
+    slideReset,
+    slideToClosest,
+    slideToClickedSlide,
   };
 
-  function loopCreate () {
-    var swiper = this;
-    var params = swiper.params;
-    var $wrapperEl = swiper.$wrapperEl;
+  function loopCreate() {
+    const swiper = this;
+    const { params } = swiper;
+    const { $wrapperEl } = swiper;
     // Remove duplicated slides
-    $wrapperEl.children(("." + (params.slideClass) + "." + (params.slideDuplicateClass))).remove();
+    $wrapperEl.children((`.${params.slideClass}.${params.slideDuplicateClass}`)).remove();
 
-    var slides = $wrapperEl.children(("." + (params.slideClass)));
+    let slides = $wrapperEl.children((`.${params.slideClass}`));
 
     if (params.loopFillGroupWithBlank) {
-      var blankSlidesNum = params.slidesPerGroup - (slides.length % params.slidesPerGroup);
+      const blankSlidesNum = params.slidesPerGroup - (slides.length % params.slidesPerGroup);
       if (blankSlidesNum !== params.slidesPerGroup) {
-        for (var i = 0; i < blankSlidesNum; i += 1) {
-          var blankNode = $(doc.createElement('div')).addClass(((params.slideClass) + " " + (params.slideBlankClass)));
+        for (let i = 0; i < blankSlidesNum; i += 1) {
+          const blankNode = $(doc.createElement('div')).addClass((`${params.slideClass} ${params.slideBlankClass}`));
           $wrapperEl.append(blankNode);
         }
-        slides = $wrapperEl.children(("." + (params.slideClass)));
+        slides = $wrapperEl.children((`.${params.slideClass}`));
       }
     }
 
@@ -2422,46 +2418,46 @@
       swiper.loopedSlides = slides.length;
     }
 
-    var prependSlides = [];
-    var appendSlides = [];
-    slides.each(function (index, el) {
-      var slide = $(el);
+    const prependSlides = [];
+    const appendSlides = [];
+    slides.each((index, el) => {
+      const slide = $(el);
       if (index < swiper.loopedSlides) { appendSlides.push(el); }
       if (index < slides.length && index >= slides.length - swiper.loopedSlides) { prependSlides.push(el); }
       slide.attr('data-swiper-slide-index', index);
     });
-    for (var i$1 = 0; i$1 < appendSlides.length; i$1 += 1) {
+    for (let i$1 = 0; i$1 < appendSlides.length; i$1 += 1) {
       $wrapperEl.append($(appendSlides[i$1].cloneNode(true)).addClass(params.slideDuplicateClass));
     }
-    for (var i$2 = prependSlides.length - 1; i$2 >= 0; i$2 -= 1) {
+    for (let i$2 = prependSlides.length - 1; i$2 >= 0; i$2 -= 1) {
       $wrapperEl.prepend($(prependSlides[i$2].cloneNode(true)).addClass(params.slideDuplicateClass));
     }
   }
 
-  function loopFix () {
-    var swiper = this;
+  function loopFix() {
+    const swiper = this;
 
     swiper.emit('beforeLoopFix');
 
-    var activeIndex = swiper.activeIndex;
-    var slides = swiper.slides;
-    var loopedSlides = swiper.loopedSlides;
-    var allowSlidePrev = swiper.allowSlidePrev;
-    var allowSlideNext = swiper.allowSlideNext;
-    var snapGrid = swiper.snapGrid;
-    var rtl = swiper.rtlTranslate;
-    var newIndex;
+    const { activeIndex } = swiper;
+    const { slides } = swiper;
+    const { loopedSlides } = swiper;
+    const { allowSlidePrev } = swiper;
+    const { allowSlideNext } = swiper;
+    const { snapGrid } = swiper;
+    const rtl = swiper.rtlTranslate;
+    let newIndex;
     swiper.allowSlidePrev = true;
     swiper.allowSlideNext = true;
 
-    var snapTranslate = -snapGrid[activeIndex];
-    var diff = snapTranslate - swiper.getTranslate();
+    const snapTranslate = -snapGrid[activeIndex];
+    const diff = snapTranslate - swiper.getTranslate();
 
     // Fix For Negative Oversliding
     if (activeIndex < loopedSlides) {
       newIndex = (slides.length - (loopedSlides * 3)) + activeIndex;
       newIndex += loopedSlides;
-      var slideChanged = swiper.slideTo(newIndex, 0, false, true);
+      const slideChanged = swiper.slideTo(newIndex, 0, false, true);
       if (slideChanged && diff !== 0) {
         swiper.setTranslate((rtl ? -swiper.translate : swiper.translate) - diff);
       }
@@ -2469,7 +2465,7 @@
       // Fix For Positive Oversliding
       newIndex = -slides.length + activeIndex + loopedSlides;
       newIndex += loopedSlides;
-      var slideChanged$1 = swiper.slideTo(newIndex, 0, false, true);
+      const slideChanged$1 = swiper.slideTo(newIndex, 0, false, true);
       if (slideChanged$1 && diff !== 0) {
         swiper.setTranslate((rtl ? -swiper.translate : swiper.translate) - diff);
       }
@@ -2480,51 +2476,51 @@
     swiper.emit('loopFix');
   }
 
-  function loopDestroy () {
-    var swiper = this;
-    var $wrapperEl = swiper.$wrapperEl;
-    var params = swiper.params;
-    var slides = swiper.slides;
-    $wrapperEl.children(("." + (params.slideClass) + "." + (params.slideDuplicateClass) + ",." + (params.slideClass) + "." + (params.slideBlankClass))).remove();
+  function loopDestroy() {
+    const swiper = this;
+    const { $wrapperEl } = swiper;
+    const { params } = swiper;
+    const { slides } = swiper;
+    $wrapperEl.children((`.${params.slideClass}.${params.slideDuplicateClass},.${params.slideClass}.${params.slideBlankClass}`)).remove();
     slides.removeAttr('data-swiper-slide-index');
   }
 
-  var loop = {
-    loopCreate: loopCreate,
-    loopFix: loopFix,
-    loopDestroy: loopDestroy,
+  const loop = {
+    loopCreate,
+    loopFix,
+    loopDestroy,
   };
 
-  function setGrabCursor (moving) {
-    var swiper = this;
+  function setGrabCursor(moving) {
+    const swiper = this;
     if (Support.touch || !swiper.params.simulateTouch || (swiper.params.watchOverflow && swiper.isLocked) || swiper.params.cssMode) { return; }
-    var el = swiper.el;
+    const { el } = swiper;
     el.style.cursor = 'move';
     el.style.cursor = moving ? '-webkit-grabbing' : '-webkit-grab';
     el.style.cursor = moving ? '-moz-grabbin' : '-moz-grab';
     el.style.cursor = moving ? 'grabbing' : 'grab';
   }
 
-  function unsetGrabCursor () {
-    var swiper = this;
+  function unsetGrabCursor() {
+    const swiper = this;
     if (Support.touch || (swiper.params.watchOverflow && swiper.isLocked) || swiper.params.cssMode) { return; }
     swiper.el.style.cursor = '';
   }
 
-  var grabCursor = {
-    setGrabCursor: setGrabCursor,
-    unsetGrabCursor: unsetGrabCursor,
+  const grabCursor = {
+    setGrabCursor,
+    unsetGrabCursor,
   };
 
-  function appendSlide (slides) {
-    var swiper = this;
-    var $wrapperEl = swiper.$wrapperEl;
-    var params = swiper.params;
+  function appendSlide(slides) {
+    const swiper = this;
+    const { $wrapperEl } = swiper;
+    const { params } = swiper;
     if (params.loop) {
       swiper.loopDestroy();
     }
     if (typeof slides === 'object' && 'length' in slides) {
-      for (var i = 0; i < slides.length; i += 1) {
+      for (let i = 0; i < slides.length; i += 1) {
         if (slides[i]) { $wrapperEl.append(slides[i]); }
       }
     } else {
@@ -2538,18 +2534,18 @@
     }
   }
 
-  function prependSlide (slides) {
-    var swiper = this;
-    var params = swiper.params;
-    var $wrapperEl = swiper.$wrapperEl;
-    var activeIndex = swiper.activeIndex;
+  function prependSlide(slides) {
+    const swiper = this;
+    const { params } = swiper;
+    const { $wrapperEl } = swiper;
+    const { activeIndex } = swiper;
 
     if (params.loop) {
       swiper.loopDestroy();
     }
-    var newActiveIndex = activeIndex + 1;
+    let newActiveIndex = activeIndex + 1;
     if (typeof slides === 'object' && 'length' in slides) {
-      for (var i = 0; i < slides.length; i += 1) {
+      for (let i = 0; i < slides.length; i += 1) {
         if (slides[i]) { $wrapperEl.prepend(slides[i]); }
       }
       newActiveIndex = activeIndex + slides.length;
@@ -2565,18 +2561,18 @@
     swiper.slideTo(newActiveIndex, 0, false);
   }
 
-  function addSlide (index, slides) {
-    var swiper = this;
-    var $wrapperEl = swiper.$wrapperEl;
-    var params = swiper.params;
-    var activeIndex = swiper.activeIndex;
-    var activeIndexBuffer = activeIndex;
+  function addSlide(index, slides) {
+    const swiper = this;
+    const { $wrapperEl } = swiper;
+    const { params } = swiper;
+    const { activeIndex } = swiper;
+    let activeIndexBuffer = activeIndex;
     if (params.loop) {
       activeIndexBuffer -= swiper.loopedSlides;
       swiper.loopDestroy();
-      swiper.slides = $wrapperEl.children(("." + (params.slideClass)));
+      swiper.slides = $wrapperEl.children((`.${params.slideClass}`));
     }
-    var baseLength = swiper.slides.length;
+    const baseLength = swiper.slides.length;
     if (index <= 0) {
       swiper.prependSlide(slides);
       return;
@@ -2585,17 +2581,17 @@
       swiper.appendSlide(slides);
       return;
     }
-    var newActiveIndex = activeIndexBuffer > index ? activeIndexBuffer + 1 : activeIndexBuffer;
+    let newActiveIndex = activeIndexBuffer > index ? activeIndexBuffer + 1 : activeIndexBuffer;
 
-    var slidesBuffer = [];
-    for (var i = baseLength - 1; i >= index; i -= 1) {
-      var currentSlide = swiper.slides.eq(i);
+    const slidesBuffer = [];
+    for (let i = baseLength - 1; i >= index; i -= 1) {
+      const currentSlide = swiper.slides.eq(i);
       currentSlide.remove();
       slidesBuffer.unshift(currentSlide);
     }
 
     if (typeof slides === 'object' && 'length' in slides) {
-      for (var i$1 = 0; i$1 < slides.length; i$1 += 1) {
+      for (let i$1 = 0; i$1 < slides.length; i$1 += 1) {
         if (slides[i$1]) { $wrapperEl.append(slides[i$1]); }
       }
       newActiveIndex = activeIndexBuffer > index ? activeIndexBuffer + slides.length : activeIndexBuffer;
@@ -2603,7 +2599,7 @@
       $wrapperEl.append(slides);
     }
 
-    for (var i$2 = 0; i$2 < slidesBuffer.length; i$2 += 1) {
+    for (let i$2 = 0; i$2 < slidesBuffer.length; i$2 += 1) {
       $wrapperEl.append(slidesBuffer[i$2]);
     }
 
@@ -2620,23 +2616,23 @@
     }
   }
 
-  function removeSlide (slidesIndexes) {
-    var swiper = this;
-    var params = swiper.params;
-    var $wrapperEl = swiper.$wrapperEl;
-    var activeIndex = swiper.activeIndex;
+  function removeSlide(slidesIndexes) {
+    const swiper = this;
+    const { params } = swiper;
+    const { $wrapperEl } = swiper;
+    const { activeIndex } = swiper;
 
-    var activeIndexBuffer = activeIndex;
+    let activeIndexBuffer = activeIndex;
     if (params.loop) {
       activeIndexBuffer -= swiper.loopedSlides;
       swiper.loopDestroy();
-      swiper.slides = $wrapperEl.children(("." + (params.slideClass)));
+      swiper.slides = $wrapperEl.children((`.${params.slideClass}`));
     }
-    var newActiveIndex = activeIndexBuffer;
-    var indexToRemove;
+    let newActiveIndex = activeIndexBuffer;
+    let indexToRemove;
 
     if (typeof slidesIndexes === 'object' && 'length' in slidesIndexes) {
-      for (var i = 0; i < slidesIndexes.length; i += 1) {
+      for (let i = 0; i < slidesIndexes.length; i += 1) {
         indexToRemove = slidesIndexes[i];
         if (swiper.slides[indexToRemove]) { swiper.slides.eq(indexToRemove).remove(); }
         if (indexToRemove < newActiveIndex) { newActiveIndex -= 1; }
@@ -2663,29 +2659,29 @@
     }
   }
 
-  function removeAllSlides () {
-    var swiper = this;
+  function removeAllSlides() {
+    const swiper = this;
 
-    var slidesIndexes = [];
-    for (var i = 0; i < swiper.slides.length; i += 1) {
+    const slidesIndexes = [];
+    for (let i = 0; i < swiper.slides.length; i += 1) {
       slidesIndexes.push(i);
     }
     swiper.removeSlide(slidesIndexes);
   }
 
-  var manipulation = {
-    appendSlide: appendSlide,
-    prependSlide: prependSlide,
-    addSlide: addSlide,
-    removeSlide: removeSlide,
-    removeAllSlides: removeAllSlides,
+  const manipulation = {
+    appendSlide,
+    prependSlide,
+    addSlide,
+    removeSlide,
+    removeAllSlides,
   };
 
-  var Device = (function Device() {
-    var platform = win.navigator.platform;
-    var ua = win.navigator.userAgent;
+  const Device = (function Device() {
+    const { platform } = win.navigator;
+    const ua = win.navigator.userAgent;
 
-    var device = {
+    const device = {
       ios: false,
       android: false,
       androidChrome: false,
@@ -2703,19 +2699,19 @@
       electron: false,
     };
 
-    var screenWidth = win.screen.width;
-    var screenHeight = win.screen.height;
+    const screenWidth = win.screen.width;
+    const screenHeight = win.screen.height;
 
     var android = ua.match(/(Android);?[\s\/]+([\d.]+)?/); // eslint-disable-line
-    var ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
-    var ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/);
-    var iphone = !ipad && ua.match(/(iPhone\sOS|iOS)\s([\d_]+)/);
-    var ie = ua.indexOf('MSIE ') >= 0 || ua.indexOf('Trident/') >= 0;
-    var edge = ua.indexOf('Edge/') >= 0;
-    var firefox = ua.indexOf('Gecko/') >= 0 && ua.indexOf('Firefox/') >= 0;
-    var windows = platform === 'Win32';
-    var electron = ua.toLowerCase().indexOf('electron') >= 0;
-    var macos = platform === 'MacIntel';
+    let ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
+    const ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/);
+    const iphone = !ipad && ua.match(/(iPhone\sOS|iOS)\s([\d_]+)/);
+    const ie = ua.indexOf('MSIE ') >= 0 || ua.indexOf('Trident/') >= 0;
+    const edge = ua.indexOf('Edge/') >= 0;
+    const firefox = ua.indexOf('Gecko/') >= 0 && ua.indexOf('Firefox/') >= 0;
+    const windows = platform === 'Win32';
+    const electron = ua.toLowerCase().indexOf('electron') >= 0;
+    let macos = platform === 'MacIntel';
 
     // iPadOs 13 fix
     if (!ipad
@@ -2794,18 +2790,18 @@
     return device;
   }());
 
-  function onTouchStart (event) {
-    var swiper = this;
-    var data = swiper.touchEventsData;
-    var params = swiper.params;
-    var touches = swiper.touches;
+  function onTouchStart(event) {
+    const swiper = this;
+    const data = swiper.touchEventsData;
+    const { params } = swiper;
+    const { touches } = swiper;
 
     if (swiper.animating && params.preventInteractionOnTransition) {
       return;
     }
-    var e = event;
+    let e = event;
     if (e.originalEvent) { e = e.originalEvent; }
-    var $targetEl = $(e.target);
+    const $targetEl = $(e.target);
 
     if (params.touchEventsTarget === 'wrapper') {
       if (!$targetEl.closest(swiper.wrapperEl).length) { return; }
@@ -2814,7 +2810,7 @@
     if (!data.isTouchEvent && 'which' in e && e.which === 3) { return; }
     if (!data.isTouchEvent && 'button' in e && e.button > 0) { return; }
     if (data.isTouched && data.isMoved) { return; }
-    if (params.noSwiping && $targetEl.closest(params.noSwipingSelector ? params.noSwipingSelector : ("." + (params.noSwipingClass)))[0]) {
+    if (params.noSwiping && $targetEl.closest(params.noSwipingSelector ? params.noSwipingSelector : (`.${params.noSwipingClass}`))[0]) {
       swiper.allowClick = true;
       return;
     }
@@ -2824,13 +2820,13 @@
 
     touches.currentX = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
     touches.currentY = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
-    var startX = touches.currentX;
-    var startY = touches.currentY;
+    const startX = touches.currentX;
+    const startY = touches.currentY;
 
     // Do NOT start if iOS edge swipe is detected. Otherwise iOS app (UIWebView) cannot swipe-to-go-back anymore
 
-    var edgeSwipeDetection = params.edgeSwipeDetection || params.iOSEdgeSwipeDetection;
-    var edgeSwipeThreshold = params.edgeSwipeThreshold || params.iOSEdgeSwipeThreshold;
+    const edgeSwipeDetection = params.edgeSwipeDetection || params.iOSEdgeSwipeDetection;
+    const edgeSwipeThreshold = params.edgeSwipeThreshold || params.iOSEdgeSwipeThreshold;
     if (
       edgeSwipeDetection
       && ((startX <= edgeSwipeThreshold)
@@ -2855,7 +2851,7 @@
     swiper.swipeDirection = undefined;
     if (params.threshold > 0) { data.allowThresholdMove = false; }
     if (e.type !== 'touchstart') {
-      var preventDefault = true;
+      let preventDefault = true;
       if ($targetEl.is(data.formElements)) { preventDefault = false; }
       if (
         doc.activeElement
@@ -2865,7 +2861,7 @@
         doc.activeElement.blur();
       }
 
-      var shouldPreventDefault = preventDefault && swiper.allowTouchMove && params.touchStartPreventDefault;
+      const shouldPreventDefault = preventDefault && swiper.allowTouchMove && params.touchStartPreventDefault;
       if (params.touchStartForcePreventDefault || shouldPreventDefault) {
         e.preventDefault();
       }
@@ -2873,13 +2869,13 @@
     swiper.emit('touchStart', e);
   }
 
-  function onTouchMove (event) {
-    var swiper = this;
-    var data = swiper.touchEventsData;
-    var params = swiper.params;
-    var touches = swiper.touches;
-    var rtl = swiper.rtlTranslate;
-    var e = event;
+  function onTouchMove(event) {
+    const swiper = this;
+    const data = swiper.touchEventsData;
+    const { params } = swiper;
+    const { touches } = swiper;
+    const rtl = swiper.rtlTranslate;
+    let e = event;
     if (e.originalEvent) { e = e.originalEvent; }
     if (!data.isTouched) {
       if (data.startMoving && data.isScrolling) {
@@ -2888,9 +2884,9 @@
       return;
     }
     if (data.isTouchEvent && e.type === 'mousemove') { return; }
-    var targetTouch = e.type === 'touchmove' && e.targetTouches && (e.targetTouches[0] || e.changedTouches[0]);
-    var pageX = e.type === 'touchmove' ? targetTouch.pageX : e.pageX;
-    var pageY = e.type === 'touchmove' ? targetTouch.pageY : e.pageY;
+    const targetTouch = e.type === 'touchmove' && e.targetTouches && (e.targetTouches[0] || e.changedTouches[0]);
+    const pageX = e.type === 'touchmove' ? targetTouch.pageX : e.pageX;
+    const pageY = e.type === 'touchmove' ? targetTouch.pageY : e.pageY;
     if (e.preventedByNestedSwiper) {
       touches.startX = pageX;
       touches.startY = pageY;
@@ -2943,12 +2939,12 @@
     touches.currentX = pageX;
     touches.currentY = pageY;
 
-    var diffX = touches.currentX - touches.startX;
-    var diffY = touches.currentY - touches.startY;
-    if (swiper.params.threshold && Math.sqrt((Math.pow( diffX, 2 )) + (Math.pow( diffY, 2 ))) < swiper.params.threshold) { return; }
+    const diffX = touches.currentX - touches.startX;
+    const diffY = touches.currentY - touches.startY;
+    if (swiper.params.threshold && Math.sqrt((Math.pow(diffX, 2)) + (Math.pow(diffY, 2))) < swiper.params.threshold) { return; }
 
     if (typeof data.isScrolling === 'undefined') {
-      var touchAngle;
+      let touchAngle;
       if ((swiper.isHorizontal() && touches.currentY === touches.startY) || (swiper.isVertical() && touches.currentX === touches.startX)) {
         data.isScrolling = false;
       } else {
@@ -3001,7 +2997,7 @@
     swiper.emit('sliderMove', e);
     data.isMoved = true;
 
-    var diff = swiper.isHorizontal() ? diffX : diffY;
+    let diff = swiper.isHorizontal() ? diffX : diffY;
     touches.diff = diff;
 
     diff *= params.touchRatio;
@@ -3010,17 +3006,17 @@
     swiper.swipeDirection = diff > 0 ? 'prev' : 'next';
     data.currentTranslate = diff + data.startTranslate;
 
-    var disableParentSwiper = true;
-    var resistanceRatio = params.resistanceRatio;
+    let disableParentSwiper = true;
+    let { resistanceRatio } = params;
     if (params.touchReleaseOnEdges) {
       resistanceRatio = 0;
     }
     if ((diff > 0 && data.currentTranslate > swiper.minTranslate())) {
       disableParentSwiper = false;
-      if (params.resistance) { data.currentTranslate = (swiper.minTranslate() - 1) + (Math.pow( (-swiper.minTranslate() + data.startTranslate + diff), resistanceRatio )); }
+      if (params.resistance) { data.currentTranslate = (swiper.minTranslate() - 1) + (Math.pow((-swiper.minTranslate() + data.startTranslate + diff), resistanceRatio)); }
     } else if (diff < 0 && data.currentTranslate < swiper.maxTranslate()) {
       disableParentSwiper = false;
-      if (params.resistance) { data.currentTranslate = (swiper.maxTranslate() + 1) - (Math.pow( (swiper.maxTranslate() - data.startTranslate - diff), resistanceRatio )); }
+      if (params.resistance) { data.currentTranslate = (swiper.maxTranslate() + 1) - (Math.pow((swiper.maxTranslate() - data.startTranslate - diff), resistanceRatio)); }
     }
 
     if (disableParentSwiper) {
@@ -3079,17 +3075,17 @@
     swiper.setTranslate(data.currentTranslate);
   }
 
-  function onTouchEnd (event) {
-    var swiper = this;
-    var data = swiper.touchEventsData;
+  function onTouchEnd(event) {
+    const swiper = this;
+    const data = swiper.touchEventsData;
 
-    var params = swiper.params;
-    var touches = swiper.touches;
-    var rtl = swiper.rtlTranslate;
-    var $wrapperEl = swiper.$wrapperEl;
-    var slidesGrid = swiper.slidesGrid;
-    var snapGrid = swiper.snapGrid;
-    var e = event;
+    const { params } = swiper;
+    const { touches } = swiper;
+    const rtl = swiper.rtlTranslate;
+    const { $wrapperEl } = swiper;
+    const { slidesGrid } = swiper;
+    const { snapGrid } = swiper;
+    let e = event;
     if (e.originalEvent) { e = e.originalEvent; }
     if (data.allowTouchCallbacks) {
       swiper.emit('touchEnd', e);
@@ -3109,8 +3105,8 @@
     }
 
     // Time diff
-    var touchEndTime = Utils.now();
-    var timeDiff = touchEndTime - data.touchStartTime;
+    const touchEndTime = Utils.now();
+    const timeDiff = touchEndTime - data.touchStartTime;
 
     // Tap, doubleTap, Click
     if (swiper.allowClick) {
@@ -3122,7 +3118,7 @@
     }
 
     data.lastClickTime = Utils.now();
-    Utils.nextTick(function () {
+    Utils.nextTick(() => {
       if (!swiper.destroyed) { swiper.allowClick = true; }
     });
 
@@ -3136,7 +3132,7 @@
     data.isMoved = false;
     data.startMoving = false;
 
-    var currentPos;
+    let currentPos;
     if (params.followFinger) {
       currentPos = rtl ? swiper.translate : -swiper.translate;
     } else {
@@ -3163,11 +3159,11 @@
 
       if (params.freeModeMomentum) {
         if (data.velocities.length > 1) {
-          var lastMoveEvent = data.velocities.pop();
-          var velocityEvent = data.velocities.pop();
+          const lastMoveEvent = data.velocities.pop();
+          const velocityEvent = data.velocities.pop();
 
-          var distance = lastMoveEvent.position - velocityEvent.position;
-          var time = lastMoveEvent.time - velocityEvent.time;
+          const distance = lastMoveEvent.position - velocityEvent.position;
+          const time = lastMoveEvent.time - velocityEvent.time;
           swiper.velocity = distance / time;
           swiper.velocity /= 2;
           if (Math.abs(swiper.velocity) < params.freeModeMinimumVelocity) {
@@ -3184,16 +3180,16 @@
         swiper.velocity *= params.freeModeMomentumVelocityRatio;
 
         data.velocities.length = 0;
-        var momentumDuration = 1000 * params.freeModeMomentumRatio;
-        var momentumDistance = swiper.velocity * momentumDuration;
+        let momentumDuration = 1000 * params.freeModeMomentumRatio;
+        const momentumDistance = swiper.velocity * momentumDuration;
 
-        var newPosition = swiper.translate + momentumDistance;
+        let newPosition = swiper.translate + momentumDistance;
         if (rtl) { newPosition = -newPosition; }
 
-        var doBounce = false;
-        var afterBouncePosition;
-        var bounceAmount = Math.abs(swiper.velocity) * 20 * params.freeModeMomentumBounceRatio;
-        var needsLoopFix;
+        let doBounce = false;
+        let afterBouncePosition;
+        const bounceAmount = Math.abs(swiper.velocity) * 20 * params.freeModeMomentumBounceRatio;
+        let needsLoopFix;
         if (newPosition < swiper.maxTranslate()) {
           if (params.freeModeMomentumBounce) {
             if (newPosition + swiper.maxTranslate() < -bounceAmount) {
@@ -3219,8 +3215,8 @@
           }
           if (params.loop && params.centeredSlides) { needsLoopFix = true; }
         } else if (params.freeModeSticky) {
-          var nextSlide;
-          for (var j = 0; j < snapGrid.length; j += 1) {
+          let nextSlide;
+          for (let j = 0; j < snapGrid.length; j += 1) {
             if (snapGrid[j] > -newPosition) {
               nextSlide = j;
               break;
@@ -3235,7 +3231,7 @@
           newPosition = -newPosition;
         }
         if (needsLoopFix) {
-          swiper.once('transitionEnd', function () {
+          swiper.once('transitionEnd', () => {
             swiper.loopFix();
           });
         }
@@ -3254,8 +3250,8 @@
             // nice side effect of matching slide speed if the user stopped moving before
             // lifting finger or mouse vs. moving slowly before lifting the finger/mouse.
             // For faster swipes, also apply limits (albeit higher ones).
-            var moveDistance = Math.abs((rtl ? -newPosition : newPosition) - swiper.translate);
-            var currentSlideSize = swiper.slidesSizesGrid[swiper.activeIndex];
+            const moveDistance = Math.abs((rtl ? -newPosition : newPosition) - swiper.translate);
+            const currentSlideSize = swiper.slidesSizesGrid[swiper.activeIndex];
             if (moveDistance < currentSlideSize) {
               momentumDuration = params.speed;
             } else if (moveDistance < 2 * currentSlideSize) {
@@ -3275,13 +3271,13 @@
           swiper.setTranslate(newPosition);
           swiper.transitionStart(true, swiper.swipeDirection);
           swiper.animating = true;
-          $wrapperEl.transitionEnd(function () {
+          $wrapperEl.transitionEnd(() => {
             if (!swiper || swiper.destroyed || !data.allowMomentumBounce) { return; }
             swiper.emit('momentumBounce');
             swiper.setTransition(params.speed);
-            setTimeout(function () {
+            setTimeout(() => {
               swiper.setTranslate(afterBouncePosition);
-              $wrapperEl.transitionEnd(function () {
+              $wrapperEl.transitionEnd(() => {
                 if (!swiper || swiper.destroyed) { return; }
                 swiper.transitionEnd();
               });
@@ -3294,7 +3290,7 @@
           swiper.transitionStart(true, swiper.swipeDirection);
           if (!swiper.animating) {
             swiper.animating = true;
-            $wrapperEl.transitionEnd(function () {
+            $wrapperEl.transitionEnd(() => {
               if (!swiper || swiper.destroyed) { return; }
               swiper.transitionEnd();
             });
@@ -3319,10 +3315,10 @@
     }
 
     // Find current slide
-    var stopIndex = 0;
-    var groupSize = swiper.slidesSizesGrid[0];
-    for (var i = 0; i < slidesGrid.length; i += (i < params.slidesPerGroupSkip ? 1 : params.slidesPerGroup)) {
-      var increment$1 = (i < params.slidesPerGroupSkip - 1 ? 1 : params.slidesPerGroup);
+    let stopIndex = 0;
+    let groupSize = swiper.slidesSizesGrid[0];
+    for (let i = 0; i < slidesGrid.length; i += (i < params.slidesPerGroupSkip ? 1 : params.slidesPerGroup)) {
+      const increment$1 = (i < params.slidesPerGroupSkip - 1 ? 1 : params.slidesPerGroup);
       if (typeof slidesGrid[i + increment$1] !== 'undefined') {
         if (currentPos >= slidesGrid[i] && currentPos < slidesGrid[i + increment$1]) {
           stopIndex = i;
@@ -3335,8 +3331,8 @@
     }
 
     // Find current slide size
-    var ratio = (currentPos - slidesGrid[stopIndex]) / groupSize;
-    var increment = (stopIndex < params.slidesPerGroupSkip - 1 ? 1 : params.slidesPerGroup);
+    const ratio = (currentPos - slidesGrid[stopIndex]) / groupSize;
+    const increment = (stopIndex < params.slidesPerGroupSkip - 1 ? 1 : params.slidesPerGroup);
 
     if (timeDiff > params.longSwipesMs) {
       // Long touches
@@ -3345,12 +3341,10 @@
         return;
       }
       if (swiper.swipeDirection === 'next') {
-        if (ratio >= params.longSwipesRatio) { swiper.slideTo(stopIndex + increment); }
-        else { swiper.slideTo(stopIndex); }
+        if (ratio >= params.longSwipesRatio) { swiper.slideTo(stopIndex + increment); } else { swiper.slideTo(stopIndex); }
       }
       if (swiper.swipeDirection === 'prev') {
-        if (ratio > (1 - params.longSwipesRatio)) { swiper.slideTo(stopIndex + increment); }
-        else { swiper.slideTo(stopIndex); }
+        if (ratio > (1 - params.longSwipesRatio)) { swiper.slideTo(stopIndex + increment); } else { swiper.slideTo(stopIndex); }
       }
     } else {
       // Short swipes
@@ -3358,7 +3352,7 @@
         swiper.slideTo(swiper.activeIndex);
         return;
       }
-      var isNavButtonTarget = swiper.navigation && (e.target === swiper.navigation.nextEl || e.target === swiper.navigation.prevEl);
+      const isNavButtonTarget = swiper.navigation && (e.target === swiper.navigation.nextEl || e.target === swiper.navigation.prevEl);
       if (!isNavButtonTarget) {
         if (swiper.swipeDirection === 'next') {
           swiper.slideTo(stopIndex + increment);
@@ -3374,11 +3368,11 @@
     }
   }
 
-  function onResize () {
-    var swiper = this;
+  function onResize() {
+    const swiper = this;
 
-    var params = swiper.params;
-    var el = swiper.el;
+    const { params } = swiper;
+    const { el } = swiper;
 
     if (el && el.offsetWidth === 0) { return; }
 
@@ -3388,9 +3382,9 @@
     }
 
     // Save locks
-    var allowSlideNext = swiper.allowSlideNext;
-    var allowSlidePrev = swiper.allowSlidePrev;
-    var snapGrid = swiper.snapGrid;
+    const { allowSlideNext } = swiper;
+    const { allowSlidePrev } = swiper;
+    const { snapGrid } = swiper;
 
     // Disable locks on resize
     swiper.allowSlideNext = true;
@@ -3418,8 +3412,8 @@
     }
   }
 
-  function onClick (e) {
-    var swiper = this;
+  function onClick(e) {
+    const swiper = this;
     if (!swiper.allowClick) {
       if (swiper.params.preventClicks) { e.preventDefault(); }
       if (swiper.params.preventClicksPropagation && swiper.animating) {
@@ -3429,10 +3423,10 @@
     }
   }
 
-  function onScroll () {
-    var swiper = this;
-    var wrapperEl = swiper.wrapperEl;
-    var rtlTranslate = swiper.rtlTranslate;
+  function onScroll() {
+    const swiper = this;
+    const { wrapperEl } = swiper;
+    const { rtlTranslate } = swiper;
     swiper.previousTranslate = swiper.translate;
     if (swiper.isHorizontal()) {
       if (rtlTranslate) {
@@ -3449,8 +3443,8 @@
     swiper.updateActiveIndex();
     swiper.updateSlidesClasses();
 
-    var newProgress;
-    var translatesDiff = swiper.maxTranslate() - swiper.minTranslate();
+    let newProgress;
+    const translatesDiff = swiper.maxTranslate() - swiper.minTranslate();
     if (translatesDiff === 0) {
       newProgress = 0;
     } else {
@@ -3463,15 +3457,15 @@
     swiper.emit('setTranslate', swiper.translate, false);
   }
 
-  var dummyEventAttached = false;
+  let dummyEventAttached = false;
   function dummyEventListener() {}
 
   function attachEvents() {
-    var swiper = this;
-    var params = swiper.params;
-    var touchEvents = swiper.touchEvents;
-    var el = swiper.el;
-    var wrapperEl = swiper.wrapperEl;
+    const swiper = this;
+    const { params } = swiper;
+    const { touchEvents } = swiper;
+    const { el } = swiper;
+    const { wrapperEl } = swiper;
 
     swiper.onTouchStart = onTouchStart.bind(swiper);
     swiper.onTouchMove = onTouchMove.bind(swiper);
@@ -3482,7 +3476,7 @@
 
     swiper.onClick = onClick.bind(swiper);
 
-    var capture = !!params.nested;
+    const capture = !!params.nested;
 
     // Touch Events
     if (!Support.touch && Support.pointerEvents) {
@@ -3491,9 +3485,9 @@
       doc.addEventListener(touchEvents.end, swiper.onTouchEnd, false);
     } else {
       if (Support.touch) {
-        var passiveListener = touchEvents.start === 'touchstart' && Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
+        const passiveListener = touchEvents.start === 'touchstart' && Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
         el.addEventListener(touchEvents.start, swiper.onTouchStart, passiveListener);
-        el.addEventListener(touchEvents.move, swiper.onTouchMove, Support.passiveListener ? { passive: false, capture: capture } : capture);
+        el.addEventListener(touchEvents.move, swiper.onTouchMove, Support.passiveListener ? { passive: false, capture } : capture);
         el.addEventListener(touchEvents.end, swiper.onTouchEnd, passiveListener);
         if (touchEvents.cancel) {
           el.addEventListener(touchEvents.cancel, swiper.onTouchEnd, passiveListener);
@@ -3526,14 +3520,14 @@
   }
 
   function detachEvents() {
-    var swiper = this;
+    const swiper = this;
 
-    var params = swiper.params;
-    var touchEvents = swiper.touchEvents;
-    var el = swiper.el;
-    var wrapperEl = swiper.wrapperEl;
+    const { params } = swiper;
+    const { touchEvents } = swiper;
+    const { el } = swiper;
+    const { wrapperEl } = swiper;
 
-    var capture = !!params.nested;
+    const capture = !!params.nested;
 
     // Touch Events
     if (!Support.touch && Support.pointerEvents) {
@@ -3542,7 +3536,7 @@
       doc.removeEventListener(touchEvents.end, swiper.onTouchEnd, false);
     } else {
       if (Support.touch) {
-        var passiveListener = touchEvents.start === 'onTouchStart' && Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
+        const passiveListener = touchEvents.start === 'onTouchStart' && Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
         el.removeEventListener(touchEvents.start, swiper.onTouchStart, passiveListener);
         el.removeEventListener(touchEvents.move, swiper.onTouchMove, capture);
         el.removeEventListener(touchEvents.end, swiper.onTouchEnd, passiveListener);
@@ -3569,29 +3563,29 @@
     swiper.off((Device.ios || Device.android ? 'resize orientationchange observerUpdate' : 'resize observerUpdate'), onResize);
   }
 
-  var events = {
-    attachEvents: attachEvents,
-    detachEvents: detachEvents,
+  const events = {
+    attachEvents,
+    detachEvents,
   };
 
-  function setBreakpoint () {
-    var swiper = this;
-    var activeIndex = swiper.activeIndex;
-    var initialized = swiper.initialized;
-    var loopedSlides = swiper.loopedSlides; if ( loopedSlides === void 0 ) loopedSlides = 0;
-    var params = swiper.params;
-    var $el = swiper.$el;
-    var breakpoints = params.breakpoints;
+  function setBreakpoint() {
+    const swiper = this;
+    const { activeIndex } = swiper;
+    const { initialized } = swiper;
+    let { loopedSlides } = swiper; if (loopedSlides === void 0) loopedSlides = 0;
+    const { params } = swiper;
+    const { $el } = swiper;
+    const { breakpoints } = params;
     if (!breakpoints || (breakpoints && Object.keys(breakpoints).length === 0)) { return; }
 
     // Get breakpoint for window width and update parameters
-    var breakpoint = swiper.getBreakpoint(breakpoints);
+    const breakpoint = swiper.getBreakpoint(breakpoints);
 
     if (breakpoint && swiper.currentBreakpoint !== breakpoint) {
-      var breakpointOnlyParams = breakpoint in breakpoints ? breakpoints[breakpoint] : undefined;
+      const breakpointOnlyParams = breakpoint in breakpoints ? breakpoints[breakpoint] : undefined;
       if (breakpointOnlyParams) {
-        ['slidesPerView', 'spaceBetween', 'slidesPerGroup', 'slidesPerGroupSkip', 'slidesPerColumn'].forEach(function (param) {
-          var paramValue = breakpointOnlyParams[param];
+        ['slidesPerView', 'spaceBetween', 'slidesPerGroup', 'slidesPerGroupSkip', 'slidesPerColumn'].forEach((param) => {
+          const paramValue = breakpointOnlyParams[param];
           if (typeof paramValue === 'undefined') { return; }
           if (param === 'slidesPerView' && (paramValue === 'AUTO' || paramValue === 'auto')) {
             breakpointOnlyParams[param] = 'auto';
@@ -3603,20 +3597,20 @@
         });
       }
 
-      var breakpointParams = breakpointOnlyParams || swiper.originalParams;
-      var wasMultiRow = params.slidesPerColumn > 1;
-      var isMultiRow = breakpointParams.slidesPerColumn > 1;
+      const breakpointParams = breakpointOnlyParams || swiper.originalParams;
+      const wasMultiRow = params.slidesPerColumn > 1;
+      const isMultiRow = breakpointParams.slidesPerColumn > 1;
       if (wasMultiRow && !isMultiRow) {
-        $el.removeClass(((params.containerModifierClass) + "multirow " + (params.containerModifierClass) + "multirow-column"));
+        $el.removeClass((`${params.containerModifierClass}multirow ${params.containerModifierClass}multirow-column`));
       } else if (!wasMultiRow && isMultiRow) {
-        $el.addClass(((params.containerModifierClass) + "multirow"));
+        $el.addClass((`${params.containerModifierClass}multirow`));
         if (breakpointParams.slidesPerColumnFill === 'column') {
-          $el.addClass(((params.containerModifierClass) + "multirow-column"));
+          $el.addClass((`${params.containerModifierClass}multirow-column`));
         }
       }
 
-      var directionChanged = breakpointParams.direction && breakpointParams.direction !== params.direction;
-      var needsReLoop = params.loop && (breakpointParams.slidesPerView !== params.slidesPerView || directionChanged);
+      const directionChanged = breakpointParams.direction && breakpointParams.direction !== params.direction;
+      const needsReLoop = params.loop && (breakpointParams.slidesPerView !== params.slidesPerView || directionChanged);
 
       if (directionChanged && initialized) {
         swiper.changeDirection();
@@ -3643,25 +3637,25 @@
     }
   }
 
-  function getBreakpoint (breakpoints) {
+  function getBreakpoint(breakpoints) {
     // Get breakpoint for window width
     if (!breakpoints) { return undefined; }
-    var breakpoint = false;
+    let breakpoint = false;
 
-    var points = Object.keys(breakpoints).map(function (point) {
+    const points = Object.keys(breakpoints).map((point) => {
       if (typeof point === 'string' && point.indexOf('@') === 0) {
-        var minRatio = parseFloat(point.substr(1));
-        var value = win.innerHeight * minRatio;
-        return { value: value, point: point };
+        const minRatio = parseFloat(point.substr(1));
+        const value = win.innerHeight * minRatio;
+        return { value, point };
       }
-      return { value: point, point: point };
+      return { value: point, point };
     });
 
-    points.sort(function (a, b) { return parseInt(a.value, 10) - parseInt(b.value, 10); });
-    for (var i = 0; i < points.length; i += 1) {
-      var ref = points[i];
-      var point = ref.point;
-      var value = ref.value;
+    points.sort((a, b) => parseInt(a.value, 10) - parseInt(b.value, 10));
+    for (let i = 0; i < points.length; i += 1) {
+      const ref = points[i];
+      const { point } = ref;
+      const { value } = ref;
       if (value <= win.innerWidth) {
         breakpoint = point;
       }
@@ -3669,15 +3663,15 @@
     return breakpoint || 'max';
   }
 
-  var breakpoints = { setBreakpoint: setBreakpoint, getBreakpoint: getBreakpoint };
+  const breakpoints = { setBreakpoint, getBreakpoint };
 
-  function addClasses () {
-    var swiper = this;
-    var classNames = swiper.classNames;
-    var params = swiper.params;
-    var rtl = swiper.rtl;
-    var $el = swiper.$el;
-    var suffixes = [];
+  function addClasses() {
+    const swiper = this;
+    const { classNames } = swiper;
+    const { params } = swiper;
+    const { rtl } = swiper;
+    const { $el } = swiper;
+    const suffixes = [];
 
     suffixes.push('initialized');
     suffixes.push(params.direction);
@@ -3708,25 +3702,25 @@
       suffixes.push('css-mode');
     }
 
-    suffixes.forEach(function (suffix) {
+    suffixes.forEach((suffix) => {
       classNames.push(params.containerModifierClass + suffix);
     });
 
     $el.addClass(classNames.join(' '));
   }
 
-  function removeClasses () {
-    var swiper = this;
-    var $el = swiper.$el;
-    var classNames = swiper.classNames;
+  function removeClasses() {
+    const swiper = this;
+    const { $el } = swiper;
+    const { classNames } = swiper;
 
     $el.removeClass(classNames.join(' '));
   }
 
-  var classes = { addClasses: addClasses, removeClasses: removeClasses };
+  const classes = { addClasses, removeClasses };
 
-  function loadImage (imageEl, src, srcset, sizes, checkForComplete, callback) {
-    var image;
+  function loadImage(imageEl, src, srcset, sizes, checkForComplete, callback) {
+    let image;
     function onReady() {
       if (callback) { callback(); }
     }
@@ -3753,8 +3747,8 @@
     }
   }
 
-  function preloadImages () {
-    var swiper = this;
+  function preloadImages() {
+    const swiper = this;
     swiper.imagesToLoad = swiper.$el.find('img');
     function onReady() {
       if (typeof swiper === 'undefined' || swiper === null || !swiper || swiper.destroyed) { return; }
@@ -3764,29 +3758,29 @@
         swiper.emit('imagesReady');
       }
     }
-    for (var i = 0; i < swiper.imagesToLoad.length; i += 1) {
-      var imageEl = swiper.imagesToLoad[i];
+    for (let i = 0; i < swiper.imagesToLoad.length; i += 1) {
+      const imageEl = swiper.imagesToLoad[i];
       swiper.loadImage(
         imageEl,
         imageEl.currentSrc || imageEl.getAttribute('src'),
         imageEl.srcset || imageEl.getAttribute('srcset'),
         imageEl.sizes || imageEl.getAttribute('sizes'),
         true,
-        onReady
+        onReady,
       );
     }
   }
 
-  var images = {
-    loadImage: loadImage,
-    preloadImages: preloadImages,
+  const images = {
+    loadImage,
+    preloadImages,
   };
 
   function checkOverflow() {
-    var swiper = this;
-    var params = swiper.params;
-    var wasLocked = swiper.isLocked;
-    var lastSlidePosition = swiper.slides.length > 0 && (params.slidesOffsetBefore + (params.spaceBetween * (swiper.slides.length - 1)) + ((swiper.slides[0]).offsetWidth) * swiper.slides.length);
+    const swiper = this;
+    const { params } = swiper;
+    const wasLocked = swiper.isLocked;
+    const lastSlidePosition = swiper.slides.length > 0 && (params.slidesOffsetBefore + (params.spaceBetween * (swiper.slides.length - 1)) + ((swiper.slides[0]).offsetWidth) * swiper.slides.length);
 
     if (params.slidesOffsetBefore && params.slidesOffsetAfter && lastSlidePosition) {
       swiper.isLocked = lastSlidePosition <= swiper.size;
@@ -3806,9 +3800,9 @@
     }
   }
 
-  var checkOverflow$1 = { checkOverflow: checkOverflow };
+  const checkOverflow$1 = { checkOverflow };
 
-  var defaults = {
+  const defaults = {
     init: true,
     direction: 'horizontal',
     touchEventsTarget: 'container',
@@ -3944,31 +3938,32 @@
 
   /* eslint no-param-reassign: "off" */
 
-  var prototypes = {
-    update: update,
-    translate: translate,
+  const prototypes = {
+    update,
+    translate,
     transition: transition$1,
-    slide: slide,
-    loop: loop,
-    grabCursor: grabCursor,
-    manipulation: manipulation,
-    events: events,
-    breakpoints: breakpoints,
+    slide,
+    loop,
+    grabCursor,
+    manipulation,
+    events,
+    breakpoints,
     checkOverflow: checkOverflow$1,
-    classes: classes,
-    images: images,
+    classes,
+    images,
   };
 
-  var extendedDefaults = {};
+  const extendedDefaults = {};
 
-  var Swiper = /*@__PURE__*/(function (SwiperClass) {
+  const Swiper = /* @__PURE__ */(function (SwiperClass) {
     function Swiper() {
-      var assign;
+      let assign;
 
-      var args = [], len = arguments.length;
-      while ( len-- ) args[ len ] = arguments[ len ];
-      var el;
-      var params;
+      const args = []; let
+        len = arguments.length;
+      while (len--) args[len] = arguments[len];
+      let el;
+      let params;
       if (args.length === 1 && args[0].constructor && args[0].constructor === Object) {
         params = args[0];
       } else {
@@ -3981,8 +3976,8 @@
 
       SwiperClass.call(this, params);
 
-      Object.keys(prototypes).forEach(function (prototypeGroup) {
-        Object.keys(prototypes[prototypeGroup]).forEach(function (protoMethod) {
+      Object.keys(prototypes).forEach((prototypeGroup) => {
+        Object.keys(prototypes[prototypeGroup]).forEach((protoMethod) => {
           if (!Swiper.prototype[protoMethod]) {
             Swiper.prototype[protoMethod] = prototypes[prototypeGroup][protoMethod];
           }
@@ -3990,15 +3985,15 @@
       });
 
       // Swiper Instance
-      var swiper = this;
+      const swiper = this;
       if (typeof swiper.modules === 'undefined') {
         swiper.modules = {};
       }
-      Object.keys(swiper.modules).forEach(function (moduleName) {
-        var module = swiper.modules[moduleName];
+      Object.keys(swiper.modules).forEach((moduleName) => {
+        const module = swiper.modules[moduleName];
         if (module.params) {
-          var moduleParamName = Object.keys(module.params)[0];
-          var moduleParams = module.params[moduleParamName];
+          const moduleParamName = Object.keys(module.params)[0];
+          const moduleParams = module.params[moduleParamName];
           if (typeof moduleParams !== 'object' || moduleParams === null) { return; }
           if (!(moduleParamName in params && 'enabled' in moduleParams)) { return; }
           if (params[moduleParamName] === true) {
@@ -4015,7 +4010,7 @@
       });
 
       // Extend defaults with modules params
-      var swiperParams = Utils.extend({}, defaults);
+      const swiperParams = Utils.extend({}, defaults);
       swiper.useModulesParams(swiperParams);
 
       // Extend defaults with passed params
@@ -4027,7 +4022,7 @@
       swiper.$ = $;
 
       // Find el
-      var $el = $(swiper.params.el);
+      const $el = $(swiper.params.el);
       el = $el[0];
 
       if (!el) {
@@ -4035,9 +4030,9 @@
       }
 
       if ($el.length > 1) {
-        var swipers = [];
-        $el.each(function (index, containerEl) {
-          var newParams = Utils.extend({}, params, { el: containerEl });
+        const swipers = [];
+        $el.each((index, containerEl) => {
+          const newParams = Utils.extend({}, params, { el: containerEl });
           swipers.push(new Swiper(newParams));
         });
         return swipers;
@@ -4047,19 +4042,19 @@
       $el.data('swiper', swiper);
 
       // Find Wrapper
-      var $wrapperEl;
+      let $wrapperEl;
       if (el && el.shadowRoot && el.shadowRoot.querySelector) {
-        $wrapperEl = $(el.shadowRoot.querySelector(("." + (swiper.params.wrapperClass))));
+        $wrapperEl = $(el.shadowRoot.querySelector((`.${swiper.params.wrapperClass}`)));
         // Children needs to return slot items
         $wrapperEl.children = function (options) { return $el.children(options); };
       } else {
-        $wrapperEl = $el.children(("." + (swiper.params.wrapperClass)));
+        $wrapperEl = $el.children((`.${swiper.params.wrapperClass}`));
       }
       // Extend Swiper
       Utils.extend(swiper, {
-        $el: $el,
-        el: el,
-        $wrapperEl: $wrapperEl,
+        $el,
+        el,
+        $wrapperEl,
         wrapperEl: $wrapperEl[0],
 
         // Classes
@@ -4104,8 +4099,8 @@
 
         // Touch Events
         touchEvents: (function touchEvents() {
-          var touch = ['touchstart', 'touchmove', 'touchend', 'touchcancel'];
-          var desktop = ['mousedown', 'mousemove', 'mouseup'];
+          const touch = ['touchstart', 'touchmove', 'touchend', 'touchcancel'];
+          let desktop = ['mousedown', 'mousemove', 'mouseup'];
           if (Support.pointerEvents) {
             desktop = ['pointerdown', 'pointermove', 'pointerup'];
           }
@@ -4175,31 +4170,33 @@
       return swiper;
     }
 
-    if ( SwiperClass ) Swiper.__proto__ = SwiperClass;
-    Swiper.prototype = Object.create( SwiperClass && SwiperClass.prototype );
+    if (SwiperClass) Swiper.__proto__ = SwiperClass;
+    Swiper.prototype = Object.create(SwiperClass && SwiperClass.prototype);
     Swiper.prototype.constructor = Swiper;
 
-    var staticAccessors = { extendedDefaults: { configurable: true },defaults: { configurable: true },Class: { configurable: true },$: { configurable: true } };
+    const staticAccessors = {
+      extendedDefaults: { configurable: true }, defaults: { configurable: true }, Class: { configurable: true }, $: { configurable: true },
+    };
 
-    Swiper.prototype.slidesPerViewDynamic = function slidesPerViewDynamic () {
-      var swiper = this;
-      var params = swiper.params;
-      var slides = swiper.slides;
-      var slidesGrid = swiper.slidesGrid;
-      var swiperSize = swiper.size;
-      var activeIndex = swiper.activeIndex;
-      var spv = 1;
+    Swiper.prototype.slidesPerViewDynamic = function slidesPerViewDynamic() {
+      const swiper = this;
+      const { params } = swiper;
+      const { slides } = swiper;
+      const { slidesGrid } = swiper;
+      const swiperSize = swiper.size;
+      const { activeIndex } = swiper;
+      let spv = 1;
       if (params.centeredSlides) {
-        var slideSize = slides[activeIndex].swiperSlideSize;
-        var breakLoop;
-        for (var i = activeIndex + 1; i < slides.length; i += 1) {
+        let slideSize = slides[activeIndex].swiperSlideSize;
+        let breakLoop;
+        for (let i = activeIndex + 1; i < slides.length; i += 1) {
           if (slides[i] && !breakLoop) {
             slideSize += slides[i].swiperSlideSize;
             spv += 1;
             if (slideSize > swiperSize) { breakLoop = true; }
           }
         }
-        for (var i$1 = activeIndex - 1; i$1 >= 0; i$1 -= 1) {
+        for (let i$1 = activeIndex - 1; i$1 >= 0; i$1 -= 1) {
           if (slides[i$1] && !breakLoop) {
             slideSize += slides[i$1].swiperSlideSize;
             spv += 1;
@@ -4207,7 +4204,7 @@
           }
         }
       } else {
-        for (var i$2 = activeIndex + 1; i$2 < slides.length; i$2 += 1) {
+        for (let i$2 = activeIndex + 1; i$2 < slides.length; i$2 += 1) {
           if (slidesGrid[i$2] - slidesGrid[activeIndex] < swiperSize) {
             spv += 1;
           }
@@ -4216,11 +4213,11 @@
       return spv;
     };
 
-    Swiper.prototype.update = function update () {
-      var swiper = this;
+    Swiper.prototype.update = function update() {
+      const swiper = this;
       if (!swiper || swiper.destroyed) { return; }
-      var snapGrid = swiper.snapGrid;
-      var params = swiper.params;
+      const { snapGrid } = swiper;
+      const { params } = swiper;
       // Breakpoints
       if (params.breakpoints) {
         swiper.setBreakpoint();
@@ -4231,13 +4228,13 @@
       swiper.updateSlidesClasses();
 
       function setTranslate() {
-        var translateValue = swiper.rtlTranslate ? swiper.translate * -1 : swiper.translate;
-        var newTranslate = Math.min(Math.max(translateValue, swiper.maxTranslate()), swiper.minTranslate());
+        const translateValue = swiper.rtlTranslate ? swiper.translate * -1 : swiper.translate;
+        const newTranslate = Math.min(Math.max(translateValue, swiper.maxTranslate()), swiper.minTranslate());
         swiper.setTranslate(newTranslate);
         swiper.updateActiveIndex();
         swiper.updateSlidesClasses();
       }
-      var translated;
+      let translated;
       if (swiper.params.freeMode) {
         setTranslate();
         if (swiper.params.autoHeight) {
@@ -4259,11 +4256,11 @@
       swiper.emit('update');
     };
 
-    Swiper.prototype.changeDirection = function changeDirection (newDirection, needUpdate) {
-      if ( needUpdate === void 0 ) needUpdate = true;
+    Swiper.prototype.changeDirection = function changeDirection(newDirection, needUpdate) {
+      if (needUpdate === void 0) needUpdate = true;
 
-      var swiper = this;
-      var currentDirection = swiper.params.direction;
+      const swiper = this;
+      const currentDirection = swiper.params.direction;
       if (!newDirection) {
         // eslint-disable-next-line
         newDirection = currentDirection === 'horizontal' ? 'vertical' : 'horizontal';
@@ -4273,12 +4270,12 @@
       }
 
       swiper.$el
-        .removeClass(("" + (swiper.params.containerModifierClass) + currentDirection))
-        .addClass(("" + (swiper.params.containerModifierClass) + newDirection));
+        .removeClass((`${swiper.params.containerModifierClass}${currentDirection}`))
+        .addClass((`${swiper.params.containerModifierClass}${newDirection}`));
 
       swiper.params.direction = newDirection;
 
-      swiper.slides.each(function (slideIndex, slideEl) {
+      swiper.slides.each((slideIndex, slideEl) => {
         if (newDirection === 'vertical') {
           slideEl.style.width = '';
         } else {
@@ -4292,8 +4289,8 @@
       return swiper;
     };
 
-    Swiper.prototype.init = function init () {
-      var swiper = this;
+    Swiper.prototype.init = function init() {
+      const swiper = this;
       if (swiper.initialized) { return; }
 
       swiper.emit('beforeInit');
@@ -4347,15 +4344,15 @@
       swiper.emit('init');
     };
 
-    Swiper.prototype.destroy = function destroy (deleteInstance, cleanStyles) {
-      if ( deleteInstance === void 0 ) deleteInstance = true;
-      if ( cleanStyles === void 0 ) cleanStyles = true;
+    Swiper.prototype.destroy = function destroy(deleteInstance, cleanStyles) {
+      if (deleteInstance === void 0) deleteInstance = true;
+      if (cleanStyles === void 0) cleanStyles = true;
 
-      var swiper = this;
-      var params = swiper.params;
-      var $el = swiper.$el;
-      var $wrapperEl = swiper.$wrapperEl;
-      var slides = swiper.slides;
+      const swiper = this;
+      const { params } = swiper;
+      const { $el } = swiper;
+      const { $wrapperEl } = swiper;
+      const { slides } = swiper;
 
       if (typeof swiper.params === 'undefined' || swiper.destroyed) {
         return null;
@@ -4385,7 +4382,7 @@
               params.slideVisibleClass,
               params.slideActiveClass,
               params.slideNextClass,
-              params.slidePrevClass ].join(' '))
+              params.slidePrevClass].join(' '))
             .removeAttr('style')
             .removeAttr('data-swiper-slide-index');
         }
@@ -4394,7 +4391,7 @@
       swiper.emit('destroy');
 
       // Detach emitter events
-      Object.keys(swiper.eventsListeners).forEach(function (eventName) {
+      Object.keys(swiper.eventsListeners).forEach((eventName) => {
         swiper.off(eventName);
       });
 
@@ -4408,7 +4405,7 @@
       return null;
     };
 
-    Swiper.extendDefaults = function extendDefaults (newDefaults) {
+    Swiper.extendDefaults = function extendDefaults(newDefaults) {
       Utils.extend(extendedDefaults, newDefaults);
     };
 
@@ -4428,12 +4425,12 @@
       return $;
     };
 
-    Object.defineProperties( Swiper, staticAccessors );
+    Object.defineProperties(Swiper, staticAccessors);
 
     return Swiper;
   }(SwiperClass));
 
-  var Device$1 = {
+  const Device$1 = {
     name: 'device',
     proto: {
       device: Device,
@@ -4443,7 +4440,7 @@
     },
   };
 
-  var Support$1 = {
+  const Support$1 = {
     name: 'support',
     proto: {
       support: Support,
@@ -4453,9 +4450,9 @@
     },
   };
 
-  var Browser = (function Browser() {
+  const Browser = (function Browser() {
     function isSafari() {
-      var ua = win.navigator.userAgent.toLowerCase();
+      const ua = win.navigator.userAgent.toLowerCase();
       return (ua.indexOf('safari') >= 0 && ua.indexOf('chrome') < 0 && ua.indexOf('android') < 0);
     }
     return {
@@ -4465,7 +4462,7 @@
     };
   }());
 
-  var Browser$1 = {
+  const Browser$1 = {
     name: 'browser',
     proto: {
       browser: Browser,
@@ -4475,10 +4472,10 @@
     },
   };
 
-  var Resize = {
+  const Resize = {
     name: 'resize',
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         resize: {
           resizeHandler: function resizeHandler() {
@@ -4495,7 +4492,7 @@
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         // Emit resize
         win.addEventListener('resize', swiper.resize.resizeHandler);
 
@@ -4503,7 +4500,7 @@
         win.addEventListener('orientationchange', swiper.resize.orientationChangeHandler);
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         win.removeEventListener('resize', swiper.resize.resizeHandler);
         win.removeEventListener('orientationchange', swiper.resize.orientationChangeHandler);
       },
@@ -4513,12 +4510,12 @@
   var Observer = {
     func: win.MutationObserver || win.WebkitMutationObserver,
     attach: function attach(target, options) {
-      if ( options === void 0 ) options = {};
+      if (options === void 0) options = {};
 
-      var swiper = this;
+      const swiper = this;
 
-      var ObserverFunc = Observer.func;
-      var observer = new ObserverFunc(function (mutations) {
+      const ObserverFunc = Observer.func;
+      const observer = new ObserverFunc(((mutations) => {
         // The observerUpdate event should only be triggered
         // once despite the number of mutations.  Additional
         // triggers are redundant and are very costly
@@ -4526,7 +4523,7 @@
           swiper.emit('observerUpdate', mutations[0]);
           return;
         }
-        var observerUpdate = function observerUpdate() {
+        const observerUpdate = function observerUpdate() {
           swiper.emit('observerUpdate', mutations[0]);
         };
 
@@ -4535,7 +4532,7 @@
         } else {
           win.setTimeout(observerUpdate, 0);
         }
-      });
+      }));
 
       observer.observe(target, {
         attributes: typeof options.attributes === 'undefined' ? true : options.attributes,
@@ -4546,11 +4543,11 @@
       swiper.observer.observers.push(observer);
     },
     init: function init() {
-      var swiper = this;
+      const swiper = this;
       if (!Support.observer || !swiper.params.observer) { return; }
       if (swiper.params.observeParents) {
-        var containerParents = swiper.$el.parents();
-        for (var i = 0; i < containerParents.length; i += 1) {
+        const containerParents = swiper.$el.parents();
+        for (let i = 0; i < containerParents.length; i += 1) {
           swiper.observer.attach(containerParents[i]);
         }
       }
@@ -4561,15 +4558,15 @@
       swiper.observer.attach(swiper.$wrapperEl[0], { attributes: false });
     },
     destroy: function destroy() {
-      var swiper = this;
-      swiper.observer.observers.forEach(function (observer) {
+      const swiper = this;
+      swiper.observer.observers.forEach((observer) => {
         observer.disconnect();
       });
       swiper.observer.observers = [];
     },
   };
 
-  var Observer$1 = {
+  const Observer$1 = {
     name: 'observer',
     params: {
       observer: false,
@@ -4577,7 +4574,7 @@
       observeSlideChildren: false,
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         observer: {
           init: Observer.init.bind(swiper),
@@ -4589,42 +4586,41 @@
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         swiper.observer.init();
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         swiper.observer.destroy();
       },
     },
   };
 
-  var Virtual = {
+  const Virtual = {
     update: function update(force) {
-      var swiper = this;
-      var ref = swiper.params;
-      var slidesPerView = ref.slidesPerView;
-      var slidesPerGroup = ref.slidesPerGroup;
-      var centeredSlides = ref.centeredSlides;
-      var ref$1 = swiper.params.virtual;
-      var addSlidesBefore = ref$1.addSlidesBefore;
-      var addSlidesAfter = ref$1.addSlidesAfter;
-      var ref$2 = swiper.virtual;
-      var previousFrom = ref$2.from;
-      var previousTo = ref$2.to;
-      var slides = ref$2.slides;
-      var previousSlidesGrid = ref$2.slidesGrid;
-      var renderSlide = ref$2.renderSlide;
-      var previousOffset = ref$2.offset;
+      const swiper = this;
+      const ref = swiper.params;
+      const { slidesPerView } = ref;
+      const { slidesPerGroup } = ref;
+      const { centeredSlides } = ref;
+      const ref$1 = swiper.params.virtual;
+      const { addSlidesBefore } = ref$1;
+      const { addSlidesAfter } = ref$1;
+      const ref$2 = swiper.virtual;
+      const previousFrom = ref$2.from;
+      const previousTo = ref$2.to;
+      const { slides } = ref$2;
+      const previousSlidesGrid = ref$2.slidesGrid;
+      const { renderSlide } = ref$2;
+      const previousOffset = ref$2.offset;
       swiper.updateActiveIndex();
-      var activeIndex = swiper.activeIndex || 0;
+      const activeIndex = swiper.activeIndex || 0;
 
-      var offsetProp;
-      if (swiper.rtlTranslate) { offsetProp = 'right'; }
-      else { offsetProp = swiper.isHorizontal() ? 'left' : 'top'; }
+      let offsetProp;
+      if (swiper.rtlTranslate) { offsetProp = 'right'; } else { offsetProp = swiper.isHorizontal() ? 'left' : 'top'; }
 
-      var slidesAfter;
-      var slidesBefore;
+      let slidesAfter;
+      let slidesBefore;
       if (centeredSlides) {
         slidesAfter = Math.floor(slidesPerView / 2) + slidesPerGroup + addSlidesBefore;
         slidesBefore = Math.floor(slidesPerView / 2) + slidesPerGroup + addSlidesAfter;
@@ -4632,14 +4628,14 @@
         slidesAfter = slidesPerView + (slidesPerGroup - 1) + addSlidesBefore;
         slidesBefore = slidesPerGroup + addSlidesAfter;
       }
-      var from = Math.max((activeIndex || 0) - slidesBefore, 0);
-      var to = Math.min((activeIndex || 0) + slidesAfter, slides.length - 1);
-      var offset = (swiper.slidesGrid[from] || 0) - (swiper.slidesGrid[0] || 0);
+      const from = Math.max((activeIndex || 0) - slidesBefore, 0);
+      const to = Math.min((activeIndex || 0) + slidesAfter, slides.length - 1);
+      const offset = (swiper.slidesGrid[from] || 0) - (swiper.slidesGrid[0] || 0);
 
       Utils.extend(swiper.virtual, {
-        from: from,
-        to: to,
-        offset: offset,
+        from,
+        to,
+        offset,
         slidesGrid: swiper.slidesGrid,
       });
 
@@ -4654,19 +4650,19 @@
 
       if (previousFrom === from && previousTo === to && !force) {
         if (swiper.slidesGrid !== previousSlidesGrid && offset !== previousOffset) {
-          swiper.slides.css(offsetProp, (offset + "px"));
+          swiper.slides.css(offsetProp, (`${offset}px`));
         }
         swiper.updateProgress();
         return;
       }
       if (swiper.params.virtual.renderExternal) {
         swiper.params.virtual.renderExternal.call(swiper, {
-          offset: offset,
-          from: from,
-          to: to,
+          offset,
+          from,
+          to,
           slides: (function getSlides() {
-            var slidesToRender = [];
-            for (var i = from; i <= to; i += 1) {
+            const slidesToRender = [];
+            for (let i = from; i <= to; i += 1) {
               slidesToRender.push(slides[i]);
             }
             return slidesToRender;
@@ -4675,18 +4671,18 @@
         onRendered();
         return;
       }
-      var prependIndexes = [];
-      var appendIndexes = [];
+      const prependIndexes = [];
+      const appendIndexes = [];
       if (force) {
-        swiper.$wrapperEl.find(("." + (swiper.params.slideClass))).remove();
+        swiper.$wrapperEl.find((`.${swiper.params.slideClass}`)).remove();
       } else {
-        for (var i = previousFrom; i <= previousTo; i += 1) {
+        for (let i = previousFrom; i <= previousTo; i += 1) {
           if (i < from || i > to) {
-            swiper.$wrapperEl.find(("." + (swiper.params.slideClass) + "[data-swiper-slide-index=\"" + i + "\"]")).remove();
+            swiper.$wrapperEl.find((`.${swiper.params.slideClass}[data-swiper-slide-index="${i}"]`)).remove();
           }
         }
       }
-      for (var i$1 = 0; i$1 < slides.length; i$1 += 1) {
+      for (let i$1 = 0; i$1 < slides.length; i$1 += 1) {
         if (i$1 >= from && i$1 <= to) {
           if (typeof previousTo === 'undefined' || force) {
             appendIndexes.push(i$1);
@@ -4696,32 +4692,32 @@
           }
         }
       }
-      appendIndexes.forEach(function (index) {
+      appendIndexes.forEach((index) => {
         swiper.$wrapperEl.append(renderSlide(slides[index], index));
       });
-      prependIndexes.sort(function (a, b) { return b - a; }).forEach(function (index) {
+      prependIndexes.sort((a, b) => b - a).forEach((index) => {
         swiper.$wrapperEl.prepend(renderSlide(slides[index], index));
       });
-      swiper.$wrapperEl.children('.swiper-slide').css(offsetProp, (offset + "px"));
+      swiper.$wrapperEl.children('.swiper-slide').css(offsetProp, (`${offset}px`));
       onRendered();
     },
     renderSlide: function renderSlide(slide, index) {
-      var swiper = this;
-      var params = swiper.params.virtual;
+      const swiper = this;
+      const params = swiper.params.virtual;
       if (params.cache && swiper.virtual.cache[index]) {
         return swiper.virtual.cache[index];
       }
-      var $slideEl = params.renderSlide
+      const $slideEl = params.renderSlide
         ? $(params.renderSlide.call(swiper, slide, index))
-        : $(("<div class=\"" + (swiper.params.slideClass) + "\" data-swiper-slide-index=\"" + index + "\">" + slide + "</div>"));
+        : $((`<div class="${swiper.params.slideClass}" data-swiper-slide-index="${index}">${slide}</div>`));
       if (!$slideEl.attr('data-swiper-slide-index')) { $slideEl.attr('data-swiper-slide-index', index); }
       if (params.cache) { swiper.virtual.cache[index] = $slideEl; }
       return $slideEl;
     },
     appendSlide: function appendSlide(slides) {
-      var swiper = this;
+      const swiper = this;
       if (typeof slides === 'object' && 'length' in slides) {
-        for (var i = 0; i < slides.length; i += 1) {
+        for (let i = 0; i < slides.length; i += 1) {
           if (slides[i]) { swiper.virtual.slides.push(slides[i]); }
         }
       } else {
@@ -4730,13 +4726,13 @@
       swiper.virtual.update(true);
     },
     prependSlide: function prependSlide(slides) {
-      var swiper = this;
-      var activeIndex = swiper.activeIndex;
-      var newActiveIndex = activeIndex + 1;
-      var numberOfNewSlides = 1;
+      const swiper = this;
+      const { activeIndex } = swiper;
+      let newActiveIndex = activeIndex + 1;
+      let numberOfNewSlides = 1;
 
       if (Array.isArray(slides)) {
-        for (var i = 0; i < slides.length; i += 1) {
+        for (let i = 0; i < slides.length; i += 1) {
           if (slides[i]) { swiper.virtual.slides.unshift(slides[i]); }
         }
         newActiveIndex = activeIndex + slides.length;
@@ -4745,11 +4741,11 @@
         swiper.virtual.slides.unshift(slides);
       }
       if (swiper.params.virtual.cache) {
-        var cache = swiper.virtual.cache;
-        var newCache = {};
-        Object.keys(cache).forEach(function (cachedIndex) {
-          var $cachedEl = cache[cachedIndex];
-          var cachedElIndex = $cachedEl.attr('data-swiper-slide-index');
+        const { cache } = swiper.virtual;
+        const newCache = {};
+        Object.keys(cache).forEach((cachedIndex) => {
+          const $cachedEl = cache[cachedIndex];
+          const cachedElIndex = $cachedEl.attr('data-swiper-slide-index');
           if (cachedElIndex) {
             $cachedEl.attr('data-swiper-slide-index', parseInt(cachedElIndex, 10) + 1);
           }
@@ -4761,11 +4757,11 @@
       swiper.slideTo(newActiveIndex, 0);
     },
     removeSlide: function removeSlide(slidesIndexes) {
-      var swiper = this;
+      const swiper = this;
       if (typeof slidesIndexes === 'undefined' || slidesIndexes === null) { return; }
-      var activeIndex = swiper.activeIndex;
+      let { activeIndex } = swiper;
       if (Array.isArray(slidesIndexes)) {
-        for (var i = slidesIndexes.length - 1; i >= 0; i -= 1) {
+        for (let i = slidesIndexes.length - 1; i >= 0; i -= 1) {
           swiper.virtual.slides.splice(slidesIndexes[i], 1);
           if (swiper.params.virtual.cache) {
             delete swiper.virtual.cache[slidesIndexes[i]];
@@ -4785,7 +4781,7 @@
       swiper.slideTo(activeIndex, 0);
     },
     removeAllSlides: function removeAllSlides() {
-      var swiper = this;
+      const swiper = this;
       swiper.virtual.slides = [];
       if (swiper.params.virtual.cache) {
         swiper.virtual.cache = {};
@@ -4795,7 +4791,7 @@
     },
   };
 
-  var Virtual$1 = {
+  const Virtual$1 = {
     name: 'virtual',
     params: {
       virtual: {
@@ -4809,7 +4805,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         virtual: {
           update: Virtual.update.bind(swiper),
@@ -4825,10 +4821,10 @@
     },
     on: {
       beforeInit: function beforeInit() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.virtual.enabled) { return; }
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "virtual"));
-        var overwriteParams = {
+        swiper.classNames.push((`${swiper.params.containerModifierClass}virtual`));
+        const overwriteParams = {
           watchSlidesProgress: true,
         };
         Utils.extend(swiper.params, overwriteParams);
@@ -4839,20 +4835,20 @@
         }
       },
       setTranslate: function setTranslate() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.virtual.enabled) { return; }
         swiper.virtual.update();
       },
     },
   };
 
-  var Keyboard = {
+  const Keyboard = {
     handle: function handle(event) {
-      var swiper = this;
-      var rtl = swiper.rtlTranslate;
-      var e = event;
+      const swiper = this;
+      const rtl = swiper.rtlTranslate;
+      let e = event;
       if (e.originalEvent) { e = e.originalEvent; } // jquery fix
-      var kc = e.keyCode || e.charCode;
+      const kc = e.keyCode || e.charCode;
       // Directions locks
       if (!swiper.allowSlideNext && ((swiper.isHorizontal() && kc === 39) || (swiper.isVertical() && kc === 40) || kc === 34)) {
         return false;
@@ -4867,22 +4863,22 @@
         return undefined;
       }
       if (swiper.params.keyboard.onlyInViewport && (kc === 33 || kc === 34 || kc === 37 || kc === 39 || kc === 38 || kc === 40)) {
-        var inView = false;
+        let inView = false;
         // Check that swiper should be inside of visible area of window
-        if (swiper.$el.parents(("." + (swiper.params.slideClass))).length > 0 && swiper.$el.parents(("." + (swiper.params.slideActiveClass))).length === 0) {
+        if (swiper.$el.parents((`.${swiper.params.slideClass}`)).length > 0 && swiper.$el.parents((`.${swiper.params.slideActiveClass}`)).length === 0) {
           return undefined;
         }
-        var windowWidth = win.innerWidth;
-        var windowHeight = win.innerHeight;
-        var swiperOffset = swiper.$el.offset();
+        const windowWidth = win.innerWidth;
+        const windowHeight = win.innerHeight;
+        const swiperOffset = swiper.$el.offset();
         if (rtl) { swiperOffset.left -= swiper.$el[0].scrollLeft; }
-        var swiperCoord = [
+        const swiperCoord = [
           [swiperOffset.left, swiperOffset.top],
           [swiperOffset.left + swiper.width, swiperOffset.top],
           [swiperOffset.left, swiperOffset.top + swiper.height],
-          [swiperOffset.left + swiper.width, swiperOffset.top + swiper.height] ];
-        for (var i = 0; i < swiperCoord.length; i += 1) {
-          var point = swiperCoord[i];
+          [swiperOffset.left + swiper.width, swiperOffset.top + swiper.height]];
+        for (let i = 0; i < swiperCoord.length; i += 1) {
+          const point = swiperCoord[i];
           if (
             point[0] >= 0 && point[0] <= windowWidth
             && point[1] >= 0 && point[1] <= windowHeight
@@ -4894,15 +4890,13 @@
       }
       if (swiper.isHorizontal()) {
         if (kc === 33 || kc === 34 || kc === 37 || kc === 39) {
-          if (e.preventDefault) { e.preventDefault(); }
-          else { e.returnValue = false; }
+          if (e.preventDefault) { e.preventDefault(); } else { e.returnValue = false; }
         }
         if (((kc === 34 || kc === 39) && !rtl) || ((kc === 33 || kc === 37) && rtl)) { swiper.slideNext(); }
         if (((kc === 33 || kc === 37) && !rtl) || ((kc === 34 || kc === 39) && rtl)) { swiper.slidePrev(); }
       } else {
         if (kc === 33 || kc === 34 || kc === 38 || kc === 40) {
-          if (e.preventDefault) { e.preventDefault(); }
-          else { e.returnValue = false; }
+          if (e.preventDefault) { e.preventDefault(); } else { e.returnValue = false; }
         }
         if (kc === 34 || kc === 40) { swiper.slideNext(); }
         if (kc === 33 || kc === 38) { swiper.slidePrev(); }
@@ -4911,20 +4905,20 @@
       return undefined;
     },
     enable: function enable() {
-      var swiper = this;
+      const swiper = this;
       if (swiper.keyboard.enabled) { return; }
       $(doc).on('keydown', swiper.keyboard.handle);
       swiper.keyboard.enabled = true;
     },
     disable: function disable() {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.keyboard.enabled) { return; }
       $(doc).off('keydown', swiper.keyboard.handle);
       swiper.keyboard.enabled = false;
     },
   };
 
-  var Keyboard$1 = {
+  const Keyboard$1 = {
     name: 'keyboard',
     params: {
       keyboard: {
@@ -4933,7 +4927,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         keyboard: {
           enabled: false,
@@ -4945,13 +4939,13 @@
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.keyboard.enabled) {
           swiper.keyboard.enable();
         }
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.keyboard.enabled) {
           swiper.keyboard.disable();
         }
@@ -4960,11 +4954,11 @@
   };
 
   function isEventSupported() {
-    var eventName = 'onwheel';
-    var isSupported = eventName in doc;
+    const eventName = 'onwheel';
+    let isSupported = eventName in doc;
 
     if (!isSupported) {
-      var element = doc.createElement('div');
+      const element = doc.createElement('div');
       element.setAttribute(eventName, 'return;');
       isSupported = typeof element[eventName] === 'function';
     }
@@ -4992,14 +4986,14 @@
     },
     normalize: function normalize(e) {
       // Reasonable defaults
-      var PIXEL_STEP = 10;
-      var LINE_HEIGHT = 40;
-      var PAGE_HEIGHT = 800;
+      const PIXEL_STEP = 10;
+      const LINE_HEIGHT = 40;
+      const PAGE_HEIGHT = 800;
 
-      var sX = 0;
-      var sY = 0; // spinX, spinY
-      var pX = 0;
-      var pY = 0; // pixelX, pixelY
+      let sX = 0;
+      let sY = 0; // spinX, spinY
+      let pX = 0;
+      let pY = 0; // pixelX, pixelY
 
       // Legacy
       if ('detail' in e) {
@@ -5062,40 +5056,38 @@
       };
     },
     handleMouseEnter: function handleMouseEnter() {
-      var swiper = this;
+      const swiper = this;
       swiper.mouseEntered = true;
     },
     handleMouseLeave: function handleMouseLeave() {
-      var swiper = this;
+      const swiper = this;
       swiper.mouseEntered = false;
     },
     handle: function handle(event) {
-      var e = event;
-      var swiper = this;
-      var params = swiper.params.mousewheel;
+      let e = event;
+      const swiper = this;
+      const params = swiper.params.mousewheel;
 
       if (swiper.params.cssMode) {
         e.preventDefault();
       }
 
-      var target = swiper.$el;
+      let target = swiper.$el;
       if (swiper.params.mousewheel.eventsTarged !== 'container') {
         target = $(swiper.params.mousewheel.eventsTarged);
       }
       if (!swiper.mouseEntered && !target[0].contains(e.target) && !params.releaseOnEdges) { return true; }
 
       if (e.originalEvent) { e = e.originalEvent; } // jquery fix
-      var delta = 0;
-      var rtlFactor = swiper.rtlTranslate ? -1 : 1;
+      let delta = 0;
+      const rtlFactor = swiper.rtlTranslate ? -1 : 1;
 
-      var data = Mousewheel.normalize(e);
+      const data = Mousewheel.normalize(e);
 
       if (params.forceToAxis) {
         if (swiper.isHorizontal()) {
-          if (Math.abs(data.pixelX) > Math.abs(data.pixelY)) { delta = data.pixelX * rtlFactor; }
-          else { return true; }
-        } else if (Math.abs(data.pixelY) > Math.abs(data.pixelX)) { delta = data.pixelY; }
-        else { return true; }
+          if (Math.abs(data.pixelX) > Math.abs(data.pixelY)) { delta = data.pixelX * rtlFactor; } else { return true; }
+        } else if (Math.abs(data.pixelY) > Math.abs(data.pixelX)) { delta = data.pixelY; } else { return true; }
       } else {
         delta = Math.abs(data.pixelX) > Math.abs(data.pixelY) ? -data.pixelX * rtlFactor : -data.pixelY;
       }
@@ -5106,7 +5098,7 @@
 
       if (!swiper.params.freeMode) {
         // Register the new event in a variable which stores the relevant data
-        var newEvent = {
+        const newEvent = {
           time: Utils.now(),
           delta: Math.abs(delta),
           direction: Math.sign(delta),
@@ -5114,11 +5106,11 @@
         };
 
         // Keep the most recent events
-        var recentWheelEvents = swiper.mousewheel.recentWheelEvents;
+        const { recentWheelEvents } = swiper.mousewheel;
         if (recentWheelEvents.length >= 2) {
           recentWheelEvents.shift(); // only store the last N events
         }
-        var prevEvent = recentWheelEvents.length ? recentWheelEvents[recentWheelEvents.length - 1] : undefined;
+        const prevEvent = recentWheelEvents.length ? recentWheelEvents[recentWheelEvents.length - 1] : undefined;
         recentWheelEvents.push(newEvent);
 
         // If there is at least one previous recorded event:
@@ -5147,10 +5139,10 @@
         // to give time for the deceleration to finish. Stop ignoring after 500 msecs
         // or if it's a new scroll (larger delta or inverse sign as last event before
         // an end-of-momentum snap).
-        var newEvent$1 = { time: Utils.now(), delta: Math.abs(delta), direction: Math.sign(delta) };
-        var ref = swiper.mousewheel;
-        var lastEventBeforeSnap = ref.lastEventBeforeSnap;
-        var ignoreWheelEvents = lastEventBeforeSnap
+        const newEvent$1 = { time: Utils.now(), delta: Math.abs(delta), direction: Math.sign(delta) };
+        const ref = swiper.mousewheel;
+        const { lastEventBeforeSnap } = ref;
+        const ignoreWheelEvents = lastEventBeforeSnap
           && newEvent$1.time < lastEventBeforeSnap.time + 500
           && newEvent$1.delta <= lastEventBeforeSnap.delta
           && newEvent$1.direction === lastEventBeforeSnap.direction;
@@ -5160,9 +5152,9 @@
           if (swiper.params.loop) {
             swiper.loopFix();
           }
-          var position = swiper.getTranslate() + (delta * params.sensitivity);
-          var wasBeginning = swiper.isBeginning;
-          var wasEnd = swiper.isEnd;
+          let position = swiper.getTranslate() + (delta * params.sensitivity);
+          const wasBeginning = swiper.isBeginning;
+          const wasEnd = swiper.isEnd;
 
           if (position >= swiper.minTranslate()) { position = swiper.minTranslate(); }
           if (position <= swiper.maxTranslate()) { position = swiper.maxTranslate(); }
@@ -5191,12 +5183,12 @@
             // If 1-4 aren't satisfied, then wait to snap until 500ms after the last event.
             clearTimeout(swiper.mousewheel.timeout);
             swiper.mousewheel.timeout = undefined;
-            var recentWheelEvents$1 = swiper.mousewheel.recentWheelEvents;
+            const recentWheelEvents$1 = swiper.mousewheel.recentWheelEvents;
             if (recentWheelEvents$1.length >= 15) {
               recentWheelEvents$1.shift(); // only store the last N events
             }
-            var prevEvent$1 = recentWheelEvents$1.length ? recentWheelEvents$1[recentWheelEvents$1.length - 1] : undefined;
-            var firstEvent = recentWheelEvents$1[0];
+            const prevEvent$1 = recentWheelEvents$1.length ? recentWheelEvents$1[recentWheelEvents$1.length - 1] : undefined;
+            const firstEvent = recentWheelEvents$1[0];
             recentWheelEvents$1.push(newEvent$1);
             if (prevEvent$1 && (newEvent$1.delta > prevEvent$1.delta || newEvent$1.direction !== prevEvent$1.direction)) {
               // Increasing or reverse-sign delta means the user started scrolling again. Clear the wheel event log.
@@ -5212,10 +5204,10 @@
               // direction of the ongoing scroll because it's better UX for the scroll to snap
               // in the same direction as the scroll instead of reversing to snap.  Therefore,
               // if it's already scrolled more than 20% in the current direction, keep going.
-              var snapToThreshold = delta > 0 ? 0.8 : 0.2;
+              const snapToThreshold = delta > 0 ? 0.8 : 0.2;
               swiper.mousewheel.lastEventBeforeSnap = newEvent$1;
               recentWheelEvents$1.splice(0);
-              swiper.mousewheel.timeout = Utils.nextTick(function () {
+              swiper.mousewheel.timeout = Utils.nextTick(() => {
                 swiper.slideToClosest(swiper.params.speed, true, undefined, snapToThreshold);
               }, 0); // no delay; move on next tick
             }
@@ -5223,8 +5215,8 @@
               // if we get here, then we haven't detected the end of a momentum scroll, so
               // we'll consider a scroll "complete" when there haven't been any wheel events
               // for 500ms.
-              swiper.mousewheel.timeout = Utils.nextTick(function () {
-                var snapToThreshold = 0.5;
+              swiper.mousewheel.timeout = Utils.nextTick(() => {
+                const snapToThreshold = 0.5;
                 swiper.mousewheel.lastEventBeforeSnap = newEvent$1;
                 recentWheelEvents$1.splice(0);
                 swiper.slideToClosest(swiper.params.speed, true, undefined, snapToThreshold);
@@ -5242,12 +5234,11 @@
         }
       }
 
-      if (e.preventDefault) { e.preventDefault(); }
-      else { e.returnValue = false; }
+      if (e.preventDefault) { e.preventDefault(); } else { e.returnValue = false; }
       return false;
     },
     animateSlider: function animateSlider(newEvent) {
-      var swiper = this;
+      const swiper = this;
       // If the movement is NOT big enough and
       // if the last time the user scrolled was too close to the current one (avoid continuously triggering the slider):
       //   Don't go any further (avoid insignificant scroll movement).
@@ -5282,8 +5273,8 @@
       return false;
     },
     releaseScroll: function releaseScroll(newEvent) {
-      var swiper = this;
-      var params = swiper.params.mousewheel;
+      const swiper = this;
+      const params = swiper.params.mousewheel;
       if (newEvent.direction < 0) {
         if (swiper.isEnd && !swiper.params.loop && params.releaseOnEdges) {
           // Return true to animate scroll on edges
@@ -5296,15 +5287,15 @@
       return false;
     },
     enable: function enable() {
-      var swiper = this;
-      var event = Mousewheel.event();
+      const swiper = this;
+      const event = Mousewheel.event();
       if (swiper.params.cssMode) {
         swiper.wrapperEl.removeEventListener(event, swiper.mousewheel.handle);
         return true;
       }
       if (!event) { return false; }
       if (swiper.mousewheel.enabled) { return false; }
-      var target = swiper.$el;
+      let target = swiper.$el;
       if (swiper.params.mousewheel.eventsTarged !== 'container') {
         target = $(swiper.params.mousewheel.eventsTarged);
       }
@@ -5315,15 +5306,15 @@
       return true;
     },
     disable: function disable() {
-      var swiper = this;
-      var event = Mousewheel.event();
+      const swiper = this;
+      const event = Mousewheel.event();
       if (swiper.params.cssMode) {
         swiper.wrapperEl.addEventListener(event, swiper.mousewheel.handle);
         return true;
       }
       if (!event) { return false; }
       if (!swiper.mousewheel.enabled) { return false; }
-      var target = swiper.$el;
+      let target = swiper.$el;
       if (swiper.params.mousewheel.eventsTarged !== 'container') {
         target = $(swiper.params.mousewheel.eventsTarged);
       }
@@ -5333,7 +5324,7 @@
     },
   };
 
-  var Mousewheel$1 = {
+  const Mousewheel$1 = {
     name: 'mousewheel',
     params: {
       mousewheel: {
@@ -5346,7 +5337,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         mousewheel: {
           enabled: false,
@@ -5365,14 +5356,14 @@
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.mousewheel.enabled && swiper.params.cssMode) {
           swiper.mousewheel.disable();
         }
         if (swiper.params.mousewheel.enabled) { swiper.mousewheel.enable(); }
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.cssMode) {
           swiper.mousewheel.enable();
         }
@@ -5381,16 +5372,16 @@
     },
   };
 
-  var Navigation = {
+  const Navigation = {
     update: function update() {
       // Update Navigation Buttons
-      var swiper = this;
-      var params = swiper.params.navigation;
+      const swiper = this;
+      const params = swiper.params.navigation;
 
       if (swiper.params.loop) { return; }
-      var ref = swiper.navigation;
-      var $nextEl = ref.$nextEl;
-      var $prevEl = ref.$prevEl;
+      const ref = swiper.navigation;
+      const { $nextEl } = ref;
+      const { $prevEl } = ref;
 
       if ($prevEl && $prevEl.length > 0) {
         if (swiper.isBeginning) {
@@ -5410,24 +5401,24 @@
       }
     },
     onPrevClick: function onPrevClick(e) {
-      var swiper = this;
+      const swiper = this;
       e.preventDefault();
       if (swiper.isBeginning && !swiper.params.loop) { return; }
       swiper.slidePrev();
     },
     onNextClick: function onNextClick(e) {
-      var swiper = this;
+      const swiper = this;
       e.preventDefault();
       if (swiper.isEnd && !swiper.params.loop) { return; }
       swiper.slideNext();
     },
     init: function init() {
-      var swiper = this;
-      var params = swiper.params.navigation;
+      const swiper = this;
+      const params = swiper.params.navigation;
       if (!(params.nextEl || params.prevEl)) { return; }
 
-      var $nextEl;
-      var $prevEl;
+      let $nextEl;
+      let $prevEl;
       if (params.nextEl) {
         $nextEl = $(params.nextEl);
         if (
@@ -5459,17 +5450,17 @@
       }
 
       Utils.extend(swiper.navigation, {
-        $nextEl: $nextEl,
+        $nextEl,
         nextEl: $nextEl && $nextEl[0],
-        $prevEl: $prevEl,
+        $prevEl,
         prevEl: $prevEl && $prevEl[0],
       });
     },
     destroy: function destroy() {
-      var swiper = this;
-      var ref = swiper.navigation;
-      var $nextEl = ref.$nextEl;
-      var $prevEl = ref.$prevEl;
+      const swiper = this;
+      const ref = swiper.navigation;
+      const { $nextEl } = ref;
+      const { $prevEl } = ref;
       if ($nextEl && $nextEl.length) {
         $nextEl.off('click', swiper.navigation.onNextClick);
         $nextEl.removeClass(swiper.params.navigation.disabledClass);
@@ -5481,7 +5472,7 @@
     },
   };
 
-  var Navigation$1 = {
+  const Navigation$1 = {
     name: 'navigation',
     params: {
       navigation: {
@@ -5495,7 +5486,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         navigation: {
           init: Navigation.init.bind(swiper),
@@ -5508,33 +5499,33 @@
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         swiper.navigation.init();
         swiper.navigation.update();
       },
       toEdge: function toEdge() {
-        var swiper = this;
+        const swiper = this;
         swiper.navigation.update();
       },
       fromEdge: function fromEdge() {
-        var swiper = this;
+        const swiper = this;
         swiper.navigation.update();
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         swiper.navigation.destroy();
       },
       click: function click(e) {
-        var swiper = this;
-        var ref = swiper.navigation;
-        var $nextEl = ref.$nextEl;
-        var $prevEl = ref.$prevEl;
+        const swiper = this;
+        const ref = swiper.navigation;
+        const { $nextEl } = ref;
+        const { $prevEl } = ref;
         if (
           swiper.params.navigation.hideOnClick
           && !$(e.target).is($prevEl)
           && !$(e.target).is($nextEl)
         ) {
-          var isHidden;
+          let isHidden;
           if ($nextEl) {
             isHidden = $nextEl.hasClass(swiper.params.navigation.hiddenClass);
           } else if ($prevEl) {
@@ -5556,18 +5547,18 @@
     },
   };
 
-  var Pagination = {
+  const Pagination = {
     update: function update() {
       // Render || Update Pagination bullets/items
-      var swiper = this;
-      var rtl = swiper.rtl;
-      var params = swiper.params.pagination;
+      const swiper = this;
+      const { rtl } = swiper;
+      const params = swiper.params.pagination;
       if (!params.el || !swiper.pagination.el || !swiper.pagination.$el || swiper.pagination.$el.length === 0) { return; }
-      var slidesLength = swiper.virtual && swiper.params.virtual.enabled ? swiper.virtual.slides.length : swiper.slides.length;
-      var $el = swiper.pagination.$el;
+      const slidesLength = swiper.virtual && swiper.params.virtual.enabled ? swiper.virtual.slides.length : swiper.slides.length;
+      const { $el } = swiper.pagination;
       // Current/Total
-      var current;
-      var total = swiper.params.loop ? Math.ceil((slidesLength - (swiper.loopedSlides * 2)) / swiper.params.slidesPerGroup) : swiper.snapGrid.length;
+      let current;
+      const total = swiper.params.loop ? Math.ceil((slidesLength - (swiper.loopedSlides * 2)) / swiper.params.slidesPerGroup) : swiper.snapGrid.length;
       if (swiper.params.loop) {
         current = Math.ceil((swiper.activeIndex - swiper.loopedSlides) / swiper.params.slidesPerGroup);
         if (current > slidesLength - 1 - (swiper.loopedSlides * 2)) {
@@ -5582,13 +5573,13 @@
       }
       // Types
       if (params.type === 'bullets' && swiper.pagination.bullets && swiper.pagination.bullets.length > 0) {
-        var bullets = swiper.pagination.bullets;
-        var firstIndex;
-        var lastIndex;
-        var midIndex;
+        const { bullets } = swiper.pagination;
+        let firstIndex;
+        let lastIndex;
+        let midIndex;
         if (params.dynamicBullets) {
           swiper.pagination.bulletSize = bullets.eq(0)[swiper.isHorizontal() ? 'outerWidth' : 'outerHeight'](true);
-          $el.css(swiper.isHorizontal() ? 'width' : 'height', ((swiper.pagination.bulletSize * (params.dynamicMainBullets + 4)) + "px"));
+          $el.css(swiper.isHorizontal() ? 'width' : 'height', (`${swiper.pagination.bulletSize * (params.dynamicMainBullets + 4)}px`));
           if (params.dynamicMainBullets > 1 && swiper.previousIndex !== undefined) {
             swiper.pagination.dynamicBulletIndex += (current - swiper.previousIndex);
             if (swiper.pagination.dynamicBulletIndex > (params.dynamicMainBullets - 1)) {
@@ -5601,103 +5592,103 @@
           lastIndex = firstIndex + (Math.min(bullets.length, params.dynamicMainBullets) - 1);
           midIndex = (lastIndex + firstIndex) / 2;
         }
-        bullets.removeClass(((params.bulletActiveClass) + " " + (params.bulletActiveClass) + "-next " + (params.bulletActiveClass) + "-next-next " + (params.bulletActiveClass) + "-prev " + (params.bulletActiveClass) + "-prev-prev " + (params.bulletActiveClass) + "-main"));
+        bullets.removeClass((`${params.bulletActiveClass} ${params.bulletActiveClass}-next ${params.bulletActiveClass}-next-next ${params.bulletActiveClass}-prev ${params.bulletActiveClass}-prev-prev ${params.bulletActiveClass}-main`));
         if ($el.length > 1) {
-          bullets.each(function (index, bullet) {
-            var $bullet = $(bullet);
-            var bulletIndex = $bullet.index();
+          bullets.each((index, bullet) => {
+            const $bullet = $(bullet);
+            const bulletIndex = $bullet.index();
             if (bulletIndex === current) {
               $bullet.addClass(params.bulletActiveClass);
             }
             if (params.dynamicBullets) {
               if (bulletIndex >= firstIndex && bulletIndex <= lastIndex) {
-                $bullet.addClass(((params.bulletActiveClass) + "-main"));
+                $bullet.addClass((`${params.bulletActiveClass}-main`));
               }
               if (bulletIndex === firstIndex) {
                 $bullet
                   .prev()
-                  .addClass(((params.bulletActiveClass) + "-prev"))
+                  .addClass((`${params.bulletActiveClass}-prev`))
                   .prev()
-                  .addClass(((params.bulletActiveClass) + "-prev-prev"));
+                  .addClass((`${params.bulletActiveClass}-prev-prev`));
               }
               if (bulletIndex === lastIndex) {
                 $bullet
                   .next()
-                  .addClass(((params.bulletActiveClass) + "-next"))
+                  .addClass((`${params.bulletActiveClass}-next`))
                   .next()
-                  .addClass(((params.bulletActiveClass) + "-next-next"));
+                  .addClass((`${params.bulletActiveClass}-next-next`));
               }
             }
           });
         } else {
-          var $bullet = bullets.eq(current);
-          var bulletIndex = $bullet.index();
+          const $bullet = bullets.eq(current);
+          const bulletIndex = $bullet.index();
           $bullet.addClass(params.bulletActiveClass);
           if (params.dynamicBullets) {
-            var $firstDisplayedBullet = bullets.eq(firstIndex);
-            var $lastDisplayedBullet = bullets.eq(lastIndex);
-            for (var i = firstIndex; i <= lastIndex; i += 1) {
-              bullets.eq(i).addClass(((params.bulletActiveClass) + "-main"));
+            const $firstDisplayedBullet = bullets.eq(firstIndex);
+            const $lastDisplayedBullet = bullets.eq(lastIndex);
+            for (let i = firstIndex; i <= lastIndex; i += 1) {
+              bullets.eq(i).addClass((`${params.bulletActiveClass}-main`));
             }
             if (swiper.params.loop) {
               if (bulletIndex >= bullets.length - params.dynamicMainBullets) {
-                for (var i$1 = params.dynamicMainBullets; i$1 >= 0; i$1 -= 1) {
-                  bullets.eq(bullets.length - i$1).addClass(((params.bulletActiveClass) + "-main"));
+                for (let i$1 = params.dynamicMainBullets; i$1 >= 0; i$1 -= 1) {
+                  bullets.eq(bullets.length - i$1).addClass((`${params.bulletActiveClass}-main`));
                 }
-                bullets.eq(bullets.length - params.dynamicMainBullets - 1).addClass(((params.bulletActiveClass) + "-prev"));
+                bullets.eq(bullets.length - params.dynamicMainBullets - 1).addClass((`${params.bulletActiveClass}-prev`));
               } else {
                 $firstDisplayedBullet
                   .prev()
-                  .addClass(((params.bulletActiveClass) + "-prev"))
+                  .addClass((`${params.bulletActiveClass}-prev`))
                   .prev()
-                  .addClass(((params.bulletActiveClass) + "-prev-prev"));
+                  .addClass((`${params.bulletActiveClass}-prev-prev`));
                 $lastDisplayedBullet
                   .next()
-                  .addClass(((params.bulletActiveClass) + "-next"))
+                  .addClass((`${params.bulletActiveClass}-next`))
                   .next()
-                  .addClass(((params.bulletActiveClass) + "-next-next"));
+                  .addClass((`${params.bulletActiveClass}-next-next`));
               }
             } else {
               $firstDisplayedBullet
                 .prev()
-                .addClass(((params.bulletActiveClass) + "-prev"))
+                .addClass((`${params.bulletActiveClass}-prev`))
                 .prev()
-                .addClass(((params.bulletActiveClass) + "-prev-prev"));
+                .addClass((`${params.bulletActiveClass}-prev-prev`));
               $lastDisplayedBullet
                 .next()
-                .addClass(((params.bulletActiveClass) + "-next"))
+                .addClass((`${params.bulletActiveClass}-next`))
                 .next()
-                .addClass(((params.bulletActiveClass) + "-next-next"));
+                .addClass((`${params.bulletActiveClass}-next-next`));
             }
           }
         }
         if (params.dynamicBullets) {
-          var dynamicBulletsLength = Math.min(bullets.length, params.dynamicMainBullets + 4);
-          var bulletsOffset = (((swiper.pagination.bulletSize * dynamicBulletsLength) - (swiper.pagination.bulletSize)) / 2) - (midIndex * swiper.pagination.bulletSize);
-          var offsetProp = rtl ? 'right' : 'left';
-          bullets.css(swiper.isHorizontal() ? offsetProp : 'top', (bulletsOffset + "px"));
+          const dynamicBulletsLength = Math.min(bullets.length, params.dynamicMainBullets + 4);
+          const bulletsOffset = (((swiper.pagination.bulletSize * dynamicBulletsLength) - (swiper.pagination.bulletSize)) / 2) - (midIndex * swiper.pagination.bulletSize);
+          const offsetProp = rtl ? 'right' : 'left';
+          bullets.css(swiper.isHorizontal() ? offsetProp : 'top', (`${bulletsOffset}px`));
         }
       }
       if (params.type === 'fraction') {
-        $el.find(("." + (params.currentClass))).text(params.formatFractionCurrent(current + 1));
-        $el.find(("." + (params.totalClass))).text(params.formatFractionTotal(total));
+        $el.find((`.${params.currentClass}`)).text(params.formatFractionCurrent(current + 1));
+        $el.find((`.${params.totalClass}`)).text(params.formatFractionTotal(total));
       }
       if (params.type === 'progressbar') {
-        var progressbarDirection;
+        let progressbarDirection;
         if (params.progressbarOpposite) {
           progressbarDirection = swiper.isHorizontal() ? 'vertical' : 'horizontal';
         } else {
           progressbarDirection = swiper.isHorizontal() ? 'horizontal' : 'vertical';
         }
-        var scale = (current + 1) / total;
-        var scaleX = 1;
-        var scaleY = 1;
+        const scale = (current + 1) / total;
+        let scaleX = 1;
+        let scaleY = 1;
         if (progressbarDirection === 'horizontal') {
           scaleX = scale;
         } else {
           scaleY = scale;
         }
-        $el.find(("." + (params.progressbarFillClass))).transform(("translate3d(0,0,0) scaleX(" + scaleX + ") scaleY(" + scaleY + ")")).transition(swiper.params.speed);
+        $el.find((`.${params.progressbarFillClass}`)).transform((`translate3d(0,0,0) scaleX(${scaleX}) scaleY(${scaleY})`)).transition(swiper.params.speed);
       }
       if (params.type === 'custom' && params.renderCustom) {
         $el.html(params.renderCustom(swiper, current + 1, total));
@@ -5709,32 +5700,32 @@
     },
     render: function render() {
       // Render Container
-      var swiper = this;
-      var params = swiper.params.pagination;
+      const swiper = this;
+      const params = swiper.params.pagination;
       if (!params.el || !swiper.pagination.el || !swiper.pagination.$el || swiper.pagination.$el.length === 0) { return; }
-      var slidesLength = swiper.virtual && swiper.params.virtual.enabled ? swiper.virtual.slides.length : swiper.slides.length;
+      const slidesLength = swiper.virtual && swiper.params.virtual.enabled ? swiper.virtual.slides.length : swiper.slides.length;
 
-      var $el = swiper.pagination.$el;
-      var paginationHTML = '';
+      const { $el } = swiper.pagination;
+      let paginationHTML = '';
       if (params.type === 'bullets') {
-        var numberOfBullets = swiper.params.loop ? Math.ceil((slidesLength - (swiper.loopedSlides * 2)) / swiper.params.slidesPerGroup) : swiper.snapGrid.length;
-        for (var i = 0; i < numberOfBullets; i += 1) {
+        const numberOfBullets = swiper.params.loop ? Math.ceil((slidesLength - (swiper.loopedSlides * 2)) / swiper.params.slidesPerGroup) : swiper.snapGrid.length;
+        for (let i = 0; i < numberOfBullets; i += 1) {
           if (params.renderBullet) {
             paginationHTML += params.renderBullet.call(swiper, i, params.bulletClass);
           } else {
-            paginationHTML += "<" + (params.bulletElement) + " class=\"" + (params.bulletClass) + "\"></" + (params.bulletElement) + ">";
+            paginationHTML += `<${params.bulletElement} class="${params.bulletClass}"></${params.bulletElement}>`;
           }
         }
         $el.html(paginationHTML);
-        swiper.pagination.bullets = $el.find(("." + (params.bulletClass)));
+        swiper.pagination.bullets = $el.find((`.${params.bulletClass}`));
       }
       if (params.type === 'fraction') {
         if (params.renderFraction) {
           paginationHTML = params.renderFraction.call(swiper, params.currentClass, params.totalClass);
         } else {
-          paginationHTML = "<span class=\"" + (params.currentClass) + "\"></span>"
+          paginationHTML = `<span class="${params.currentClass}"></span>`
           + ' / '
-          + "<span class=\"" + (params.totalClass) + "\"></span>";
+          + `<span class="${params.totalClass}"></span>`;
         }
         $el.html(paginationHTML);
       }
@@ -5742,7 +5733,7 @@
         if (params.renderProgressbar) {
           paginationHTML = params.renderProgressbar.call(swiper, params.progressbarFillClass);
         } else {
-          paginationHTML = "<span class=\"" + (params.progressbarFillClass) + "\"></span>";
+          paginationHTML = `<span class="${params.progressbarFillClass}"></span>`;
         }
         $el.html(paginationHTML);
       }
@@ -5751,11 +5742,11 @@
       }
     },
     init: function init() {
-      var swiper = this;
-      var params = swiper.params.pagination;
+      const swiper = this;
+      const params = swiper.params.pagination;
       if (!params.el) { return; }
 
-      var $el = $(params.el);
+      let $el = $(params.el);
       if ($el.length === 0) { return; }
 
       if (
@@ -5774,7 +5765,7 @@
       $el.addClass(params.modifierClass + params.type);
 
       if (params.type === 'bullets' && params.dynamicBullets) {
-        $el.addClass(("" + (params.modifierClass) + (params.type) + "-dynamic"));
+        $el.addClass((`${params.modifierClass}${params.type}-dynamic`));
         swiper.pagination.dynamicBulletIndex = 0;
         if (params.dynamicMainBullets < 1) {
           params.dynamicMainBullets = 1;
@@ -5785,35 +5776,35 @@
       }
 
       if (params.clickable) {
-        $el.on('click', ("." + (params.bulletClass)), function onClick(e) {
+        $el.on('click', (`.${params.bulletClass}`), function onClick(e) {
           e.preventDefault();
-          var index = $(this).index() * swiper.params.slidesPerGroup;
+          let index = $(this).index() * swiper.params.slidesPerGroup;
           if (swiper.params.loop) { index += swiper.loopedSlides; }
           swiper.slideTo(index);
         });
       }
 
       Utils.extend(swiper.pagination, {
-        $el: $el,
+        $el,
         el: $el[0],
       });
     },
     destroy: function destroy() {
-      var swiper = this;
-      var params = swiper.params.pagination;
+      const swiper = this;
+      const params = swiper.params.pagination;
       if (!params.el || !swiper.pagination.el || !swiper.pagination.$el || swiper.pagination.$el.length === 0) { return; }
-      var $el = swiper.pagination.$el;
+      const { $el } = swiper.pagination;
 
       $el.removeClass(params.hiddenClass);
       $el.removeClass(params.modifierClass + params.type);
       if (swiper.pagination.bullets) { swiper.pagination.bullets.removeClass(params.bulletActiveClass); }
       if (params.clickable) {
-        $el.off('click', ("." + (params.bulletClass)));
+        $el.off('click', (`.${params.bulletClass}`));
       }
     },
   };
 
-  var Pagination$1 = {
+  const Pagination$1 = {
     name: 'pagination',
     params: {
       pagination: {
@@ -5829,8 +5820,8 @@
         type: 'bullets', // 'bullets' or 'progressbar' or 'fraction' or 'custom'
         dynamicBullets: false,
         dynamicMainBullets: 1,
-        formatFractionCurrent: function (number) { return number; },
-        formatFractionTotal: function (number) { return number; },
+        formatFractionCurrent(number) { return number; },
+        formatFractionTotal(number) { return number; },
         bulletClass: 'swiper-pagination-bullet',
         bulletActiveClass: 'swiper-pagination-bullet-active',
         modifierClass: 'swiper-pagination-', // NEW
@@ -5844,7 +5835,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         pagination: {
           init: Pagination.init.bind(swiper),
@@ -5857,13 +5848,13 @@
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         swiper.pagination.init();
         swiper.pagination.render();
         swiper.pagination.update();
       },
       activeIndexChange: function activeIndexChange() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.loop) {
           swiper.pagination.update();
         } else if (typeof swiper.snapIndex === 'undefined') {
@@ -5871,38 +5862,38 @@
         }
       },
       snapIndexChange: function snapIndexChange() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.loop) {
           swiper.pagination.update();
         }
       },
       slidesLengthChange: function slidesLengthChange() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.loop) {
           swiper.pagination.render();
           swiper.pagination.update();
         }
       },
       snapGridLengthChange: function snapGridLengthChange() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.loop) {
           swiper.pagination.render();
           swiper.pagination.update();
         }
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         swiper.pagination.destroy();
       },
       click: function click(e) {
-        var swiper = this;
+        const swiper = this;
         if (
           swiper.params.pagination.el
           && swiper.params.pagination.hideOnClick
           && swiper.pagination.$el.length > 0
           && !$(e.target).hasClass(swiper.params.pagination.bulletClass)
         ) {
-          var isHidden = swiper.pagination.$el.hasClass(swiper.params.pagination.hiddenClass);
+          const isHidden = swiper.pagination.$el.hasClass(swiper.params.pagination.hiddenClass);
           if (isHidden === true) {
             swiper.emit('paginationShow', swiper);
           } else {
@@ -5914,21 +5905,21 @@
     },
   };
 
-  var Scrollbar = {
+  const Scrollbar = {
     setTranslate: function setTranslate() {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.params.scrollbar.el || !swiper.scrollbar.el) { return; }
-      var scrollbar = swiper.scrollbar;
-      var rtl = swiper.rtlTranslate;
-      var progress = swiper.progress;
-      var dragSize = scrollbar.dragSize;
-      var trackSize = scrollbar.trackSize;
-      var $dragEl = scrollbar.$dragEl;
-      var $el = scrollbar.$el;
-      var params = swiper.params.scrollbar;
+      const { scrollbar } = swiper;
+      const rtl = swiper.rtlTranslate;
+      const { progress } = swiper;
+      const { dragSize } = scrollbar;
+      const { trackSize } = scrollbar;
+      const { $dragEl } = scrollbar;
+      const { $el } = scrollbar;
+      const params = swiper.params.scrollbar;
 
-      var newSize = dragSize;
-      var newPos = (trackSize - dragSize) * progress;
+      let newSize = dragSize;
+      let newPos = (trackSize - dragSize) * progress;
       if (rtl) {
         newPos = -newPos;
         if (newPos > 0) {
@@ -5944,41 +5935,41 @@
         newSize = trackSize - newPos;
       }
       if (swiper.isHorizontal()) {
-        $dragEl.transform(("translate3d(" + newPos + "px, 0, 0)"));
-        $dragEl[0].style.width = newSize + "px";
+        $dragEl.transform((`translate3d(${newPos}px, 0, 0)`));
+        $dragEl[0].style.width = `${newSize}px`;
       } else {
-        $dragEl.transform(("translate3d(0px, " + newPos + "px, 0)"));
-        $dragEl[0].style.height = newSize + "px";
+        $dragEl.transform((`translate3d(0px, ${newPos}px, 0)`));
+        $dragEl[0].style.height = `${newSize}px`;
       }
       if (params.hide) {
         clearTimeout(swiper.scrollbar.timeout);
         $el[0].style.opacity = 1;
-        swiper.scrollbar.timeout = setTimeout(function () {
+        swiper.scrollbar.timeout = setTimeout(() => {
           $el[0].style.opacity = 0;
           $el.transition(400);
         }, 1000);
       }
     },
     setTransition: function setTransition(duration) {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.params.scrollbar.el || !swiper.scrollbar.el) { return; }
       swiper.scrollbar.$dragEl.transition(duration);
     },
     updateSize: function updateSize() {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.params.scrollbar.el || !swiper.scrollbar.el) { return; }
 
-      var scrollbar = swiper.scrollbar;
-      var $dragEl = scrollbar.$dragEl;
-      var $el = scrollbar.$el;
+      const { scrollbar } = swiper;
+      const { $dragEl } = scrollbar;
+      const { $el } = scrollbar;
 
       $dragEl[0].style.width = '';
       $dragEl[0].style.height = '';
-      var trackSize = swiper.isHorizontal() ? $el[0].offsetWidth : $el[0].offsetHeight;
+      const trackSize = swiper.isHorizontal() ? $el[0].offsetWidth : $el[0].offsetHeight;
 
-      var divider = swiper.size / swiper.virtualSize;
-      var moveDivider = divider * (trackSize / swiper.size);
-      var dragSize;
+      const divider = swiper.size / swiper.virtualSize;
+      const moveDivider = divider * (trackSize / swiper.size);
+      let dragSize;
       if (swiper.params.scrollbar.dragSize === 'auto') {
         dragSize = trackSize * divider;
       } else {
@@ -5986,9 +5977,9 @@
       }
 
       if (swiper.isHorizontal()) {
-        $dragEl[0].style.width = dragSize + "px";
+        $dragEl[0].style.width = `${dragSize}px`;
       } else {
-        $dragEl[0].style.height = dragSize + "px";
+        $dragEl[0].style.height = `${dragSize}px`;
       }
 
       if (divider >= 1) {
@@ -6000,30 +5991,30 @@
         $el[0].style.opacity = 0;
       }
       Utils.extend(scrollbar, {
-        trackSize: trackSize,
-        divider: divider,
-        moveDivider: moveDivider,
-        dragSize: dragSize,
+        trackSize,
+        divider,
+        moveDivider,
+        dragSize,
       });
       scrollbar.$el[swiper.params.watchOverflow && swiper.isLocked ? 'addClass' : 'removeClass'](swiper.params.scrollbar.lockClass);
     },
     getPointerPosition: function getPointerPosition(e) {
-      var swiper = this;
+      const swiper = this;
       if (swiper.isHorizontal()) {
         return ((e.type === 'touchstart' || e.type === 'touchmove') ? e.targetTouches[0].clientX : e.clientX);
       }
       return ((e.type === 'touchstart' || e.type === 'touchmove') ? e.targetTouches[0].clientY : e.clientY);
     },
     setDragPosition: function setDragPosition(e) {
-      var swiper = this;
-      var scrollbar = swiper.scrollbar;
-      var rtl = swiper.rtlTranslate;
-      var $el = scrollbar.$el;
-      var dragSize = scrollbar.dragSize;
-      var trackSize = scrollbar.trackSize;
-      var dragStartPos = scrollbar.dragStartPos;
+      const swiper = this;
+      const { scrollbar } = swiper;
+      const rtl = swiper.rtlTranslate;
+      const { $el } = scrollbar;
+      const { dragSize } = scrollbar;
+      const { trackSize } = scrollbar;
+      const { dragStartPos } = scrollbar;
 
-      var positionRatio;
+      let positionRatio;
       positionRatio = ((scrollbar.getPointerPosition(e)) - $el.offset()[swiper.isHorizontal() ? 'left' : 'top']
         - (dragStartPos !== null ? dragStartPos : dragSize / 2)) / (trackSize - dragSize);
       positionRatio = Math.max(Math.min(positionRatio, 1), 0);
@@ -6031,7 +6022,7 @@
         positionRatio = 1 - positionRatio;
       }
 
-      var position = swiper.minTranslate() + ((swiper.maxTranslate() - swiper.minTranslate()) * positionRatio);
+      const position = swiper.minTranslate() + ((swiper.maxTranslate() - swiper.minTranslate()) * positionRatio);
 
       swiper.updateProgress(position);
       swiper.setTranslate(position);
@@ -6039,12 +6030,12 @@
       swiper.updateSlidesClasses();
     },
     onDragStart: function onDragStart(e) {
-      var swiper = this;
-      var params = swiper.params.scrollbar;
-      var scrollbar = swiper.scrollbar;
-      var $wrapperEl = swiper.$wrapperEl;
-      var $el = scrollbar.$el;
-      var $dragEl = scrollbar.$dragEl;
+      const swiper = this;
+      const params = swiper.params.scrollbar;
+      const { scrollbar } = swiper;
+      const { $wrapperEl } = swiper;
+      const { $el } = scrollbar;
+      const { $dragEl } = scrollbar;
       swiper.scrollbar.isTouched = true;
       swiper.scrollbar.dragStartPos = (e.target === $dragEl[0] || e.target === $dragEl)
         ? scrollbar.getPointerPosition(e) - e.target.getBoundingClientRect()[swiper.isHorizontal() ? 'left' : 'top'] : null;
@@ -6067,15 +6058,14 @@
       swiper.emit('scrollbarDragStart', e);
     },
     onDragMove: function onDragMove(e) {
-      var swiper = this;
-      var scrollbar = swiper.scrollbar;
-      var $wrapperEl = swiper.$wrapperEl;
-      var $el = scrollbar.$el;
-      var $dragEl = scrollbar.$dragEl;
+      const swiper = this;
+      const { scrollbar } = swiper;
+      const { $wrapperEl } = swiper;
+      const { $el } = scrollbar;
+      const { $dragEl } = scrollbar;
 
       if (!swiper.scrollbar.isTouched) { return; }
-      if (e.preventDefault) { e.preventDefault(); }
-      else { e.returnValue = false; }
+      if (e.preventDefault) { e.preventDefault(); } else { e.returnValue = false; }
       scrollbar.setDragPosition(e);
       $wrapperEl.transition(0);
       $el.transition(0);
@@ -6083,12 +6073,12 @@
       swiper.emit('scrollbarDragMove', e);
     },
     onDragEnd: function onDragEnd(e) {
-      var swiper = this;
+      const swiper = this;
 
-      var params = swiper.params.scrollbar;
-      var scrollbar = swiper.scrollbar;
-      var $wrapperEl = swiper.$wrapperEl;
-      var $el = scrollbar.$el;
+      const params = swiper.params.scrollbar;
+      const { scrollbar } = swiper;
+      const { $wrapperEl } = swiper;
+      const { $el } = scrollbar;
 
       if (!swiper.scrollbar.isTouched) { return; }
       swiper.scrollbar.isTouched = false;
@@ -6098,7 +6088,7 @@
       }
       if (params.hide) {
         clearTimeout(swiper.scrollbar.dragTimeout);
-        swiper.scrollbar.dragTimeout = Utils.nextTick(function () {
+        swiper.scrollbar.dragTimeout = Utils.nextTick(() => {
           $el.css('opacity', 0);
           $el.transition(400);
         }, 1000);
@@ -6109,16 +6099,16 @@
       }
     },
     enableDraggable: function enableDraggable() {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.params.scrollbar.el) { return; }
-      var scrollbar = swiper.scrollbar;
-      var touchEventsTouch = swiper.touchEventsTouch;
-      var touchEventsDesktop = swiper.touchEventsDesktop;
-      var params = swiper.params;
-      var $el = scrollbar.$el;
-      var target = $el[0];
-      var activeListener = Support.passiveListener && params.passiveListeners ? { passive: false, capture: false } : false;
-      var passiveListener = Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
+      const { scrollbar } = swiper;
+      const { touchEventsTouch } = swiper;
+      const { touchEventsDesktop } = swiper;
+      const { params } = swiper;
+      const { $el } = scrollbar;
+      const target = $el[0];
+      const activeListener = Support.passiveListener && params.passiveListeners ? { passive: false, capture: false } : false;
+      const passiveListener = Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
       if (!Support.touch) {
         target.addEventListener(touchEventsDesktop.start, swiper.scrollbar.onDragStart, activeListener);
         doc.addEventListener(touchEventsDesktop.move, swiper.scrollbar.onDragMove, activeListener);
@@ -6130,16 +6120,16 @@
       }
     },
     disableDraggable: function disableDraggable() {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.params.scrollbar.el) { return; }
-      var scrollbar = swiper.scrollbar;
-      var touchEventsTouch = swiper.touchEventsTouch;
-      var touchEventsDesktop = swiper.touchEventsDesktop;
-      var params = swiper.params;
-      var $el = scrollbar.$el;
-      var target = $el[0];
-      var activeListener = Support.passiveListener && params.passiveListeners ? { passive: false, capture: false } : false;
-      var passiveListener = Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
+      const { scrollbar } = swiper;
+      const { touchEventsTouch } = swiper;
+      const { touchEventsDesktop } = swiper;
+      const { params } = swiper;
+      const { $el } = scrollbar;
+      const target = $el[0];
+      const activeListener = Support.passiveListener && params.passiveListeners ? { passive: false, capture: false } : false;
+      const passiveListener = Support.passiveListener && params.passiveListeners ? { passive: true, capture: false } : false;
       if (!Support.touch) {
         target.removeEventListener(touchEventsDesktop.start, swiper.scrollbar.onDragStart, activeListener);
         doc.removeEventListener(touchEventsDesktop.move, swiper.scrollbar.onDragMove, activeListener);
@@ -6151,27 +6141,27 @@
       }
     },
     init: function init() {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.params.scrollbar.el) { return; }
-      var scrollbar = swiper.scrollbar;
-      var $swiperEl = swiper.$el;
-      var params = swiper.params.scrollbar;
+      const { scrollbar } = swiper;
+      const $swiperEl = swiper.$el;
+      const params = swiper.params.scrollbar;
 
-      var $el = $(params.el);
+      let $el = $(params.el);
       if (swiper.params.uniqueNavElements && typeof params.el === 'string' && $el.length > 1 && $swiperEl.find(params.el).length === 1) {
         $el = $swiperEl.find(params.el);
       }
 
-      var $dragEl = $el.find(("." + (swiper.params.scrollbar.dragClass)));
+      let $dragEl = $el.find((`.${swiper.params.scrollbar.dragClass}`));
       if ($dragEl.length === 0) {
-        $dragEl = $(("<div class=\"" + (swiper.params.scrollbar.dragClass) + "\"></div>"));
+        $dragEl = $((`<div class="${swiper.params.scrollbar.dragClass}"></div>`));
         $el.append($dragEl);
       }
 
       Utils.extend(scrollbar, {
-        $el: $el,
+        $el,
         el: $el[0],
-        $dragEl: $dragEl,
+        $dragEl,
         dragEl: $dragEl[0],
       });
 
@@ -6180,12 +6170,12 @@
       }
     },
     destroy: function destroy() {
-      var swiper = this;
+      const swiper = this;
       swiper.scrollbar.disableDraggable();
     },
   };
 
-  var Scrollbar$1 = {
+  const Scrollbar$1 = {
     name: 'scrollbar',
     params: {
       scrollbar: {
@@ -6199,7 +6189,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         scrollbar: {
           init: Scrollbar.init.bind(swiper),
@@ -6222,51 +6212,51 @@
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         swiper.scrollbar.init();
         swiper.scrollbar.updateSize();
         swiper.scrollbar.setTranslate();
       },
       update: function update() {
-        var swiper = this;
+        const swiper = this;
         swiper.scrollbar.updateSize();
       },
       resize: function resize() {
-        var swiper = this;
+        const swiper = this;
         swiper.scrollbar.updateSize();
       },
       observerUpdate: function observerUpdate() {
-        var swiper = this;
+        const swiper = this;
         swiper.scrollbar.updateSize();
       },
       setTranslate: function setTranslate() {
-        var swiper = this;
+        const swiper = this;
         swiper.scrollbar.setTranslate();
       },
       setTransition: function setTransition(duration) {
-        var swiper = this;
+        const swiper = this;
         swiper.scrollbar.setTransition(duration);
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         swiper.scrollbar.destroy();
       },
     },
   };
 
-  var Parallax = {
+  const Parallax = {
     setTransform: function setTransform(el, progress) {
-      var swiper = this;
-      var rtl = swiper.rtl;
+      const swiper = this;
+      const { rtl } = swiper;
 
-      var $el = $(el);
-      var rtlFactor = rtl ? -1 : 1;
+      const $el = $(el);
+      const rtlFactor = rtl ? -1 : 1;
 
-      var p = $el.attr('data-swiper-parallax') || '0';
-      var x = $el.attr('data-swiper-parallax-x');
-      var y = $el.attr('data-swiper-parallax-y');
-      var scale = $el.attr('data-swiper-parallax-scale');
-      var opacity = $el.attr('data-swiper-parallax-opacity');
+      const p = $el.attr('data-swiper-parallax') || '0';
+      let x = $el.attr('data-swiper-parallax-x');
+      let y = $el.attr('data-swiper-parallax-y');
+      const scale = $el.attr('data-swiper-parallax-scale');
+      const opacity = $el.attr('data-swiper-parallax-opacity');
 
       if (x || y) {
         x = x || '0';
@@ -6280,65 +6270,65 @@
       }
 
       if ((x).indexOf('%') >= 0) {
-        x = (parseInt(x, 10) * progress * rtlFactor) + "%";
+        x = `${parseInt(x, 10) * progress * rtlFactor}%`;
       } else {
-        x = (x * progress * rtlFactor) + "px";
+        x = `${x * progress * rtlFactor}px`;
       }
       if ((y).indexOf('%') >= 0) {
-        y = (parseInt(y, 10) * progress) + "%";
+        y = `${parseInt(y, 10) * progress}%`;
       } else {
-        y = (y * progress) + "px";
+        y = `${y * progress}px`;
       }
 
       if (typeof opacity !== 'undefined' && opacity !== null) {
-        var currentOpacity = opacity - ((opacity - 1) * (1 - Math.abs(progress)));
+        const currentOpacity = opacity - ((opacity - 1) * (1 - Math.abs(progress)));
         $el[0].style.opacity = currentOpacity;
       }
       if (typeof scale === 'undefined' || scale === null) {
-        $el.transform(("translate3d(" + x + ", " + y + ", 0px)"));
+        $el.transform((`translate3d(${x}, ${y}, 0px)`));
       } else {
-        var currentScale = scale - ((scale - 1) * (1 - Math.abs(progress)));
-        $el.transform(("translate3d(" + x + ", " + y + ", 0px) scale(" + currentScale + ")"));
+        const currentScale = scale - ((scale - 1) * (1 - Math.abs(progress)));
+        $el.transform((`translate3d(${x}, ${y}, 0px) scale(${currentScale})`));
       }
     },
     setTranslate: function setTranslate() {
-      var swiper = this;
-      var $el = swiper.$el;
-      var slides = swiper.slides;
-      var progress = swiper.progress;
-      var snapGrid = swiper.snapGrid;
+      const swiper = this;
+      const { $el } = swiper;
+      const { slides } = swiper;
+      const { progress } = swiper;
+      const { snapGrid } = swiper;
       $el.children('[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y], [data-swiper-parallax-opacity], [data-swiper-parallax-scale]')
-        .each(function (index, el) {
+        .each((index, el) => {
           swiper.parallax.setTransform(el, progress);
         });
-      slides.each(function (slideIndex, slideEl) {
-        var slideProgress = slideEl.progress;
+      slides.each((slideIndex, slideEl) => {
+        let slideProgress = slideEl.progress;
         if (swiper.params.slidesPerGroup > 1 && swiper.params.slidesPerView !== 'auto') {
           slideProgress += Math.ceil(slideIndex / 2) - (progress * (snapGrid.length - 1));
         }
         slideProgress = Math.min(Math.max(slideProgress, -1), 1);
         $(slideEl).find('[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y], [data-swiper-parallax-opacity], [data-swiper-parallax-scale]')
-          .each(function (index, el) {
+          .each((index, el) => {
             swiper.parallax.setTransform(el, slideProgress);
           });
       });
     },
     setTransition: function setTransition(duration) {
-      if ( duration === void 0 ) duration = this.params.speed;
+      if (duration === void 0) duration = this.params.speed;
 
-      var swiper = this;
-      var $el = swiper.$el;
+      const swiper = this;
+      const { $el } = swiper;
       $el.find('[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y], [data-swiper-parallax-opacity], [data-swiper-parallax-scale]')
-        .each(function (index, parallaxEl) {
-          var $parallaxEl = $(parallaxEl);
-          var parallaxDuration = parseInt($parallaxEl.attr('data-swiper-parallax-duration'), 10) || duration;
+        .each((index, parallaxEl) => {
+          const $parallaxEl = $(parallaxEl);
+          let parallaxDuration = parseInt($parallaxEl.attr('data-swiper-parallax-duration'), 10) || duration;
           if (duration === 0) { parallaxDuration = 0; }
           $parallaxEl.transition(parallaxDuration);
         });
     },
   };
 
-  var Parallax$1 = {
+  const Parallax$1 = {
     name: 'parallax',
     params: {
       parallax: {
@@ -6346,7 +6336,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         parallax: {
           setTransform: Parallax.setTransform.bind(swiper),
@@ -6357,23 +6347,23 @@
     },
     on: {
       beforeInit: function beforeInit() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.parallax.enabled) { return; }
         swiper.params.watchSlidesProgress = true;
         swiper.originalParams.watchSlidesProgress = true;
       },
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.parallax.enabled) { return; }
         swiper.parallax.setTranslate();
       },
       setTranslate: function setTranslate() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.parallax.enabled) { return; }
         swiper.parallax.setTranslate();
       },
       setTransition: function setTransition(duration) {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.parallax.enabled) { return; }
         swiper.parallax.setTransition(duration);
       },
@@ -6384,19 +6374,19 @@
     // Calc Scale From Multi-touches
     getDistanceBetweenTouches: function getDistanceBetweenTouches(e) {
       if (e.targetTouches.length < 2) { return 1; }
-      var x1 = e.targetTouches[0].pageX;
-      var y1 = e.targetTouches[0].pageY;
-      var x2 = e.targetTouches[1].pageX;
-      var y2 = e.targetTouches[1].pageY;
-      var distance = Math.sqrt((Math.pow( (x2 - x1), 2 )) + (Math.pow( (y2 - y1), 2 )));
+      const x1 = e.targetTouches[0].pageX;
+      const y1 = e.targetTouches[0].pageY;
+      const x2 = e.targetTouches[1].pageX;
+      const y2 = e.targetTouches[1].pageY;
+      const distance = Math.sqrt((Math.pow((x2 - x1), 2)) + (Math.pow((y2 - y1), 2)));
       return distance;
     },
     // Events
     onGestureStart: function onGestureStart(e) {
-      var swiper = this;
-      var params = swiper.params.zoom;
-      var zoom = swiper.zoom;
-      var gesture = zoom.gesture;
+      const swiper = this;
+      const params = swiper.params.zoom;
+      const { zoom } = swiper;
+      const { gesture } = zoom;
       zoom.fakeGestureTouched = false;
       zoom.fakeGestureMoved = false;
       if (!Support.gestures) {
@@ -6407,10 +6397,10 @@
         gesture.scaleStart = Zoom.getDistanceBetweenTouches(e);
       }
       if (!gesture.$slideEl || !gesture.$slideEl.length) {
-        gesture.$slideEl = $(e.target).closest(("." + (swiper.params.slideClass)));
+        gesture.$slideEl = $(e.target).closest((`.${swiper.params.slideClass}`));
         if (gesture.$slideEl.length === 0) { gesture.$slideEl = swiper.slides.eq(swiper.activeIndex); }
         gesture.$imageEl = gesture.$slideEl.find('img, svg, canvas, picture, .swiper-zoom-target');
-        gesture.$imageWrapEl = gesture.$imageEl.parent(("." + (params.containerClass)));
+        gesture.$imageWrapEl = gesture.$imageEl.parent((`.${params.containerClass}`));
         gesture.maxRatio = gesture.$imageWrapEl.attr('data-swiper-zoom') || params.maxRatio;
         if (gesture.$imageWrapEl.length === 0) {
           gesture.$imageEl = undefined;
@@ -6423,10 +6413,10 @@
       swiper.zoom.isScaling = true;
     },
     onGestureChange: function onGestureChange(e) {
-      var swiper = this;
-      var params = swiper.params.zoom;
-      var zoom = swiper.zoom;
-      var gesture = zoom.gesture;
+      const swiper = this;
+      const params = swiper.params.zoom;
+      const { zoom } = swiper;
+      const { gesture } = zoom;
       if (!Support.gestures) {
         if (e.type !== 'touchmove' || (e.type === 'touchmove' && e.targetTouches.length < 2)) {
           return;
@@ -6441,18 +6431,18 @@
         zoom.scale = (gesture.scaleMove / gesture.scaleStart) * zoom.currentScale;
       }
       if (zoom.scale > gesture.maxRatio) {
-        zoom.scale = (gesture.maxRatio - 1) + (Math.pow( ((zoom.scale - gesture.maxRatio) + 1), 0.5 ));
+        zoom.scale = (gesture.maxRatio - 1) + (Math.pow(((zoom.scale - gesture.maxRatio) + 1), 0.5));
       }
       if (zoom.scale < params.minRatio) {
-        zoom.scale = (params.minRatio + 1) - (Math.pow( ((params.minRatio - zoom.scale) + 1), 0.5 ));
+        zoom.scale = (params.minRatio + 1) - (Math.pow(((params.minRatio - zoom.scale) + 1), 0.5));
       }
-      gesture.$imageEl.transform(("translate3d(0,0,0) scale(" + (zoom.scale) + ")"));
+      gesture.$imageEl.transform((`translate3d(0,0,0) scale(${zoom.scale})`));
     },
     onGestureEnd: function onGestureEnd(e) {
-      var swiper = this;
-      var params = swiper.params.zoom;
-      var zoom = swiper.zoom;
-      var gesture = zoom.gesture;
+      const swiper = this;
+      const params = swiper.params.zoom;
+      const { zoom } = swiper;
+      const { gesture } = zoom;
       if (!Support.gestures) {
         if (!zoom.fakeGestureTouched || !zoom.fakeGestureMoved) {
           return;
@@ -6465,16 +6455,16 @@
       }
       if (!gesture.$imageEl || gesture.$imageEl.length === 0) { return; }
       zoom.scale = Math.max(Math.min(zoom.scale, gesture.maxRatio), params.minRatio);
-      gesture.$imageEl.transition(swiper.params.speed).transform(("translate3d(0,0,0) scale(" + (zoom.scale) + ")"));
+      gesture.$imageEl.transition(swiper.params.speed).transform((`translate3d(0,0,0) scale(${zoom.scale})`));
       zoom.currentScale = zoom.scale;
       zoom.isScaling = false;
       if (zoom.scale === 1) { gesture.$slideEl = undefined; }
     },
     onTouchStart: function onTouchStart(e) {
-      var swiper = this;
-      var zoom = swiper.zoom;
-      var gesture = zoom.gesture;
-      var image = zoom.image;
+      const swiper = this;
+      const { zoom } = swiper;
+      const { gesture } = zoom;
+      const { image } = zoom;
       if (!gesture.$imageEl || gesture.$imageEl.length === 0) { return; }
       if (image.isTouched) { return; }
       if (Device.android) { e.preventDefault(); }
@@ -6483,11 +6473,11 @@
       image.touchesStart.y = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
     },
     onTouchMove: function onTouchMove(e) {
-      var swiper = this;
-      var zoom = swiper.zoom;
-      var gesture = zoom.gesture;
-      var image = zoom.image;
-      var velocity = zoom.velocity;
+      const swiper = this;
+      const { zoom } = swiper;
+      const { gesture } = zoom;
+      const { image } = zoom;
+      const { velocity } = zoom;
       if (!gesture.$imageEl || gesture.$imageEl.length === 0) { return; }
       swiper.allowClick = false;
       if (!image.isTouched || !gesture.$slideEl) { return; }
@@ -6506,8 +6496,8 @@
         }
       }
       // Define if we need image drag
-      var scaledWidth = image.width * zoom.scale;
-      var scaledHeight = image.height * zoom.scale;
+      const scaledWidth = image.width * zoom.scale;
+      const scaledHeight = image.height * zoom.scale;
 
       if (scaledWidth < gesture.slideWidth && scaledHeight < gesture.slideHeight) { return; }
 
@@ -6548,17 +6538,17 @@
       image.currentY = (image.touchesCurrent.y - image.touchesStart.y) + image.startY;
 
       if (image.currentX < image.minX) {
-        image.currentX = (image.minX + 1) - (Math.pow( ((image.minX - image.currentX) + 1), 0.8 ));
+        image.currentX = (image.minX + 1) - (Math.pow(((image.minX - image.currentX) + 1), 0.8));
       }
       if (image.currentX > image.maxX) {
-        image.currentX = (image.maxX - 1) + (Math.pow( ((image.currentX - image.maxX) + 1), 0.8 ));
+        image.currentX = (image.maxX - 1) + (Math.pow(((image.currentX - image.maxX) + 1), 0.8));
       }
 
       if (image.currentY < image.minY) {
-        image.currentY = (image.minY + 1) - (Math.pow( ((image.minY - image.currentY) + 1), 0.8 ));
+        image.currentY = (image.minY + 1) - (Math.pow(((image.minY - image.currentY) + 1), 0.8));
       }
       if (image.currentY > image.maxY) {
-        image.currentY = (image.maxY - 1) + (Math.pow( ((image.currentY - image.maxY) + 1), 0.8 ));
+        image.currentY = (image.maxY - 1) + (Math.pow(((image.currentY - image.maxY) + 1), 0.8));
       }
 
       // Velocity
@@ -6573,14 +6563,14 @@
       velocity.prevPositionY = image.touchesCurrent.y;
       velocity.prevTime = Date.now();
 
-      gesture.$imageWrapEl.transform(("translate3d(" + (image.currentX) + "px, " + (image.currentY) + "px,0)"));
+      gesture.$imageWrapEl.transform((`translate3d(${image.currentX}px, ${image.currentY}px,0)`));
     },
     onTouchEnd: function onTouchEnd() {
-      var swiper = this;
-      var zoom = swiper.zoom;
-      var gesture = zoom.gesture;
-      var image = zoom.image;
-      var velocity = zoom.velocity;
+      const swiper = this;
+      const { zoom } = swiper;
+      const { gesture } = zoom;
+      const { image } = zoom;
+      const { velocity } = zoom;
       if (!gesture.$imageEl || gesture.$imageEl.length === 0) { return; }
       if (!image.isTouched || !image.isMoved) {
         image.isTouched = false;
@@ -6589,24 +6579,24 @@
       }
       image.isTouched = false;
       image.isMoved = false;
-      var momentumDurationX = 300;
-      var momentumDurationY = 300;
-      var momentumDistanceX = velocity.x * momentumDurationX;
-      var newPositionX = image.currentX + momentumDistanceX;
-      var momentumDistanceY = velocity.y * momentumDurationY;
-      var newPositionY = image.currentY + momentumDistanceY;
+      let momentumDurationX = 300;
+      let momentumDurationY = 300;
+      const momentumDistanceX = velocity.x * momentumDurationX;
+      const newPositionX = image.currentX + momentumDistanceX;
+      const momentumDistanceY = velocity.y * momentumDurationY;
+      const newPositionY = image.currentY + momentumDistanceY;
 
       // Fix duration
       if (velocity.x !== 0) { momentumDurationX = Math.abs((newPositionX - image.currentX) / velocity.x); }
       if (velocity.y !== 0) { momentumDurationY = Math.abs((newPositionY - image.currentY) / velocity.y); }
-      var momentumDuration = Math.max(momentumDurationX, momentumDurationY);
+      const momentumDuration = Math.max(momentumDurationX, momentumDurationY);
 
       image.currentX = newPositionX;
       image.currentY = newPositionY;
 
       // Define if we need image drag
-      var scaledWidth = image.width * zoom.scale;
-      var scaledHeight = image.height * zoom.scale;
+      const scaledWidth = image.width * zoom.scale;
+      const scaledHeight = image.height * zoom.scale;
       image.minX = Math.min(((gesture.slideWidth / 2) - (scaledWidth / 2)), 0);
       image.maxX = -image.minX;
       image.minY = Math.min(((gesture.slideHeight / 2) - (scaledHeight / 2)), 0);
@@ -6614,12 +6604,12 @@
       image.currentX = Math.max(Math.min(image.currentX, image.maxX), image.minX);
       image.currentY = Math.max(Math.min(image.currentY, image.maxY), image.minY);
 
-      gesture.$imageWrapEl.transition(momentumDuration).transform(("translate3d(" + (image.currentX) + "px, " + (image.currentY) + "px,0)"));
+      gesture.$imageWrapEl.transition(momentumDuration).transform((`translate3d(${image.currentX}px, ${image.currentY}px,0)`));
     },
     onTransitionEnd: function onTransitionEnd() {
-      var swiper = this;
-      var zoom = swiper.zoom;
-      var gesture = zoom.gesture;
+      const swiper = this;
+      const { zoom } = swiper;
+      const { gesture } = zoom;
       if (gesture.$slideEl && swiper.previousIndex !== swiper.activeIndex) {
         if (gesture.$imageEl) {
           gesture.$imageEl.transform('translate3d(0,0,0) scale(1)');
@@ -6638,8 +6628,8 @@
     },
     // Toggle Zoom
     toggle: function toggle(e) {
-      var swiper = this;
-      var zoom = swiper.zoom;
+      const swiper = this;
+      const { zoom } = swiper;
 
       if (zoom.scale && zoom.scale !== 1) {
         // Zoom Out
@@ -6650,44 +6640,44 @@
       }
     },
     in: function in$1(e) {
-      var swiper = this;
+      const swiper = this;
 
-      var zoom = swiper.zoom;
-      var params = swiper.params.zoom;
-      var gesture = zoom.gesture;
-      var image = zoom.image;
+      const { zoom } = swiper;
+      const params = swiper.params.zoom;
+      const { gesture } = zoom;
+      const { image } = zoom;
 
       if (!gesture.$slideEl) {
         if (swiper.params.virtual && swiper.params.virtual.enabled && swiper.virtual) {
-          gesture.$slideEl = swiper.$wrapperEl.children(("." + (swiper.params.slideActiveClass)));
+          gesture.$slideEl = swiper.$wrapperEl.children((`.${swiper.params.slideActiveClass}`));
         } else {
           gesture.$slideEl = swiper.slides.eq(swiper.activeIndex);
         }
         gesture.$imageEl = gesture.$slideEl.find('img, svg, canvas, picture, .swiper-zoom-target');
-        gesture.$imageWrapEl = gesture.$imageEl.parent(("." + (params.containerClass)));
+        gesture.$imageWrapEl = gesture.$imageEl.parent((`.${params.containerClass}`));
       }
       if (!gesture.$imageEl || gesture.$imageEl.length === 0) { return; }
 
-      gesture.$slideEl.addClass(("" + (params.zoomedSlideClass)));
+      gesture.$slideEl.addClass((`${params.zoomedSlideClass}`));
 
-      var touchX;
-      var touchY;
-      var offsetX;
-      var offsetY;
-      var diffX;
-      var diffY;
-      var translateX;
-      var translateY;
-      var imageWidth;
-      var imageHeight;
-      var scaledWidth;
-      var scaledHeight;
-      var translateMinX;
-      var translateMinY;
-      var translateMaxX;
-      var translateMaxY;
-      var slideWidth;
-      var slideHeight;
+      let touchX;
+      let touchY;
+      let offsetX;
+      let offsetY;
+      let diffX;
+      let diffY;
+      let translateX;
+      let translateY;
+      let imageWidth;
+      let imageHeight;
+      let scaledWidth;
+      let scaledHeight;
+      let translateMinX;
+      let translateMinY;
+      let translateMaxX;
+      let translateMaxY;
+      let slideWidth;
+      let slideHeight;
 
       if (typeof image.touchesStart.x === 'undefined' && e) {
         touchX = e.type === 'touchend' ? e.changedTouches[0].pageX : e.pageX;
@@ -6737,24 +6727,24 @@
         translateX = 0;
         translateY = 0;
       }
-      gesture.$imageWrapEl.transition(300).transform(("translate3d(" + translateX + "px, " + translateY + "px,0)"));
-      gesture.$imageEl.transition(300).transform(("translate3d(0,0,0) scale(" + (zoom.scale) + ")"));
+      gesture.$imageWrapEl.transition(300).transform((`translate3d(${translateX}px, ${translateY}px,0)`));
+      gesture.$imageEl.transition(300).transform((`translate3d(0,0,0) scale(${zoom.scale})`));
     },
     out: function out() {
-      var swiper = this;
+      const swiper = this;
 
-      var zoom = swiper.zoom;
-      var params = swiper.params.zoom;
-      var gesture = zoom.gesture;
+      const { zoom } = swiper;
+      const params = swiper.params.zoom;
+      const { gesture } = zoom;
 
       if (!gesture.$slideEl) {
         if (swiper.params.virtual && swiper.params.virtual.enabled && swiper.virtual) {
-          gesture.$slideEl = swiper.$wrapperEl.children(("." + (swiper.params.slideActiveClass)));
+          gesture.$slideEl = swiper.$wrapperEl.children((`.${swiper.params.slideActiveClass}`));
         } else {
           gesture.$slideEl = swiper.slides.eq(swiper.activeIndex);
         }
         gesture.$imageEl = gesture.$slideEl.find('img, svg, canvas, picture, .swiper-zoom-target');
-        gesture.$imageWrapEl = gesture.$imageEl.parent(("." + (params.containerClass)));
+        gesture.$imageWrapEl = gesture.$imageEl.parent((`.${params.containerClass}`));
       }
       if (!gesture.$imageEl || gesture.$imageEl.length === 0) { return; }
 
@@ -6762,20 +6752,20 @@
       zoom.currentScale = 1;
       gesture.$imageWrapEl.transition(300).transform('translate3d(0,0,0)');
       gesture.$imageEl.transition(300).transform('translate3d(0,0,0) scale(1)');
-      gesture.$slideEl.removeClass(("" + (params.zoomedSlideClass)));
+      gesture.$slideEl.removeClass((`${params.zoomedSlideClass}`));
       gesture.$slideEl = undefined;
     },
     // Attach/Detach Events
     enable: function enable() {
-      var swiper = this;
-      var zoom = swiper.zoom;
+      const swiper = this;
+      const { zoom } = swiper;
       if (zoom.enabled) { return; }
       zoom.enabled = true;
 
-      var passiveListener = swiper.touchEvents.start === 'touchstart' && Support.passiveListener && swiper.params.passiveListeners ? { passive: true, capture: false } : false;
-      var activeListenerWithCapture = Support.passiveListener ? { passive: false, capture: true } : true;
+      const passiveListener = swiper.touchEvents.start === 'touchstart' && Support.passiveListener && swiper.params.passiveListeners ? { passive: true, capture: false } : false;
+      const activeListenerWithCapture = Support.passiveListener ? { passive: false, capture: true } : true;
 
-      var slideSelector = "." + (swiper.params.slideClass);
+      const slideSelector = `.${swiper.params.slideClass}`;
 
       // Scale image
       if (Support.gestures) {
@@ -6792,19 +6782,19 @@
       }
 
       // Move image
-      swiper.$wrapperEl.on(swiper.touchEvents.move, ("." + (swiper.params.zoom.containerClass)), zoom.onTouchMove, activeListenerWithCapture);
+      swiper.$wrapperEl.on(swiper.touchEvents.move, (`.${swiper.params.zoom.containerClass}`), zoom.onTouchMove, activeListenerWithCapture);
     },
     disable: function disable() {
-      var swiper = this;
-      var zoom = swiper.zoom;
+      const swiper = this;
+      const { zoom } = swiper;
       if (!zoom.enabled) { return; }
 
       swiper.zoom.enabled = false;
 
-      var passiveListener = swiper.touchEvents.start === 'touchstart' && Support.passiveListener && swiper.params.passiveListeners ? { passive: true, capture: false } : false;
-      var activeListenerWithCapture = Support.passiveListener ? { passive: false, capture: true } : true;
+      const passiveListener = swiper.touchEvents.start === 'touchstart' && Support.passiveListener && swiper.params.passiveListeners ? { passive: true, capture: false } : false;
+      const activeListenerWithCapture = Support.passiveListener ? { passive: false, capture: true } : true;
 
-      var slideSelector = "." + (swiper.params.slideClass);
+      const slideSelector = `.${swiper.params.slideClass}`;
 
       // Scale image
       if (Support.gestures) {
@@ -6821,11 +6811,11 @@
       }
 
       // Move image
-      swiper.$wrapperEl.off(swiper.touchEvents.move, ("." + (swiper.params.zoom.containerClass)), zoom.onTouchMove, activeListenerWithCapture);
+      swiper.$wrapperEl.off(swiper.touchEvents.move, (`.${swiper.params.zoom.containerClass}`), zoom.onTouchMove, activeListenerWithCapture);
     },
   };
 
-  var Zoom$1 = {
+  const Zoom$1 = {
     name: 'zoom',
     params: {
       zoom: {
@@ -6838,8 +6828,8 @@
       },
     },
     create: function create() {
-      var swiper = this;
-      var zoom = {
+      const swiper = this;
+      const zoom = {
         enabled: false,
         scale: 1,
         currentScale: 1,
@@ -6877,22 +6867,22 @@
         },
       };
 
-      ('onGestureStart onGestureChange onGestureEnd onTouchStart onTouchMove onTouchEnd onTransitionEnd toggle enable disable in out').split(' ').forEach(function (methodName) {
+      ('onGestureStart onGestureChange onGestureEnd onTouchStart onTouchMove onTouchEnd onTransitionEnd toggle enable disable in out').split(' ').forEach((methodName) => {
         zoom[methodName] = Zoom[methodName].bind(swiper);
       });
       Utils.extend(swiper, {
-        zoom: zoom,
+        zoom,
       });
 
-      var scale = 1;
+      let scale = 1;
       Object.defineProperty(swiper.zoom, 'scale', {
         get: function get() {
           return scale;
         },
         set: function set(value) {
           if (scale !== value) {
-            var imageEl = swiper.zoom.gesture.$imageEl ? swiper.zoom.gesture.$imageEl[0] : undefined;
-            var slideEl = swiper.zoom.gesture.$slideEl ? swiper.zoom.gesture.$slideEl[0] : undefined;
+            const imageEl = swiper.zoom.gesture.$imageEl ? swiper.zoom.gesture.$imageEl[0] : undefined;
+            const slideEl = swiper.zoom.gesture.$slideEl ? swiper.zoom.gesture.$slideEl[0] : undefined;
             swiper.emit('zoomChange', value, imageEl, slideEl);
           }
           scale = value;
@@ -6901,39 +6891,39 @@
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.zoom.enabled) {
           swiper.zoom.enable();
         }
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         swiper.zoom.disable();
       },
       touchStart: function touchStart(e) {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.zoom.enabled) { return; }
         swiper.zoom.onTouchStart(e);
       },
       touchEnd: function touchEnd(e) {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.zoom.enabled) { return; }
         swiper.zoom.onTouchEnd(e);
       },
       doubleTap: function doubleTap(e) {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.zoom.enabled && swiper.zoom.enabled && swiper.params.zoom.toggle) {
           swiper.zoom.toggle(e);
         }
       },
       transitionEnd: function transitionEnd() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.zoom.enabled && swiper.params.zoom.enabled) {
           swiper.zoom.onTransitionEnd();
         }
       },
       slideChange: function slideChange() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.zoom.enabled && swiper.params.zoom.enabled && swiper.params.cssMode) {
           swiper.zoom.onTransitionEnd();
         }
@@ -6941,39 +6931,39 @@
     },
   };
 
-  var Lazy = {
+  const Lazy = {
     loadInSlide: function loadInSlide(index, loadInDuplicate) {
-      if ( loadInDuplicate === void 0 ) loadInDuplicate = true;
+      if (loadInDuplicate === void 0) loadInDuplicate = true;
 
-      var swiper = this;
-      var params = swiper.params.lazy;
+      const swiper = this;
+      const params = swiper.params.lazy;
       if (typeof index === 'undefined') { return; }
       if (swiper.slides.length === 0) { return; }
-      var isVirtual = swiper.virtual && swiper.params.virtual.enabled;
+      const isVirtual = swiper.virtual && swiper.params.virtual.enabled;
 
-      var $slideEl = isVirtual
-        ? swiper.$wrapperEl.children(("." + (swiper.params.slideClass) + "[data-swiper-slide-index=\"" + index + "\"]"))
+      const $slideEl = isVirtual
+        ? swiper.$wrapperEl.children((`.${swiper.params.slideClass}[data-swiper-slide-index="${index}"]`))
         : swiper.slides.eq(index);
 
-      var $images = $slideEl.find(("." + (params.elementClass) + ":not(." + (params.loadedClass) + "):not(." + (params.loadingClass) + ")"));
+      let $images = $slideEl.find((`.${params.elementClass}:not(.${params.loadedClass}):not(.${params.loadingClass})`));
       if ($slideEl.hasClass(params.elementClass) && !$slideEl.hasClass(params.loadedClass) && !$slideEl.hasClass(params.loadingClass)) {
         $images = $images.add($slideEl[0]);
       }
       if ($images.length === 0) { return; }
 
-      $images.each(function (imageIndex, imageEl) {
-        var $imageEl = $(imageEl);
+      $images.each((imageIndex, imageEl) => {
+        const $imageEl = $(imageEl);
         $imageEl.addClass(params.loadingClass);
 
-        var background = $imageEl.attr('data-background');
-        var src = $imageEl.attr('data-src');
-        var srcset = $imageEl.attr('data-srcset');
-        var sizes = $imageEl.attr('data-sizes');
+        const background = $imageEl.attr('data-background');
+        const src = $imageEl.attr('data-src');
+        const srcset = $imageEl.attr('data-srcset');
+        const sizes = $imageEl.attr('data-sizes');
 
-        swiper.loadImage($imageEl[0], (src || background), srcset, sizes, false, function () {
+        swiper.loadImage($imageEl[0], (src || background), srcset, sizes, false, () => {
           if (typeof swiper === 'undefined' || swiper === null || !swiper || (swiper && !swiper.params) || swiper.destroyed) { return; }
           if (background) {
-            $imageEl.css('background-image', ("url(\"" + background + "\")"));
+            $imageEl.css('background-image', (`url("${background}")`));
             $imageEl.removeAttr('data-background');
           } else {
             if (srcset) {
@@ -6991,14 +6981,14 @@
           }
 
           $imageEl.addClass(params.loadedClass).removeClass(params.loadingClass);
-          $slideEl.find(("." + (params.preloaderClass))).remove();
+          $slideEl.find((`.${params.preloaderClass}`)).remove();
           if (swiper.params.loop && loadInDuplicate) {
-            var slideOriginalIndex = $slideEl.attr('data-swiper-slide-index');
+            const slideOriginalIndex = $slideEl.attr('data-swiper-slide-index');
             if ($slideEl.hasClass(swiper.params.slideDuplicateClass)) {
-              var originalSlide = swiper.$wrapperEl.children(("[data-swiper-slide-index=\"" + slideOriginalIndex + "\"]:not(." + (swiper.params.slideDuplicateClass) + ")"));
+              const originalSlide = swiper.$wrapperEl.children((`[data-swiper-slide-index="${slideOriginalIndex}"]:not(.${swiper.params.slideDuplicateClass})`));
               swiper.lazy.loadInSlide(originalSlide.index(), false);
             } else {
-              var duplicatedSlide = swiper.$wrapperEl.children(("." + (swiper.params.slideDuplicateClass) + "[data-swiper-slide-index=\"" + slideOriginalIndex + "\"]"));
+              const duplicatedSlide = swiper.$wrapperEl.children((`.${swiper.params.slideDuplicateClass}[data-swiper-slide-index="${slideOriginalIndex}"]`));
               swiper.lazy.loadInSlide(duplicatedSlide.index(), false);
             }
           }
@@ -7012,22 +7002,22 @@
       });
     },
     load: function load() {
-      var swiper = this;
-      var $wrapperEl = swiper.$wrapperEl;
-      var swiperParams = swiper.params;
-      var slides = swiper.slides;
-      var activeIndex = swiper.activeIndex;
-      var isVirtual = swiper.virtual && swiperParams.virtual.enabled;
-      var params = swiperParams.lazy;
+      const swiper = this;
+      const { $wrapperEl } = swiper;
+      const swiperParams = swiper.params;
+      const { slides } = swiper;
+      const { activeIndex } = swiper;
+      const isVirtual = swiper.virtual && swiperParams.virtual.enabled;
+      const params = swiperParams.lazy;
 
-      var slidesPerView = swiperParams.slidesPerView;
+      let { slidesPerView } = swiperParams;
       if (slidesPerView === 'auto') {
         slidesPerView = 0;
       }
 
       function slideExist(index) {
         if (isVirtual) {
-          if ($wrapperEl.children(("." + (swiperParams.slideClass) + "[data-swiper-slide-index=\"" + index + "\"]")).length) {
+          if ($wrapperEl.children((`.${swiperParams.slideClass}[data-swiper-slide-index="${index}"]`)).length) {
             return true;
           }
         } else if (slides[index]) { return true; }
@@ -7042,12 +7032,12 @@
 
       if (!swiper.lazy.initialImageLoaded) { swiper.lazy.initialImageLoaded = true; }
       if (swiper.params.watchSlidesVisibility) {
-        $wrapperEl.children(("." + (swiperParams.slideVisibleClass))).each(function (elIndex, slideEl) {
-          var index = isVirtual ? $(slideEl).attr('data-swiper-slide-index') : $(slideEl).index();
+        $wrapperEl.children((`.${swiperParams.slideVisibleClass}`)).each((elIndex, slideEl) => {
+          const index = isVirtual ? $(slideEl).attr('data-swiper-slide-index') : $(slideEl).index();
           swiper.lazy.loadInSlide(index);
         });
       } else if (slidesPerView > 1) {
-        for (var i = activeIndex; i < activeIndex + slidesPerView; i += 1) {
+        for (let i = activeIndex; i < activeIndex + slidesPerView; i += 1) {
           if (slideExist(i)) { swiper.lazy.loadInSlide(i); }
         }
       } else {
@@ -7055,30 +7045,30 @@
       }
       if (params.loadPrevNext) {
         if (slidesPerView > 1 || (params.loadPrevNextAmount && params.loadPrevNextAmount > 1)) {
-          var amount = params.loadPrevNextAmount;
-          var spv = slidesPerView;
-          var maxIndex = Math.min(activeIndex + spv + Math.max(amount, spv), slides.length);
-          var minIndex = Math.max(activeIndex - Math.max(spv, amount), 0);
+          const amount = params.loadPrevNextAmount;
+          const spv = slidesPerView;
+          const maxIndex = Math.min(activeIndex + spv + Math.max(amount, spv), slides.length);
+          const minIndex = Math.max(activeIndex - Math.max(spv, amount), 0);
           // Next Slides
-          for (var i$1 = activeIndex + slidesPerView; i$1 < maxIndex; i$1 += 1) {
+          for (let i$1 = activeIndex + slidesPerView; i$1 < maxIndex; i$1 += 1) {
             if (slideExist(i$1)) { swiper.lazy.loadInSlide(i$1); }
           }
           // Prev Slides
-          for (var i$2 = minIndex; i$2 < activeIndex; i$2 += 1) {
+          for (let i$2 = minIndex; i$2 < activeIndex; i$2 += 1) {
             if (slideExist(i$2)) { swiper.lazy.loadInSlide(i$2); }
           }
         } else {
-          var nextSlide = $wrapperEl.children(("." + (swiperParams.slideNextClass)));
+          const nextSlide = $wrapperEl.children((`.${swiperParams.slideNextClass}`));
           if (nextSlide.length > 0) { swiper.lazy.loadInSlide(slideIndex(nextSlide)); }
 
-          var prevSlide = $wrapperEl.children(("." + (swiperParams.slidePrevClass)));
+          const prevSlide = $wrapperEl.children((`.${swiperParams.slidePrevClass}`));
           if (prevSlide.length > 0) { swiper.lazy.loadInSlide(slideIndex(prevSlide)); }
         }
       }
     },
   };
 
-  var Lazy$1 = {
+  const Lazy$1 = {
     name: 'lazy',
     params: {
       lazy: {
@@ -7094,7 +7084,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         lazy: {
           initialImageLoaded: false,
@@ -7105,37 +7095,37 @@
     },
     on: {
       beforeInit: function beforeInit() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.lazy.enabled && swiper.params.preloadImages) {
           swiper.params.preloadImages = false;
         }
       },
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.lazy.enabled && !swiper.params.loop && swiper.params.initialSlide === 0) {
           swiper.lazy.load();
         }
       },
       scroll: function scroll() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.freeMode && !swiper.params.freeModeSticky) {
           swiper.lazy.load();
         }
       },
       resize: function resize() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.lazy.enabled) {
           swiper.lazy.load();
         }
       },
       scrollbarDragMove: function scrollbarDragMove() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.lazy.enabled) {
           swiper.lazy.load();
         }
       },
       transitionStart: function transitionStart() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.lazy.enabled) {
           if (swiper.params.lazy.loadOnTransitionStart || (!swiper.params.lazy.loadOnTransitionStart && !swiper.lazy.initialImageLoaded)) {
             swiper.lazy.load();
@@ -7143,13 +7133,13 @@
         }
       },
       transitionEnd: function transitionEnd() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.lazy.enabled && !swiper.params.lazy.loadOnTransitionStart) {
           swiper.lazy.load();
         }
       },
       slideChange: function slideChange() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.lazy.enabled && swiper.params.cssMode) {
           swiper.lazy.load();
         }
@@ -7161,10 +7151,10 @@
 
   var Controller = {
     LinearSpline: function LinearSpline(x, y) {
-      var binarySearch = (function search() {
-        var maxIndex;
-        var minIndex;
-        var guess;
+      const binarySearch = (function search() {
+        let maxIndex;
+        let minIndex;
+        let guess;
         return function (array, val) {
           minIndex = -1;
           maxIndex = array.length;
@@ -7185,8 +7175,8 @@
       // Given an x value (x2), return the expected y2 value:
       // (x1,y1) is the known point before given value,
       // (x3,y3) is the known point after given value.
-      var i1;
-      var i3;
+      let i1;
+      let i3;
 
       this.interpolate = function interpolate(x2) {
         if (!x2) { return 0; }
@@ -7203,7 +7193,7 @@
     },
     // xxx: for now i will just save one spline function to to
     getInterpolateFunction: function getInterpolateFunction(c) {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.controller.spline) {
         swiper.controller.spline = swiper.params.loop
           ? new Controller.LinearSpline(swiper.slidesGrid, c.slidesGrid)
@@ -7211,16 +7201,16 @@
       }
     },
     setTranslate: function setTranslate(setTranslate$1, byController) {
-      var swiper = this;
-      var controlled = swiper.controller.control;
-      var multiplier;
-      var controlledTranslate;
+      const swiper = this;
+      const controlled = swiper.controller.control;
+      let multiplier;
+      let controlledTranslate;
       function setControlledTranslate(c) {
         // this will create an Interpolate function based on the snapGrids
         // x is the Grid of the scrolled scroller and y will be the controlled scroller
         // it makes sense to create this only once and recall it for the interpolation
         // the function does a lot of value caching for performance
-        var translate = swiper.rtlTranslate ? -swiper.translate : swiper.translate;
+        const translate = swiper.rtlTranslate ? -swiper.translate : swiper.translate;
         if (swiper.params.controller.by === 'slide') {
           swiper.controller.getInterpolateFunction(c);
           // i am not sure why the values have to be multiplicated this way, tried to invert the snapGrid
@@ -7242,7 +7232,7 @@
         c.updateSlidesClasses();
       }
       if (Array.isArray(controlled)) {
-        for (var i = 0; i < controlled.length; i += 1) {
+        for (let i = 0; i < controlled.length; i += 1) {
           if (controlled[i] !== byController && controlled[i] instanceof Swiper) {
             setControlledTranslate(controlled[i]);
           }
@@ -7252,19 +7242,19 @@
       }
     },
     setTransition: function setTransition(duration, byController) {
-      var swiper = this;
-      var controlled = swiper.controller.control;
-      var i;
+      const swiper = this;
+      const controlled = swiper.controller.control;
+      let i;
       function setControlledTransition(c) {
         c.setTransition(duration, swiper);
         if (duration !== 0) {
           c.transitionStart();
           if (c.params.autoHeight) {
-            Utils.nextTick(function () {
+            Utils.nextTick(() => {
               c.updateAutoHeight();
             });
           }
-          c.$wrapperEl.transitionEnd(function () {
+          c.$wrapperEl.transitionEnd(() => {
             if (!controlled) { return; }
             if (c.params.loop && swiper.params.controller.by === 'slide') {
               c.loopFix();
@@ -7284,7 +7274,7 @@
       }
     },
   };
-  var Controller$1 = {
+  const Controller$1 = {
     name: 'controller',
     params: {
       controller: {
@@ -7294,7 +7284,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         controller: {
           control: swiper.params.controller.control,
@@ -7306,7 +7296,7 @@
     },
     on: {
       update: function update() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.controller.control) { return; }
         if (swiper.controller.spline) {
           swiper.controller.spline = undefined;
@@ -7314,7 +7304,7 @@
         }
       },
       resize: function resize() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.controller.control) { return; }
         if (swiper.controller.spline) {
           swiper.controller.spline = undefined;
@@ -7322,7 +7312,7 @@
         }
       },
       observerUpdate: function observerUpdate() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.controller.control) { return; }
         if (swiper.controller.spline) {
           swiper.controller.spline = undefined;
@@ -7330,19 +7320,19 @@
         }
       },
       setTranslate: function setTranslate(translate, byController) {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.controller.control) { return; }
         swiper.controller.setTranslate(translate, byController);
       },
       setTransition: function setTransition(duration, byController) {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.controller.control) { return; }
         swiper.controller.setTransition(duration, byController);
       },
     },
   };
 
-  var a11y = {
+  const a11y = {
     makeElFocusable: function makeElFocusable($el) {
       $el.attr('tabIndex', '0');
       return $el;
@@ -7364,10 +7354,10 @@
       return $el;
     },
     onEnterKey: function onEnterKey(e) {
-      var swiper = this;
-      var params = swiper.params.a11y;
+      const swiper = this;
+      const params = swiper.params.a11y;
       if (e.keyCode !== 13) { return; }
-      var $targetEl = $(e.target);
+      const $targetEl = $(e.target);
       if (swiper.navigation && swiper.navigation.$nextEl && $targetEl.is(swiper.navigation.$nextEl)) {
         if (!(swiper.isEnd && !swiper.params.loop)) {
           swiper.slideNext();
@@ -7388,24 +7378,24 @@
           swiper.a11y.notify(params.prevSlideMessage);
         }
       }
-      if (swiper.pagination && $targetEl.is(("." + (swiper.params.pagination.bulletClass)))) {
+      if (swiper.pagination && $targetEl.is((`.${swiper.params.pagination.bulletClass}`))) {
         $targetEl[0].click();
       }
     },
     notify: function notify(message) {
-      var swiper = this;
-      var notification = swiper.a11y.liveRegion;
+      const swiper = this;
+      const notification = swiper.a11y.liveRegion;
       if (notification.length === 0) { return; }
       notification.html('');
       notification.html(message);
     },
     updateNavigation: function updateNavigation() {
-      var swiper = this;
+      const swiper = this;
 
       if (swiper.params.loop || !swiper.navigation) { return; }
-      var ref = swiper.navigation;
-      var $nextEl = ref.$nextEl;
-      var $prevEl = ref.$prevEl;
+      const ref = swiper.navigation;
+      const { $nextEl } = ref;
+      const { $prevEl } = ref;
 
       if ($prevEl && $prevEl.length > 0) {
         if (swiper.isBeginning) {
@@ -7423,11 +7413,11 @@
       }
     },
     updatePagination: function updatePagination() {
-      var swiper = this;
-      var params = swiper.params.a11y;
+      const swiper = this;
+      const params = swiper.params.a11y;
       if (swiper.pagination && swiper.params.pagination.clickable && swiper.pagination.bullets && swiper.pagination.bullets.length) {
-        swiper.pagination.bullets.each(function (bulletIndex, bulletEl) {
-          var $bulletEl = $(bulletEl);
+        swiper.pagination.bullets.each((bulletIndex, bulletEl) => {
+          const $bulletEl = $(bulletEl);
           swiper.a11y.makeElFocusable($bulletEl);
           swiper.a11y.addElRole($bulletEl, 'button');
           swiper.a11y.addElLabel($bulletEl, params.paginationBulletMessage.replace(/\{\{index\}\}/, $bulletEl.index() + 1));
@@ -7435,14 +7425,14 @@
       }
     },
     init: function init() {
-      var swiper = this;
+      const swiper = this;
 
       swiper.$el.append(swiper.a11y.liveRegion);
 
       // Navigation
-      var params = swiper.params.a11y;
-      var $nextEl;
-      var $prevEl;
+      const params = swiper.params.a11y;
+      let $nextEl;
+      let $prevEl;
       if (swiper.navigation && swiper.navigation.$nextEl) {
         $nextEl = swiper.navigation.$nextEl;
       }
@@ -7464,15 +7454,15 @@
 
       // Pagination
       if (swiper.pagination && swiper.params.pagination.clickable && swiper.pagination.bullets && swiper.pagination.bullets.length) {
-        swiper.pagination.$el.on('keydown', ("." + (swiper.params.pagination.bulletClass)), swiper.a11y.onEnterKey);
+        swiper.pagination.$el.on('keydown', (`.${swiper.params.pagination.bulletClass}`), swiper.a11y.onEnterKey);
       }
     },
     destroy: function destroy() {
-      var swiper = this;
+      const swiper = this;
       if (swiper.a11y.liveRegion && swiper.a11y.liveRegion.length > 0) { swiper.a11y.liveRegion.remove(); }
 
-      var $nextEl;
-      var $prevEl;
+      let $nextEl;
+      let $prevEl;
       if (swiper.navigation && swiper.navigation.$nextEl) {
         $nextEl = swiper.navigation.$nextEl;
       }
@@ -7488,11 +7478,11 @@
 
       // Pagination
       if (swiper.pagination && swiper.params.pagination.clickable && swiper.pagination.bullets && swiper.pagination.bullets.length) {
-        swiper.pagination.$el.off('keydown', ("." + (swiper.params.pagination.bulletClass)), swiper.a11y.onEnterKey);
+        swiper.pagination.$el.off('keydown', (`.${swiper.params.pagination.bulletClass}`), swiper.a11y.onEnterKey);
       }
     },
   };
-  var A11y = {
+  const A11y = {
     name: 'a11y',
     params: {
       a11y: {
@@ -7506,40 +7496,40 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         a11y: {
-          liveRegion: $(("<span class=\"" + (swiper.params.a11y.notificationClass) + "\" aria-live=\"assertive\" aria-atomic=\"true\"></span>")),
+          liveRegion: $((`<span class="${swiper.params.a11y.notificationClass}" aria-live="assertive" aria-atomic="true"></span>`)),
         },
       });
-      Object.keys(a11y).forEach(function (methodName) {
+      Object.keys(a11y).forEach((methodName) => {
         swiper.a11y[methodName] = a11y[methodName].bind(swiper);
       });
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.a11y.enabled) { return; }
         swiper.a11y.init();
         swiper.a11y.updateNavigation();
       },
       toEdge: function toEdge() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.a11y.enabled) { return; }
         swiper.a11y.updateNavigation();
       },
       fromEdge: function fromEdge() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.a11y.enabled) { return; }
         swiper.a11y.updateNavigation();
       },
       paginationUpdate: function paginationUpdate() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.a11y.enabled) { return; }
         swiper.a11y.updatePagination();
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.params.a11y.enabled) { return; }
         swiper.a11y.destroy();
       },
@@ -7548,14 +7538,14 @@
 
   var History = {
     init: function init() {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.params.history) { return; }
       if (!win.history || !win.history.pushState) {
         swiper.params.history.enabled = false;
         swiper.params.hashNavigation.enabled = true;
         return;
       }
-      var history = swiper.history;
+      const { history } = swiper;
       history.initialized = true;
       history.paths = History.getPathValues();
       if (!history.paths.key && !history.paths.value) { return; }
@@ -7565,39 +7555,39 @@
       }
     },
     destroy: function destroy() {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.params.history.replaceState) {
         win.removeEventListener('popstate', swiper.history.setHistoryPopState);
       }
     },
     setHistoryPopState: function setHistoryPopState() {
-      var swiper = this;
+      const swiper = this;
       swiper.history.paths = History.getPathValues();
       swiper.history.scrollToSlide(swiper.params.speed, swiper.history.paths.value, false);
     },
     getPathValues: function getPathValues() {
-      var pathArray = win.location.pathname.slice(1).split('/').filter(function (part) { return part !== ''; });
-      var total = pathArray.length;
-      var key = pathArray[total - 2];
-      var value = pathArray[total - 1];
-      return { key: key, value: value };
+      const pathArray = win.location.pathname.slice(1).split('/').filter((part) => part !== '');
+      const total = pathArray.length;
+      const key = pathArray[total - 2];
+      const value = pathArray[total - 1];
+      return { key, value };
     },
     setHistory: function setHistory(key, index) {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.history.initialized || !swiper.params.history.enabled) { return; }
-      var slide = swiper.slides.eq(index);
-      var value = History.slugify(slide.attr('data-history'));
+      const slide = swiper.slides.eq(index);
+      let value = History.slugify(slide.attr('data-history'));
       if (!win.location.pathname.includes(key)) {
-        value = key + "/" + value;
+        value = `${key}/${value}`;
       }
-      var currentState = win.history.state;
+      const currentState = win.history.state;
       if (currentState && currentState.value === value) {
         return;
       }
       if (swiper.params.history.replaceState) {
-        win.history.replaceState({ value: value }, null, value);
+        win.history.replaceState({ value }, null, value);
       } else {
-        win.history.pushState({ value: value }, null, value);
+        win.history.pushState({ value }, null, value);
       }
     },
     slugify: function slugify(text) {
@@ -7609,13 +7599,13 @@
         .replace(/-+$/, '');
     },
     scrollToSlide: function scrollToSlide(speed, value, runCallbacks) {
-      var swiper = this;
+      const swiper = this;
       if (value) {
-        for (var i = 0, length = swiper.slides.length; i < length; i += 1) {
-          var slide = swiper.slides.eq(i);
-          var slideHistory = History.slugify(slide.attr('data-history'));
+        for (let i = 0, { length } = swiper.slides; i < length; i += 1) {
+          const slide = swiper.slides.eq(i);
+          const slideHistory = History.slugify(slide.attr('data-history'));
           if (slideHistory === value && !slide.hasClass(swiper.params.slideDuplicateClass)) {
-            var index = slide.index();
+            const index = slide.index();
             swiper.slideTo(index, speed, runCallbacks);
           }
         }
@@ -7625,7 +7615,7 @@
     },
   };
 
-  var History$1 = {
+  const History$1 = {
     name: 'history',
     params: {
       history: {
@@ -7635,7 +7625,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         history: {
           init: History.init.bind(swiper),
@@ -7648,25 +7638,25 @@
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.history.enabled) {
           swiper.history.init();
         }
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.history.enabled) {
           swiper.history.destroy();
         }
       },
       transitionEnd: function transitionEnd() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.history.initialized) {
           swiper.history.setHistory(swiper.params.history.key, swiper.activeIndex);
         }
       },
       slideChange: function slideChange() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.history.initialized && swiper.params.cssMode) {
           swiper.history.setHistory(swiper.params.history.key, swiper.activeIndex);
         }
@@ -7674,40 +7664,40 @@
     },
   };
 
-  var HashNavigation = {
+  const HashNavigation = {
     onHashCange: function onHashCange() {
-      var swiper = this;
-      var newHash = doc.location.hash.replace('#', '');
-      var activeSlideHash = swiper.slides.eq(swiper.activeIndex).attr('data-hash');
+      const swiper = this;
+      const newHash = doc.location.hash.replace('#', '');
+      const activeSlideHash = swiper.slides.eq(swiper.activeIndex).attr('data-hash');
       if (newHash !== activeSlideHash) {
-        var newIndex = swiper.$wrapperEl.children(("." + (swiper.params.slideClass) + "[data-hash=\"" + newHash + "\"]")).index();
+        const newIndex = swiper.$wrapperEl.children((`.${swiper.params.slideClass}[data-hash="${newHash}"]`)).index();
         if (typeof newIndex === 'undefined') { return; }
         swiper.slideTo(newIndex);
       }
     },
     setHash: function setHash() {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.hashNavigation.initialized || !swiper.params.hashNavigation.enabled) { return; }
       if (swiper.params.hashNavigation.replaceState && win.history && win.history.replaceState) {
-        win.history.replaceState(null, null, (("#" + (swiper.slides.eq(swiper.activeIndex).attr('data-hash'))) || ''));
+        win.history.replaceState(null, null, ((`#${swiper.slides.eq(swiper.activeIndex).attr('data-hash')}`) || ''));
       } else {
-        var slide = swiper.slides.eq(swiper.activeIndex);
-        var hash = slide.attr('data-hash') || slide.attr('data-history');
+        const slide = swiper.slides.eq(swiper.activeIndex);
+        const hash = slide.attr('data-hash') || slide.attr('data-history');
         doc.location.hash = hash || '';
       }
     },
     init: function init() {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.params.hashNavigation.enabled || (swiper.params.history && swiper.params.history.enabled)) { return; }
       swiper.hashNavigation.initialized = true;
-      var hash = doc.location.hash.replace('#', '');
+      const hash = doc.location.hash.replace('#', '');
       if (hash) {
-        var speed = 0;
-        for (var i = 0, length = swiper.slides.length; i < length; i += 1) {
-          var slide = swiper.slides.eq(i);
-          var slideHash = slide.attr('data-hash') || slide.attr('data-history');
+        const speed = 0;
+        for (let i = 0, { length } = swiper.slides; i < length; i += 1) {
+          const slide = swiper.slides.eq(i);
+          const slideHash = slide.attr('data-hash') || slide.attr('data-history');
           if (slideHash === hash && !slide.hasClass(swiper.params.slideDuplicateClass)) {
-            var index = slide.index();
+            const index = slide.index();
             swiper.slideTo(index, speed, swiper.params.runCallbacksOnInit, true);
           }
         }
@@ -7717,13 +7707,13 @@
       }
     },
     destroy: function destroy() {
-      var swiper = this;
+      const swiper = this;
       if (swiper.params.hashNavigation.watchState) {
         $(win).off('hashchange', swiper.hashNavigation.onHashCange);
       }
     },
   };
-  var HashNavigation$1 = {
+  const HashNavigation$1 = {
     name: 'hash-navigation',
     params: {
       hashNavigation: {
@@ -7733,7 +7723,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         hashNavigation: {
           initialized: false,
@@ -7746,25 +7736,25 @@
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.hashNavigation.enabled) {
           swiper.hashNavigation.init();
         }
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.hashNavigation.enabled) {
           swiper.hashNavigation.destroy();
         }
       },
       transitionEnd: function transitionEnd() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.hashNavigation.initialized) {
           swiper.hashNavigation.setHash();
         }
       },
       slideChange: function slideChange() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.hashNavigation.initialized && swiper.params.cssMode) {
           swiper.hashNavigation.setHash();
         }
@@ -7774,16 +7764,16 @@
 
   /* eslint no-underscore-dangle: "off" */
 
-  var Autoplay = {
+  const Autoplay = {
     run: function run() {
-      var swiper = this;
-      var $activeSlideEl = swiper.slides.eq(swiper.activeIndex);
-      var delay = swiper.params.autoplay.delay;
+      const swiper = this;
+      const $activeSlideEl = swiper.slides.eq(swiper.activeIndex);
+      let { delay } = swiper.params.autoplay;
       if ($activeSlideEl.attr('data-swiper-autoplay')) {
         delay = $activeSlideEl.attr('data-swiper-autoplay') || swiper.params.autoplay.delay;
       }
       clearTimeout(swiper.autoplay.timeout);
-      swiper.autoplay.timeout = Utils.nextTick(function () {
+      swiper.autoplay.timeout = Utils.nextTick(() => {
         if (swiper.params.autoplay.reverseDirection) {
           if (swiper.params.loop) {
             swiper.loopFix();
@@ -7815,7 +7805,7 @@
       }, delay);
     },
     start: function start() {
-      var swiper = this;
+      const swiper = this;
       if (typeof swiper.autoplay.timeout !== 'undefined') { return false; }
       if (swiper.autoplay.running) { return false; }
       swiper.autoplay.running = true;
@@ -7824,7 +7814,7 @@
       return true;
     },
     stop: function stop() {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.autoplay.running) { return false; }
       if (typeof swiper.autoplay.timeout === 'undefined') { return false; }
 
@@ -7837,7 +7827,7 @@
       return true;
     },
     pause: function pause(speed) {
-      var swiper = this;
+      const swiper = this;
       if (!swiper.autoplay.running) { return; }
       if (swiper.autoplay.paused) { return; }
       if (swiper.autoplay.timeout) { clearTimeout(swiper.autoplay.timeout); }
@@ -7852,7 +7842,7 @@
     },
   };
 
-  var Autoplay$1 = {
+  const Autoplay$1 = {
     name: 'autoplay',
     params: {
       autoplay: {
@@ -7865,7 +7855,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         autoplay: {
           running: false,
@@ -7900,14 +7890,14 @@
     },
     on: {
       init: function init() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.autoplay.enabled) {
           swiper.autoplay.start();
           document.addEventListener('visibilitychange', swiper.autoplay.onVisibilityChange);
         }
       },
       beforeTransitionStart: function beforeTransitionStart(speed, internal) {
-        var swiper = this;
+        const swiper = this;
         if (swiper.autoplay.running) {
           if (internal || !swiper.params.autoplay.disableOnInteraction) {
             swiper.autoplay.pause(speed);
@@ -7917,7 +7907,7 @@
         }
       },
       sliderFirstMove: function sliderFirstMove() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.autoplay.running) {
           if (swiper.params.autoplay.disableOnInteraction) {
             swiper.autoplay.stop();
@@ -7927,13 +7917,13 @@
         }
       },
       touchEnd: function touchEnd() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.cssMode && swiper.autoplay.paused && !swiper.params.autoplay.disableOnInteraction) {
           swiper.autoplay.run();
         }
       },
       destroy: function destroy() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.autoplay.running) {
           swiper.autoplay.stop();
         }
@@ -7942,44 +7932,44 @@
     },
   };
 
-  var Fade = {
+  const Fade = {
     setTranslate: function setTranslate() {
-      var swiper = this;
-      var slides = swiper.slides;
-      for (var i = 0; i < slides.length; i += 1) {
-        var $slideEl = swiper.slides.eq(i);
-        var offset = $slideEl[0].swiperSlideOffset;
-        var tx = -offset;
+      const swiper = this;
+      const { slides } = swiper;
+      for (let i = 0; i < slides.length; i += 1) {
+        const $slideEl = swiper.slides.eq(i);
+        const offset = $slideEl[0].swiperSlideOffset;
+        let tx = -offset;
         if (!swiper.params.virtualTranslate) { tx -= swiper.translate; }
-        var ty = 0;
+        let ty = 0;
         if (!swiper.isHorizontal()) {
           ty = tx;
           tx = 0;
         }
-        var slideOpacity = swiper.params.fadeEffect.crossFade
+        const slideOpacity = swiper.params.fadeEffect.crossFade
           ? Math.max(1 - Math.abs($slideEl[0].progress), 0)
           : 1 + Math.min(Math.max($slideEl[0].progress, -1), 0);
         $slideEl
           .css({
             opacity: slideOpacity,
           })
-          .transform(("translate3d(" + tx + "px, " + ty + "px, 0px)"));
+          .transform((`translate3d(${tx}px, ${ty}px, 0px)`));
       }
     },
     setTransition: function setTransition(duration) {
-      var swiper = this;
-      var slides = swiper.slides;
-      var $wrapperEl = swiper.$wrapperEl;
+      const swiper = this;
+      const { slides } = swiper;
+      const { $wrapperEl } = swiper;
       slides.transition(duration);
       if (swiper.params.virtualTranslate && duration !== 0) {
-        var eventTriggered = false;
-        slides.transitionEnd(function () {
+        let eventTriggered = false;
+        slides.transitionEnd(() => {
           if (eventTriggered) { return; }
           if (!swiper || swiper.destroyed) { return; }
           eventTriggered = true;
           swiper.animating = false;
-          var triggerEvents = ['webkitTransitionEnd', 'transitionend'];
-          for (var i = 0; i < triggerEvents.length; i += 1) {
+          const triggerEvents = ['webkitTransitionEnd', 'transitionend'];
+          for (let i = 0; i < triggerEvents.length; i += 1) {
             $wrapperEl.trigger(triggerEvents[i]);
           }
         });
@@ -7987,7 +7977,7 @@
     },
   };
 
-  var EffectFade = {
+  const EffectFade = {
     name: 'effect-fade',
     params: {
       fadeEffect: {
@@ -7995,7 +7985,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         fadeEffect: {
           setTranslate: Fade.setTranslate.bind(swiper),
@@ -8005,10 +7995,10 @@
     },
     on: {
       beforeInit: function beforeInit() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'fade') { return; }
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "fade"));
-        var overwriteParams = {
+        swiper.classNames.push((`${swiper.params.containerModifierClass}fade`));
+        const overwriteParams = {
           slidesPerView: 1,
           slidesPerColumn: 1,
           slidesPerGroup: 1,
@@ -8020,33 +8010,33 @@
         Utils.extend(swiper.originalParams, overwriteParams);
       },
       setTranslate: function setTranslate() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'fade') { return; }
         swiper.fadeEffect.setTranslate();
       },
       setTransition: function setTransition(duration) {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'fade') { return; }
         swiper.fadeEffect.setTransition(duration);
       },
     },
   };
 
-  var Cube = {
+  const Cube = {
     setTranslate: function setTranslate() {
-      var swiper = this;
-      var $el = swiper.$el;
-      var $wrapperEl = swiper.$wrapperEl;
-      var slides = swiper.slides;
-      var swiperWidth = swiper.width;
-      var swiperHeight = swiper.height;
-      var rtl = swiper.rtlTranslate;
-      var swiperSize = swiper.size;
-      var params = swiper.params.cubeEffect;
-      var isHorizontal = swiper.isHorizontal();
-      var isVirtual = swiper.virtual && swiper.params.virtual.enabled;
-      var wrapperRotate = 0;
-      var $cubeShadowEl;
+      const swiper = this;
+      const { $el } = swiper;
+      const { $wrapperEl } = swiper;
+      const { slides } = swiper;
+      const swiperWidth = swiper.width;
+      const swiperHeight = swiper.height;
+      const rtl = swiper.rtlTranslate;
+      const swiperSize = swiper.size;
+      const params = swiper.params.cubeEffect;
+      const isHorizontal = swiper.isHorizontal();
+      const isVirtual = swiper.virtual && swiper.params.virtual.enabled;
+      let wrapperRotate = 0;
+      let $cubeShadowEl;
       if (params.shadow) {
         if (isHorizontal) {
           $cubeShadowEl = $wrapperEl.find('.swiper-cube-shadow');
@@ -8054,7 +8044,7 @@
             $cubeShadowEl = $('<div class="swiper-cube-shadow"></div>');
             $wrapperEl.append($cubeShadowEl);
           }
-          $cubeShadowEl.css({ height: (swiperWidth + "px") });
+          $cubeShadowEl.css({ height: (`${swiperWidth}px`) });
         } else {
           $cubeShadowEl = $el.find('.swiper-cube-shadow');
           if ($cubeShadowEl.length === 0) {
@@ -8063,22 +8053,22 @@
           }
         }
       }
-      for (var i = 0; i < slides.length; i += 1) {
-        var $slideEl = slides.eq(i);
-        var slideIndex = i;
+      for (let i = 0; i < slides.length; i += 1) {
+        const $slideEl = slides.eq(i);
+        let slideIndex = i;
         if (isVirtual) {
           slideIndex = parseInt($slideEl.attr('data-swiper-slide-index'), 10);
         }
-        var slideAngle = slideIndex * 90;
-        var round = Math.floor(slideAngle / 360);
+        let slideAngle = slideIndex * 90;
+        let round = Math.floor(slideAngle / 360);
         if (rtl) {
           slideAngle = -slideAngle;
           round = Math.floor(-slideAngle / 360);
         }
-        var progress = Math.max(Math.min($slideEl[0].progress, 1), -1);
-        var tx = 0;
-        var ty = 0;
-        var tz = 0;
+        const progress = Math.max(Math.min($slideEl[0].progress, 1), -1);
+        let tx = 0;
+        let ty = 0;
+        let tz = 0;
         if (slideIndex % 4 === 0) {
           tx = -round * 4 * swiperSize;
           tz = 0;
@@ -8101,7 +8091,7 @@
           tx = 0;
         }
 
-        var transform = "rotateX(" + (isHorizontal ? 0 : -slideAngle) + "deg) rotateY(" + (isHorizontal ? slideAngle : 0) + "deg) translate3d(" + tx + "px, " + ty + "px, " + tz + "px)";
+        const transform = `rotateX(${isHorizontal ? 0 : -slideAngle}deg) rotateY(${isHorizontal ? slideAngle : 0}deg) translate3d(${tx}px, ${ty}px, ${tz}px)`;
         if (progress <= 1 && progress > -1) {
           wrapperRotate = (slideIndex * 90) + (progress * 90);
           if (rtl) { wrapperRotate = (-slideIndex * 90) - (progress * 90); }
@@ -8109,14 +8099,14 @@
         $slideEl.transform(transform);
         if (params.slideShadows) {
           // Set shadows
-          var shadowBefore = isHorizontal ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
-          var shadowAfter = isHorizontal ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
+          let shadowBefore = isHorizontal ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
+          let shadowAfter = isHorizontal ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
           if (shadowBefore.length === 0) {
-            shadowBefore = $(("<div class=\"swiper-slide-shadow-" + (isHorizontal ? 'left' : 'top') + "\"></div>"));
+            shadowBefore = $((`<div class="swiper-slide-shadow-${isHorizontal ? 'left' : 'top'}"></div>`));
             $slideEl.append(shadowBefore);
           }
           if (shadowAfter.length === 0) {
-            shadowAfter = $(("<div class=\"swiper-slide-shadow-" + (isHorizontal ? 'right' : 'bottom') + "\"></div>"));
+            shadowAfter = $((`<div class="swiper-slide-shadow-${isHorizontal ? 'right' : 'bottom'}"></div>`));
             $slideEl.append(shadowAfter);
           }
           if (shadowBefore.length) { shadowBefore[0].style.opacity = Math.max(-progress, 0); }
@@ -8124,35 +8114,35 @@
         }
       }
       $wrapperEl.css({
-        '-webkit-transform-origin': ("50% 50% -" + (swiperSize / 2) + "px"),
-        '-moz-transform-origin': ("50% 50% -" + (swiperSize / 2) + "px"),
-        '-ms-transform-origin': ("50% 50% -" + (swiperSize / 2) + "px"),
-        'transform-origin': ("50% 50% -" + (swiperSize / 2) + "px"),
+        '-webkit-transform-origin': (`50% 50% -${swiperSize / 2}px`),
+        '-moz-transform-origin': (`50% 50% -${swiperSize / 2}px`),
+        '-ms-transform-origin': (`50% 50% -${swiperSize / 2}px`),
+        'transform-origin': (`50% 50% -${swiperSize / 2}px`),
       });
 
       if (params.shadow) {
         if (isHorizontal) {
-          $cubeShadowEl.transform(("translate3d(0px, " + ((swiperWidth / 2) + params.shadowOffset) + "px, " + (-swiperWidth / 2) + "px) rotateX(90deg) rotateZ(0deg) scale(" + (params.shadowScale) + ")"));
+          $cubeShadowEl.transform((`translate3d(0px, ${(swiperWidth / 2) + params.shadowOffset}px, ${-swiperWidth / 2}px) rotateX(90deg) rotateZ(0deg) scale(${params.shadowScale})`));
         } else {
-          var shadowAngle = Math.abs(wrapperRotate) - (Math.floor(Math.abs(wrapperRotate) / 90) * 90);
-          var multiplier = 1.5 - (
+          const shadowAngle = Math.abs(wrapperRotate) - (Math.floor(Math.abs(wrapperRotate) / 90) * 90);
+          const multiplier = 1.5 - (
             (Math.sin((shadowAngle * 2 * Math.PI) / 360) / 2)
             + (Math.cos((shadowAngle * 2 * Math.PI) / 360) / 2)
           );
-          var scale1 = params.shadowScale;
-          var scale2 = params.shadowScale / multiplier;
-          var offset = params.shadowOffset;
-          $cubeShadowEl.transform(("scale3d(" + scale1 + ", 1, " + scale2 + ") translate3d(0px, " + ((swiperHeight / 2) + offset) + "px, " + (-swiperHeight / 2 / scale2) + "px) rotateX(-90deg)"));
+          const scale1 = params.shadowScale;
+          const scale2 = params.shadowScale / multiplier;
+          const offset = params.shadowOffset;
+          $cubeShadowEl.transform((`scale3d(${scale1}, 1, ${scale2}) translate3d(0px, ${(swiperHeight / 2) + offset}px, ${-swiperHeight / 2 / scale2}px) rotateX(-90deg)`));
         }
       }
-      var zFactor = (Browser.isSafari || Browser.isUiWebView) ? (-swiperSize / 2) : 0;
+      const zFactor = (Browser.isSafari || Browser.isUiWebView) ? (-swiperSize / 2) : 0;
       $wrapperEl
-        .transform(("translate3d(0px,0," + zFactor + "px) rotateX(" + (swiper.isHorizontal() ? 0 : wrapperRotate) + "deg) rotateY(" + (swiper.isHorizontal() ? -wrapperRotate : 0) + "deg)"));
+        .transform((`translate3d(0px,0,${zFactor}px) rotateX(${swiper.isHorizontal() ? 0 : wrapperRotate}deg) rotateY(${swiper.isHorizontal() ? -wrapperRotate : 0}deg)`));
     },
     setTransition: function setTransition(duration) {
-      var swiper = this;
-      var $el = swiper.$el;
-      var slides = swiper.slides;
+      const swiper = this;
+      const { $el } = swiper;
+      const { slides } = swiper;
       slides
         .transition(duration)
         .find('.swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left')
@@ -8163,7 +8153,7 @@
     },
   };
 
-  var EffectCube = {
+  const EffectCube = {
     name: 'effect-cube',
     params: {
       cubeEffect: {
@@ -8174,7 +8164,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         cubeEffect: {
           setTranslate: Cube.setTranslate.bind(swiper),
@@ -8184,11 +8174,11 @@
     },
     on: {
       beforeInit: function beforeInit() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'cube') { return; }
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "cube"));
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "3d"));
-        var overwriteParams = {
+        swiper.classNames.push((`${swiper.params.containerModifierClass}cube`));
+        swiper.classNames.push((`${swiper.params.containerModifierClass}3d`));
+        const overwriteParams = {
           slidesPerView: 1,
           slidesPerColumn: 1,
           slidesPerGroup: 1,
@@ -8202,35 +8192,35 @@
         Utils.extend(swiper.originalParams, overwriteParams);
       },
       setTranslate: function setTranslate() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'cube') { return; }
         swiper.cubeEffect.setTranslate();
       },
       setTransition: function setTransition(duration) {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'cube') { return; }
         swiper.cubeEffect.setTransition(duration);
       },
     },
   };
 
-  var Flip = {
+  const Flip = {
     setTranslate: function setTranslate() {
-      var swiper = this;
-      var slides = swiper.slides;
-      var rtl = swiper.rtlTranslate;
-      for (var i = 0; i < slides.length; i += 1) {
-        var $slideEl = slides.eq(i);
-        var progress = $slideEl[0].progress;
+      const swiper = this;
+      const { slides } = swiper;
+      const rtl = swiper.rtlTranslate;
+      for (let i = 0; i < slides.length; i += 1) {
+        const $slideEl = slides.eq(i);
+        let { progress } = $slideEl[0];
         if (swiper.params.flipEffect.limitRotation) {
           progress = Math.max(Math.min($slideEl[0].progress, 1), -1);
         }
-        var offset = $slideEl[0].swiperSlideOffset;
-        var rotate = -180 * progress;
-        var rotateY = rotate;
-        var rotateX = 0;
-        var tx = -offset;
-        var ty = 0;
+        const offset = $slideEl[0].swiperSlideOffset;
+        const rotate = -180 * progress;
+        let rotateY = rotate;
+        let rotateX = 0;
+        let tx = -offset;
+        let ty = 0;
         if (!swiper.isHorizontal()) {
           ty = tx;
           tx = 0;
@@ -8244,34 +8234,34 @@
 
         if (swiper.params.flipEffect.slideShadows) {
           // Set shadows
-          var shadowBefore = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
-          var shadowAfter = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
+          let shadowBefore = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
+          let shadowAfter = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
           if (shadowBefore.length === 0) {
-            shadowBefore = $(("<div class=\"swiper-slide-shadow-" + (swiper.isHorizontal() ? 'left' : 'top') + "\"></div>"));
+            shadowBefore = $((`<div class="swiper-slide-shadow-${swiper.isHorizontal() ? 'left' : 'top'}"></div>`));
             $slideEl.append(shadowBefore);
           }
           if (shadowAfter.length === 0) {
-            shadowAfter = $(("<div class=\"swiper-slide-shadow-" + (swiper.isHorizontal() ? 'right' : 'bottom') + "\"></div>"));
+            shadowAfter = $((`<div class="swiper-slide-shadow-${swiper.isHorizontal() ? 'right' : 'bottom'}"></div>`));
             $slideEl.append(shadowAfter);
           }
           if (shadowBefore.length) { shadowBefore[0].style.opacity = Math.max(-progress, 0); }
           if (shadowAfter.length) { shadowAfter[0].style.opacity = Math.max(progress, 0); }
         }
         $slideEl
-          .transform(("translate3d(" + tx + "px, " + ty + "px, 0px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)"));
+          .transform((`translate3d(${tx}px, ${ty}px, 0px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`));
       }
     },
     setTransition: function setTransition(duration) {
-      var swiper = this;
-      var slides = swiper.slides;
-      var activeIndex = swiper.activeIndex;
-      var $wrapperEl = swiper.$wrapperEl;
+      const swiper = this;
+      const { slides } = swiper;
+      const { activeIndex } = swiper;
+      const { $wrapperEl } = swiper;
       slides
         .transition(duration)
         .find('.swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left')
         .transition(duration);
       if (swiper.params.virtualTranslate && duration !== 0) {
-        var eventTriggered = false;
+        let eventTriggered = false;
         // eslint-disable-next-line
         slides.eq(activeIndex).transitionEnd(function onTransitionEnd() {
           if (eventTriggered) { return; }
@@ -8279,8 +8269,8 @@
           // if (!$(this).hasClass(swiper.params.slideActiveClass)) return;
           eventTriggered = true;
           swiper.animating = false;
-          var triggerEvents = ['webkitTransitionEnd', 'transitionend'];
-          for (var i = 0; i < triggerEvents.length; i += 1) {
+          const triggerEvents = ['webkitTransitionEnd', 'transitionend'];
+          for (let i = 0; i < triggerEvents.length; i += 1) {
             $wrapperEl.trigger(triggerEvents[i]);
           }
         });
@@ -8288,7 +8278,7 @@
     },
   };
 
-  var EffectFlip = {
+  const EffectFlip = {
     name: 'effect-flip',
     params: {
       flipEffect: {
@@ -8297,7 +8287,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         flipEffect: {
           setTranslate: Flip.setTranslate.bind(swiper),
@@ -8307,11 +8297,11 @@
     },
     on: {
       beforeInit: function beforeInit() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'flip') { return; }
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "flip"));
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "3d"));
-        var overwriteParams = {
+        swiper.classNames.push((`${swiper.params.containerModifierClass}flip`));
+        swiper.classNames.push((`${swiper.params.containerModifierClass}3d`));
+        const overwriteParams = {
           slidesPerView: 1,
           slidesPerColumn: 1,
           slidesPerGroup: 1,
@@ -8323,51 +8313,51 @@
         Utils.extend(swiper.originalParams, overwriteParams);
       },
       setTranslate: function setTranslate() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'flip') { return; }
         swiper.flipEffect.setTranslate();
       },
       setTransition: function setTransition(duration) {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'flip') { return; }
         swiper.flipEffect.setTransition(duration);
       },
     },
   };
 
-  var Coverflow = {
+  const Coverflow = {
     setTranslate: function setTranslate() {
-      var swiper = this;
-      var swiperWidth = swiper.width;
-      var swiperHeight = swiper.height;
-      var slides = swiper.slides;
-      var $wrapperEl = swiper.$wrapperEl;
-      var slidesSizesGrid = swiper.slidesSizesGrid;
-      var params = swiper.params.coverflowEffect;
-      var isHorizontal = swiper.isHorizontal();
-      var transform = swiper.translate;
-      var center = isHorizontal ? -transform + (swiperWidth / 2) : -transform + (swiperHeight / 2);
-      var rotate = isHorizontal ? params.rotate : -params.rotate;
-      var translate = params.depth;
+      const swiper = this;
+      const swiperWidth = swiper.width;
+      const swiperHeight = swiper.height;
+      const { slides } = swiper;
+      const { $wrapperEl } = swiper;
+      const { slidesSizesGrid } = swiper;
+      const params = swiper.params.coverflowEffect;
+      const isHorizontal = swiper.isHorizontal();
+      const transform = swiper.translate;
+      const center = isHorizontal ? -transform + (swiperWidth / 2) : -transform + (swiperHeight / 2);
+      const rotate = isHorizontal ? params.rotate : -params.rotate;
+      const translate = params.depth;
       // Each slide offset from center
-      for (var i = 0, length = slides.length; i < length; i += 1) {
-        var $slideEl = slides.eq(i);
-        var slideSize = slidesSizesGrid[i];
-        var slideOffset = $slideEl[0].swiperSlideOffset;
-        var offsetMultiplier = ((center - slideOffset - (slideSize / 2)) / slideSize) * params.modifier;
+      for (let i = 0, { length } = slides; i < length; i += 1) {
+        const $slideEl = slides.eq(i);
+        const slideSize = slidesSizesGrid[i];
+        const slideOffset = $slideEl[0].swiperSlideOffset;
+        const offsetMultiplier = ((center - slideOffset - (slideSize / 2)) / slideSize) * params.modifier;
 
-        var rotateY = isHorizontal ? rotate * offsetMultiplier : 0;
-        var rotateX = isHorizontal ? 0 : rotate * offsetMultiplier;
+        let rotateY = isHorizontal ? rotate * offsetMultiplier : 0;
+        let rotateX = isHorizontal ? 0 : rotate * offsetMultiplier;
         // var rotateZ = 0
-        var translateZ = -translate * Math.abs(offsetMultiplier);
+        let translateZ = -translate * Math.abs(offsetMultiplier);
 
-        var stretch = params.stretch;
+        let { stretch } = params;
         // Allow percentage to make a relative stretch for responsive sliders
         if (typeof stretch === 'string' && stretch.indexOf('%') !== -1) {
           stretch = ((parseFloat(params.stretch) / 100) * slideSize);
         }
-        var translateY = isHorizontal ? 0 : stretch * (offsetMultiplier);
-        var translateX = isHorizontal ? stretch * (offsetMultiplier) : 0;
+        let translateY = isHorizontal ? 0 : stretch * (offsetMultiplier);
+        let translateX = isHorizontal ? stretch * (offsetMultiplier) : 0;
 
         // Fix for ultra small values
         if (Math.abs(translateX) < 0.001) { translateX = 0; }
@@ -8376,20 +8366,20 @@
         if (Math.abs(rotateY) < 0.001) { rotateY = 0; }
         if (Math.abs(rotateX) < 0.001) { rotateX = 0; }
 
-        var slideTransform = "translate3d(" + translateX + "px," + translateY + "px," + translateZ + "px)  rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
+        const slideTransform = `translate3d(${translateX}px,${translateY}px,${translateZ}px)  rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
         $slideEl.transform(slideTransform);
         $slideEl[0].style.zIndex = -Math.abs(Math.round(offsetMultiplier)) + 1;
         if (params.slideShadows) {
           // Set shadows
-          var $shadowBeforeEl = isHorizontal ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
-          var $shadowAfterEl = isHorizontal ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
+          let $shadowBeforeEl = isHorizontal ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
+          let $shadowAfterEl = isHorizontal ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
           if ($shadowBeforeEl.length === 0) {
-            $shadowBeforeEl = $(("<div class=\"swiper-slide-shadow-" + (isHorizontal ? 'left' : 'top') + "\"></div>"));
+            $shadowBeforeEl = $((`<div class="swiper-slide-shadow-${isHorizontal ? 'left' : 'top'}"></div>`));
             $slideEl.append($shadowBeforeEl);
           }
           if ($shadowAfterEl.length === 0) {
-            $shadowAfterEl = $(("<div class=\"swiper-slide-shadow-" + (isHorizontal ? 'right' : 'bottom') + "\"></div>"));
+            $shadowAfterEl = $((`<div class="swiper-slide-shadow-${isHorizontal ? 'right' : 'bottom'}"></div>`));
             $slideEl.append($shadowAfterEl);
           }
           if ($shadowBeforeEl.length) { $shadowBeforeEl[0].style.opacity = offsetMultiplier > 0 ? offsetMultiplier : 0; }
@@ -8399,12 +8389,12 @@
 
       // Set correct perspective for IE10
       if (Support.pointerEvents || Support.prefixedPointerEvents) {
-        var ws = $wrapperEl[0].style;
-        ws.perspectiveOrigin = center + "px 50%";
+        const ws = $wrapperEl[0].style;
+        ws.perspectiveOrigin = `${center}px 50%`;
       }
     },
     setTransition: function setTransition(duration) {
-      var swiper = this;
+      const swiper = this;
       swiper.slides
         .transition(duration)
         .find('.swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left')
@@ -8412,7 +8402,7 @@
     },
   };
 
-  var EffectCoverflow = {
+  const EffectCoverflow = {
     name: 'effect-coverflow',
     params: {
       coverflowEffect: {
@@ -8424,7 +8414,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         coverflowEffect: {
           setTranslate: Coverflow.setTranslate.bind(swiper),
@@ -8434,34 +8424,34 @@
     },
     on: {
       beforeInit: function beforeInit() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'coverflow') { return; }
 
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "coverflow"));
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "3d"));
+        swiper.classNames.push((`${swiper.params.containerModifierClass}coverflow`));
+        swiper.classNames.push((`${swiper.params.containerModifierClass}3d`));
 
         swiper.params.watchSlidesProgress = true;
         swiper.originalParams.watchSlidesProgress = true;
       },
       setTranslate: function setTranslate() {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'coverflow') { return; }
         swiper.coverflowEffect.setTranslate();
       },
       setTransition: function setTransition(duration) {
-        var swiper = this;
+        const swiper = this;
         if (swiper.params.effect !== 'coverflow') { return; }
         swiper.coverflowEffect.setTransition(duration);
       },
     },
   };
 
-  var Thumbs = {
+  const Thumbs = {
     init: function init() {
-      var swiper = this;
-      var ref = swiper.params;
-      var thumbsParams = ref.thumbs;
-      var SwiperClass = swiper.constructor;
+      const swiper = this;
+      const ref = swiper.params;
+      const thumbsParams = ref.thumbs;
+      const SwiperClass = swiper.constructor;
       if (thumbsParams.swiper instanceof SwiperClass) {
         swiper.thumbs.swiper = thumbsParams.swiper;
         Utils.extend(swiper.thumbs.swiper.originalParams, {
@@ -8484,51 +8474,48 @@
       swiper.thumbs.swiper.on('tap', swiper.thumbs.onThumbClick);
     },
     onThumbClick: function onThumbClick() {
-      var swiper = this;
-      var thumbsSwiper = swiper.thumbs.swiper;
+      const swiper = this;
+      const thumbsSwiper = swiper.thumbs.swiper;
       if (!thumbsSwiper) { return; }
-      var clickedIndex = thumbsSwiper.clickedIndex;
-      var clickedSlide = thumbsSwiper.clickedSlide;
+      const { clickedIndex } = thumbsSwiper;
+      const { clickedSlide } = thumbsSwiper;
       if (clickedSlide && $(clickedSlide).hasClass(swiper.params.thumbs.slideThumbActiveClass)) { return; }
       if (typeof clickedIndex === 'undefined' || clickedIndex === null) { return; }
-      var slideToIndex;
+      let slideToIndex;
       if (thumbsSwiper.params.loop) {
         slideToIndex = parseInt($(thumbsSwiper.clickedSlide).attr('data-swiper-slide-index'), 10);
       } else {
         slideToIndex = clickedIndex;
       }
       if (swiper.params.loop) {
-        var currentIndex = swiper.activeIndex;
+        let currentIndex = swiper.activeIndex;
         if (swiper.slides.eq(currentIndex).hasClass(swiper.params.slideDuplicateClass)) {
           swiper.loopFix();
           // eslint-disable-next-line
           swiper._clientLeft = swiper.$wrapperEl[0].clientLeft;
           currentIndex = swiper.activeIndex;
         }
-        var prevIndex = swiper.slides.eq(currentIndex).prevAll(("[data-swiper-slide-index=\"" + slideToIndex + "\"]")).eq(0).index();
-        var nextIndex = swiper.slides.eq(currentIndex).nextAll(("[data-swiper-slide-index=\"" + slideToIndex + "\"]")).eq(0).index();
-        if (typeof prevIndex === 'undefined') { slideToIndex = nextIndex; }
-        else if (typeof nextIndex === 'undefined') { slideToIndex = prevIndex; }
-        else if (nextIndex - currentIndex < currentIndex - prevIndex) { slideToIndex = nextIndex; }
-        else { slideToIndex = prevIndex; }
+        const prevIndex = swiper.slides.eq(currentIndex).prevAll((`[data-swiper-slide-index="${slideToIndex}"]`)).eq(0).index();
+        const nextIndex = swiper.slides.eq(currentIndex).nextAll((`[data-swiper-slide-index="${slideToIndex}"]`)).eq(0).index();
+        if (typeof prevIndex === 'undefined') { slideToIndex = nextIndex; } else if (typeof nextIndex === 'undefined') { slideToIndex = prevIndex; } else if (nextIndex - currentIndex < currentIndex - prevIndex) { slideToIndex = nextIndex; } else { slideToIndex = prevIndex; }
       }
       swiper.slideTo(slideToIndex);
     },
     update: function update(initial) {
-      var swiper = this;
-      var thumbsSwiper = swiper.thumbs.swiper;
+      const swiper = this;
+      const thumbsSwiper = swiper.thumbs.swiper;
       if (!thumbsSwiper) { return; }
 
-      var slidesPerView = thumbsSwiper.params.slidesPerView === 'auto'
+      const slidesPerView = thumbsSwiper.params.slidesPerView === 'auto'
         ? thumbsSwiper.slidesPerViewDynamic()
         : thumbsSwiper.params.slidesPerView;
 
-      var autoScrollOffset = swiper.params.thumbs.autoScrollOffset;
-      var useOffset = autoScrollOffset && !thumbsSwiper.params.loop;
+      const { autoScrollOffset } = swiper.params.thumbs;
+      const useOffset = autoScrollOffset && !thumbsSwiper.params.loop;
       if (swiper.realIndex !== thumbsSwiper.realIndex || useOffset) {
-        var currentThumbsIndex = thumbsSwiper.activeIndex;
-        var newThumbsIndex;
-        var direction;
+        let currentThumbsIndex = thumbsSwiper.activeIndex;
+        let newThumbsIndex;
+        let direction;
         if (thumbsSwiper.params.loop) {
           if (thumbsSwiper.slides.eq(currentThumbsIndex).hasClass(thumbsSwiper.params.slideDuplicateClass)) {
             thumbsSwiper.loopFix();
@@ -8537,19 +8524,15 @@
             currentThumbsIndex = thumbsSwiper.activeIndex;
           }
           // Find actual thumbs index to slide to
-          var prevThumbsIndex = thumbsSwiper.slides
+          const prevThumbsIndex = thumbsSwiper.slides
             .eq(currentThumbsIndex)
-            .prevAll(("[data-swiper-slide-index=\"" + (swiper.realIndex) + "\"]")).eq(0)
+            .prevAll((`[data-swiper-slide-index="${swiper.realIndex}"]`)).eq(0)
             .index();
-          var nextThumbsIndex = thumbsSwiper.slides
+          const nextThumbsIndex = thumbsSwiper.slides
             .eq(currentThumbsIndex)
-            .nextAll(("[data-swiper-slide-index=\"" + (swiper.realIndex) + "\"]")).eq(0)
+            .nextAll((`[data-swiper-slide-index="${swiper.realIndex}"]`)).eq(0)
             .index();
-          if (typeof prevThumbsIndex === 'undefined') { newThumbsIndex = nextThumbsIndex; }
-          else if (typeof nextThumbsIndex === 'undefined') { newThumbsIndex = prevThumbsIndex; }
-          else if (nextThumbsIndex - currentThumbsIndex === currentThumbsIndex - prevThumbsIndex) { newThumbsIndex = currentThumbsIndex; }
-          else if (nextThumbsIndex - currentThumbsIndex < currentThumbsIndex - prevThumbsIndex) { newThumbsIndex = nextThumbsIndex; }
-          else { newThumbsIndex = prevThumbsIndex; }
+          if (typeof prevThumbsIndex === 'undefined') { newThumbsIndex = nextThumbsIndex; } else if (typeof nextThumbsIndex === 'undefined') { newThumbsIndex = prevThumbsIndex; } else if (nextThumbsIndex - currentThumbsIndex === currentThumbsIndex - prevThumbsIndex) { newThumbsIndex = currentThumbsIndex; } else if (nextThumbsIndex - currentThumbsIndex < currentThumbsIndex - prevThumbsIndex) { newThumbsIndex = nextThumbsIndex; } else { newThumbsIndex = prevThumbsIndex; }
           direction = swiper.activeIndex > swiper.previousIndex ? 'next' : 'prev';
         } else {
           newThumbsIndex = swiper.realIndex;
@@ -8574,8 +8557,8 @@
       }
 
       // Activate thumbs
-      var thumbsToActivate = 1;
-      var thumbActiveClass = swiper.params.thumbs.slideThumbActiveClass;
+      let thumbsToActivate = 1;
+      const thumbActiveClass = swiper.params.thumbs.slideThumbActiveClass;
 
       if (swiper.params.slidesPerView > 1 && !swiper.params.centeredSlides) {
         thumbsToActivate = swiper.params.slidesPerView;
@@ -8589,17 +8572,17 @@
 
       thumbsSwiper.slides.removeClass(thumbActiveClass);
       if (thumbsSwiper.params.loop || (thumbsSwiper.params.virtual && thumbsSwiper.params.virtual.enabled)) {
-        for (var i = 0; i < thumbsToActivate; i += 1) {
-          thumbsSwiper.$wrapperEl.children(("[data-swiper-slide-index=\"" + (swiper.realIndex + i) + "\"]")).addClass(thumbActiveClass);
+        for (let i = 0; i < thumbsToActivate; i += 1) {
+          thumbsSwiper.$wrapperEl.children((`[data-swiper-slide-index="${swiper.realIndex + i}"]`)).addClass(thumbActiveClass);
         }
       } else {
-        for (var i$1 = 0; i$1 < thumbsToActivate; i$1 += 1) {
+        for (let i$1 = 0; i$1 < thumbsToActivate; i$1 += 1) {
           thumbsSwiper.slides.eq(swiper.realIndex + i$1).addClass(thumbActiveClass);
         }
       }
     },
   };
-  var Thumbs$1 = {
+  const Thumbs$1 = {
     name: 'thumbs',
     params: {
       thumbs: {
@@ -8611,7 +8594,7 @@
       },
     },
     create: function create() {
-      var swiper = this;
+      const swiper = this;
       Utils.extend(swiper, {
         thumbs: {
           swiper: null,
@@ -8623,42 +8606,42 @@
     },
     on: {
       beforeInit: function beforeInit() {
-        var swiper = this;
-        var ref = swiper.params;
-        var thumbs = ref.thumbs;
+        const swiper = this;
+        const ref = swiper.params;
+        const { thumbs } = ref;
         if (!thumbs || !thumbs.swiper) { return; }
         swiper.thumbs.init();
         swiper.thumbs.update(true);
       },
       slideChange: function slideChange() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.thumbs.swiper) { return; }
         swiper.thumbs.update();
       },
       update: function update() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.thumbs.swiper) { return; }
         swiper.thumbs.update();
       },
       resize: function resize() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.thumbs.swiper) { return; }
         swiper.thumbs.update();
       },
       observerUpdate: function observerUpdate() {
-        var swiper = this;
+        const swiper = this;
         if (!swiper.thumbs.swiper) { return; }
         swiper.thumbs.update();
       },
       setTransition: function setTransition(duration) {
-        var swiper = this;
-        var thumbsSwiper = swiper.thumbs.swiper;
+        const swiper = this;
+        const thumbsSwiper = swiper.thumbs.swiper;
         if (!thumbsSwiper) { return; }
         thumbsSwiper.setTransition(duration);
       },
       beforeDestroy: function beforeDestroy() {
-        var swiper = this;
-        var thumbsSwiper = swiper.thumbs.swiper;
+        const swiper = this;
+        const thumbsSwiper = swiper.thumbs.swiper;
         if (!thumbsSwiper) { return; }
         if (swiper.thumbs.swiperCreated && thumbsSwiper) {
           thumbsSwiper.destroy();
@@ -8669,7 +8652,7 @@
 
   // Swiper Class
 
-  var components = [
+  const components = [
     Device$1,
     Support$1,
     Browser$1,
@@ -8693,7 +8676,7 @@
     EffectCube,
     EffectFlip,
     EffectCoverflow,
-    Thumbs$1
+    Thumbs$1,
   ];
 
   if (typeof Swiper.use === 'undefined') {
@@ -8704,6 +8687,5 @@
   Swiper.use(components);
 
   return Swiper;
-
 })));
-//# sourceMappingURL=swiper.js.map
+// # sourceMappingURL=swiper.js.map
