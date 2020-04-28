@@ -4,18 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="swiper.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  
   <header>Movie search</header>
   <main>
     <form>
-      <input id="input">
+      <input class="input" id="input">
       <button id="btn">search</button>
     </form>
-    <div class="swiper"></div>
+    <div class="swiper-container">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+          <!-- Slides -->
+          <div class="swiper-slide"><img src="./assets/1.png"></div>
+          <div class="swiper-slide"><img src="./assets/1.png"></div>
+          <div class="swiper-slide"><img src="./assets/1.png"></div>
+          <div class="swiper-slide"><img src="./assets/1.png"></div>
+          <div class="swiper-slide"><img src="./assets/1.png"></div>
+          <div class="swiper-slide"><img src="./assets/1.png"></div>
+          <div class="swiper-slide"><img src="./assets/1.png"></div>
+          <div class="swiper-slide"><img src="./assets/1.png"></div>
+          <div class="swiper-slide"><img src="./assets/1.png"></div>
+          <div class="swiper-slide"><img src="./assets/1.png"></div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+  </div>
   </main>
-  <script src="index.js"></script>
-  <script src="swiper.js"></script>
+  <footer>footer</footer>
+  <script src="../dist/main.js"></script>
 </body>
 </html>
