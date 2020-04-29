@@ -42,41 +42,6 @@ form {
   width: 50%;
   border-radius: 10px;
   margin-left: 20%;
-  font-family: 'Lato', sans-serif;
-  color: #363826;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.btn {
-  font-family: 'Lato', sans-serif;
-  color: #363826;
-  font-size: 20px;
-  border-radius: 10px;
-  margin-left: 10px;
-  height: 36px;
-  cursor: pointer;
-}
-
-.btn:hover {
-  box-shadow: 0 0 6px 3px #818087;
-}
-
-.btn-clear {
-  border-radius: 60%;
-  border: 0;
-  margin-left: 10px;
-  width: 36px;
-  height: 36px;
-  background-image: url(./assets/close.svg);
-  background-size: 100%;
-  background-position: 50% 50%;
-  opacity: 0.6;
-  cursor: pointer;
-}
-
-.btn-clear:hover {
-  box-shadow: 0 0 6px 3px #818087;
 }
 
 footer {
@@ -116,7 +81,7 @@ footer {
   content: " ";
   background-size: 100%;
   border-radius: 50%;
-  background-image: url(./assets/GitHub.png);
+  background-image: url(https://img1.pngindir.com/20180709/zpg/kisspng-computer-icons-github-symbol-clip-art-github-5b441879498ab9.5929183415311893693012.jpg);
   width: 30px;
   height: 30px;
 }
@@ -151,7 +116,7 @@ footer {
   content: " ";
   background-size: 100%;
   border-radius: 50%;
-  background-image: url(./assets/signs.svg);
+  background-image: url(https://avatars.mds.yandex.net/get-pdb/2700313/b8db4f5d-a353-4ce1-a6d3-720c599204dd/s375);
   width: 25px;
   height: 25px;
 }
@@ -159,25 +124,12 @@ footer {
 .card-title {
   font-family: 'Lato', sans-serif;
   color: #363826;
-  height: 55px;
+  height: 60px;
   overflow: hidden;
   font-size: 25px;
   display: block;
   text-align: center;
   margin-bottom: 10px;
-}
-
-input::-webkit-input-placeholder {
-  font-family: 'Lato', sans-serif;
-  color: #cdcdcd;
-  font-size: 20px;
-  margin-left: 5px;
-}
-input:-moz-placeholder {
-  font-family: 'Lato', sans-serif;
-  color: #cdcdcd;
-  font-size: 20px;
-  margin-left: 5px;
 }
 
 

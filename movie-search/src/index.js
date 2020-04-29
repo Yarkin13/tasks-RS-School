@@ -5,8 +5,10 @@ import {
 
 const mySwiper = new Swiper('.swiper-container', {
   direction: 'horizontal',
+  preventInteractionOnTransition: true,
   pagination: {
     el: '.swiper-pagination',
+    clickable: true,
   },
   navigation: {
     nextEl: '.swiper-button-next',
@@ -20,26 +22,47 @@ const mySwiper = new Swiper('.swiper-container', {
       slidesPerView: 1,
       spaceBetween: 20,
     },
-    480: {
+    770: {
       slidesPerView: 2,
       spaceBetween: 30,
     },
-    640: {
+    1200: {
       slidesPerView: 3,
       spaceBetween: 40,
     },
-    900: {
+    1600: {
       slidesPerView: 4,
       spaceBetween: 40,
     },
   },
 });
+const btn = document.querySelector('.btn');
+const btnClear = document.querySelector('.btn-clear')
+const input = document.querySelector('.input');
+document.addEventListener("DOMContentLoaded", () => {
+  input.focus();
+})
 
-document.querySelector('button').addEventListener('click', (event) => {
+btnClear.addEventListener('click', (event) => {
+  event.preventDefault();
+  input.value = '';
+})
+
+const firstData  = getMovieInfo(1, 'war');
+firstData.then((firstData) => {
+  drawPosters(firstData);
+  drawTitle(firstData);
+  drawYear(firstData);
+  const idArrayFirst = getImdbID(firstData);
+  getMovieRate(idArrayFirst);
+})
+
+btn.addEventListener('click', (event) => {
   event.preventDefault();
   const text = document.querySelector('input').value;
   const data = getMovieInfo(1, text);
   data.then((data) => {
+    console.log(data)
     drawPosters(data);
     drawTitle(data);
     drawYear(data);

@@ -18,7 +18,6 @@ export function getMovieRate(idArray) {
       });
     i += 1;
   })
-
 }
 
 export function drawPosters(data) {
@@ -39,7 +38,7 @@ export function drawTitle(data) {
     titleArray[i] = data.Search[i].Title;
   }
   let j = 0;
-  document.querySelectorAll('a').forEach((el) => {
+  document.querySelectorAll('.card-title').forEach((el) => {
     el.innerText = titleArray[j];
     j++;
   });
