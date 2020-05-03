@@ -1,8 +1,13 @@
 import Swiper from 'swiper';
 import {
-  getMovieInfo, drawPosters, drawTitle, drawYear, getMovieRate,getImdbID
-} from './request.js';
+  getMovieInfoFc, createMoviesInfo, addRating, getTranslate,
+} from './requestfactory.js';
 
+import {
+  MovieFactory, Movie,
+} from './factory-pattern.js';
+
+const swiperWrapper = document.querySelector('.swiper-wrapper');
 const mySwiper = new Swiper('.swiper-container', {
   direction: 'horizontal',
   preventInteractionOnTransition: true,
@@ -37,43 +42,100 @@ const mySwiper = new Swiper('.swiper-container', {
   },
 });
 const btn = document.querySelector('.btn');
-const btnClear = document.querySelector('.btn-clear')
+const btnClear = document.querySelector('.btn-clear');
 const input = document.querySelector('.input');
-document.addEventListener("DOMContentLoaded", () => {
+const subField = document.querySelector('.sub-field');
+const load = document.querySelector('.load');
+
+load.classList.add('show');
+
+document.addEventListener('DOMContentLoaded', () => {
   input.focus();
-})
+});
+
+async function drawMovieCards(textRequest = 'war', page = 1) {
+  const data = await getMovieInfoFc(page, textRequest);
+  let moviesInfo = createMoviesInfo(data);
+  moviesInfo = await addRating(moviesInfo);
+  swiperWrapper.innerHTML = '';
+  moviesInfo.forEach((movie) => {
+    const movieFactory = new MovieFactory(movie, swiperWrapper);
+    movieFactory.create();
+  });
+  mySwiper.update();
+  load.classList.remove('show');
+  return data;
+}
+
+drawMovieCards();
 
 btnClear.addEventListener('click', (event) => {
   event.preventDefault();
   input.value = '';
-})
-
-const firstData  = getMovieInfo(1, 'war');
-firstData.then((firstData) => {
-  drawPosters(firstData);
-  drawTitle(firstData);
-  drawYear(firstData);
-  const idArrayFirst = getImdbID(firstData);
-  getMovieRate(idArrayFirst);
-})
+});
 
 btn.addEventListener('click', (event) => {
   event.preventDefault();
-  const text = document.querySelector('input').value;
-  const data = getMovieInfo(1, text);
-  data.then((data) => {
-    console.log(data)
-    drawPosters(data);
-    drawTitle(data);
-    drawYear(data);
-    const idArray = getImdbID(data);
-    getMovieRate(idArray);
-  })
+  load.classList.add('show');
+  subField.innerText = '';
+  const textRequest = document.querySelector('input').value;
+  if (textRequest === '') {
+    load.classList.remove('show');
+    return;
+  }
+  if (/[a-zA-Z]/.test(textRequest)) {
+    const data = drawMovieCards(textRequest);
+    data.catch(() => {
+      subField.innerText = `No result for "${textRequest}"`;
+      load.classList.remove('show');
+    });
+  } else {
+    const translate = getTranslate(textRequest);
+    translate.then((data) => data.text[0])
+      .then((data) => {
+        const dataRequest = drawMovieCards(data);
+        dataRequest.then(() => subField.innerText = `Showing results for "${data}"`);
+        dataRequest.catch(() => {
+          subField.innerText = `No result for "${textRequest}"`;
+          load.classList.remove('show');
+        });
+      });
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    load.classList.add('show');
+    subField.innerText = '';
+    const textRequest = document.querySelector('input').value;
+    if (textRequest === '') {
+      load.classList.remove('show');
+      return;
+    }
+    if (/[a-zA-Z]/.test(textRequest)) {
+      const data = drawMovieCards(textRequest);
+      data.catch(() => {
+        subField.innerText = `No result for "${textRequest}"`;
+        load.classList.remove('show');
+      });
+    } else {
+      const translate = getTranslate(textRequest);
+      translate.then((data) => data.text[0])
+        .then((data) => {
+          const dataRequest = drawMovieCards(data);
+          dataRequest.then(() => subField.innerText = `Showing results for "${data}"`);
+          dataRequest.catch(() => {
+            subField.innerText = `No result for "${textRequest}"`;
+            load.classList.remove('show');
+          });
+        });
+    }
+  }
 });
 
 mySwiper.on('reachEnd', () => {
-  const text = document.querySelector('input').value;
-  /* const data = getMovieArray(2, text); */
-  mySwiper.appendSlide('<div class="swiper-slide">Slide 10"</div>');
+  const textRequest = document.querySelector('input').value;
+  drawMovieCards(textRequest = 'war', 2)
   mySwiper.update();
 });

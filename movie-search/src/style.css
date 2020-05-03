@@ -15,9 +15,23 @@ header {
   font-size: 40px;
 }
 
+.load {
+  height: 36px;
+  width: 36px;
+  background-image: url(./assets/loading.gif);
+  display: none;
+  background-size: 100%;
+  margin-left: 10px;
+}
+
+.show {
+  display: block;
+}
+
 .swiper-container {
-  padding-top: 25px;
+  padding-top: 10px;
   overflow: visible;
+  height: 554px;
 }
 
 .swiper-slide {
@@ -25,7 +39,7 @@ header {
 }
 
 .swiper-pagination {
- top:600px
+ top:585px
 }
 
 main {
@@ -35,13 +49,24 @@ main {
 
 form {
   display: flex;
+  justify-content: center;
+}
+
+.sub-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Lato', sans-serif;
+  color: #531c02;
+  font-size: 30px;
+  padding-top: 10px;
+  height: 45px;
 }
 
 .input {
   height: 30px;
   width: 50%;
   border-radius: 10px;
-  margin-left: 20%;
   font-family: 'Lato', sans-serif;
   color: #363826;
   font-size: 20px;
