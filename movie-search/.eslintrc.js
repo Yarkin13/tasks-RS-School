@@ -7,6 +7,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    "plugin:jsx-a11y/recommended"
   ],
   globals: {
     Atomics: 'readonly',
@@ -16,5 +17,9 @@ module.exports = {
     ecmaVersion: 2018,
   },
   rules: {
+
   },
+  "plugins": [
+    "jsx-a11y"
+  ]
 };

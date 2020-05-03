@@ -30,7 +30,7 @@ header {
 
 .swiper-container {
   padding-top: 10px;
-  overflow: visible;
+  overflow: hidden;
   height: 554px;
 }
 
@@ -39,7 +39,7 @@ header {
 }
 
 .swiper-pagination {
- top:585px
+  top:510px
 }
 
 main {
@@ -111,10 +111,10 @@ footer {
   background:linear-gradient(white,#818087);
 }
 .card-poster {
-  width: 300px;
+  width: 240px;
   margin: 0 auto;
   background-color: grey;
-  height: 420px;
+  height: 39vh;
   background-size: 100%;
   background-position: center center;
   box-shadow: 0 0 10px 5px #818087;
@@ -205,7 +205,15 @@ input:-moz-placeholder {
   margin-left: 5px;
 }
 
-
+@media (max-width: 500px) {
+  .card-poster{
+    width: 50vw;
+  
+  }
+  .sub-field {
+    display: none;
+  }
+}
 
 
 

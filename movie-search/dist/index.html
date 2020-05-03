@@ -5,79 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie search</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="swiper.css">
-  <link rel="stylesheet" href="style.css">
-</head>
+<link href="style.css" rel="stylesheet"></head>
 <body>
   
   <header>Movie search</header>
   <main>
     <form>
-      <input class="input" id="input">
-      <button id="btn">search</button>
+      <input class="input" id="input" autocomplete="off" placeholder="Enter movie name">
+      <button id="btn-clear" class="btn-clear"></button>
+      <button id="btn" class="btn">Search</button>
+      <div class="load"></div>
     </form>
+    <div class="sub-field"></div>
     <div class="swiper-container">
       <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <a class="card-title">Avengers: Infinity War</a>
-            <div class="card-poster" style="background-image: url(https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg);"></div>
-            <div class="card-year">2018</div>
-            <div class="card-star">8.5</div>
-          </div>
-          <div class="swiper-slide">
-            <a class="card-title">Captain America: Civil War</a>
-            <div class="card-poster" style="background-image: url(https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SX300.jpg);"></div>
-            <div class="card-year">2016</div>
-            <div class="card-star">7.8</div>
-          </div>
-          <div class="swiper-slide">
-            <a class="card-title">World War Z</a>
-            <div class="card-poster" style="background-image: url(https://m.media-amazon.com/images/M/MV5BNDQ4YzFmNzktMmM5ZC00MDZjLTk1OTktNDE2ODE4YjM2MjJjXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg);"></div>
-            <div class="card-year">2013</div>
-            <div class="card-star">7.0</div>
-          </div>
-          <div class="swiper-slide">
-            <a class="card-title">War of the Worlds</a>
-            <div class="card-poster" style="background-image: url(https://m.media-amazon.com/images/M/MV5BNDUyODAzNDI1Nl5BMl5BanBnXkFtZTcwMDA2NDAzMw@@._V1_SX300.jpg);"></div>
-            <div class="card-year">2005</div>
-            <div class="card-star">6.5</div>
-          </div>
-          <div class="swiper-slide">
-            <a class="card-title">Lord of War</a>
-            <div class="card-poster" style="background-image: url(https://m.media-amazon.com/images/M/MV5BMTYzZWE3MDAtZjZkMi00MzhlLTlhZDUtNmI2Zjg3OWVlZWI0XkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg);"></div>
-            <div class="card-year">2005</div>
-            <div class="card-star">7.6</div>
-          </div>
-          <div class="swiper-slide">
-            <a class="card-title">War for the Planet of the Apes</a>
-            <div class="card-poster" style="background-image: url(https://m.media-amazon.com/images/M/MV5BNDNmYTQzMDEtMmY0MS00OTNjLTk4MjItMDZhMzkzOGI3MzA0XkEyXkFqcGdeQXVyNjk5NDA3OTk@._V1_SX300.jpg);"></div>
-            <div class="card-year">2017</div>
-            <div class="card-star">7.4</div>
-          </div>
-          <div class="swiper-slide">
-            <a class="card-title">This Means War</a>
-            <div class="card-poster" style="background-image: url(https://m.media-amazon.com/images/M/MV5BMTYyOTQ4MDE2MV5BMl5BanBnXkFtZTcwOTE0MTgwNw@@._V1_SX300.jpg);"></div>
-            <div class="card-year">2012</div>
-            <div class="card-star">6.3</div>
-          </div>
-          <div class="swiper-slide">
-            <a class="card-title">War Dogs</a>
-            <div class="card-poster" style="background-image: url(https://m.media-amazon.com/images/M/MV5BMjEyNzQ0NzM4MV5BMl5BanBnXkFtZTgwMDI0ODM2OTE@._V1_SX300.jpg);"></div>
-            <div class="card-year">2016</div>
-            <div class="card-star">7.1</div>
-          </div>
-          <div class="swiper-slide">
-            <a class="card-title">War Horse</a>
-            <div class="card-poster" style="background-image: url(https://m.media-amazon.com/images/M/MV5BMjExNzkxOTYyNl5BMl5BanBnXkFtZTcwODA0MjU4Ng@@._V1_SX300.jpg);"></div>
-            <div class="card-year">2011</div>
-            <div class="card-star">7.2</div>
-          </div>
-          <div class="swiper-slide">
-            <a class="card-title">Charlie Wilson's War</a>
-            <div class="card-poster" style="background-image: url(https://m.media-amazon.com/images/M/MV5BMTgwMDgwMDc4MF5BMl5BanBnXkFtZTYwOTU3MDM4._V1_SX300.jpg);"></div>
-            <div class="card-year">2007</div>
-            <div class="card-star">7.0</div>
-          </div>
       </div>
       <div class="swiper-pagination"></div>
       <div class="swiper-button-prev"></div>
@@ -88,6 +29,6 @@
     <div class="footer__school">RS2020Q1</div>
     <div class="footer__github"><a class="footer__logo" href="https://github.com/Yarkin13">Yarkin13</a></div>
   </footer>
-  <script src="./main.js"></script>
-</body>
+  <script src="../dist/main.js"></script>
+<script src="main.js"></script></body>
 </html>
