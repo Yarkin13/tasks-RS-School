@@ -1,8 +1,7 @@
-export async function getMovieInfoFc(page, search) {
+export async function getMovieInfo(page, search) {
   const url = `https://www.omdbapi.com/?s=${search}&page=${page}&apikey=2e0bd215`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data);
   return data;
 }
 
@@ -26,7 +25,7 @@ export function createMoviesInfo(data) {
   const arrayMoviesInfo = [];
   for (let i = 0; arrayYear.length > i; i += 1) {
     const movie = new Object();
-    movie.poster = arrayPosters[i];
+    movie.poster = arrayPosters[i] === 'N/A' ? './assets/notFound.png' : arrayPosters[i];
     movie.title = arrayTitle[i];
     movie.year = arrayYear[i];
     movie.id = arrayId[i];
@@ -41,7 +40,6 @@ export async function addRating(arrayMoviesInfo) {
     const res = await fetch(url);
     const data = await res.json();
     arrayMoviesInfo[i].rating = data.imdbRating;
-    /* delete arrayMoviesInfo[i].id; */
   }
   return arrayMoviesInfo;
 }

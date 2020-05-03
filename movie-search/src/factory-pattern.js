@@ -26,6 +26,6 @@ export class MovieFactory {
 
   create() {
     const newMovie = new Movie(this.movie);
-    this.targetNode.insertAdjacentHTML('afterbegin', newMovie.getTemplate());
+    this.targetNode.insertAdjacentHTML('beforeend', newMovie.getTemplate());
   }
 }
