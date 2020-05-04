@@ -3,12 +3,11 @@ import {
   getMovieInfo, createMoviesInfo, addRating, getTranslate,
 } from './request-functions';
 
-import {
-  MovieFactory,
-} from './factory-pattern';
+import MovieFactory from './factory-pattern';
 import './style.css';
 import './swiper.css';
 import '@babel/polyfill';
+
 const swiperWrapper = document.querySelector('.swiper-wrapper');
 const mySwiper = new Swiper('.swiper-container', {
   direction: 'horizontal',
@@ -48,7 +47,7 @@ const btnClear = document.querySelector('.btn-clear');
 const input = document.querySelector('.input');
 const subField = document.querySelector('.sub-field');
 const load = document.querySelector('.load');
-let page = 1;
+let pageRequest = 1;
 document.addEventListener('DOMContentLoaded', () => {
   input.focus();
   load.classList.add('show');
@@ -90,7 +89,7 @@ btnClear.addEventListener('click', (event) => {
 });
 
 btn.addEventListener('click', (event) => {
-  page = 1;
+  pageRequest = 1;
   event.preventDefault();
   load.classList.add('show');
   subField.innerText = '';
@@ -123,7 +122,7 @@ btn.addEventListener('click', (event) => {
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
-    page = 1;
+    pageRequest = 1;
     event.preventDefault();
     load.classList.add('show');
     subField.innerText = '';
@@ -162,13 +161,13 @@ mySwiper.on('reachEnd', () => {
     load.classList.remove('show');
     return;
   }
-  page += 1;
+  pageRequest += 1;
   if (/[a-zA-Z]/.test(textRequest)) {
-    drawMovieCardsForAddSlides(textRequest, page);
+    drawMovieCardsForAddSlides(textRequest, pageRequest);
   } else {
     const translate = getTranslate(textRequest);
-    translate.then((textRequest) => {
-      drawMovieCardsForAddSlides(textRequest.text[0], page);
+    translate.then((data) => {
+      drawMovieCardsForAddSlides(data.text[0], pageRequest);
     });
   }
 });

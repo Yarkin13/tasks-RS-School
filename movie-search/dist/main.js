@@ -11728,15 +11728,15 @@ Swiper.use(components);
 /*!********************************!*\
   !*** ./src/factory-pattern.js ***!
   \********************************/
-/*! exports provided: Movie, MovieFactory */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Movie", function() { return Movie; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MovieFactory", function() { return MovieFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MovieFactory; });
 /* harmony import */ var core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.object.define-property */ "./node_modules/core-js/modules/es6.object.define-property.js");
 /* harmony import */ var core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _movie_class__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./movie-class */ "./src/movie-class.js");
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11745,28 +11745,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var Movie = /*#__PURE__*/function () {
-  function Movie(movie) {
-    _classCallCheck(this, Movie);
 
-    this.movie = movie;
-  }
 
-  _createClass(Movie, [{
-    key: "getTemplate",
-    value: function getTemplate() {
-      var _this$movie = this.movie,
-          title = _this$movie.title,
-          poster = _this$movie.poster,
-          year = _this$movie.year,
-          rating = _this$movie.rating,
-          id = _this$movie.id;
-      return "<div class=\"swiper-slide\">\n      <a class=\"card-title\" href=\" https://www.imdb.com/title/".concat(id, "\">").concat(title, "</a>\n      <div class=\"card-poster\" style=\"background-image: url(").concat(poster, ");\"></div>\n      <div class=\"card-year\">").concat(year, "</div>\n      <div class=\"card-star\">").concat(rating, "</div>\n    </div>");
-    }
-  }]);
-
-  return Movie;
-}();
 var MovieFactory = /*#__PURE__*/function () {
   function MovieFactory(movie, targetNode) {
     _classCallCheck(this, MovieFactory);
@@ -11778,13 +11758,15 @@ var MovieFactory = /*#__PURE__*/function () {
   _createClass(MovieFactory, [{
     key: "create",
     value: function create() {
-      var newMovie = new Movie(this.movie);
+      var newMovie = new _movie_class__WEBPACK_IMPORTED_MODULE_1__["default"](this.movie);
       this.targetNode.insertAdjacentHTML('beforeend', newMovie.getTemplate());
     }
   }]);
 
   return MovieFactory;
 }();
+
+
 
 /***/ }),
 
@@ -11865,7 +11847,7 @@ var btnClear = document.querySelector('.btn-clear');
 var input = document.querySelector('.input');
 var subField = document.querySelector('.sub-field');
 var load = document.querySelector('.load');
-var page = 1;
+var pageRequest = 1;
 document.addEventListener('DOMContentLoaded', function () {
   input.focus();
   load.classList.add('show');
@@ -11901,7 +11883,7 @@ function _drawMovieCards() {
             moviesInfo = _context.sent;
             swiperWrapper.innerHTML = '';
             moviesInfo.forEach(function (movie) {
-              var movieFactory = new _factory_pattern__WEBPACK_IMPORTED_MODULE_6__["MovieFactory"](movie, swiperWrapper);
+              var movieFactory = new _factory_pattern__WEBPACK_IMPORTED_MODULE_6__["default"](movie, swiperWrapper);
               movieFactory.create();
             });
             mySwiper.slideTo(0);
@@ -11948,7 +11930,7 @@ function _drawMovieCardsForAddSlides() {
           case 8:
             moviesInfo = _context2.sent;
             moviesInfo.forEach(function (movie) {
-              var movieFactory = new _factory_pattern__WEBPACK_IMPORTED_MODULE_6__["MovieFactory"](movie, swiperWrapper);
+              var movieFactory = new _factory_pattern__WEBPACK_IMPORTED_MODULE_6__["default"](movie, swiperWrapper);
               movieFactory.create();
             });
             mySwiper.update();
@@ -11971,7 +11953,7 @@ btnClear.addEventListener('click', function (event) {
   input.value = '';
 });
 btn.addEventListener('click', function (event) {
-  page = 1;
+  pageRequest = 1;
   event.preventDefault();
   load.classList.add('show');
   subField.innerText = '';
@@ -12006,7 +11988,7 @@ btn.addEventListener('click', function (event) {
 });
 document.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
-    page = 1;
+    pageRequest = 1;
     event.preventDefault();
     load.classList.add('show');
     subField.innerText = '';
@@ -12049,17 +12031,64 @@ mySwiper.on('reachEnd', function () {
     return;
   }
 
-  page += 1;
+  pageRequest += 1;
 
   if (/[a-zA-Z]/.test(textRequest)) {
-    drawMovieCardsForAddSlides(textRequest, page);
+    drawMovieCardsForAddSlides(textRequest, pageRequest);
   } else {
     var translate = Object(_request_functions__WEBPACK_IMPORTED_MODULE_5__["getTranslate"])(textRequest);
-    translate.then(function (textRequest) {
-      drawMovieCardsForAddSlides(textRequest.text[0], page);
+    translate.then(function (data) {
+      drawMovieCardsForAddSlides(data.text[0], pageRequest);
     });
   }
 });
+
+/***/ }),
+
+/***/ "./src/movie-class.js":
+/*!****************************!*\
+  !*** ./src/movie-class.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Movie; });
+/* harmony import */ var core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.object.define-property */ "./node_modules/core-js/modules/es6.object.define-property.js");
+/* harmony import */ var core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Movie = /*#__PURE__*/function () {
+  function Movie(movie) {
+    _classCallCheck(this, Movie);
+
+    this.movie = movie;
+  }
+
+  _createClass(Movie, [{
+    key: "getTemplate",
+    value: function getTemplate() {
+      var _this$movie = this.movie,
+          title = _this$movie.title,
+          poster = _this$movie.poster,
+          year = _this$movie.year,
+          rating = _this$movie.rating,
+          id = _this$movie.id;
+      return "<div class=\"swiper-slide\">\n      <a class=\"card-title\" href=\" https://www.imdb.com/title/".concat(id, "\">").concat(title, "</a>\n      <div class=\"card-poster\" style=\"background-image: url(").concat(poster, ");\"></div>\n      <div class=\"card-year\">").concat(year, "</div>\n      <div class=\"card-star\">").concat(rating, "</div>\n    </div>");
+    }
+  }]);
+
+  return Movie;
+}();
+
+
 
 /***/ }),
 
@@ -12147,8 +12176,8 @@ function createMoviesInfo(data) {
   var arrayMoviesInfo = [];
 
   for (var i = 0; arrayYear.length > i; i += 1) {
-    var movie = new Object();
-    movie.poster = arrayPosters[i] === 'N/A' ? './assets/notFound.png' : arrayPosters[i];
+    var movie = {};
+    movie.poster = arrayPosters[i] === 'N/A' ? './notFound.png' : arrayPosters[i];
     movie.title = arrayTitle[i];
     movie.year = arrayYear[i];
     movie.id = arrayId[i];
@@ -12163,41 +12192,44 @@ function addRating(_x3) {
 
 function _addRating() {
   _addRating = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(arrayMoviesInfo) {
-    var i, url, res, data;
+    var array, i, url, res, data;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
+            array = arrayMoviesInfo;
+            /* eslint-disable no-await-in-loop */
+
             i = 0;
 
-          case 1:
+          case 2:
             if (!(arrayMoviesInfo.length > i)) {
-              _context2.next = 13;
+              _context2.next = 14;
               break;
             }
 
             url = "https://www.omdbapi.com/?i=".concat(arrayMoviesInfo[i].id, "&apikey=2e0bd215");
-            _context2.next = 5;
+            _context2.next = 6;
             return fetch(url);
 
-          case 5:
+          case 6:
             res = _context2.sent;
-            _context2.next = 8;
+            _context2.next = 9;
             return res.json();
 
-          case 8:
+          case 9:
             data = _context2.sent;
-            arrayMoviesInfo[i].rating = data.imdbRating;
+            array[i].rating = data.imdbRating;
 
-          case 10:
+          case 11:
             i += 1;
-            _context2.next = 1;
+            _context2.next = 2;
             break;
 
-          case 13:
-            return _context2.abrupt("return", arrayMoviesInfo);
-
           case 14:
+            return _context2.abrupt("return", array);
+
+          case 15:
           case "end":
             return _context2.stop();
         }

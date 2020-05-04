@@ -16,8 +16,8 @@ header {
 }
 
 .load {
-  height: 36px;
-  width: 36px;
+  height: 35px;
+  width: 35px;
   background-image: url(./assets/loading.gif);
   display: none;
   background-size: 100%;
@@ -31,7 +31,7 @@ header {
 .swiper-container {
   padding-top: 10px;
   overflow: hidden;
-  height: 554px;
+  height: 60vh;
 }
 
 .swiper-slide {
@@ -39,7 +39,7 @@ header {
 }
 
 .swiper-pagination {
-  top:510px
+  top:540px
 }
 
 main {
@@ -50,6 +50,7 @@ main {
 form {
   display: flex;
   justify-content: center;
+  height: 35px;
 }
 
 .sub-field {
@@ -59,12 +60,10 @@ form {
   font-family: 'Lato', sans-serif;
   color: #531c02;
   font-size: 30px;
-  padding-top: 10px;
   height: 45px;
 }
 
 .input {
-  height: 30px;
   width: 50%;
   border-radius: 10px;
   font-family: 'Lato', sans-serif;
@@ -79,7 +78,8 @@ form {
   font-size: 20px;
   border-radius: 10px;
   margin-left: 10px;
-  height: 36px;
+  height: 35px;
+  width: 75px;
   cursor: pointer;
 }
 
@@ -91,8 +91,8 @@ form {
   border-radius: 60%;
   border: 0;
   margin-left: 10px;
-  width: 36px;
-  height: 36px;
+  width: 35px;
+  height: 35px;
   background-image: url(./assets/close.svg);
   background-size: 100%;
   background-position: 50% 50%;
@@ -114,7 +114,7 @@ footer {
   width: 240px;
   margin: 0 auto;
   background-color: grey;
-  height: 39vh;
+  height: 350px;
   background-size: 100%;
   background-position: center center;
   box-shadow: 0 0 10px 5px #818087;
@@ -204,16 +204,56 @@ input:-moz-placeholder {
   font-size: 20px;
   margin-left: 5px;
 }
-
-@media (max-width: 500px) {
-  .card-poster{
-    width: 50vw;
-  
+@media(max-width: 1024px) {
+  .card-poster {
+    height: 40vh;
+    width: 35vw;
   }
+
+}
+
+
+
+@media(max-width: 767px) {
+  .card-poster {
+    height: 40vh;
+    width: 50vw;
+  }
+
   .sub-field {
     display: none;
   }
+
+  .card-year {
+    display: none;
+  }
 }
+
+@media(max-width: 376px) {
+  .card-poster {
+    height: 40vh;
+    width: 60vw;
+  }
+
+}
+
+@media(max-width: 340px) {
+  .card-poster {
+    height: 30vh;
+    width: 60vw;
+  }
+
+}
+
+
+@media(max-width: 320px) {
+  .card-poster {
+    height: 50vh;
+    width: 60vw;
+  }
+
+}
+
 
 
 

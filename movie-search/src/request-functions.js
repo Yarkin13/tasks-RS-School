@@ -24,8 +24,8 @@ export function createMoviesInfo(data) {
   });
   const arrayMoviesInfo = [];
   for (let i = 0; arrayYear.length > i; i += 1) {
-    const movie = new Object();
-    movie.poster = arrayPosters[i] === 'N/A' ? './assets/notFound.png' : arrayPosters[i];
+    const movie = {};
+    movie.poster = arrayPosters[i] === 'N/A' ? './notFound.png' : arrayPosters[i];
     movie.title = arrayTitle[i];
     movie.year = arrayYear[i];
     movie.id = arrayId[i];
@@ -35,13 +35,16 @@ export function createMoviesInfo(data) {
 }
 
 export async function addRating(arrayMoviesInfo) {
+  const array = arrayMoviesInfo;
+  /* eslint-disable no-await-in-loop */
   for (let i = 0; arrayMoviesInfo.length > i; i += 1) {
     const url = `https://www.omdbapi.com/?i=${arrayMoviesInfo[i].id}&apikey=2e0bd215`;
     const res = await fetch(url);
     const data = await res.json();
-    arrayMoviesInfo[i].rating = data.imdbRating;
+    array[i].rating = data.imdbRating;
   }
-  return arrayMoviesInfo;
+  /* eslint-disable no-await-in-loop */
+  return array;
 }
 
 export async function getTranslate(str) {
