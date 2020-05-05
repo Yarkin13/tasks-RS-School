@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11724,10 +11724,10 @@ Swiper.use(components);
 
 /***/ }),
 
-/***/ "./src/factory-pattern.js":
-/*!********************************!*\
-  !*** ./src/factory-pattern.js ***!
-  \********************************/
+/***/ "./src/js/factory-pattern.js":
+/*!***********************************!*\
+  !*** ./src/js/factory-pattern.js ***!
+  \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11736,7 +11736,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MovieFactory; });
 /* harmony import */ var core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.object.define-property */ "./node_modules/core-js/modules/es6.object.define-property.js");
 /* harmony import */ var core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _movie_class__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./movie-class */ "./src/movie-class.js");
+/* harmony import */ var _movie_class__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./movie-class */ "./src/js/movie-class.js");
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11770,10 +11770,10 @@ var MovieFactory = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
+/***/ "./src/js/index.js":
+/*!*************************!*\
+  !*** ./src/js/index.js ***!
+  \*************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11788,12 +11788,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
 /* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/js/swiper.esm.bundle.js");
-/* harmony import */ var _request_functions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./request-functions */ "./src/request-functions.js");
-/* harmony import */ var _factory_pattern__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./factory-pattern */ "./src/factory-pattern.js");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _swiper_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./swiper.css */ "./src/swiper.css");
-/* harmony import */ var _swiper_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_swiper_css__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _request_functions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./request-functions */ "./src/js/request-functions.js");
+/* harmony import */ var _factory_pattern__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./factory-pattern */ "./src/js/factory-pattern.js");
+/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../styles/style.css */ "./src/styles/style.css");
+/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_styles_style_css__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _styles_swiper_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../styles/swiper.css */ "./src/styles/swiper.css");
+/* harmony import */ var _styles_swiper_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_styles_swiper_css__WEBPACK_IMPORTED_MODULE_8__);
 
 
 
@@ -11852,6 +11852,7 @@ document.addEventListener('DOMContentLoaded', function () {
   input.focus();
   load.classList.add('show');
 });
+var quantity = 0;
 
 function drawMovieCards() {
   return _drawMovieCards.apply(this, arguments);
@@ -11876,22 +11877,26 @@ function _drawMovieCards() {
           case 4:
             data = _context.sent;
             moviesInfo = Object(_request_functions__WEBPACK_IMPORTED_MODULE_5__["createMoviesInfo"])(data);
-            _context.next = 8;
+            quantity = moviesInfo.length;
+            _context.next = 9;
             return Object(_request_functions__WEBPACK_IMPORTED_MODULE_5__["addRating"])(moviesInfo);
 
-          case 8:
+          case 9:
             moviesInfo = _context.sent;
-            if (pageRequest === 1) swiperWrapper.innerHTML = '';
+            if (pageRequest === 1) swiperWrapper.innerHTML = ''; // conditional first search or add slides after end slides
+
             moviesInfo.forEach(function (movie) {
               var movieFactory = new _factory_pattern__WEBPACK_IMPORTED_MODULE_6__["default"](movie, swiperWrapper);
               movieFactory.create();
             });
-            if (pageRequest === 1) mySwiper.slideTo(0);
+            if (pageRequest === 1) mySwiper.slideTo(0); // conditional first search or
+            // add slides after end slides
+
             mySwiper.update();
             load.classList.remove('show');
             return _context.abrupt("return", data);
 
-          case 15:
+          case 16:
           case "end":
             return _context.stop();
         }
@@ -11949,6 +11954,7 @@ document.addEventListener('keydown', function (event) {
   }
 });
 mySwiper.on('reachEnd', function () {
+  if (quantity < 10) return;
   load.classList.add('show');
   var textRequest = document.querySelector('input').value;
 
@@ -11971,10 +11977,10 @@ mySwiper.on('reachEnd', function () {
 
 /***/ }),
 
-/***/ "./src/movie-class.js":
-/*!****************************!*\
-  !*** ./src/movie-class.js ***!
-  \****************************/
+/***/ "./src/js/movie-class.js":
+/*!*******************************!*\
+  !*** ./src/js/movie-class.js ***!
+  \*******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12018,10 +12024,10 @@ var Movie = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./src/request-functions.js":
-/*!**********************************!*\
-  !*** ./src/request-functions.js ***!
-  \**********************************/
+/***/ "./src/js/request-functions.js":
+/*!*************************************!*\
+  !*** ./src/js/request-functions.js ***!
+  \*************************************/
 /*! exports provided: getMovieInfo, createMoviesInfo, addRating, getTranslate */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12201,10 +12207,10 @@ function _getTranslate() {
 
 /***/ }),
 
-/***/ "./src/style.css":
-/*!***********************!*\
-  !*** ./src/style.css ***!
-  \***********************/
+/***/ "./src/styles/style.css":
+/*!******************************!*\
+  !*** ./src/styles/style.css ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12212,10 +12218,10 @@ function _getTranslate() {
 
 /***/ }),
 
-/***/ "./src/swiper.css":
-/*!************************!*\
-  !*** ./src/swiper.css ***!
-  \************************/
+/***/ "./src/styles/swiper.css":
+/*!*******************************!*\
+  !*** ./src/styles/swiper.css ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

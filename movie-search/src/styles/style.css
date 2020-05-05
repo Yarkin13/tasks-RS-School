@@ -20,7 +20,7 @@ header {
   right: 15%;
   height: 35px;
   width: 35px;
-  background-image: url(./assets/loading.gif);
+  background-image: url(../assets/loading.gif);
   display: none;
   background-size: 100%;
   margin-left: 10px;
@@ -96,7 +96,7 @@ form {
   margin-left: 10px;
   width: 35px;
   height: 35px;
-  background-image: url(./assets/close.svg);
+  background-image: url(../assets/close.svg);
   background-size: 100%;
   background-position: 50% 50%;
   opacity: 0.6;
@@ -144,7 +144,7 @@ footer {
   content: " ";
   background-size: 100%;
   border-radius: 50%;
-  background-image: url(./assets/GitHub.png);
+  background-image: url(../assets/GitHub.png);
   width: 30px;
   height: 30px;
 }
@@ -179,7 +179,7 @@ footer {
   content: " ";
   background-size: 100%;
   border-radius: 50%;
-  background-image: url(./assets/signs.svg);
+  background-image: url(../assets/signs.svg);
   width: 25px;
   height: 25px;
 }
@@ -187,7 +187,7 @@ footer {
 .card-title {
   font-family: 'Lato', sans-serif;
   color: #363826;
-  height: 55px;
+  height: 60px;
   overflow: hidden;
   font-size: 25px;
   display: block;

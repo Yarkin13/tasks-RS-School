@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = (env, options) => {
   const isProduction = options.mode === 'production';
   const config = {
-    entry: './src/index.js',
+    entry: './src/js/index.js',
     output: {
       path: path.join(__dirname, '/dist'),
       filename: 'main.js'

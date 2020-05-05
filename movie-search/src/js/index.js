@@ -4,8 +4,8 @@ import {
 } from './request-functions';
 
 import MovieFactory from './factory-pattern';
-import './style.css';
-import './swiper.css';
+import '../styles/style.css';
+import '../styles/swiper.css';
 import '@babel/polyfill';
 
 const swiperWrapper = document.querySelector('.swiper-wrapper');
@@ -52,10 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
   input.focus();
   load.classList.add('show');
 });
+let quantity = 0;
 
 async function drawMovieCards(textRequest = 'war', page) {
   const data = await getMovieInfo(page, textRequest);
   let moviesInfo = createMoviesInfo(data);
+  quantity = moviesInfo.length;
   moviesInfo = await addRating(moviesInfo);
   if (pageRequest === 1) swiperWrapper.innerHTML = ''; // conditional first search or add slides after end slides
   moviesInfo.forEach((movie) => {
@@ -116,6 +118,7 @@ document.addEventListener('keydown', (event) => {
 });
 
 mySwiper.on('reachEnd', () => {
+  if (quantity < 10) return;
   load.classList.add('show');
   const textRequest = document.querySelector('input').value;
   if (textRequest === '') {
