@@ -57,25 +57,13 @@ async function drawMovieCards(textRequest = 'war', page) {
   const data = await getMovieInfo(page, textRequest);
   let moviesInfo = createMoviesInfo(data);
   moviesInfo = await addRating(moviesInfo);
-  swiperWrapper.innerHTML = '';
+  if (pageRequest === 1) swiperWrapper.innerHTML = ''; // conditional first search or add slides after end slides
   moviesInfo.forEach((movie) => {
     const movieFactory = new MovieFactory(movie, swiperWrapper);
     movieFactory.create();
   });
-  mySwiper.slideTo(0);
-  mySwiper.update();
-  load.classList.remove('show');
-  return data;
-}
-
-async function drawMovieCardsForAddSlides(textRequest = 'war', page) {
-  const data = await getMovieInfo(page, textRequest);
-  let moviesInfo = createMoviesInfo(data);
-  moviesInfo = await addRating(moviesInfo);
-  moviesInfo.forEach((movie) => {
-    const movieFactory = new MovieFactory(movie, swiperWrapper);
-    movieFactory.create();
-  });
+  if (pageRequest === 1) mySwiper.slideTo(0); // conditional first search or
+  // add slides after end slides
   mySwiper.update();
   load.classList.remove('show');
   return data;
@@ -88,7 +76,7 @@ btnClear.addEventListener('click', (event) => {
   input.value = '';
 });
 
-btn.addEventListener('click', (event) => {
+function searchMovie(event) {
   pageRequest = 1;
   event.preventDefault();
   load.classList.add('show');
@@ -118,39 +106,12 @@ btn.addEventListener('click', (event) => {
         });
       });
   }
-});
+}
+btn.addEventListener('click', searchMovie);
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
-    pageRequest = 1;
-    event.preventDefault();
-    load.classList.add('show');
-    subField.innerText = '';
-    const textRequest = document.querySelector('input').value;
-    if (textRequest === '') {
-      load.classList.remove('show');
-      return;
-    }
-    if (/[a-zA-Z]/.test(textRequest)) {
-      const data = drawMovieCards(textRequest);
-      data.catch(() => {
-        subField.innerText = `No result for "${textRequest}"`;
-        load.classList.remove('show');
-      });
-    } else {
-      const translate = getTranslate(textRequest);
-      translate.then((data) => data.text[0])
-        .then((data) => {
-          const dataRequest = drawMovieCards(data);
-          dataRequest.then(() => {
-            subField.innerText = `Showing results for "${data}"`;
-          });
-          dataRequest.catch(() => {
-            subField.innerText = `No result for "${textRequest}"`;
-            load.classList.remove('show');
-          });
-        });
-    }
+    searchMovie(event);
   }
 });
 
@@ -163,11 +124,11 @@ mySwiper.on('reachEnd', () => {
   }
   pageRequest += 1;
   if (/[a-zA-Z]/.test(textRequest)) {
-    drawMovieCardsForAddSlides(textRequest, pageRequest);
+    drawMovieCards(textRequest, pageRequest);
   } else {
     const translate = getTranslate(textRequest);
     translate.then((data) => {
-      drawMovieCardsForAddSlides(data.text[0], pageRequest);
+      drawMovieCards(data.text[0], pageRequest);
     });
   }
 });

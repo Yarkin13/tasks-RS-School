@@ -11881,12 +11881,12 @@ function _drawMovieCards() {
 
           case 8:
             moviesInfo = _context.sent;
-            swiperWrapper.innerHTML = '';
+            if (pageRequest === 1) swiperWrapper.innerHTML = '';
             moviesInfo.forEach(function (movie) {
               var movieFactory = new _factory_pattern__WEBPACK_IMPORTED_MODULE_6__["default"](movie, swiperWrapper);
               movieFactory.create();
             });
-            mySwiper.slideTo(0);
+            if (pageRequest === 1) mySwiper.slideTo(0);
             mySwiper.update();
             load.classList.remove('show');
             return _context.abrupt("return", data);
@@ -11901,58 +11901,13 @@ function _drawMovieCards() {
   return _drawMovieCards.apply(this, arguments);
 }
 
-function drawMovieCardsForAddSlides() {
-  return _drawMovieCardsForAddSlides.apply(this, arguments);
-}
-
-function _drawMovieCardsForAddSlides() {
-  _drawMovieCardsForAddSlides = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-    var textRequest,
-        page,
-        data,
-        moviesInfo,
-        _args2 = arguments;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            textRequest = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : 'war';
-            page = _args2.length > 1 ? _args2[1] : undefined;
-            _context2.next = 4;
-            return Object(_request_functions__WEBPACK_IMPORTED_MODULE_5__["getMovieInfo"])(page, textRequest);
-
-          case 4:
-            data = _context2.sent;
-            moviesInfo = Object(_request_functions__WEBPACK_IMPORTED_MODULE_5__["createMoviesInfo"])(data);
-            _context2.next = 8;
-            return Object(_request_functions__WEBPACK_IMPORTED_MODULE_5__["addRating"])(moviesInfo);
-
-          case 8:
-            moviesInfo = _context2.sent;
-            moviesInfo.forEach(function (movie) {
-              var movieFactory = new _factory_pattern__WEBPACK_IMPORTED_MODULE_6__["default"](movie, swiperWrapper);
-              movieFactory.create();
-            });
-            mySwiper.update();
-            load.classList.remove('show');
-            return _context2.abrupt("return", data);
-
-          case 13:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2);
-  }));
-  return _drawMovieCardsForAddSlides.apply(this, arguments);
-}
-
 drawMovieCards('war', 1);
 btnClear.addEventListener('click', function (event) {
   event.preventDefault();
   input.value = '';
 });
-btn.addEventListener('click', function (event) {
+
+function searchMovie(event) {
   pageRequest = 1;
   event.preventDefault();
   load.classList.add('show');
@@ -11985,41 +11940,12 @@ btn.addEventListener('click', function (event) {
       });
     });
   }
-});
+}
+
+btn.addEventListener('click', searchMovie);
 document.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
-    pageRequest = 1;
-    event.preventDefault();
-    load.classList.add('show');
-    subField.innerText = '';
-    var textRequest = document.querySelector('input').value;
-
-    if (textRequest === '') {
-      load.classList.remove('show');
-      return;
-    }
-
-    if (/[a-zA-Z]/.test(textRequest)) {
-      var data = drawMovieCards(textRequest);
-      data["catch"](function () {
-        subField.innerText = "No result for \"".concat(textRequest, "\"");
-        load.classList.remove('show');
-      });
-    } else {
-      var translate = Object(_request_functions__WEBPACK_IMPORTED_MODULE_5__["getTranslate"])(textRequest);
-      translate.then(function (data) {
-        return data.text[0];
-      }).then(function (data) {
-        var dataRequest = drawMovieCards(data);
-        dataRequest.then(function () {
-          subField.innerText = "Showing results for \"".concat(data, "\"");
-        });
-        dataRequest["catch"](function () {
-          subField.innerText = "No result for \"".concat(textRequest, "\"");
-          load.classList.remove('show');
-        });
-      });
-    }
+    searchMovie(event);
   }
 });
 mySwiper.on('reachEnd', function () {
@@ -12034,11 +11960,11 @@ mySwiper.on('reachEnd', function () {
   pageRequest += 1;
 
   if (/[a-zA-Z]/.test(textRequest)) {
-    drawMovieCardsForAddSlides(textRequest, pageRequest);
+    drawMovieCards(textRequest, pageRequest);
   } else {
     var translate = Object(_request_functions__WEBPACK_IMPORTED_MODULE_5__["getTranslate"])(textRequest);
     translate.then(function (data) {
-      drawMovieCardsForAddSlides(data.text[0], pageRequest);
+      drawMovieCards(data.text[0], pageRequest);
     });
   }
 });

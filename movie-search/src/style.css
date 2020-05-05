@@ -16,6 +16,8 @@ header {
 }
 
 .load {
+  position: absolute;
+  right: 15%;
   height: 35px;
   width: 35px;
   background-image: url(./assets/loading.gif);
@@ -81,6 +83,7 @@ form {
   height: 35px;
   width: 75px;
   cursor: pointer;
+  position: relative;
 }
 
 .btn:hover {
@@ -210,6 +213,10 @@ input:-moz-placeholder {
     width: 35vw;
   }
 
+  .load {
+    right: 10%;
+  }
+
 }
 
 
@@ -218,6 +225,10 @@ input:-moz-placeholder {
   .card-poster {
     height: 40vh;
     width: 50vw;
+  }
+
+  .load {
+    right: 0%;
   }
 
   .sub-field {
@@ -233,6 +244,10 @@ input:-moz-placeholder {
   .card-poster {
     height: 40vh;
     width: 60vw;
+  }
+
+  .load {
+    display: none;
   }
 
 }
