@@ -1,11 +1,344 @@
 body{
   margin: 0 auto;
 }
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+}
 .control-block {
+  padding: 70px;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  padding-bottom: 30px;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
+
+.control-block__switcher {
+  display: flex;
+  align-items: center;
+}
+
+.control-block__switche__btn-update {
+  font-family: 'Lato', sans-serif;
+  font-size: 28px;
+  color: aliceblue;
+  border: 0;
+  width: 55px;
+  height: 55px;
+  background-color: grey;
+  background-image: url(../assets/update.svg);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+
+.control-block__switche__btn-BE {
+  font-family: 'Lato', sans-serif;
+  font-size: 28px;
+  color: aliceblue;
+  border: 0;
+  width: 55px;
+  height: 55px;
+  background-color: grey;
+  margin-right: 10px;
+  border-radius: 0 10px 10px 0;
+}
+.control-block__switche__btn-RU {
+  font-family: 'Lato', sans-serif;
+  font-size: 28px;
+  color: aliceblue;
+  border: 0;
+  width: 55px;
+  height: 55px;
+  background-color: grey;
+  border-radius: 10px 0 0 10px;
+}
+
+.control-block__switche__btn-EN {
+  font-family: 'Lato', sans-serif;
+  font-size: 28px;
+  color: aliceblue;
+  border: 0;
+  width: 55px;
+  height: 55px;
+  background-color: #5b5e60;
+}
+.control-block__switche__btn-F {
+  font-family: 'Lato', sans-serif;
+  font-size: 28px;
+  color: aliceblue;
+  border: 0;
+  width: 55px;
+  height: 55px;
+  background-color: grey;
+  border-radius: 0 10px 10px 0;
+}
+
+.control-block__switche__btn-C {
+  font-family: 'Lato', sans-serif;
+  font-size: 28px;
+  color: aliceblue;
+  border: 0;
+  width: 55px;
+  height: 55px;
+  background-color: #5b5e60;
+  border-radius: 10px 0 0 10px;
+}
+
+.control-block__search-form__input{
+  width: 20vw;
+  height: 55px;
+  background-color: #5b5e60;
+  border-radius: 10px 0 0 10px;
+  border: 0;
+  font-size: 30px;
+  color: #ffffff;
+  padding: 0;
+  border: solid grey 1px;
+}
+
+.control-block__search-form {
+  display: flex;
+  align-items: center;
+}
+.control-block__search-form__btn {
+  padding: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 57px;
+  background-color: grey;
+  border-radius: 0 10px 10px 0;
+  font-size: 30px;
+  border: 0;
+  color: #ffffff;
+}
+
+.weather {
+  margin-left: 10vw;
+}
+
+.weather__title__city {
+  font-family: 'Lato', sans-serif;
+  font-size: 60px;
+  color: #ffffff;
+  margin: 0;
+  margin-bottom: 20px;
+}
+.weather__title__date {
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.weather__description {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.weather__description__summary__img {
+  padding-left: 15px;
+}
+
+.weather__description__temperature {
+  font-family: 'Lato', sans-serif;
+  font-size: 270px;
+  color: #ffffff;
+  margin: 0
+}
+
+.weather__description__summary__feels-like{
+  padding-left: 15px;
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  color: #ffffff;
+  margin: 0
+}
+
+.weather__description__summary__wind {
+  padding-left: 15px;
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  color: #ffffff;
+  margin: 0
+}
+
+.weather__description__summary__hum{
+  padding-left: 15px;
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  color: #ffffff;
+  margin: 0
+}
+
+.weather__description__summary__description {
+  padding-left: 15px;
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  color: #ffffff;
+  margin: 0
+}
+
+.weather__three-days-weather{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.weather__three-days-weather__one-day__name-day{
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  color: #ffffff;
+}
+
+.weather__three-days-weather__one-day__temp{
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  color: #ffffff;
+}
+#map {
+  margin-right: 10vw;
+  width: 500px;
+  height: 50vh;
+  border-radius: 5%;
+  border: 1px solid gray;
+}
+.mapboxgl-canvas{
+  border-radius: 5%;
+}
+
+.map-box__coordinates__longitude{
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  color: #ffffff;
+}
+
+.map-box__coordinates__latitude{
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  color: #ffffff;
+}
+
 .main-content-wrapper{
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+}
+.mapboxgl-map {
+  overflow: visible
+}
+
+@media (max-width: 1268px) {
+  .main-content-wrapper{
+    justify-content: center;
+  }
+
+  .weather {
+    margin: 0 auto;
+  }
+  .map-box {
+    width: 497px;
+    margin: 0 auto;
+  }
+
+}
+
+@media (max-width: 970px) {
+  .wrapper {
+    height: 100%;
+  }
+}
+
+@media (max-width: 761px) {
+  .control-block{
+    justify-content: center;
+  }
+
+  .control-block__search-form{
+    margin-top: 10px;
+  }
+
+  .control-block__search-form__input {
+    width: 30vw;
+  }
+}
+
+@media (max-width: 497px) {
+  .control-block__search-form__input {
+    width: 50vw;
+  }
+
+  #map {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+  }
+  .weather__description{
+    justify-content: center;
+  }
+  .weather__title__city {
+    text-align: center;
+  }
+  .weather__title__date {
+    text-align: center;
+  }
+
+  .map-box__coordinates__longitude {
+    text-align: center;
+  }
+
+  .map-box__coordinates__latitude {
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .control-block__switche__btn-update {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .weather__three-days-weather {
+    justify-content: center;
+  }
+  .weather__three-days-weather__one-day {
+    margin-top: 10px;
+  }
+  .control-block__switche__btn-BE {
+    width: 45px;
+    height: 45px;
+  }
+  .control-block__switche__btn-RU {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .control-block__switche__btn-EN {
+    width: 45px;
+    height: 45px;
+  }
+  .control-block__switche__btn-F {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .control-block__switche__btn-C {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .control-block__search-form__input{
+    height: 45px;
+  }
+
+  .control-block__search-form__btn{
+    height: 45px;
+  }
 }
