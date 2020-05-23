@@ -3,7 +3,8 @@ body{
 }
 .wrapper {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  max-height: 100%;
   background-repeat: no-repeat;
 }
 .control-block {
@@ -35,8 +36,17 @@ body{
   background-position: center;
   margin-right: 10px;
   border-radius: 10px;
+  transition-duration: 0.5s;
+  cursor: pointer;
 }
 
+.control-block__switche__btn-update:hover {
+  background-color: #353636;
+}
+
+.hide {
+  display: none;
+}
 
 .control-block__switche__btn-BE {
   font-family: 'Lato', sans-serif;
@@ -48,7 +58,14 @@ body{
   background-color: grey;
   margin-right: 10px;
   border-radius: 0 10px 10px 0;
+  transition-duration: 0.5s;
+  cursor: pointer;
 }
+
+.control-block__switche__btn-BE:hover {
+  background-color: #353636;
+}
+
 .control-block__switche__btn-RU {
   font-family: 'Lato', sans-serif;
   font-size: 28px;
@@ -58,6 +75,12 @@ body{
   height: 55px;
   background-color: grey;
   border-radius: 10px 0 0 10px;
+  transition-duration: 0.5s;
+  cursor: pointer;
+}
+
+.control-block__switche__btn-RU:hover {
+  background-color: #353636;
 }
 
 .control-block__switche__btn-EN {
@@ -68,8 +91,16 @@ body{
   width: 55px;
   height: 55px;
   background-color: #5b5e60;
+  transition-duration: 0.5s;
+  cursor: pointer;
 }
+
+.control-block__switche__btn-EN:hover {
+  background-color: #353636;
+}
+
 .control-block__switche__btn-F {
+  transition-duration: 0.5s;
   font-family: 'Lato', sans-serif;
   font-size: 28px;
   color: aliceblue;
@@ -78,17 +109,32 @@ body{
   height: 55px;
   background-color: grey;
   border-radius: 0 10px 10px 0;
+  cursor: pointer;
+}
+
+.control-block__switche__btn-F:hover {
+  background-color: #353636;
+}
+
+.control-block__switche__btn-C:hover {
+  background-color: #353636;
 }
 
 .control-block__switche__btn-C {
+  transition-duration: 0.5s;
   font-family: 'Lato', sans-serif;
   font-size: 28px;
   color: aliceblue;
   border: 0;
   width: 55px;
   height: 55px;
-  background-color: #5b5e60;
+  background-color: grey;
   border-radius: 10px 0 0 10px;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #5b5e60
 }
 
 .control-block__search-form__input{
@@ -120,8 +166,10 @@ body{
 }
 
 .weather {
+  max-width: 650px;
   margin-left: 10vw;
 }
+
 
 .weather__title__city {
   font-family: 'Lato', sans-serif;
@@ -197,21 +245,25 @@ body{
   color: #ffffff;
 }
 
-.weather__three-days-weather__one-day__temp{
+.weather__three-days-weather__one-day__temp1, .weather__three-days-weather__one-day__temp2, .weather__three-days-weather__one-day__temp3{
   text-align: center;
   font-family: 'Lato', sans-serif;
   font-size: 30px;
   color: #ffffff;
 }
 #map {
-  margin-right: 10vw;
-  width: 500px;
+  width: 100%;
   height: 50vh;
   border-radius: 5%;
   border: 1px solid gray;
 }
 .mapboxgl-canvas{
   border-radius: 5%;
+}
+
+.map-box {
+width: 500px;
+margin-right: 10vw;
 }
 
 .map-box__coordinates__longitude{
@@ -231,30 +283,54 @@ body{
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.mapboxgl-map {
-  overflow: visible
-}
 
-@media (max-width: 1268px) {
-  .main-content-wrapper{
-    justify-content: center;
+@media (max-width: 1450px) {
+  .map-box{
+    margin-right: 5vw;
+  }
+  .weather {
+    margin-left: 5vw;
   }
 
+  .control-block {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
+
+@media (max-width: 1300px) {
+  .weather {
+    margin-left: 2vw;
+  }
+  .map-box{
+    margin-right: 2vw;
+  }
+  .control-block {
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+}
+
+@media (max-width: 1250px) {
+  .map-box {
+    margin: 0 auto;
+  }
   .weather {
     margin: 0 auto;
   }
-  .map-box {
-    width: 497px;
-    margin: 0 auto;
-  }
-
 }
 
-@media (max-width: 970px) {
+@media (max-width: 1146px) {
+  .control-block {
+    padding-left: 10vw;
+    padding-right: 10vw;
+  }
+
   .wrapper {
     height: 100%;
   }
 }
+
 
 @media (max-width: 761px) {
   .control-block{
@@ -262,11 +338,23 @@ body{
   }
 
   .control-block__search-form{
-    margin-top: 10px;
+    margin-top: 30px;
   }
 
   .control-block__search-form__input {
-    width: 30vw;
+    width: 50vw;
+  }
+
+}
+
+@media (max-width: 646px) {
+  .weather__title{
+    text-align: center;
+  }
+
+  .weather__description {
+    justify-content: center;
+    margin-bottom: 30px;
   }
 }
 
@@ -280,14 +368,13 @@ body{
     height: 300px;
     margin: 0 auto;
   }
-  .weather__description{
-    justify-content: center;
+
+  .weather__description__temperature {
+    font-size: 200px;
   }
+
   .weather__title__city {
-    text-align: center;
-  }
-  .weather__title__date {
-    text-align: center;
+    font-size: 40px;
   }
 
   .map-box__coordinates__longitude {
