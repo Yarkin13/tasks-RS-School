@@ -1,6 +1,6 @@
-import { getCurrentlyNameCity, getGeoData, getDate, getAndTransformDatefromUTC0 } from './services/geolocation-service';
+import { getCurrentlyNameCity, getGeoData, getDate } from './services/geolocation-service';
 import { getOneDayWeatherData, getThreeDayWeatherData } from './services/weather-service';
-import { getTranslateSearch } from './services/translate-service';
+import { getTranslateRequest } from './services/translate-service';
 
 export const WeatherTodayModule = (function () {
   const dayInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'];
@@ -15,24 +15,19 @@ export const WeatherTodayModule = (function () {
     const hour = time.split(':')[0];
     const min = time.split(':')[1];
     const sec = time.split(':')[2];
-    const newDate = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hour), Number(min), Number(sec)));
-    console.log(newDate)
+    const newDate = new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(min), Number(sec));
     return [hour, min, sec, newDate];
   };
-
   const getCurrentWeatherData = async function () {
     const currentlyNameCity = await getCurrentlyNameCity();
     const geoData = await getGeoData(currentlyNameCity);
-    const time  = await getAndTransformDatefromUTC0(currentlyNameCity, geoData.results[0].geometry.lat, geoData.results[0].geometry.lng)
-    /* const date = await getDate(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
-    const time = await transformDate(date); */
+    const date = await getDate(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
+    const time = await transformDate(date);
     const data = await getOneDayWeatherData(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
     const data2 = await getThreeDayWeatherData(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
-    console.log(data)
     const weatherInfo = {
       city: geoData.results[0].formatted,
-      date: time,
-      code: data.data[0].weather.code,
+      date: time[3],
       temp: Math.round(data.data[0].temp),
       description: data.data[0].weather.description,
       feelsLike: Math.round(data.data[0].app_temp),
@@ -59,15 +54,13 @@ export const WeatherTodayModule = (function () {
 
   const getRequestedWeatherDate = async (searchValue) => {
     const geoData = await getGeoData(searchValue);
-    const time  = await getAndTransformDatefromUTC0(searchValue, geoData.results[0].geometry.lat, geoData.results[0].geometry.lng)
-    /* const date = await getDate(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng); */
-    /* const time = await transformDate(date); */
+    const date = await getDate(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
+    const time = await transformDate(date);
     const data = await getOneDayWeatherData(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
     const data2 = await getThreeDayWeatherData(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
     const weatherInfo = {
       city: geoData.results[0].formatted,
-      date: time,
-      code: data.data[0].weather.code,
+      date: time[3],
       temp: Math.round(data.data[0].temp),
       description: data.data[0].weather.description,
       feelsLike: Math.round(data.data[0].app_temp),
@@ -98,34 +91,31 @@ export const WeatherTodayModule = (function () {
       `<div class="weather">
       <div class="weather__title">
         <p class="weather__title__city">${weatherInfo.city}</p>
-        <div class="weather__title__date">
-          <p data-i18n="date" class="weather__title__date__date">${dayInWeek[weatherInfo.date.getDay()]} ${weatherInfo.date.getDate()} ${months[weatherInfo.date.getMonth()]}</p>
-          <p class="weather__title__date__time">&nbsp${weatherInfo.date.getHours().toString().padStart(2, 0)}:${weatherInfo.date.getMinutes().toString().padStart(2, 0)}:${weatherInfo.date.getSeconds().toString().padStart(2, 0)}</p>
-        </div>
+        <p class="weather__title__date">${dayInWeek[weatherInfo.date.getDay()]} ${weatherInfo.date.getDate()} ${months[weatherInfo.date.getMonth()]} ${weatherInfo.date.getHours().toString().padStart(2, 0)}:${weatherInfo.date.getMinutes().toString().padStart(2, 0)}:${weatherInfo.date.getSeconds().toString().padStart(2, 0)}</p>
       </div>
       <div class="weather__description">
         <div class="weather__description__temperature">${weatherInfo.temp}°</div>
         <div class="weather__description__summary">
           <img src="./assets/icons/${weatherInfo.icon}.png" class="weather__description__summary__img">
-          <p data-i18n="${weatherInfo.code}" class="weather__description__summary__description">${weatherInfo.description}</p>
-          <p data-i18n="fells" class="weather__description__summary__feels-like">Fells like:&nbsp${weatherInfo.feelsLike}°</p>
-          <p data-i18n="wind" class="weather__description__summary__wind">Wind:&nbsp${weatherInfo.wind} m/s</p>
-          <p data-i18n="hum" class="weather__description__summary__hum">Humidity:&nbsp${weatherInfo.humidity}%</p>
+          <p class="weather__description__summary__description">${weatherInfo.description}</p>
+          <p class="weather__description__summary__feels-like">Fells like:&nbsp${weatherInfo.feelsLike}°</p>
+          <p class="weather__description__summary__wind">Wind:&nbsp${weatherInfo.wind} m/s</p>
+          <p class="weather__description__summary__hum">Humidity:&nbsp${weatherInfo.humidity}%</p>
         </div>
       </div>
       <div class="weather__three-days-weather">
         <div class="weather__three-days-weather__one-day">
-          <div data-i18n="date1" class="weather__three-days-weather__one-day__name-day1">${dayInWeek[weatherInfo.date.getDay() + 1]}</div>
+          <div class="weather__three-days-weather__one-day__name-day1">${dayInWeek[weatherInfo.date.getDay() + 1]}</div>
           <div class="weather__three-days-weather__one-day__temp1">${weatherInfo.threeDay[0].temp}°</div>
           <img src="./assets/icons/${weatherInfo.threeDay[0].icon}.png">
         </div>
         <div class="weather__three-days-weather__one-day">
-          <div data-i18n="date2" class="weather__three-days-weather__one-day__name-day2">${dayInWeek[weatherInfo.date.getDay() + 2]}</div>
+          <div class="weather__three-days-weather__one-day__name-day2">${dayInWeek[weatherInfo.date.getDay() + 2]}</div>
           <div class="weather__three-days-weather__one-day__temp2">${weatherInfo.threeDay[1].temp}°</div>
           <img src="./assets/icons/${weatherInfo.threeDay[1].icon}.png">
         </div>
         <div class="weather__three-days-weather__one-day">
-          <div data-i18n="date3" class="weather__three-days-weather__one-day__name-day3">${dayInWeek[weatherInfo.date.getDay() + 3]}</div>
+          <div class="weather__three-days-weather__one-day__name-day3">${dayInWeek[weatherInfo.date.getDay() + 3]}</div>
           <div class="weather__three-days-weather__one-day__temp3">${weatherInfo.threeDay[2].temp}°</div>
           <img src="./assets/icons/${weatherInfo.threeDay[2].icon}.png">
         </div>
@@ -144,7 +134,7 @@ export const WeatherTodayModule = (function () {
       const weatherInfo = await getRequestedWeatherDate(searchValue);
       await renderWeatherData(weatherInfo);
     } else {
-      const translate = await getTranslateSearch(searchValue);
+      const translate = await getTranslateRequest(searchValue);
       const weatherInfo = await getRequestedWeatherDate(translate.text[0]);
       await renderWeatherData(weatherInfo);
     }

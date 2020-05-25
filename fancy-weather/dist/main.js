@@ -2091,6 +2091,56 @@ module.exports = __webpack_require__(/*! ./_core */ "./node_modules/core-js/modu
 
 /***/ }),
 
+/***/ "./node_modules/core-js/modules/es6.array.for-each.js":
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/modules/es6.array.for-each.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/modules/_export.js");
+var $forEach = __webpack_require__(/*! ./_array-methods */ "./node_modules/core-js/modules/_array-methods.js")(0);
+var STRICT = __webpack_require__(/*! ./_strict-method */ "./node_modules/core-js/modules/_strict-method.js")([].forEach, true);
+
+$export($export.P + $export.F * !STRICT, 'Array', {
+  // 22.1.3.10 / 15.4.4.18 Array.prototype.forEach(callbackfn [, thisArg])
+  forEach: function forEach(callbackfn /* , thisArg */) {
+    return $forEach(this, callbackfn, arguments[1]);
+  }
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es6.array.index-of.js":
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/modules/es6.array.index-of.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/modules/_export.js");
+var $indexOf = __webpack_require__(/*! ./_array-includes */ "./node_modules/core-js/modules/_array-includes.js")(false);
+var $native = [].indexOf;
+var NEGATIVE_ZERO = !!$native && 1 / [1].indexOf(1, -0) < 0;
+
+$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(/*! ./_strict-method */ "./node_modules/core-js/modules/_strict-method.js")($native)), 'Array', {
+  // 22.1.3.11 / 15.4.4.14 Array.prototype.indexOf(searchElement [, fromIndex])
+  indexOf: function indexOf(searchElement /* , fromIndex = 0 */) {
+    return NEGATIVE_ZERO
+      // convert -0 to +0
+      ? $native.apply(this, arguments) || 0
+      : $indexOf(this, searchElement, arguments[1]);
+  }
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/modules/es6.array.map.js":
 /*!*******************************************************!*\
   !*** ./node_modules/core-js/modules/es6.array.map.js ***!
@@ -3615,52 +3665,78 @@ var BackgroundModule = function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ControlBlockModule", function() { return ControlBlockModule; });
-/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.number.constructor */ "./node_modules/core-js/modules/es6.number.constructor.js");
-/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es6_array_map__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.array.map */ "./node_modules/core-js/modules/es6.array.map.js");
-/* harmony import */ var core_js_modules_es6_array_map__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_map__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.promise */ "./node_modules/core-js/modules/es6.promise.js");
+/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es6_array_index_of__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es6.array.index-of */ "./node_modules/core-js/modules/es6.array.index-of.js");
+/* harmony import */ var core_js_modules_es6_array_index_of__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_index_of__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es6.regexp.split */ "./node_modules/core-js/modules/es6.regexp.split.js");
+/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es6_array_for_each__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es6.array.for-each */ "./node_modules/core-js/modules/es6.array.for-each.js");
+/* harmony import */ var core_js_modules_es6_array_for_each__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_for_each__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es6.number.constructor */ "./node_modules/core-js/modules/es6.number.constructor.js");
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es6_array_map__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es6.array.map */ "./node_modules/core-js/modules/es6.array.map.js");
+/* harmony import */ var core_js_modules_es6_array_map__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_map__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _services_translate_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/translate-service */ "./src/js/services/translate-service.js");
+/* harmony import */ var _data_translate_data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./data/translate-data */ "./src/js/data/translate-data.js");
+
+
+
+
+
+
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 var ControlBlockModule = function () {
   var state = JSON.parse(sessionStorage.getItem('state'));
   var targetNode = document.querySelector('.control-block');
-  var node = "<div class=\"control-block__switcher\">\n      <button class=\"control-block__switche__btn-update\"> </button>\n      <button class=\"control-block__switche__btn-RU\">RU</button>\n      <button class=\"control-block__switche__btn-EN\">EN</button>\n      <button class=\"control-block__switche__btn-BE\">BE</button>\n      <button class=\"control-block__switche__btn-C active\">C\xB0</button>\n      <button class=\"control-block__switche__btn-F\">F\xB0</button>\n    </div>\n    <div class=\"control-block__search-form\">\n        <input class=\"control-block__search-form__input\">\n        <button class=\"control-block__search-form__btn\">Search</button>\n    </div>";
+  var node = "<div class=\"control-block__switcher\">\n      <button class=\"control-block__switche__btn-update\"> </button>\n      <button class=\"control-block__switche__btn-RU\">RU</button>\n      <button class=\"control-block__switche__btn-EN\">EN</button>\n      <button class=\"control-block__switche__btn-BE\">BE</button>\n      <button class=\"control-block__switche__btn-C\">C\xB0</button>\n      <button class=\"control-block__switche__btn-F\">F\xB0</button>\n    </div>\n    <div class=\"control-block__search-form\">\n        <input class=\"control-block__search-form__input\">\n        <button data-i18n =\"search\" class=\"control-block__search-form__btn\">Search</button>\n    </div>";
 
-  var transformTemperatureC_F = function transformTemperatureC_F() {
+  var transformTemperature = function transformTemperature(targetUnit) {
     var state = JSON.parse(sessionStorage.getItem('state'));
     var mainTempNode = document.querySelector('.weather__description__temperature');
     var TempOneDayNode = document.querySelector('.weather__three-days-weather__one-day__temp1');
     var TempTwoDayNode = document.querySelector('.weather__three-days-weather__one-day__temp2');
     var TempThreeDayNode = document.querySelector('.weather__three-days-weather__one-day__temp3');
-    var arrayC = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText];
-    var arrayF = arrayC.map(function (el) {
-      el = Math.round(Number(el.substring(0, el.length - 1)) * 1.8 + 32);
-      return el;
-    });
-    mainTempNode.innerText = "".concat(arrayF[0], "\xB0");
-    TempOneDayNode.innerText = "".concat(arrayF[1], "\xB0");
-    TempTwoDayNode.innerText = "".concat(arrayF[2], "\xB0");
-    TempThreeDayNode.innerText = "".concat(arrayF[3], "\xB0");
-    state.unit = 'f';
-    sessionStorage.setItem('state', JSON.stringify(state));
-  };
+    var btnF = document.querySelector('.control-block__switche__btn-F');
+    var btnC = document.querySelector('.control-block__switche__btn-C');
+    var arrayBefore = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText];
+    var arrayAfter;
 
-  var transformTemperatureF_C = function transformTemperatureF_C() {
-    var state = JSON.parse(sessionStorage.getItem('state'));
-    var mainTempNode = document.querySelector('.weather__description__temperature');
-    var TempOneDayNode = document.querySelector('.weather__three-days-weather__one-day__temp1');
-    var TempTwoDayNode = document.querySelector('.weather__three-days-weather__one-day__temp2');
-    var TempThreeDayNode = document.querySelector('.weather__three-days-weather__one-day__temp3');
-    var arrayF = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText];
-    var arrayC = arrayF.map(function (el) {
-      el = Math.round((Number(el.substring(0, el.length - 1)) - 32) / 1.8);
-      return el;
-    });
-    mainTempNode.innerText = "".concat(arrayC[0], "\xB0");
-    TempOneDayNode.innerText = "".concat(arrayC[1], "\xB0");
-    TempTwoDayNode.innerText = "".concat(arrayC[2], "\xB0");
-    TempThreeDayNode.innerText = "".concat(arrayC[3], "\xB0");
-    state.unit = 'c';
+    if (targetUnit === 'f') {
+      arrayAfter = arrayBefore.map(function (el) {
+        el = Math.round(Number(el.substring(0, el.length - 1)) * 1.8 + 32);
+        return el;
+      });
+      btnC.classList.remove('active');
+      btnF.classList.add('active');
+    }
+
+    if (targetUnit === 'c') {
+      arrayAfter = arrayBefore.map(function (el) {
+        el = Math.round((Number(el.substring(0, el.length - 1)) - 32) / 1.8);
+        return el;
+      });
+      btnF.classList.remove('active');
+      btnC.classList.add('active');
+    }
+
+    mainTempNode.innerText = "".concat(arrayAfter[0], "\xB0");
+    TempOneDayNode.innerText = "".concat(arrayAfter[1], "\xB0");
+    TempTwoDayNode.innerText = "".concat(arrayAfter[2], "\xB0");
+    TempThreeDayNode.innerText = "".concat(arrayAfter[3], "\xB0");
+    state.unit = targetUnit;
     sessionStorage.setItem('state', JSON.stringify(state));
   };
 
@@ -3668,28 +3744,120 @@ var ControlBlockModule = function () {
     targetNode.insertAdjacentHTML('beforeend', node);
 
     if (typeof sessionStorage.state == 'undefined') {
-      document.querySelector('.control-block__switche__btn-C').classList.add('active');
       var _state = {
-        unit: 'c'
+        unit: 'c',
+        lang: 'en',
+        date: ''
       };
       sessionStorage.setItem('state', JSON.stringify(_state));
       return;
     }
-
-    var state = JSON.parse(sessionStorage.getItem('state'));
-
-    if (state.unit === 'c') {
-      document.querySelector('.control-block__switche__btn-C').classList.add('active');
-    } else {
-      document.querySelector('.control-block__switche__btn-C').classList.remove('active');
-      document.querySelector('.control-block__switche__btn-F').classList.add('active');
-    }
   };
+
+  var translate = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(targetLang) {
+      var btnRU, btnEN, btnBE, cityNode, translateCity, date, nodes, state, translateData;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              btnRU = document.querySelector('.control-block__switche__btn-RU');
+              btnEN = document.querySelector('.control-block__switche__btn-EN');
+              btnBE = document.querySelector('.control-block__switche__btn-BE');
+              cityNode = document.querySelector('.weather__title__city');
+              _context.next = 6;
+              return Object(_services_translate_service__WEBPACK_IMPORTED_MODULE_8__["getTranslateCity"])(cityNode.textContent, targetLang);
+
+            case 6:
+              translateCity = _context.sent;
+              cityNode.textContent = translateCity.text[0];
+              date = new Date(JSON.parse(sessionStorage.getItem('state')).date);
+              nodes = document.querySelectorAll('[data-i18n]');
+              state = JSON.parse(sessionStorage.getItem('state'));
+              state.lang = targetLang;
+              sessionStorage.setItem('state', JSON.stringify(state));
+              _context.t0 = state.lang;
+              _context.next = _context.t0 === 'ru' ? 16 : _context.t0 === 'en' ? 21 : _context.t0 === 'be' ? 26 : 31;
+              break;
+
+            case 16:
+              translateData = _data_translate_data__WEBPACK_IMPORTED_MODULE_9__["translateDataRU"];
+              btnRU.classList.add('active');
+              btnEN.classList.remove('active');
+              btnBE.classList.remove('active');
+              return _context.abrupt("break", 31);
+
+            case 21:
+              translateData = _data_translate_data__WEBPACK_IMPORTED_MODULE_9__["translateDataEN"];
+              btnEN.classList.add('active');
+              btnRU.classList.remove('active');
+              btnBE.classList.remove('active');
+              return _context.abrupt("break", 31);
+
+            case 26:
+              translateData = _data_translate_data__WEBPACK_IMPORTED_MODULE_9__["translateDataBE"];
+              btnBE.classList.add('active');
+              btnRU.classList.remove('active');
+              btnEN.classList.remove('active');
+              return _context.abrupt("break", 31);
+
+            case 31:
+              nodes.forEach(function (el) {
+                switch (el.className) {
+                  case 'weather__description__summary__wind':
+                    el.textContent = translateData[el.dataset.i18n] + ':' + el.textContent.split(':')[1].split(' ')[0] + ' ' + translateData.ms;
+                    break;
+
+                  case 'weather__title__date__date':
+                    el.textContent = translateData.days[date.getDay()] + ' ' + date.getDate() + ' ' + translateData.months[date.getMonth()];
+                    break;
+
+                  case 'weather__three-days-weather__one-day__name-day1':
+                    el.textContent = translateData.days[date.getDay() + 1];
+                    break;
+
+                  case 'weather__three-days-weather__one-day__name-day2':
+                    el.textContent = translateData.days[date.getDay() + 2];
+                    break;
+
+                  case 'weather__three-days-weather__one-day__name-day3':
+                    el.textContent = translateData.days[date.getDay() + 3];
+                    break;
+
+                  case 'control-block__search-form__btn':
+                    el.textContent = translateData[el.dataset.i18n];
+                    break;
+
+                  case 'weather__description__summary__description':
+                    el.textContent = translateData[el.dataset.i18n];
+                    break;
+
+                  case 'weather__title__date__date':
+                    el.textContent = translateData.days[translateData.days.indexOf(el.textContent.split(' ')[0])] + el.textContent.split(' ')[1] + translateData.months[translateData.months.indexOf(el.textContent.split(' ')[2])];
+                    break;
+
+                  default:
+                    el.textContent = translateData[el.dataset.i18n] + ':' + el.textContent.split(':')[1];
+                }
+              });
+
+            case 32:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function translate(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
   return {
     render: renderControlBlock,
-    transformTemperatureC_F: transformTemperatureC_F,
-    transformTemperatureF_C: transformTemperatureF_C
+    transformTemperature: transformTemperature,
+    translate: translate
   };
 }();
 
@@ -3746,7 +3914,7 @@ var MapBoxModule = function () {
 
   var renderCoordinate = function renderCoordinate(lng, lat) {
     var targetNode = document.querySelector('.map-box__coordinates');
-    var node = "<p class=\"map-box__coordinates__longitude\">Longitude: ".concat(lng, "</p>\n      <p class=\"map-box__coordinates__latitude\">Latitude: ").concat(lat, "</p>");
+    var node = "<p data-i18n=\"lng\" class=\"map-box__coordinates__longitude\">Longitude: ".concat(lng, "</p>\n      <p data-i18n=\"lat\"  class=\"map-box__coordinates__latitude\">Latitude: ").concat(lat, "</p>");
     targetNode.insertAdjacentHTML('beforeend', node);
   };
 
@@ -3811,7 +3979,7 @@ var MapBoxModule = function () {
 
             case 9:
               _context2.next = 11;
-              return Object(_services_translate_service__WEBPACK_IMPORTED_MODULE_5__["getTranslate"])(searchValue);
+              return Object(_services_translate_service__WEBPACK_IMPORTED_MODULE_5__["getTranslateSearch"])(searchValue);
 
             case 11:
               translate = _context2.sent;
@@ -3908,10 +4076,11 @@ var WeatherTodayModule = function () {
               hour = time.split(':')[0];
               min = time.split(':')[1];
               sec = time.split(':')[2];
-              newDate = new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(min), Number(sec));
+              newDate = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hour), Number(min), Number(sec)));
+              console.log(newDate);
               return _context.abrupt("return", [hour, min, sec, newDate]);
 
-            case 10:
+            case 11:
             case "end":
               return _context.stop();
           }
@@ -3926,7 +4095,7 @@ var WeatherTodayModule = function () {
 
   var getCurrentWeatherData = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-      var currentlyNameCity, geoData, date, time, data, data2, weatherInfo;
+      var currentlyNameCity, geoData, time, data, data2, weatherInfo;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -3942,28 +4111,25 @@ var WeatherTodayModule = function () {
             case 5:
               geoData = _context2.sent;
               _context2.next = 8;
-              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_8__["getDate"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
+              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_8__["getAndTransformDatefromUTC0"])(currentlyNameCity, geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
 
             case 8:
-              date = _context2.sent;
-              _context2.next = 11;
-              return transformDate(date);
-
-            case 11:
               time = _context2.sent;
-              _context2.next = 14;
+              _context2.next = 11;
               return Object(_services_weather_service__WEBPACK_IMPORTED_MODULE_9__["getOneDayWeatherData"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
 
-            case 14:
+            case 11:
               data = _context2.sent;
-              _context2.next = 17;
+              _context2.next = 14;
               return Object(_services_weather_service__WEBPACK_IMPORTED_MODULE_9__["getThreeDayWeatherData"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
 
-            case 17:
+            case 14:
               data2 = _context2.sent;
+              console.log(data);
               weatherInfo = {
                 city: geoData.results[0].formatted,
-                date: time[3],
+                date: time,
+                code: data.data[0].weather.code,
                 temp: Math.round(data.data[0].temp),
                 description: data.data[0].weather.description,
                 feelsLike: Math.round(data.data[0].app_temp),
@@ -3983,7 +4149,7 @@ var WeatherTodayModule = function () {
               };
               return _context2.abrupt("return", weatherInfo);
 
-            case 20:
+            case 18:
             case "end":
               return _context2.stop();
           }
@@ -3998,7 +4164,7 @@ var WeatherTodayModule = function () {
 
   var getRequestedWeatherDate = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(searchValue) {
-      var geoData, date, time, data, data2, weatherInfo;
+      var geoData, time, data, data2, weatherInfo;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -4009,28 +4175,24 @@ var WeatherTodayModule = function () {
             case 2:
               geoData = _context3.sent;
               _context3.next = 5;
-              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_8__["getDate"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
+              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_8__["getAndTransformDatefromUTC0"])(searchValue, geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
 
             case 5:
-              date = _context3.sent;
-              _context3.next = 8;
-              return transformDate(date);
-
-            case 8:
               time = _context3.sent;
-              _context3.next = 11;
+              _context3.next = 8;
               return Object(_services_weather_service__WEBPACK_IMPORTED_MODULE_9__["getOneDayWeatherData"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
 
-            case 11:
+            case 8:
               data = _context3.sent;
-              _context3.next = 14;
+              _context3.next = 11;
               return Object(_services_weather_service__WEBPACK_IMPORTED_MODULE_9__["getThreeDayWeatherData"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
 
-            case 14:
+            case 11:
               data2 = _context3.sent;
               weatherInfo = {
                 city: geoData.results[0].formatted,
-                date: time[3],
+                date: time,
+                code: data.data[0].weather.code,
                 temp: Math.round(data.data[0].temp),
                 description: data.data[0].weather.description,
                 feelsLike: Math.round(data.data[0].app_temp),
@@ -4050,7 +4212,7 @@ var WeatherTodayModule = function () {
               };
               return _context3.abrupt("return", weatherInfo);
 
-            case 17:
+            case 14:
             case "end":
               return _context3.stop();
           }
@@ -4071,7 +4233,7 @@ var WeatherTodayModule = function () {
           switch (_context4.prev = _context4.next) {
             case 0:
               targetNode = document.querySelector('.main-content-wrapper');
-              weatherNode = "<div class=\"weather\">\n      <div class=\"weather__title\">\n        <p class=\"weather__title__city\">".concat(weatherInfo.city, "</p>\n        <p class=\"weather__title__date\">").concat(dayInWeek[weatherInfo.date.getDay()], ", ").concat(weatherInfo.date.getDate(), " ").concat(months[weatherInfo.date.getMonth()], " ").concat(weatherInfo.date.getHours().toString().padStart(2, 0), ":").concat(weatherInfo.date.getMinutes().toString().padStart(2, 0), ":").concat(weatherInfo.date.getSeconds().toString().padStart(2, 0), "</p>\n      </div>\n      <div class=\"weather__description\">\n        <div class=\"weather__description__temperature\">").concat(weatherInfo.temp, "\xB0</div>\n        <div class=\"weather__description__summary\">\n          <img src=\"./assets/icons/").concat(weatherInfo.icon, ".png\" class=\"weather__description__summary__img\">\n          <p class=\"weather__description__summary__description\">").concat(weatherInfo.description, "</p>\n          <p class=\"weather__description__summary__feels-like\">Fells like:&nbsp").concat(weatherInfo.feelsLike, "\xB0</p>\n          <p class=\"weather__description__summary__wind\">Wind:&nbsp").concat(weatherInfo.wind, " m/s</p>\n          <p class=\"weather__description__summary__hum\">Humidity:&nbsp").concat(weatherInfo.humidity, "%</p>\n        </div>\n      </div>\n      <div class=\"weather__three-days-weather\">\n        <div class=\"weather__three-days-weather__one-day\">\n          <div class=\"weather__three-days-weather__one-day__name-day\">").concat(dayInWeek[weatherInfo.date.getDay() + 1], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp1\">").concat(weatherInfo.threeDay[0].temp, "\xB0</div>\n          <img src=\"./assets/icons/").concat(weatherInfo.threeDay[0].icon, ".png\">\n        </div>\n        <div class=\"weather__three-days-weather__one-day\">\n          <div class=\"weather__three-days-weather__one-day__name-day\">").concat(dayInWeek[weatherInfo.date.getDay() + 2], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp2\">").concat(weatherInfo.threeDay[1].temp, "\xB0</div>\n          <img src=\"./assets/icons/").concat(weatherInfo.threeDay[1].icon, ".png\">\n        </div>\n        <div class=\"weather__three-days-weather__one-day\">\n          <div class=\"weather__three-days-weather__one-day__name-day\">").concat(dayInWeek[weatherInfo.date.getDay() + 3], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp3\">").concat(weatherInfo.threeDay[2].temp, "\xB0</div>\n          <img src=\"./assets/icons/").concat(weatherInfo.threeDay[2].icon, ".png\">\n        </div>\n      </div>\n    </div>");
+              weatherNode = "<div class=\"weather\">\n      <div class=\"weather__title\">\n        <p class=\"weather__title__city\">".concat(weatherInfo.city, "</p>\n        <div class=\"weather__title__date\">\n          <p data-i18n=\"date\" class=\"weather__title__date__date\">").concat(dayInWeek[weatherInfo.date.getDay()], " ").concat(weatherInfo.date.getDate(), " ").concat(months[weatherInfo.date.getMonth()], "</p>\n          <p class=\"weather__title__date__time\">&nbsp").concat(weatherInfo.date.getHours().toString().padStart(2, 0), ":").concat(weatherInfo.date.getMinutes().toString().padStart(2, 0), ":").concat(weatherInfo.date.getSeconds().toString().padStart(2, 0), "</p>\n        </div>\n      </div>\n      <div class=\"weather__description\">\n        <div class=\"weather__description__temperature\">").concat(weatherInfo.temp, "\xB0</div>\n        <div class=\"weather__description__summary\">\n          <img src=\"./assets/icons/").concat(weatherInfo.icon, ".png\" class=\"weather__description__summary__img\">\n          <p data-i18n=\"").concat(weatherInfo.code, "\" class=\"weather__description__summary__description\">").concat(weatherInfo.description, "</p>\n          <p data-i18n=\"fells\" class=\"weather__description__summary__feels-like\">Fells like:&nbsp").concat(weatherInfo.feelsLike, "\xB0</p>\n          <p data-i18n=\"wind\" class=\"weather__description__summary__wind\">Wind:&nbsp").concat(weatherInfo.wind, " m/s</p>\n          <p data-i18n=\"hum\" class=\"weather__description__summary__hum\">Humidity:&nbsp").concat(weatherInfo.humidity, "%</p>\n        </div>\n      </div>\n      <div class=\"weather__three-days-weather\">\n        <div class=\"weather__three-days-weather__one-day\">\n          <div data-i18n=\"date1\" class=\"weather__three-days-weather__one-day__name-day1\">").concat(dayInWeek[weatherInfo.date.getDay() + 1], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp1\">").concat(weatherInfo.threeDay[0].temp, "\xB0</div>\n          <img src=\"./assets/icons/").concat(weatherInfo.threeDay[0].icon, ".png\">\n        </div>\n        <div class=\"weather__three-days-weather__one-day\">\n          <div data-i18n=\"date2\" class=\"weather__three-days-weather__one-day__name-day2\">").concat(dayInWeek[weatherInfo.date.getDay() + 2], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp2\">").concat(weatherInfo.threeDay[1].temp, "\xB0</div>\n          <img src=\"./assets/icons/").concat(weatherInfo.threeDay[1].icon, ".png\">\n        </div>\n        <div class=\"weather__three-days-weather__one-day\">\n          <div data-i18n=\"date3\" class=\"weather__three-days-weather__one-day__name-day3\">").concat(dayInWeek[weatherInfo.date.getDay() + 3], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp3\">").concat(weatherInfo.threeDay[2].temp, "\xB0</div>\n          <img src=\"./assets/icons/").concat(weatherInfo.threeDay[2].icon, ".png\">\n        </div>\n      </div>\n    </div>");
               targetNode.insertAdjacentHTML('afterbegin', weatherNode);
 
             case 3:
@@ -4142,7 +4304,7 @@ var WeatherTodayModule = function () {
 
             case 8:
               _context6.next = 10;
-              return Object(_services_translate_service__WEBPACK_IMPORTED_MODULE_10__["getTranslate"])(searchValue);
+              return Object(_services_translate_service__WEBPACK_IMPORTED_MODULE_10__["getTranslateSearch"])(searchValue);
 
             case 10:
               translate = _context6.sent;
@@ -4172,6 +4334,168 @@ var WeatherTodayModule = function () {
     renderRequestedWeather: renderRequestedWeather
   };
 }();
+
+/***/ }),
+
+/***/ "./src/js/data/translate-data.js":
+/*!***************************************!*\
+  !*** ./src/js/data/translate-data.js ***!
+  \***************************************/
+/*! exports provided: translateDataRU, translateDataEN, translateDataBE */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "translateDataRU", function() { return translateDataRU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "translateDataEN", function() { return translateDataEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "translateDataBE", function() { return translateDataBE; });
+var translateDataRU = {
+  fells: 'Ощущается как',
+  wind: 'Ветер',
+  hum: 'Влажность',
+  lng: 'Долгота',
+  lat: 'Широта',
+  ms: 'м/c',
+  search: 'Поиск',
+  months: ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'],
+  days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье', 'Понедельник', 'Вторник'],
+  '200': 'Гроза с небольшим дождем',
+  '201': 'Гроза с дождем',
+  '202': 'Гроза с проливным дождем',
+  '230': 'Гроза с легкой моросью',
+  '231': 'Гроза с моросящим дождем',
+  '232': 'Гроза с сильным моросящим дождем',
+  '233': 'Гроза с градом',
+  '300': 'Легкая морось',
+  '301': 'Изморось',
+  '302': 'Тяжелая морось',
+  '500': 'Легкий дождь',
+  '501': 'Умеренный дождь',
+  '502': 'Ливень',
+  '511': 'Ледяной дождь',
+  '520': 'Легкий дождь',
+  '521': 'Дождь',
+  '522': 'Сильный дождь',
+  '600': 'Легкий снег',
+  '601': 'Снег',
+  '602': 'Снегопад',
+  '610': 'Cнег с дождем',
+  '611': 'Мокрый снег',
+  '612': 'Тяжелый мокрый снег',
+  '621': 'Снегопад',
+  '622': 'Сильный снегопад',
+  '623': 'Порывы ветра',
+  '700': 'Туман',
+  '711': 'Туман',
+  '721': 'Туман',
+  '731': 'Туман',
+  '741': 'Туман',
+  '751': 'Туман',
+  '800': 'Чистое небо',
+  '801': 'Малооблачно',
+  '802': 'Рассеянные облака',
+  '803': 'Облачность',
+  '804': 'Пасмурно',
+  '900': 'Неизвестные осадки'
+};
+var translateDataEN = {
+  fells: 'Fells like',
+  wind: 'Wind',
+  hum: 'Humidity',
+  lng: 'Longitude',
+  lat: 'Latitude',
+  ms: 'm/s',
+  search: 'Search',
+  months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'],
+  '200': 'Thunderstorm with light rain',
+  '201': 'Thunderstorm with rain',
+  '202': 'Thunderstorm with heavy rain',
+  '230': 'Thunderstorm with light drizzle',
+  '231': 'Thunderstorm with drizzle',
+  '232': 'Thunderstorm with heavy drizzle',
+  '233': 'Thunderstorm with Hail',
+  '300': 'Light Drizzle',
+  '301': 'Drizzle',
+  '302': 'Heavy Drizzle',
+  '500': 'Light Rain',
+  '501': 'Moderate Rain',
+  '502': 'Heavy Rain',
+  '511': 'Freezing rain',
+  '520': 'Light shower rain',
+  '521': 'Shower rain',
+  '522': 'Heavy shower rain',
+  '600': 'Light snow',
+  '601': 'Snow',
+  '602': 'Heavy Snow',
+  '610': 'Mix snow/rain',
+  '611': 'Sleet',
+  '612': 'Heavy sleet',
+  '621': 'Snow shower',
+  '622': 'Heavy snow shower',
+  '623': 'Flurries',
+  '700': 'Mist',
+  '711': 'Smoke',
+  '721': 'Sand/dust',
+  '731': 'Fog',
+  '741': 'Freezing Fog',
+  '751': 'Fog',
+  '800': 'Clear sky',
+  '801': 'Few clouds',
+  '802': 'Scattered clouds',
+  '803': 'Broken clouds',
+  '804': 'Overcast clouds',
+  '900': 'Unknown Precipitation'
+};
+var translateDataBE = {
+  fells: 'Адчувае, як',
+  wind: 'Вецер',
+  hum: 'Вільготнасць',
+  lng: 'Шырата',
+  lat: 'Даўгата',
+  ms: 'м/с',
+  search: 'Пошук',
+  months: ['Студзень', 'Люты', 'Сакавiк', 'Красавiк', 'Май', 'Чэрвень', 'Лiпень', 'Жнiвень', 'Верасень', 'Кастрычнiк', 'Лiстапад', 'Снежань'],
+  days: ['Нядзеля', 'Панядзелак', 'Аўторак', 'Серада', 'Чацьвер', 'Пятніца', 'Сыбота', 'Нядзеля', 'Панядзелак', 'Аўторак'],
+  '200': 'Навальніца з невялікім дажджом',
+  '201': 'Навальніца з дажджом',
+  '202': 'Навальніца з моцным дажджом',
+  '230': 'Навальніца са слабым дажджом',
+  '231': 'Навальніца з дробным дожджыкам',
+  '232': 'Навальніца з моцным дожджыкам',
+  '233': 'Навальніца з градам',
+  '300': 'Лёгкая галава',
+  '301': 'Дрыжэ',
+  '302': 'Моцны завірух',
+  '500': 'Невялікі дождж',
+  '501': 'Дождж умераны',
+  '502': 'Залева',
+  '511': 'Ледзяны дождж',
+  '520': 'Невялікі дождж з дажджом',
+  '521': 'Дажджлівы дождж',
+  '522': 'Моцны дождж',
+  '600': 'Невялікі снег',
+  '601': 'Снег',
+  '602': 'Моцны снег',
+  '610': 'Змешваць снег / дождж',
+  '611': 'Мокры снег',
+  '612': 'Мокры снегt',
+  '621': 'Снежны душ',
+  '622': 'Моцны снежны душ',
+  '623': 'Шквалы',
+  '700': 'Туман',
+  '711': 'Дым',
+  '721': 'Дымка',
+  '731': 'Пясок / пыл',
+  '741': 'Туман',
+  '751': 'Замярзаючы туман',
+  '800': 'Яснае неба',
+  '801': 'Мала воблакаў',
+  '802': 'Невялікія хмары',
+  '803': 'Разбітыя хмары',
+  '804': 'Воблачныя хмары',
+  '900': 'Невядомыя ападкі'
+};
 
 /***/ }),
 
@@ -4223,18 +4547,37 @@ function _startApplication() {
           case 0:
             _BackgroundModule__WEBPACK_IMPORTED_MODULE_7__["BackgroundModule"].renderBackground();
             _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].render();
-            _MapBoxModule__WEBPACK_IMPORTED_MODULE_6__["MapBoxModule"].renderCurrentMap();
-            _context2.next = 5;
+            _context2.next = 4;
+            return _MapBoxModule__WEBPACK_IMPORTED_MODULE_6__["MapBoxModule"].renderCurrentMap();
+
+          case 4:
+            _context2.next = 6;
             return _WeatherTodayModule__WEBPACK_IMPORTED_MODULE_5__["WeatherTodayModule"].renderCurrentWeather();
 
-          case 5:
+          case 6:
             state = JSON.parse(sessionStorage.getItem('state'));
 
             if (state.unit === 'f') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperatureC_F();
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature('f');
             }
 
-          case 7:
+            if (state.unit === 'c') {
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature('c');
+            }
+
+            if (state.lang === 'ru') {
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('ru');
+            }
+
+            if (state.lang === 'en') {
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('en');
+            }
+
+            if (state.lang === 'be') {
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('be');
+            }
+
+          case 12:
           case "end":
             return _context2.stop();
         }
@@ -4250,6 +4593,9 @@ var btn = document.querySelector('.control-block__search-form__btn');
 var wrapper = document.querySelector('.main-content-wrapper');
 var btnF = document.querySelector('.control-block__switche__btn-F');
 var btnC = document.querySelector('.control-block__switche__btn-C');
+var btnRU = document.querySelector('.control-block__switche__btn-RU');
+var btnEN = document.querySelector('.control-block__switche__btn-EN');
+var btnBE = document.querySelector('.control-block__switche__btn-BE');
 btn.addEventListener('click', /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
     var state;
@@ -4268,10 +4614,26 @@ btn.addEventListener('click', /*#__PURE__*/function () {
 
           case 6:
             if (state.unit === 'f') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperatureC_F();
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature('f');
             }
 
-          case 7:
+            if (state.unit === 'c') {
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature('c');
+            }
+
+            if (state.lang === 'ru') {
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('ru');
+            }
+
+            if (state.lang === 'en') {
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('en');
+            }
+
+            if (state.lang === 'be') {
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('be');
+            }
+
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -4286,16 +4648,21 @@ btn.addEventListener('click', /*#__PURE__*/function () {
 btnF.addEventListener('click', function () {
   var state = JSON.parse(sessionStorage.getItem('state'));
   if (state.unit === 'f') return;
-  _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperatureC_F();
-  btnC.classList.remove('active');
-  btnF.classList.add('active');
+  _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature('f');
 });
 btnC.addEventListener('click', function () {
   var state = JSON.parse(sessionStorage.getItem('state'));
   if (state.unit === 'c') return;
-  _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperatureF_C();
-  btnF.classList.remove('active');
-  btnC.classList.add('active');
+  _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature('c');
+});
+btnRU.addEventListener('click', function () {
+  _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('ru');
+});
+btnEN.addEventListener('click', function () {
+  _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('en');
+});
+btnBE.addEventListener('click', function () {
+  _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('be');
 });
 
 /***/ }),
@@ -4304,7 +4671,7 @@ btnC.addEventListener('click', function () {
 /*!************************************************!*\
   !*** ./src/js/services/geolocation-service.js ***!
   \************************************************/
-/*! exports provided: getCurrentlyNameCity, getGeoData, getDate */
+/*! exports provided: getCurrentlyNameCity, getGeoData, getDate, getAndTransformDatefromUTC0 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4312,12 +4679,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentlyNameCity", function() { return getCurrentlyNameCity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGeoData", function() { return getGeoData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDate", function() { return getDate; });
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.promise */ "./node_modules/core-js/modules/es6.promise.js");
-/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
-/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAndTransformDatefromUTC0", function() { return getAndTransformDatefromUTC0; });
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.number.constructor */ "./node_modules/core-js/modules/es6.number.constructor.js");
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es6.promise */ "./node_modules/core-js/modules/es6.promise.js");
+/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -4382,10 +4753,9 @@ function _getGeoData() {
 
           case 6:
             data = _context2.sent;
-            console.log(data);
             return _context2.abrupt("return", data);
 
-          case 9:
+          case 8:
           case "end":
             return _context2.stop();
         }
@@ -4429,18 +4799,57 @@ function _getDate() {
   return _getDate.apply(this, arguments);
 }
 
+function getAndTransformDatefromUTC0(_x4) {
+  return _getAndTransformDatefromUTC.apply(this, arguments);
+}
+
+function _getAndTransformDatefromUTC() {
+  _getAndTransformDatefromUTC = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(city) {
+    var geoData, UTC, date, dateUTC, strDate, state;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.next = 2;
+            return getGeoData(city);
+
+          case 2:
+            geoData = _context4.sent;
+            UTC = Number(geoData.results[0].annotations.timezone.offset_sec);
+            date = new Date();
+            dateUTC = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getUTCHours(), date.getMinutes(), date.getSeconds());
+            dateUTC.setSeconds(dateUTC.getSeconds() + UTC);
+            strDate = String(dateUTC);
+            state = JSON.parse(sessionStorage.getItem('state'));
+            state.date = dateUTC;
+            sessionStorage.setItem('state', JSON.stringify(state));
+            return _context4.abrupt("return", dateUTC);
+
+          case 12:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+  return _getAndTransformDatefromUTC.apply(this, arguments);
+}
+
+;
+
 /***/ }),
 
 /***/ "./src/js/services/translate-service.js":
 /*!**********************************************!*\
   !*** ./src/js/services/translate-service.js ***!
   \**********************************************/
-/*! exports provided: getTranslate */
+/*! exports provided: getTranslateSearch, getTranslateCity */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTranslate", function() { return getTranslate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTranslateSearch", function() { return getTranslateSearch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTranslateCity", function() { return getTranslateCity; });
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.promise */ "./node_modules/core-js/modules/es6.promise.js");
@@ -4455,18 +4864,18 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function getTranslate(_x) {
-  return _getTranslate.apply(this, arguments);
+function getTranslateSearch(_x) {
+  return _getTranslateSearch.apply(this, arguments);
 }
 
-function _getTranslate() {
-  _getTranslate = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(str) {
+function _getTranslateSearch() {
+  _getTranslateSearch = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(str) {
     var url, res, data;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200501T172619Z.dceb063c3b5389b5.f6342d8e2926316e43c9556febb44f345b597d81&text=".concat(str, "&lang=ru-en");
+            url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200501T172619Z.dceb063c3b5389b5.f6342d8e2926316e43c9556febb44f345b597d81&text=".concat(str, "&lang=en");
             _context.next = 3;
             return fetch(url);
 
@@ -4486,7 +4895,79 @@ function _getTranslate() {
       }
     }, _callee);
   }));
-  return _getTranslate.apply(this, arguments);
+  return _getTranslateSearch.apply(this, arguments);
+}
+
+function getTranslateCity(_x2, _x3) {
+  return _getTranslateCity.apply(this, arguments);
+}
+/* const transformTemperatureC_F = () => {
+  const state = JSON.parse(sessionStorage.getItem('state'));
+  const mainTempNode = document.querySelector('.weather__description__temperature');
+  const TempOneDayNode = document.querySelector('.weather__three-days-weather__one-day__temp1');
+  const TempTwoDayNode = document.querySelector('.weather__three-days-weather__one-day__temp2');
+  const TempThreeDayNode = document.querySelector('.weather__three-days-weather__one-day__temp3');
+  const arrayC = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText];
+  const arrayF = arrayC.map(el => {
+    el = Math.round(Number(el.substring(0, el.length - 1))* 1.8 + 32);
+    return el;
+  })
+  mainTempNode.innerText = `${arrayF[0]}°`;
+  TempOneDayNode.innerText = `${arrayF[1]}°`
+  TempTwoDayNode.innerText = `${arrayF[2]}°`
+  TempThreeDayNode.innerText = `${arrayF[3]}°`
+  state.unit = 'f';
+  sessionStorage.setItem('state', JSON.stringify(state));
+}
+
+const transformTemperatureF_C = () => {
+  const state = JSON.parse(sessionStorage.getItem('state'));
+  const mainTempNode = document.querySelector('.weather__description__temperature');
+  const TempOneDayNode = document.querySelector('.weather__three-days-weather__one-day__temp1');
+  const TempTwoDayNode = document.querySelector('.weather__three-days-weather__one-day__temp2');
+  const TempThreeDayNode = document.querySelector('.weather__three-days-weather__one-day__temp3');
+  const arrayF = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText];
+  const arrayC = arrayF.map(el => {
+    el = Math.round((Number(el.substring(0, el.length - 1))-32)/1.8);
+    return el;
+  }
+  )
+  mainTempNode.innerText = `${arrayC[0]}°`;
+  TempOneDayNode.innerText = `${arrayC[1]}°`
+  TempTwoDayNode.innerText = `${arrayC[2]}°`
+  TempThreeDayNode.innerText = `${arrayC[3]}°`
+  state.unit = 'c';
+  sessionStorage.setItem('state', JSON.stringify(state));
+} */
+
+function _getTranslateCity() {
+  _getTranslateCity = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(str, targetLang) {
+    var url, res, data;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200501T172619Z.dceb063c3b5389b5.f6342d8e2926316e43c9556febb44f345b597d81&text=".concat(str, "&lang=").concat(targetLang);
+            _context2.next = 3;
+            return fetch(url);
+
+          case 3:
+            res = _context2.sent;
+            _context2.next = 6;
+            return res.json();
+
+          case 6:
+            data = _context2.sent;
+            return _context2.abrupt("return", data);
+
+          case 8:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _getTranslateCity.apply(this, arguments);
 }
 
 /***/ }),
@@ -4527,7 +5008,7 @@ function _getOneDayWeatherData() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            url = "https://api.weatherbit.io/v2.0/forecast/hourly?&lat=".concat(lat, "&lon=").concat(lon, "&key=b35f20a094624b15aa851a45290ae009&hours=48");
+            url = "https://api.weatherbit.io/v2.0/forecast/hourly?&lat=".concat(lat, "&lon=").concat(lon, "&units=M&lang=EN&key=b35f20a094624b15aa851a45290ae009&hours=48");
             _context.next = 3;
             return fetch(url);
 

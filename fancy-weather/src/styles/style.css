@@ -90,7 +90,7 @@ body{
   border: 0;
   width: 55px;
   height: 55px;
-  background-color: #5b5e60;
+  background-color: grey;
   transition-duration: 0.5s;
   cursor: pointer;
 }
@@ -179,6 +179,7 @@ body{
   margin-bottom: 20px;
 }
 .weather__title__date {
+  display: flex;
   font-family: 'Lato', sans-serif;
   font-size: 30px;
   color: #ffffff;
@@ -196,7 +197,7 @@ body{
 
 .weather__description__temperature {
   font-family: 'Lato', sans-serif;
-  font-size: 270px;
+  font-size: 230px;
   color: #ffffff;
   margin: 0
 }
@@ -238,7 +239,7 @@ body{
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.weather__three-days-weather__one-day__name-day{
+.weather__three-days-weather__one-day__name-day1, .weather__three-days-weather__one-day__name-day2, .weather__three-days-weather__one-day__name-day3{
   text-align: center;
   font-family: 'Lato', sans-serif;
   font-size: 30px;

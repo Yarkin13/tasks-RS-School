@@ -1,3 +1,5 @@
+import {getTranslateCity} from './services/translate-service'
+import {translateDataRU, translateDataEN, translateDataBE} from './data/translate-data'
 export const ControlBlockModule = (function () {
   const state = JSON.parse(sessionStorage.getItem('state'));
   const targetNode = document.querySelector('.control-block');
@@ -7,76 +9,131 @@ export const ControlBlockModule = (function () {
       <button class="control-block__switche__btn-RU">RU</button>
       <button class="control-block__switche__btn-EN">EN</button>
       <button class="control-block__switche__btn-BE">BE</button>
-      <button class="control-block__switche__btn-C active">C°</button>
+      <button class="control-block__switche__btn-C">C°</button>
       <button class="control-block__switche__btn-F">F°</button>
     </div>
     <div class="control-block__search-form">
         <input class="control-block__search-form__input">
-        <button class="control-block__search-form__btn">Search</button>
+        <button data-i18n ="search" class="control-block__search-form__btn">Search</button>
     </div>`);
 
-  const transformTemperatureC_F = () => {
+  const transformTemperature = (targetUnit) => {
     const state = JSON.parse(sessionStorage.getItem('state'));
     const mainTempNode = document.querySelector('.weather__description__temperature');
     const TempOneDayNode = document.querySelector('.weather__three-days-weather__one-day__temp1');
     const TempTwoDayNode = document.querySelector('.weather__three-days-weather__one-day__temp2');
     const TempThreeDayNode = document.querySelector('.weather__three-days-weather__one-day__temp3');
-    const arrayC = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText];
-    const arrayF = arrayC.map(el => {
-      el = Math.round(Number(el.substring(0, el.length - 1))* 1.8 + 32);
-      return el;
+    const btnF = document.querySelector('.control-block__switche__btn-F');
+    const btnC = document.querySelector('.control-block__switche__btn-C');
+    const arrayBefore = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText];
+    let arrayAfter;
+    if(targetUnit === 'f') {
+      arrayAfter = arrayBefore.map(el => {
+        el = Math.round(Number(el.substring(0, el.length - 1))* 1.8 + 32);
+        return el;
     })
-    mainTempNode.innerText = `${arrayF[0]}°`;
-    TempOneDayNode.innerText = `${arrayF[1]}°`
-    TempTwoDayNode.innerText = `${arrayF[2]}°`
-    TempThreeDayNode.innerText = `${arrayF[3]}°`
-    state.unit = 'f';
+      btnC.classList.remove('active')
+      btnF.classList.add('active');
+    }
+    if(targetUnit === 'c') {
+      arrayAfter = arrayBefore.map(el => {
+        el = Math.round((Number(el.substring(0, el.length - 1))-32)/1.8);
+        return el;
+    })
+      btnF.classList.remove('active')
+      btnC.classList.add('active');
+    }
+  
+    mainTempNode.innerText = `${arrayAfter[0]}°`;
+    TempOneDayNode.innerText = `${arrayAfter[1]}°`
+    TempTwoDayNode.innerText = `${arrayAfter[2]}°`
+    TempThreeDayNode.innerText = `${arrayAfter[3]}°`
+    state.unit = targetUnit;
     sessionStorage.setItem('state', JSON.stringify(state));
   }
 
-  const transformTemperatureF_C = () => {
-    const state = JSON.parse(sessionStorage.getItem('state'));
-    const mainTempNode = document.querySelector('.weather__description__temperature');
-    const TempOneDayNode = document.querySelector('.weather__three-days-weather__one-day__temp1');
-    const TempTwoDayNode = document.querySelector('.weather__three-days-weather__one-day__temp2');
-    const TempThreeDayNode = document.querySelector('.weather__three-days-weather__one-day__temp3');
-    const arrayF = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText];
-    const arrayC = arrayF.map(el => {
-      el = Math.round((Number(el.substring(0, el.length - 1))-32)/1.8);
-      return el;
-    }
-    )
-    mainTempNode.innerText = `${arrayC[0]}°`;
-    TempOneDayNode.innerText = `${arrayC[1]}°`
-    TempTwoDayNode.innerText = `${arrayC[2]}°`
-    TempThreeDayNode.innerText = `${arrayC[3]}°`
-    state.unit = 'c';
-    sessionStorage.setItem('state', JSON.stringify(state));
-  }
-  
   const renderControlBlock = () => {
     targetNode.insertAdjacentHTML('beforeend', node);
     if(typeof sessionStorage.state == 'undefined') {
-      document.querySelector('.control-block__switche__btn-C').classList.add('active');
       const state = {
-        unit: 'c'
+        unit: 'c',
+        lang: 'en',
+        date: ''
       };
       sessionStorage.setItem('state', JSON.stringify(state));
       return;
     } 
-    const state = JSON.parse(sessionStorage.getItem('state'));
-    if(state.unit === 'c') {
-      document.querySelector('.control-block__switche__btn-C').classList.add('active')
-    } else {
-      document.querySelector('.control-block__switche__btn-C').classList.remove('active')
-      document.querySelector('.control-block__switche__btn-F').classList.add('active')
-    }
-     
   };
+  
+  const translate = async (targetLang) => {
+    const btnRU = document.querySelector('.control-block__switche__btn-RU');
+    const btnEN = document.querySelector('.control-block__switche__btn-EN');
+    const btnBE = document.querySelector('.control-block__switche__btn-BE');
+    const cityNode = document.querySelector('.weather__title__city');
+    const translateCity = await getTranslateCity(cityNode.textContent, targetLang);
+    cityNode.textContent = translateCity.text[0];
+    const date = new Date(JSON.parse(sessionStorage.getItem('state')).date);
+    const nodes = document.querySelectorAll('[data-i18n]');
+    const state = JSON.parse(sessionStorage.getItem('state'));
+    state.lang = targetLang;
+    sessionStorage.setItem('state', JSON.stringify(state));
+    let translateData;
+    switch(state.lang) {
+      case 'ru':
+        translateData = translateDataRU;
+        btnRU.classList.add('active');
+        btnEN.classList.remove('active');
+        btnBE.classList.remove('active');
+        break;
+      case 'en':
+        translateData = translateDataEN;
+        btnEN.classList.add('active');
+        btnRU.classList.remove('active');
+        btnBE.classList.remove('active');
+        break;
+      case 'be':
+        translateData = translateDataBE;
+        btnBE.classList.add('active');
+        btnRU.classList.remove('active');
+        btnEN.classList.remove('active');
+        break;
+    }
+    nodes.forEach((el) => {
+      switch(el.className) {
+        case 'weather__description__summary__wind':
+          el.textContent = translateData[el.dataset.i18n] + ':' +el.textContent.split(':')[1].split(' ')[0] + ' ' + translateData.ms ;
+          break;
+        case 'weather__title__date__date':
+          el.textContent = translateData.days[date.getDay()] + ' ' +  date.getDate() + ' ' + translateData.months[date.getMonth()];
+          break;
+        case 'weather__three-days-weather__one-day__name-day1':
+          el.textContent = translateData.days[date.getDay() + 1]
+          break;
+        case 'weather__three-days-weather__one-day__name-day2':
+          el.textContent = translateData.days[date.getDay() + 2]
+          break;
+        case 'weather__three-days-weather__one-day__name-day3':
+          el.textContent = translateData.days[date.getDay() + 3]
+          break;
+        case 'control-block__search-form__btn': 
+          el.textContent = translateData[el.dataset.i18n];
+          break;
+        case 'weather__description__summary__description': 
+          el.textContent = translateData[el.dataset.i18n];
+          break;
+        case 'weather__title__date__date':
+          el.textContent = translateData.days[translateData.days.indexOf(el.textContent.split(' ')[0])] +  el.textContent.split(' ')[1]
+          +  translateData.months[translateData.months.indexOf(el.textContent.split(' ')[2])];
+          break;
+        default:
+          el.textContent = translateData[el.dataset.i18n] + ':' +el.textContent.split(':')[1];
+      }
+    })
+  }
 
   return {
     render: renderControlBlock,
-    transformTemperatureC_F,
-    transformTemperatureF_C
+    transformTemperature,
+    translate
   };
 }());

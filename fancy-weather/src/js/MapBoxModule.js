@@ -1,6 +1,6 @@
 import mapboxgl from 'mapbox-gl';
 import { getCurrentlyNameCity, getGeoData } from './services/geolocation-service';
-import { getTranslate } from './services/translate-service';
+import { getTranslateSearch } from './services/translate-service';
 
 export const MapBoxModule = (function () {
   const renderStructure = () => {
@@ -29,8 +29,8 @@ export const MapBoxModule = (function () {
   const renderCoordinate = (lng, lat) => {
     const targetNode = document.querySelector('.map-box__coordinates');
     const node = (
-      `<p class="map-box__coordinates__longitude">Longitude: ${lng}</p>
-      <p class="map-box__coordinates__latitude">Latitude: ${lat}</p>`
+      `<p data-i18n="lng" class="map-box__coordinates__longitude">Longitude: ${lng}</p>
+      <p data-i18n="lat"  class="map-box__coordinates__latitude">Latitude: ${lat}</p>`
     );
     targetNode.insertAdjacentHTML('beforeend', node);
   };
@@ -48,7 +48,7 @@ export const MapBoxModule = (function () {
       renderMap(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
       renderCoordinate(geoData.results[0].annotations.DMS.lng, geoData.results[0].annotations.DMS.lat);
     } else {
-      const translate = await getTranslate(searchValue);
+      const translate = await getTranslateSearch(searchValue);
       const geoData = await getGeoData(translate.text[0]);
       renderMap(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
       renderCoordinate(geoData.results[0].annotations.DMS.lng, geoData.results[0].annotations.DMS.lat);
