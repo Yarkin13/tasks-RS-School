@@ -18,16 +18,16 @@ export async function getDate(lat, lng) {
   return data;
 }
 
-export async function getAndTransformDatefromUTC0 (city) {
+export async function getAndTransformDatefromUTC0(city) {
   const geoData = await getGeoData(city);
   const UTC = Number(geoData.results[0].annotations.timezone.offset_sec);
   const date = new Date();
-  let dateUTC = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getUTCHours(), date.getMinutes(), date.getSeconds());
+  const dateUTC = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getUTCHours(), date.getMinutes(), date.getSeconds());
   dateUTC.setSeconds(dateUTC.getSeconds() + UTC);
   const strDate = String(dateUTC);
-  
+
   const state = JSON.parse(sessionStorage.getItem('state'));
   state.date = dateUTC;
   sessionStorage.setItem('state', JSON.stringify(state));
   return dateUTC;
-};
+}

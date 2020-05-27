@@ -3633,20 +3633,157 @@ try {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BackgroundModule", function() { return BackgroundModule; });
+/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es6.promise */ "./node_modules/core-js/modules/es6.promise.js");
+/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
+/* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es6.regexp.split */ "./node_modules/core-js/modules/es6.regexp.split.js");
+/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _services_geolocation_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/geolocation-service */ "./src/js/services/geolocation-service.js");
+/* harmony import */ var _services_weather_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/weather-service */ "./src/js/services/weather-service.js");
+
+
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
 var BackgroundModule = function () {
   var node = document.querySelector('.wrapper');
-  var number = Math.round(Math.random() * 13);
-  var backgroundList = ['./assets/background/background-1.jpg', './assets/background/background-2.jpg', './assets/background/background-3.jpg', './assets/background/background-3.jpg', './assets/background/background-5.jpg', './assets/background/background-4.jpg', './assets/background/background-7.jpg', './assets/background/background-5.jpg', './assets/background/background-9.jpg', './assets/background/background-6.jpg', './assets/background/background-11.jpg', './assets/background/background-7.jpg', './assets/background/background-13.jpg', './assets/background/background-8.jpg'];
-
-  var renderBackground = function renderBackground() {
-    node.style.background = "url(".concat(backgroundList[number], ")");
-    node.style.backgroundAttachment = 'fixed';
-    node.style.backgroundRepeat = 'no-repeat';
-    /* node.style.backgroundSize = '100%'; */
-
-    node.style.backgroundPosition = 'center';
-    console.log(number);
+  var backgroundList = {
+    spring: [['./assets/background/spring/spring-day-1', './assets/background/spring/spring-day-2', './assets/background/spring/spring-day-3', './assets/background/spring/spring-day-4', './assets/background/spring/spring-day-5', './assets/background/spring/spring-day-6', './assets/background/spring/spring-day-7'], ['./assets/background/spring/spring-night-1', './assets/background/spring/spring-night-2', './assets/background/spring/spring-night-3', './assets/background/spring/spring-night-4', './assets/background/spring/spring-night-5']],
+    summer: [['./assets/background/summer/summer-day-1', './assets/background/summer/summer-day-2', './assets/background/summer/summer-day-3', './assets/background/summer/summer-day-4', './assets/background/summer/summer-day-5', './assets/background/summer/summer-day-6', './assets/background/summer/summer-day-7', './assets/background/summer/summer-day-8', './assets/background/summer/summer-day-9', './assets/background/summer/summer-day-10', './assets/background/summer/summer-day-11', './assets/background/summer/summer-day-12'], ['./assets/background/summer/summer-night-1', './assets/background/summer/summer-night-2', './assets/background/summer/summer-night-3', './assets/background/summer/summer-night-4', './assets/background/summer/summer-night-5', './assets/background/summer/summer-night-6', './assets/background/summer/summer-night-7', './assets/background/summer/summer-night-8', './assets/background/summer/summer-night-9']],
+    autumn: [['./assets/background/autumn/autumn-day-1', './assets/background/autumn/autumn-day-2', './assets/background/autumn/autumn-day-3', './assets/background/autumn/autumn-day-4', './assets/background/autumn/autumn-day-5', './assets/background/autumn/autumn-day-6', './assets/background/autumn/autumn-day-7'], ['./assets/background/autumn/autumn-night-1', './assets/background/autumn/autumn-night-2', './assets/background/autumn/autumn-night-3']],
+    winter: [['./assets/background/winter/winter-day-1', './assets/background/winter/winter-day-2', './assets/background/winter/winter-day-3', './assets/background/winter/winter-day-4', './assets/background/winter/winter-day-5', './assets/background/winter/winter-day-6', './assets/background/winter/winter-day-7'], ['./assets/background/winter/winter-night-1', './assets/background/winter/winter-night-2', './assets/background/winter/winter-night-3', './assets/background/winter/winter-night-4']]
   };
+
+  var initBackgroundList = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var state, input, currentlyNameCity, geoData, dataWeather, date, month, hour, targetBackgroundList;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              state = JSON.parse(sessionStorage.getItem('state'));
+              input = document.querySelector('.control-block__search-form__input');
+              _context.next = 4;
+              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_4__["getCurrentlyNameCity"])();
+
+            case 4:
+              currentlyNameCity = _context.sent;
+
+              if (input.value !== '') {
+                currentlyNameCity = state.request;
+              }
+
+              _context.next = 8;
+              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_4__["getGeoData"])(currentlyNameCity);
+
+            case 8:
+              geoData = _context.sent;
+              _context.next = 11;
+              return Object(_services_weather_service__WEBPACK_IMPORTED_MODULE_5__["getOneDayWeatherData"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
+
+            case 11:
+              dataWeather = _context.sent;
+              date = dataWeather.data[0].timestamp_local;
+              month = date.split('-')[1];
+              hour = date.split('T')[1].split(':')[0];
+
+              if (month >= 0 && month <= 2 || month === '12') {
+                if (hour >= 0 && hour < 6 || hour >= 21) {
+                  console.log('winter night');
+                  targetBackgroundList = backgroundList.winter[1];
+                } else {
+                  console.log('winter day');
+                  targetBackgroundList = backgroundList.winter[0];
+                }
+              }
+
+              if (month >= 3 && month <= 5) {
+                if (hour >= 0 && hour < 6 || hour >= 21) {
+                  console.log('spring night');
+                  targetBackgroundList = backgroundList.spring[1];
+                } else {
+                  console.log('spring day');
+                  targetBackgroundList = backgroundList.spring[0];
+                }
+              }
+
+              if (month >= 6 && month <= 8) {
+                if (hour >= 0 && hour < 6 || hour >= 21) {
+                  console.log('summer night');
+                  targetBackgroundList = backgroundList.summer[1];
+                } else {
+                  console.log('summer day');
+                  targetBackgroundList = backgroundList.summer[0];
+                }
+              }
+
+              if (month >= 9 && month <= 11) {
+                if (hour >= 0 && hour < 6 || hour >= 21) {
+                  console.log('autumn night');
+                  targetBackgroundList = backgroundList.autumn[1];
+                } else {
+                  console.log('autumn day');
+                  targetBackgroundList = backgroundList.autumn[0];
+                }
+              }
+
+              return _context.abrupt("return", targetBackgroundList);
+
+            case 20:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function initBackgroundList() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var rnd = function rnd(listLength) {
+    return Math.round(Math.random() * (listLength - 1));
+  };
+
+  var renderBackground = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var targetBackgroundList;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return initBackgroundList();
+
+            case 2:
+              targetBackgroundList = _context2.sent;
+              node.style.background = "url(".concat(targetBackgroundList[rnd(targetBackgroundList.length)], ".jpg), linear-gradient(#303030, grey)");
+              node.style.backgroundAttachment = 'fixed';
+              node.style.backgroundRepeat = 'no-repeat';
+              node.style.backgroundPosition = 'center';
+
+            case 7:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function renderBackground() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
 
   return {
     renderBackground: renderBackground
@@ -3699,7 +3836,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var ControlBlockModule = function () {
-  var state = JSON.parse(sessionStorage.getItem('state'));
   var targetNode = document.querySelector('.control-block');
   var node = "<div class=\"control-block__switcher\">\n      <button class=\"control-block__switche__btn-update\"> </button>\n      <button class=\"control-block__switche__btn-RU\">RU</button>\n      <button class=\"control-block__switche__btn-EN\">EN</button>\n      <button class=\"control-block__switche__btn-BE\">BE</button>\n      <button class=\"control-block__switche__btn-C\">C\xB0</button>\n      <button class=\"control-block__switche__btn-F\">F\xB0</button>\n    </div>\n    <div class=\"control-block__search-form\">\n        <input class=\"control-block__search-form__input\">\n        <button data-i18n =\"search\" class=\"control-block__search-form__btn\">Search</button>\n    </div>";
 
@@ -3711,7 +3847,9 @@ var ControlBlockModule = function () {
     var TempThreeDayNode = document.querySelector('.weather__three-days-weather__one-day__temp3');
     var btnF = document.querySelector('.control-block__switche__btn-F');
     var btnC = document.querySelector('.control-block__switche__btn-C');
-    var arrayBefore = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText];
+    var fellsLikeTemp = document.querySelector('.weather__description__summary__feels-like__temp');
+    var arrayBefore = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText, fellsLikeTemp.innerText];
+    console.log(arrayBefore);
     var arrayAfter;
 
     if (targetUnit === 'f') {
@@ -3736,6 +3874,7 @@ var ControlBlockModule = function () {
     TempOneDayNode.innerText = "".concat(arrayAfter[1], "\xB0");
     TempTwoDayNode.innerText = "".concat(arrayAfter[2], "\xB0");
     TempThreeDayNode.innerText = "".concat(arrayAfter[3], "\xB0");
+    fellsLikeTemp.innerText = "".concat(arrayAfter[4], "\xB0");
     state.unit = targetUnit;
     sessionStorage.setItem('state', JSON.stringify(state));
   };
@@ -3743,14 +3882,14 @@ var ControlBlockModule = function () {
   var renderControlBlock = function renderControlBlock() {
     targetNode.insertAdjacentHTML('beforeend', node);
 
-    if (typeof sessionStorage.state == 'undefined') {
-      var _state = {
+    if (typeof sessionStorage.state === 'undefined') {
+      var state = {
         unit: 'c',
         lang: 'en',
-        date: ''
+        date: '',
+        request: 'samara'
       };
-      sessionStorage.setItem('state', JSON.stringify(_state));
-      return;
+      sessionStorage.setItem('state', JSON.stringify(state));
     }
   };
 
@@ -3805,11 +3944,11 @@ var ControlBlockModule = function () {
               nodes.forEach(function (el) {
                 switch (el.className) {
                   case 'weather__description__summary__wind':
-                    el.textContent = translateData[el.dataset.i18n] + ':' + el.textContent.split(':')[1].split(' ')[0] + ' ' + translateData.ms;
+                    el.textContent = "".concat(translateData[el.dataset.i18n], ":").concat(el.textContent.split(':')[1].split(' ')[0], " ").concat(translateData.ms);
                     break;
 
                   case 'weather__title__date__date':
-                    el.textContent = translateData.days[date.getDay()] + ' ' + date.getDate() + ' ' + translateData.months[date.getMonth()];
+                    el.textContent = "".concat(translateData.days[date.getDay()], " ").concat(date.getDate(), " ").concat(translateData.months[date.getMonth()]);
                     break;
 
                   case 'weather__three-days-weather__one-day__name-day1':
@@ -3836,8 +3975,12 @@ var ControlBlockModule = function () {
                     el.textContent = translateData.days[translateData.days.indexOf(el.textContent.split(' ')[0])] + el.textContent.split(' ')[1] + translateData.months[translateData.months.indexOf(el.textContent.split(' ')[2])];
                     break;
 
+                  case 'weather__description__summary__feels-like__text':
+                    el.textContent = translateData[el.dataset.i18n];
+                    break;
+
                   default:
-                    el.textContent = translateData[el.dataset.i18n] + ':' + el.textContent.split(':')[1];
+                    el.textContent = "".concat(translateData[el.dataset.i18n], ":").concat(el.textContent.split(':')[1]);
                 }
               });
 
@@ -4032,17 +4175,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es7_string_pad_start__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es7.string.pad-start */ "./node_modules/core-js/modules/es7.string.pad-start.js");
 /* harmony import */ var core_js_modules_es7_string_pad_start__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_string_pad_start__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es6.number.constructor */ "./node_modules/core-js/modules/es6.number.constructor.js");
-/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es6.regexp.split */ "./node_modules/core-js/modules/es6.regexp.split.js");
-/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _services_geolocation_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/geolocation-service */ "./src/js/services/geolocation-service.js");
-/* harmony import */ var _services_weather_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./services/weather-service */ "./src/js/services/weather-service.js");
-/* harmony import */ var _services_translate_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./services/translate-service */ "./src/js/services/translate-service.js");
-
-
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _services_geolocation_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/geolocation-service */ "./src/js/services/geolocation-service.js");
+/* harmony import */ var _services_weather_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/weather-service */ "./src/js/services/weather-service.js");
+/* harmony import */ var _services_translate_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/translate-service */ "./src/js/services/translate-service.js");
 
 
 
@@ -4061,70 +4198,44 @@ var WeatherTodayModule = function () {
   var dayInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'];
   var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-  var transformDate = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(date) {
-      var date1, year, month, day, time, hour, min, sec, newDate;
+  var getCurrentWeatherData = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var input, currentlyNameCity, geoData, time, data, data2, weatherInfo;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              date1 = date.formatted.split(' ')[0];
-              year = date1.split('-')[0];
-              month = date1.split('-')[1];
-              day = date1.split('-')[2];
-              time = date.formatted.split(' ')[1];
-              hour = time.split(':')[0];
-              min = time.split(':')[1];
-              sec = time.split(':')[2];
-              newDate = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hour), Number(min), Number(sec)));
-              console.log(newDate);
-              return _context.abrupt("return", [hour, min, sec, newDate]);
+              input = document.querySelector('.control-block__search-form__input');
+              _context.next = 3;
+              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_6__["getCurrentlyNameCity"])();
 
-            case 11:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
+            case 3:
+              currentlyNameCity = _context.sent;
 
-    return function transformDate(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
+              if (input.value !== '') {
+                currentlyNameCity = input.value;
+              }
 
-  var getCurrentWeatherData = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-      var currentlyNameCity, geoData, time, data, data2, weatherInfo;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_8__["getCurrentlyNameCity"])();
+              _context.next = 7;
+              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_6__["getGeoData"])(currentlyNameCity);
 
-            case 2:
-              currentlyNameCity = _context2.sent;
-              _context2.next = 5;
-              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_8__["getGeoData"])(currentlyNameCity);
+            case 7:
+              geoData = _context.sent;
+              _context.next = 10;
+              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_6__["getAndTransformDatefromUTC0"])(currentlyNameCity, geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
 
-            case 5:
-              geoData = _context2.sent;
-              _context2.next = 8;
-              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_8__["getAndTransformDatefromUTC0"])(currentlyNameCity, geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
+            case 10:
+              time = _context.sent;
+              _context.next = 13;
+              return Object(_services_weather_service__WEBPACK_IMPORTED_MODULE_7__["getOneDayWeatherData"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
 
-            case 8:
-              time = _context2.sent;
-              _context2.next = 11;
-              return Object(_services_weather_service__WEBPACK_IMPORTED_MODULE_9__["getOneDayWeatherData"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
+            case 13:
+              data = _context.sent;
+              _context.next = 16;
+              return Object(_services_weather_service__WEBPACK_IMPORTED_MODULE_7__["getThreeDayWeatherData"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
 
-            case 11:
-              data = _context2.sent;
-              _context2.next = 14;
-              return Object(_services_weather_service__WEBPACK_IMPORTED_MODULE_9__["getThreeDayWeatherData"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
-
-            case 14:
-              data2 = _context2.sent;
+            case 16:
+              data2 = _context.sent;
               console.log(data);
               weatherInfo = {
                 city: geoData.results[0].formatted,
@@ -4147,9 +4258,33 @@ var WeatherTodayModule = function () {
                   icon: data2.data[3].weather.icon
                 }]
               };
-              return _context2.abrupt("return", weatherInfo);
+              return _context.abrupt("return", weatherInfo);
 
-            case 18:
+            case 20:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function getCurrentWeatherData() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var renderWeatherData = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(weatherInfo) {
+      var targetNode, weatherNode;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              targetNode = document.querySelector('.main-content-wrapper');
+              weatherNode = "<div class=\"weather\">\n      <div class=\"weather__title\">\n        <p class=\"weather__title__city\">".concat(weatherInfo.city, "</p>\n        <div class=\"weather__title__date\">\n          <p data-i18n=\"date\" class=\"weather__title__date__date\">").concat(dayInWeek[weatherInfo.date.getDay()], " ").concat(weatherInfo.date.getDate(), " ").concat(months[weatherInfo.date.getMonth()], "</p>\n          <p class=\"weather__title__date__time\">&nbsp").concat(weatherInfo.date.getHours().toString().padStart(2, 0), ":").concat(weatherInfo.date.getMinutes().toString().padStart(2, 0), ":").concat(weatherInfo.date.getSeconds().toString().padStart(2, 0), "</p>\n        </div>\n      </div>\n      <div class=\"weather__description\">\n        <div class=\"weather__description__temperature\">").concat(weatherInfo.temp, "\xB0</div>\n        <div class=\"weather__description__summary\">\n          <img src=\"./assets/icons/").concat(weatherInfo.icon, ".png\" class=\"weather__description__summary__img\">\n          <p data-i18n=\"").concat(weatherInfo.code, "\" class=\"weather__description__summary__description\">").concat(weatherInfo.description, "</p>\n          <div class=\"weather__description__summary__feels-like\">\n            <p data-i18n=\"fells\" class=\"weather__description__summary__feels-like__text\">Fells like:</p>\n            <p class=\"weather__description__summary__feels-like__temp\">&nbsp").concat(weatherInfo.feelsLike, "\xB0</p>\n          </div>\n          <p data-i18n=\"wind\" class=\"weather__description__summary__wind\">Wind:&nbsp").concat(weatherInfo.wind, " m/s</p>\n          <p data-i18n=\"hum\" class=\"weather__description__summary__hum\">Humidity:&nbsp").concat(weatherInfo.humidity, "%</p>\n        </div>\n      </div>\n      <div class=\"weather__three-days-weather\">\n        <div class=\"weather__three-days-weather__one-day\">\n          <div data-i18n=\"date1\" class=\"weather__three-days-weather__one-day__name-day1\">").concat(dayInWeek[weatherInfo.date.getDay() + 1], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp1\">").concat(weatherInfo.threeDay[0].temp, "\xB0</div>\n          <img style=\"position: relative; z-index: 10000;\" src=\"./assets/icons/").concat(weatherInfo.threeDay[0].icon, ".png\">\n        </div>\n        <div class=\"weather__three-days-weather__one-day\">\n          <div data-i18n=\"date2\" class=\"weather__three-days-weather__one-day__name-day2\">").concat(dayInWeek[weatherInfo.date.getDay() + 2], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp2\">").concat(weatherInfo.threeDay[1].temp, "\xB0</div>\n          <img style=\"position: relative; z-index: 10000;\" src=\"./assets/icons/").concat(weatherInfo.threeDay[1].icon, ".png\">\n        </div>\n        <div class=\"weather__three-days-weather__one-day\">\n          <div data-i18n=\"date3\" class=\"weather__three-days-weather__one-day__name-day3\">").concat(dayInWeek[weatherInfo.date.getDay() + 3], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp3\">").concat(weatherInfo.threeDay[2].temp, "\xB0</div>\n          <img style=\"position: relative; z-index: 10000;\" src=\"./assets/icons/").concat(weatherInfo.threeDay[2].icon, ".png\">\n        </div>\n      </div>\n    </div>");
+              targetNode.insertAdjacentHTML('afterbegin', weatherNode);
+
+            case 3:
             case "end":
               return _context2.stop();
           }
@@ -4157,62 +4292,27 @@ var WeatherTodayModule = function () {
       }, _callee2);
     }));
 
-    return function getCurrentWeatherData() {
+    return function renderWeatherData(_x) {
       return _ref2.apply(this, arguments);
     };
   }();
 
-  var getRequestedWeatherDate = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(searchValue) {
-      var geoData, time, data, data2, weatherInfo;
+  var renderCurrentWeather = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+      var weatherInfo;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_8__["getGeoData"])(searchValue);
+              return getCurrentWeatherData();
 
             case 2:
-              geoData = _context3.sent;
+              weatherInfo = _context3.sent;
               _context3.next = 5;
-              return Object(_services_geolocation_service__WEBPACK_IMPORTED_MODULE_8__["getAndTransformDatefromUTC0"])(searchValue, geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
+              return renderWeatherData(weatherInfo);
 
             case 5:
-              time = _context3.sent;
-              _context3.next = 8;
-              return Object(_services_weather_service__WEBPACK_IMPORTED_MODULE_9__["getOneDayWeatherData"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
-
-            case 8:
-              data = _context3.sent;
-              _context3.next = 11;
-              return Object(_services_weather_service__WEBPACK_IMPORTED_MODULE_9__["getThreeDayWeatherData"])(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
-
-            case 11:
-              data2 = _context3.sent;
-              weatherInfo = {
-                city: geoData.results[0].formatted,
-                date: time,
-                code: data.data[0].weather.code,
-                temp: Math.round(data.data[0].temp),
-                description: data.data[0].weather.description,
-                feelsLike: Math.round(data.data[0].app_temp),
-                wind: Math.round(data.data[0].wind_spd),
-                humidity: data.data[0].rh,
-                icon: data.data[0].weather.icon,
-                threeDay: [{
-                  temp: Math.round(data2.data[1].temp),
-                  icon: data2.data[1].weather.icon
-                }, {
-                  temp: Math.round(data2.data[2].temp),
-                  icon: data2.data[2].weather.icon
-                }, {
-                  temp: Math.round(data2.data[3].temp),
-                  icon: data2.data[3].weather.icon
-                }]
-              };
-              return _context3.abrupt("return", weatherInfo);
-
-            case 14:
             case "end":
               return _context3.stop();
           }
@@ -4220,23 +4320,51 @@ var WeatherTodayModule = function () {
       }, _callee3);
     }));
 
-    return function getRequestedWeatherDate(_x2) {
+    return function renderCurrentWeather() {
       return _ref3.apply(this, arguments);
     };
   }();
 
-  var renderWeatherData = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(weatherInfo) {
-      var targetNode, weatherNode;
+  var renderRequestedWeather = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(searchValue) {
+      var weatherInfo, translate, _weatherInfo;
+
       return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              targetNode = document.querySelector('.main-content-wrapper');
-              weatherNode = "<div class=\"weather\">\n      <div class=\"weather__title\">\n        <p class=\"weather__title__city\">".concat(weatherInfo.city, "</p>\n        <div class=\"weather__title__date\">\n          <p data-i18n=\"date\" class=\"weather__title__date__date\">").concat(dayInWeek[weatherInfo.date.getDay()], " ").concat(weatherInfo.date.getDate(), " ").concat(months[weatherInfo.date.getMonth()], "</p>\n          <p class=\"weather__title__date__time\">&nbsp").concat(weatherInfo.date.getHours().toString().padStart(2, 0), ":").concat(weatherInfo.date.getMinutes().toString().padStart(2, 0), ":").concat(weatherInfo.date.getSeconds().toString().padStart(2, 0), "</p>\n        </div>\n      </div>\n      <div class=\"weather__description\">\n        <div class=\"weather__description__temperature\">").concat(weatherInfo.temp, "\xB0</div>\n        <div class=\"weather__description__summary\">\n          <img src=\"./assets/icons/").concat(weatherInfo.icon, ".png\" class=\"weather__description__summary__img\">\n          <p data-i18n=\"").concat(weatherInfo.code, "\" class=\"weather__description__summary__description\">").concat(weatherInfo.description, "</p>\n          <p data-i18n=\"fells\" class=\"weather__description__summary__feels-like\">Fells like:&nbsp").concat(weatherInfo.feelsLike, "\xB0</p>\n          <p data-i18n=\"wind\" class=\"weather__description__summary__wind\">Wind:&nbsp").concat(weatherInfo.wind, " m/s</p>\n          <p data-i18n=\"hum\" class=\"weather__description__summary__hum\">Humidity:&nbsp").concat(weatherInfo.humidity, "%</p>\n        </div>\n      </div>\n      <div class=\"weather__three-days-weather\">\n        <div class=\"weather__three-days-weather__one-day\">\n          <div data-i18n=\"date1\" class=\"weather__three-days-weather__one-day__name-day1\">").concat(dayInWeek[weatherInfo.date.getDay() + 1], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp1\">").concat(weatherInfo.threeDay[0].temp, "\xB0</div>\n          <img src=\"./assets/icons/").concat(weatherInfo.threeDay[0].icon, ".png\">\n        </div>\n        <div class=\"weather__three-days-weather__one-day\">\n          <div data-i18n=\"date2\" class=\"weather__three-days-weather__one-day__name-day2\">").concat(dayInWeek[weatherInfo.date.getDay() + 2], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp2\">").concat(weatherInfo.threeDay[1].temp, "\xB0</div>\n          <img src=\"./assets/icons/").concat(weatherInfo.threeDay[1].icon, ".png\">\n        </div>\n        <div class=\"weather__three-days-weather__one-day\">\n          <div data-i18n=\"date3\" class=\"weather__three-days-weather__one-day__name-day3\">").concat(dayInWeek[weatherInfo.date.getDay() + 3], "</div>\n          <div class=\"weather__three-days-weather__one-day__temp3\">").concat(weatherInfo.threeDay[2].temp, "\xB0</div>\n          <img src=\"./assets/icons/").concat(weatherInfo.threeDay[2].icon, ".png\">\n        </div>\n      </div>\n    </div>");
-              targetNode.insertAdjacentHTML('afterbegin', weatherNode);
+              if (!/[a-zA-Z]/.test(searchValue)) {
+                _context4.next = 8;
+                break;
+              }
+
+              _context4.next = 3;
+              return getCurrentWeatherData(searchValue);
 
             case 3:
+              weatherInfo = _context4.sent;
+              _context4.next = 6;
+              return renderWeatherData(weatherInfo);
+
+            case 6:
+              _context4.next = 16;
+              break;
+
+            case 8:
+              _context4.next = 10;
+              return Object(_services_translate_service__WEBPACK_IMPORTED_MODULE_8__["getTranslateSearch"])(searchValue);
+
+            case 10:
+              translate = _context4.sent;
+              _context4.next = 13;
+              return getCurrentWeatherData(translate.text[0]);
+
+            case 13:
+              _weatherInfo = _context4.sent;
+              _context4.next = 16;
+              return renderWeatherData(_weatherInfo);
+
+            case 16:
             case "end":
               return _context4.stop();
           }
@@ -4244,88 +4372,8 @@ var WeatherTodayModule = function () {
       }, _callee4);
     }));
 
-    return function renderWeatherData(_x3) {
+    return function renderRequestedWeather(_x2) {
       return _ref4.apply(this, arguments);
-    };
-  }();
-
-  var renderCurrentWeather = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-      var weatherInfo;
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              _context5.next = 2;
-              return getCurrentWeatherData();
-
-            case 2:
-              weatherInfo = _context5.sent;
-              _context5.next = 5;
-              return renderWeatherData(weatherInfo);
-
-            case 5:
-            case "end":
-              return _context5.stop();
-          }
-        }
-      }, _callee5);
-    }));
-
-    return function renderCurrentWeather() {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-
-  var renderRequestedWeather = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(searchValue) {
-      var weatherInfo, translate, _weatherInfo;
-
-      return regeneratorRuntime.wrap(function _callee6$(_context6) {
-        while (1) {
-          switch (_context6.prev = _context6.next) {
-            case 0:
-              if (!/[a-zA-Z]/.test(searchValue)) {
-                _context6.next = 8;
-                break;
-              }
-
-              _context6.next = 3;
-              return getRequestedWeatherDate(searchValue);
-
-            case 3:
-              weatherInfo = _context6.sent;
-              _context6.next = 6;
-              return renderWeatherData(weatherInfo);
-
-            case 6:
-              _context6.next = 16;
-              break;
-
-            case 8:
-              _context6.next = 10;
-              return Object(_services_translate_service__WEBPACK_IMPORTED_MODULE_10__["getTranslateSearch"])(searchValue);
-
-            case 10:
-              translate = _context6.sent;
-              _context6.next = 13;
-              return getRequestedWeatherDate(translate.text[0]);
-
-            case 13:
-              _weatherInfo = _context6.sent;
-              _context6.next = 16;
-              return renderWeatherData(_weatherInfo);
-
-            case 16:
-            case "end":
-              return _context6.stop();
-          }
-        }
-      }, _callee6);
-    }));
-
-    return function renderRequestedWeather(_x4) {
-      return _ref6.apply(this, arguments);
     };
   }();
 
@@ -4350,7 +4398,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "translateDataEN", function() { return translateDataEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "translateDataBE", function() { return translateDataBE; });
 var translateDataRU = {
-  fells: 'Ощущается как',
+  fells: 'Ощущается как:',
   wind: 'Ветер',
   hum: 'Влажность',
   lng: 'Долгота',
@@ -4359,47 +4407,47 @@ var translateDataRU = {
   search: 'Поиск',
   months: ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'],
   days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье', 'Понедельник', 'Вторник'],
-  '200': 'Гроза с небольшим дождем',
-  '201': 'Гроза с дождем',
-  '202': 'Гроза с проливным дождем',
-  '230': 'Гроза с легкой моросью',
-  '231': 'Гроза с моросящим дождем',
-  '232': 'Гроза с сильным моросящим дождем',
-  '233': 'Гроза с градом',
-  '300': 'Легкая морось',
-  '301': 'Изморось',
-  '302': 'Тяжелая морось',
-  '500': 'Легкий дождь',
-  '501': 'Умеренный дождь',
-  '502': 'Ливень',
-  '511': 'Ледяной дождь',
-  '520': 'Легкий дождь',
-  '521': 'Дождь',
-  '522': 'Сильный дождь',
-  '600': 'Легкий снег',
-  '601': 'Снег',
-  '602': 'Снегопад',
-  '610': 'Cнег с дождем',
-  '611': 'Мокрый снег',
-  '612': 'Тяжелый мокрый снег',
-  '621': 'Снегопад',
-  '622': 'Сильный снегопад',
-  '623': 'Порывы ветра',
-  '700': 'Туман',
-  '711': 'Туман',
-  '721': 'Туман',
-  '731': 'Туман',
-  '741': 'Туман',
-  '751': 'Туман',
-  '800': 'Чистое небо',
-  '801': 'Малооблачно',
-  '802': 'Рассеянные облака',
-  '803': 'Облачность',
-  '804': 'Пасмурно',
-  '900': 'Неизвестные осадки'
+  200: 'Гроза с небольшим дождем',
+  201: 'Гроза с дождем',
+  202: 'Гроза с проливным дождем',
+  230: 'Гроза с легкой моросью',
+  231: 'Гроза с моросящим дождем',
+  232: 'Гроза с сильным моросящим дождем',
+  233: 'Гроза с градом',
+  300: 'Легкая морось',
+  301: 'Изморось',
+  302: 'Тяжелая морось',
+  500: 'Легкий дождь',
+  501: 'Умеренный дождь',
+  502: 'Ливень',
+  511: 'Ледяной дождь',
+  520: 'Легкий дождь',
+  521: 'Дождь',
+  522: 'Сильный дождь',
+  600: 'Легкий снег',
+  601: 'Снег',
+  602: 'Снегопад',
+  610: 'Cнег с дождем',
+  611: 'Мокрый снег',
+  612: 'Тяжелый мокрый снег',
+  621: 'Снегопад',
+  622: 'Сильный снегопад',
+  623: 'Порывы ветра',
+  700: 'Туман',
+  711: 'Туман',
+  721: 'Туман',
+  731: 'Туман',
+  741: 'Туман',
+  751: 'Туман',
+  800: 'Чистое небо',
+  801: 'Малооблачно',
+  802: 'Рассеянные облака',
+  803: 'Облачность',
+  804: 'Пасмурно',
+  900: 'Неизвестные осадки'
 };
 var translateDataEN = {
-  fells: 'Fells like',
+  fells: 'Fells like:',
   wind: 'Wind',
   hum: 'Humidity',
   lng: 'Longitude',
@@ -4408,47 +4456,47 @@ var translateDataEN = {
   search: 'Search',
   months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'],
-  '200': 'Thunderstorm with light rain',
-  '201': 'Thunderstorm with rain',
-  '202': 'Thunderstorm with heavy rain',
-  '230': 'Thunderstorm with light drizzle',
-  '231': 'Thunderstorm with drizzle',
-  '232': 'Thunderstorm with heavy drizzle',
-  '233': 'Thunderstorm with Hail',
-  '300': 'Light Drizzle',
-  '301': 'Drizzle',
-  '302': 'Heavy Drizzle',
-  '500': 'Light Rain',
-  '501': 'Moderate Rain',
-  '502': 'Heavy Rain',
-  '511': 'Freezing rain',
-  '520': 'Light shower rain',
-  '521': 'Shower rain',
-  '522': 'Heavy shower rain',
-  '600': 'Light snow',
-  '601': 'Snow',
-  '602': 'Heavy Snow',
-  '610': 'Mix snow/rain',
-  '611': 'Sleet',
-  '612': 'Heavy sleet',
-  '621': 'Snow shower',
-  '622': 'Heavy snow shower',
-  '623': 'Flurries',
-  '700': 'Mist',
-  '711': 'Smoke',
-  '721': 'Sand/dust',
-  '731': 'Fog',
-  '741': 'Freezing Fog',
-  '751': 'Fog',
-  '800': 'Clear sky',
-  '801': 'Few clouds',
-  '802': 'Scattered clouds',
-  '803': 'Broken clouds',
-  '804': 'Overcast clouds',
-  '900': 'Unknown Precipitation'
+  200: 'Thunderstorm with light rain',
+  201: 'Thunderstorm with rain',
+  202: 'Thunderstorm with heavy rain',
+  230: 'Thunderstorm with light drizzle',
+  231: 'Thunderstorm with drizzle',
+  232: 'Thunderstorm with heavy drizzle',
+  233: 'Thunderstorm with Hail',
+  300: 'Light Drizzle',
+  301: 'Drizzle',
+  302: 'Heavy Drizzle',
+  500: 'Light Rain',
+  501: 'Moderate Rain',
+  502: 'Heavy Rain',
+  511: 'Freezing rain',
+  520: 'Light shower rain',
+  521: 'Shower rain',
+  522: 'Heavy shower rain',
+  600: 'Light snow',
+  601: 'Snow',
+  602: 'Heavy Snow',
+  610: 'Mix snow/rain',
+  611: 'Sleet',
+  612: 'Heavy sleet',
+  621: 'Snow shower',
+  622: 'Heavy snow shower',
+  623: 'Flurries',
+  700: 'Mist',
+  711: 'Smoke',
+  721: 'Sand/dust',
+  731: 'Fog',
+  741: 'Freezing Fog',
+  751: 'Fog',
+  800: 'Clear sky',
+  801: 'Few clouds',
+  802: 'Scattered clouds',
+  803: 'Broken clouds',
+  804: 'Overcast clouds',
+  900: 'Unknown Precipitation'
 };
 var translateDataBE = {
-  fells: 'Адчувае, як',
+  fells: 'Адчувае, як:',
   wind: 'Вецер',
   hum: 'Вільготнасць',
   lng: 'Шырата',
@@ -4457,44 +4505,44 @@ var translateDataBE = {
   search: 'Пошук',
   months: ['Студзень', 'Люты', 'Сакавiк', 'Красавiк', 'Май', 'Чэрвень', 'Лiпень', 'Жнiвень', 'Верасень', 'Кастрычнiк', 'Лiстапад', 'Снежань'],
   days: ['Нядзеля', 'Панядзелак', 'Аўторак', 'Серада', 'Чацьвер', 'Пятніца', 'Сыбота', 'Нядзеля', 'Панядзелак', 'Аўторак'],
-  '200': 'Навальніца з невялікім дажджом',
-  '201': 'Навальніца з дажджом',
-  '202': 'Навальніца з моцным дажджом',
-  '230': 'Навальніца са слабым дажджом',
-  '231': 'Навальніца з дробным дожджыкам',
-  '232': 'Навальніца з моцным дожджыкам',
-  '233': 'Навальніца з градам',
-  '300': 'Лёгкая галава',
-  '301': 'Дрыжэ',
-  '302': 'Моцны завірух',
-  '500': 'Невялікі дождж',
-  '501': 'Дождж умераны',
-  '502': 'Залева',
-  '511': 'Ледзяны дождж',
-  '520': 'Невялікі дождж з дажджом',
-  '521': 'Дажджлівы дождж',
-  '522': 'Моцны дождж',
-  '600': 'Невялікі снег',
-  '601': 'Снег',
-  '602': 'Моцны снег',
-  '610': 'Змешваць снег / дождж',
-  '611': 'Мокры снег',
-  '612': 'Мокры снегt',
-  '621': 'Снежны душ',
-  '622': 'Моцны снежны душ',
-  '623': 'Шквалы',
-  '700': 'Туман',
-  '711': 'Дым',
-  '721': 'Дымка',
-  '731': 'Пясок / пыл',
-  '741': 'Туман',
-  '751': 'Замярзаючы туман',
-  '800': 'Яснае неба',
-  '801': 'Мала воблакаў',
-  '802': 'Невялікія хмары',
-  '803': 'Разбітыя хмары',
-  '804': 'Воблачныя хмары',
-  '900': 'Невядомыя ападкі'
+  200: 'Навальніца з невялікім дажджом',
+  201: 'Навальніца з дажджом',
+  202: 'Навальніца з моцным дажджом',
+  230: 'Навальніца са слабым дажджом',
+  231: 'Навальніца з дробным дожджыкам',
+  232: 'Навальніца з моцным дожджыкам',
+  233: 'Навальніца з градам',
+  300: 'Лёгкая галава',
+  301: 'Дрыжэ',
+  302: 'Моцны завірух',
+  500: 'Невялікі дождж',
+  501: 'Дождж умераны',
+  502: 'Залева',
+  511: 'Ледзяны дождж',
+  520: 'Невялікі дождж з дажджом',
+  521: 'Дажджлівы дождж',
+  522: 'Моцны дождж',
+  600: 'Невялікі снег',
+  601: 'Снег',
+  602: 'Моцны снег',
+  610: 'Змешваць снег / дождж',
+  611: 'Мокры снег',
+  612: 'Мокры снегt',
+  621: 'Снежны душ',
+  622: 'Моцны снежны душ',
+  623: 'Шквалы',
+  700: 'Туман',
+  711: 'Дым',
+  721: 'Дымка',
+  731: 'Пясок / пыл',
+  741: 'Туман',
+  751: 'Замярзаючы туман',
+  800: 'Яснае неба',
+  801: 'Мала воблакаў',
+  802: 'Невялікія хмары',
+  803: 'Разбітыя хмары',
+  804: 'Воблачныя хмары',
+  900: 'Невядомыя ападкі'
 };
 
 /***/ }),
@@ -4520,6 +4568,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _WeatherTodayModule__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./WeatherTodayModule */ "./src/js/WeatherTodayModule.js");
 /* harmony import */ var _MapBoxModule__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MapBoxModule */ "./src/js/MapBoxModule.js");
 /* harmony import */ var _BackgroundModule__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BackgroundModule */ "./src/js/BackgroundModule.js");
+/* harmony import */ var _services_error_handler__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/error-handler */ "./src/js/services/error-handler.js");
 
 
 
@@ -4534,6 +4583,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+var weatherContent = document.querySelector('.main-content-wrapper');
+var body = document.querySelector('body');
+
 function startApplication() {
   return _startApplication.apply(this, arguments);
 }
@@ -4545,39 +4597,39 @@ function _startApplication() {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _BackgroundModule__WEBPACK_IMPORTED_MODULE_7__["BackgroundModule"].renderBackground();
+            body.style.display = 'none';
             _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].render();
             _context2.next = 4;
-            return _MapBoxModule__WEBPACK_IMPORTED_MODULE_6__["MapBoxModule"].renderCurrentMap();
+            return _BackgroundModule__WEBPACK_IMPORTED_MODULE_7__["BackgroundModule"].renderBackground();
 
           case 4:
-            _context2.next = 6;
+            body.style.display = 'block';
+            _context2.next = 7;
+            return _MapBoxModule__WEBPACK_IMPORTED_MODULE_6__["MapBoxModule"].renderCurrentMap();
+
+          case 7:
+            _context2.next = 9;
             return _WeatherTodayModule__WEBPACK_IMPORTED_MODULE_5__["WeatherTodayModule"].renderCurrentWeather();
 
-          case 6:
+          case 9:
             state = JSON.parse(sessionStorage.getItem('state'));
 
             if (state.unit === 'f') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature('f');
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature(state.unit);
             }
 
             if (state.unit === 'c') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature('c');
+              document.querySelector('.control-block__switche__btn-C').classList.add('active');
             }
 
-            if (state.lang === 'ru') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('ru');
-            }
+            _context2.next = 14;
+            return _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate(state.lang);
 
-            if (state.lang === 'en') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('en');
-            }
+          case 14:
+            weatherContent.classList.remove('hide');
+            weatherContent.classList.add('show');
 
-            if (state.lang === 'be') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('be');
-            }
-
-          case 12:
+          case 16:
           case "end":
             return _context2.stop();
         }
@@ -4589,56 +4641,67 @@ function _startApplication() {
 
 startApplication();
 var input = document.querySelector('.control-block__search-form__input');
-var btn = document.querySelector('.control-block__search-form__btn');
-var wrapper = document.querySelector('.main-content-wrapper');
+var btnSearch = document.querySelector('.control-block__search-form__btn');
 var btnF = document.querySelector('.control-block__switche__btn-F');
 var btnC = document.querySelector('.control-block__switche__btn-C');
 var btnRU = document.querySelector('.control-block__switche__btn-RU');
 var btnEN = document.querySelector('.control-block__switche__btn-EN');
 var btnBE = document.querySelector('.control-block__switche__btn-BE');
-btn.addEventListener('click', /*#__PURE__*/function () {
+var btnUpdate = document.querySelector('.control-block__switche__btn-update');
+btnSearch.addEventListener('click', /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
     var state;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            _context.prev = 0;
             state = JSON.parse(sessionStorage.getItem('state'));
-            wrapper.innerHTML = '';
-            _context.next = 4;
-            return _WeatherTodayModule__WEBPACK_IMPORTED_MODULE_5__["WeatherTodayModule"].renderRequestedWeather(input.value);
-
-          case 4:
+            state.request = input.value;
+            sessionStorage.setItem('state', JSON.stringify(state));
             _context.next = 6;
-            return _MapBoxModule__WEBPACK_IMPORTED_MODULE_6__["MapBoxModule"].renderRequestedMap(input.value);
+            return _BackgroundModule__WEBPACK_IMPORTED_MODULE_7__["BackgroundModule"].renderBackground();
 
           case 6:
+            weatherContent.classList.remove('show');
+            weatherContent.classList.add('hide');
+            weatherContent.innerHTML = '';
+            _context.next = 11;
+            return _WeatherTodayModule__WEBPACK_IMPORTED_MODULE_5__["WeatherTodayModule"].renderRequestedWeather(input.value);
+
+          case 11:
+            _context.next = 13;
+            return _MapBoxModule__WEBPACK_IMPORTED_MODULE_6__["MapBoxModule"].renderRequestedMap(input.value);
+
+          case 13:
             if (state.unit === 'f') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature('f');
+              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature(state.unit);
             }
 
             if (state.unit === 'c') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].transformTemperature('c');
+              btnC.classList.add('active');
             }
 
-            if (state.lang === 'ru') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('ru');
-            }
+            _context.next = 17;
+            return _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate(state.lang);
 
-            if (state.lang === 'en') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('en');
-            }
+          case 17:
+            weatherContent.classList.remove('hide');
+            weatherContent.classList.add('show');
+            _context.next = 24;
+            break;
 
-            if (state.lang === 'be') {
-              _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('be');
-            }
+          case 21:
+            _context.prev = 21;
+            _context.t0 = _context["catch"](0);
+            Object(_services_error_handler__WEBPACK_IMPORTED_MODULE_8__["errorHandler"])();
 
-          case 11:
+          case 24:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[0, 21]]);
   }));
 
   return function (_x) {
@@ -4664,6 +4727,32 @@ btnEN.addEventListener('click', function () {
 btnBE.addEventListener('click', function () {
   _ControlBlockModule__WEBPACK_IMPORTED_MODULE_4__["ControlBlockModule"].translate('be');
 });
+btnUpdate.addEventListener('click', function () {
+  _BackgroundModule__WEBPACK_IMPORTED_MODULE_7__["BackgroundModule"].renderBackground();
+});
+
+/***/ }),
+
+/***/ "./src/js/services/error-handler.js":
+/*!******************************************!*\
+  !*** ./src/js/services/error-handler.js ***!
+  \******************************************/
+/*! exports provided: errorHandler */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorHandler", function() { return errorHandler; });
+function errorHandler() {
+  var errorNode = document.querySelector('.error-msg');
+  errorNode.classList.add('show-msg');
+
+  var hide = function hide() {
+    errorNode.classList.remove('show-msg');
+  };
+
+  setTimeout(hide, 2000);
+}
 
 /***/ }),
 
@@ -4835,8 +4924,6 @@ function _getAndTransformDatefromUTC() {
   return _getAndTransformDatefromUTC.apply(this, arguments);
 }
 
-;
-
 /***/ }),
 
 /***/ "./src/js/services/translate-service.js":
@@ -4901,44 +4988,6 @@ function _getTranslateSearch() {
 function getTranslateCity(_x2, _x3) {
   return _getTranslateCity.apply(this, arguments);
 }
-/* const transformTemperatureC_F = () => {
-  const state = JSON.parse(sessionStorage.getItem('state'));
-  const mainTempNode = document.querySelector('.weather__description__temperature');
-  const TempOneDayNode = document.querySelector('.weather__three-days-weather__one-day__temp1');
-  const TempTwoDayNode = document.querySelector('.weather__three-days-weather__one-day__temp2');
-  const TempThreeDayNode = document.querySelector('.weather__three-days-weather__one-day__temp3');
-  const arrayC = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText];
-  const arrayF = arrayC.map(el => {
-    el = Math.round(Number(el.substring(0, el.length - 1))* 1.8 + 32);
-    return el;
-  })
-  mainTempNode.innerText = `${arrayF[0]}°`;
-  TempOneDayNode.innerText = `${arrayF[1]}°`
-  TempTwoDayNode.innerText = `${arrayF[2]}°`
-  TempThreeDayNode.innerText = `${arrayF[3]}°`
-  state.unit = 'f';
-  sessionStorage.setItem('state', JSON.stringify(state));
-}
-
-const transformTemperatureF_C = () => {
-  const state = JSON.parse(sessionStorage.getItem('state'));
-  const mainTempNode = document.querySelector('.weather__description__temperature');
-  const TempOneDayNode = document.querySelector('.weather__three-days-weather__one-day__temp1');
-  const TempTwoDayNode = document.querySelector('.weather__three-days-weather__one-day__temp2');
-  const TempThreeDayNode = document.querySelector('.weather__three-days-weather__one-day__temp3');
-  const arrayF = [mainTempNode.innerText, TempOneDayNode.innerText, TempTwoDayNode.innerText, TempThreeDayNode.innerText];
-  const arrayC = arrayF.map(el => {
-    el = Math.round((Number(el.substring(0, el.length - 1))-32)/1.8);
-    return el;
-  }
-  )
-  mainTempNode.innerText = `${arrayC[0]}°`;
-  TempOneDayNode.innerText = `${arrayC[1]}°`
-  TempTwoDayNode.innerText = `${arrayC[2]}°`
-  TempThreeDayNode.innerText = `${arrayC[3]}°`
-  state.unit = 'c';
-  sessionStorage.setItem('state', JSON.stringify(state));
-} */
 
 function _getTranslateCity() {
   _getTranslateCity = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(str, targetLang) {

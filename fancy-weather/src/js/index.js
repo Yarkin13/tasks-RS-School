@@ -3,88 +3,91 @@ import { ControlBlockModule } from './ControlBlockModule';
 import { WeatherTodayModule } from './WeatherTodayModule';
 import { MapBoxModule } from './MapBoxModule';
 import { BackgroundModule } from './BackgroundModule';
+import { errorHandler } from './services/error-handler';
 
+const weatherContent = document.querySelector('.main-content-wrapper');
+const body = document.querySelector('body');
 
 async function startApplication() {
-  BackgroundModule.renderBackground();
+  body.style.display = 'none';
   ControlBlockModule.render();
+  await BackgroundModule.renderBackground();
+  body.style.display = 'block';
   await MapBoxModule.renderCurrentMap();
   await WeatherTodayModule.renderCurrentWeather();
   const state = JSON.parse(sessionStorage.getItem('state'));
   if (state.unit === 'f') {
-    ControlBlockModule.transformTemperature('f');
+    ControlBlockModule.transformTemperature(state.unit);
   }
   if (state.unit === 'c') {
-    ControlBlockModule.transformTemperature('c');
+    document.querySelector('.control-block__switche__btn-C').classList.add('active');
   }
-  if (state.lang === 'ru') {
-    ControlBlockModule.translate('ru');
-  }
-  if (state.lang === 'en') {
-    ControlBlockModule.translate('en');
-  }
-  if (state.lang === 'be') {
-    ControlBlockModule.translate('be');
-  }
+  await ControlBlockModule.translate(state.lang);
+  weatherContent.classList.remove('hide');
+  weatherContent.classList.add('show');
 }
 
 startApplication();
 
 const input = document.querySelector('.control-block__search-form__input');
-const btn = document.querySelector('.control-block__search-form__btn');
-const wrapper = document.querySelector('.main-content-wrapper');
+const btnSearch = document.querySelector('.control-block__search-form__btn');
 const btnF = document.querySelector('.control-block__switche__btn-F');
 const btnC = document.querySelector('.control-block__switche__btn-C');
 const btnRU = document.querySelector('.control-block__switche__btn-RU');
 const btnEN = document.querySelector('.control-block__switche__btn-EN');
 const btnBE = document.querySelector('.control-block__switche__btn-BE');
+const btnUpdate = document.querySelector('.control-block__switche__btn-update');
 
 
-btn.addEventListener('click', async (event) => {
-  const state = JSON.parse(sessionStorage.getItem('state'));
-  wrapper.innerHTML = '';
-  await WeatherTodayModule.renderRequestedWeather(input.value);
-  await MapBoxModule.renderRequestedMap(input.value);
-  if (state.unit === 'f') {
-    ControlBlockModule.transformTemperature('f');
-  }
-  if (state.unit === 'c') {
-    ControlBlockModule.transformTemperature('c');
-  }
-  if (state.lang === 'ru') {
-    ControlBlockModule.translate('ru');
-  }
-  if (state.lang === 'en') {
-    ControlBlockModule.translate('en');
-  }
-  if (state.lang === 'be') {
-    ControlBlockModule.translate('be');
+btnSearch.addEventListener('click', async (event) => {
+  try {
+    const state = JSON.parse(sessionStorage.getItem('state'));
+    state.request = input.value;
+    sessionStorage.setItem('state', JSON.stringify(state));
+    await BackgroundModule.renderBackground();
+    weatherContent.classList.remove('show');
+    weatherContent.classList.add('hide');
+    weatherContent.innerHTML = '';
+    await WeatherTodayModule.renderRequestedWeather(input.value);
+    await MapBoxModule.renderRequestedMap(input.value);
+    if (state.unit === 'f') {
+      ControlBlockModule.transformTemperature(state.unit);
+    }
+    if (state.unit === 'c') {
+      btnC.classList.add('active');
+    }
+    await ControlBlockModule.translate(state.lang);
+    weatherContent.classList.remove('hide');
+    weatherContent.classList.add('show');
+  } catch (error) {
+    errorHandler();
   }
 });
 
 btnF.addEventListener('click', () => {
   const state = JSON.parse(sessionStorage.getItem('state'));
-    if(state.unit === 'f') return;
+  if (state.unit === 'f') return;
   ControlBlockModule.transformTemperature('f');
-})
+});
 
 btnC.addEventListener('click', () => {
   const state = JSON.parse(sessionStorage.getItem('state'));
-    if(state.unit === 'c') return;
+  if (state.unit === 'c') return;
   ControlBlockModule.transformTemperature('c');
-})
+});
 
 btnRU.addEventListener('click', () => {
   ControlBlockModule.translate('ru');
-})
+});
 
 btnEN.addEventListener('click', () => {
   ControlBlockModule.translate('en');
-})
+});
 
 btnBE.addEventListener('click', () => {
   ControlBlockModule.translate('be');
-})
+});
 
-
-
+btnUpdate.addEventListener('click', () => {
+  BackgroundModule.renderBackground();
+});
