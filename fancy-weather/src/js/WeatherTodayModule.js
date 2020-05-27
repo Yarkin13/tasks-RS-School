@@ -1,22 +1,23 @@
-import { getCurrentlyNameCity, getGeoData, getAndTransformDatefromUTC0 } from './services/geolocation-service';
+import { getCurrentlyNameCity, getGeoData, getAndTransformDateUTC0 } from './services/geolocation-service';
 import { getOneDayWeatherData, getThreeDayWeatherData } from './services/weather-service';
 import { getTranslateSearch } from './services/translate-service';
 
-export const WeatherTodayModule = (function () {
+export default (function WeatherTodayModule() {
   const dayInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'];
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-  const getCurrentWeatherData = async function () {
+  async function getCurrentWeatherData() {
     const input = document.querySelector('.control-block__search-form__input');
     let currentlyNameCity = await getCurrentlyNameCity();
     if (input.value !== '') {
       currentlyNameCity = input.value;
     }
     const geoData = await getGeoData(currentlyNameCity);
-    const time = await getAndTransformDatefromUTC0(currentlyNameCity, geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
-    const data = await getOneDayWeatherData(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
-    const data2 = await getThreeDayWeatherData(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
-    console.log(data);
+    const time = await getAndTransformDateUTC0(currentlyNameCity,
+      geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
+    const data = await getOneDayWeatherData(geoData.results[0].geometry.lat,
+      geoData.results[0].geometry.lng);
+    const data2 = await getThreeDayWeatherData(geoData.results[0].geometry.lat,
+      geoData.results[0].geometry.lng);
     const weatherInfo = {
       city: geoData.results[0].formatted,
       date: time,
@@ -43,7 +44,7 @@ export const WeatherTodayModule = (function () {
       ],
     };
     return weatherInfo;
-  };
+  }
 
   const renderWeatherData = async (weatherInfo) => {
     const targetNode = document.querySelector('.main-content-wrapper');

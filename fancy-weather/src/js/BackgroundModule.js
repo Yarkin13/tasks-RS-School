@@ -1,7 +1,7 @@
 import { getCurrentlyNameCity, getGeoData } from './services/geolocation-service';
 import { getOneDayWeatherData } from './services/weather-service';
 
-export const BackgroundModule = (function () {
+export default (function BackgroundModule() {
   const node = document.querySelector('.wrapper');
   const backgroundList = {
     spring: [['./assets/background/spring/spring-day-1', './assets/background/spring/spring-day-2', './assets/background/spring/spring-day-3',
@@ -10,8 +10,8 @@ export const BackgroundModule = (function () {
       './assets/background/spring/spring-night-3', './assets/background/spring/spring-night-4', './assets/background/spring/spring-night-5']],
     summer: [['./assets/background/summer/summer-day-1', './assets/background/summer/summer-day-2', './assets/background/summer/summer-day-3',
       './assets/background/summer/summer-day-4', './assets/background/summer/summer-day-5', './assets/background/summer/summer-day-6',
-      './assets/background/summer/summer-day-7', './assets/background/summer/summer-day-8', './assets/background/summer/summer-day-9' ,
-      './assets/background/summer/summer-day-10' ,'./assets/background/summer/summer-day-11' ,'./assets/background/summer/summer-day-12'],
+      './assets/background/summer/summer-day-7', './assets/background/summer/summer-day-8', './assets/background/summer/summer-day-9',
+      './assets/background/summer/summer-day-10', './assets/background/summer/summer-day-11', './assets/background/summer/summer-day-12'],
     ['./assets/background/summer/summer-night-1', './assets/background/summer/summer-night-2',
       './assets/background/summer/summer-night-3', './assets/background/summer/summer-night-4', './assets/background/summer/summer-night-5',
       './assets/background/summer/summer-night-6', './assets/background/summer/summer-night-7', './assets/background/summer/summer-night-8',
@@ -40,10 +40,12 @@ export const BackgroundModule = (function () {
     const month = date.split('-')[1];
     const hour = date.split('T')[1].split(':')[0];
     let targetBackgroundList;
+    // for define in console logic background
+    /* eslint-disable no-console */
     if ((month >= 0 && month <= 2) || month === '12') {
       if ((hour >= 0 && hour < 6) || hour >= 21) {
         console.log('winter night');
-        targetBackgroundList = backgroundList.winter[1];
+        [targetBackgroundList] = backgroundList.winter[1];
       } else {
         console.log('winter day');
         targetBackgroundList = backgroundList.winter[0];
@@ -75,6 +77,7 @@ export const BackgroundModule = (function () {
         console.log('autumn day');
         targetBackgroundList = backgroundList.autumn[0];
       }
+      /* eslint-disable no-console */
     }
     return targetBackgroundList;
   };
@@ -82,7 +85,7 @@ export const BackgroundModule = (function () {
 
   const renderBackground = async () => {
     const targetBackgroundList = await initBackgroundList();
-    node.style.background = `url(${targetBackgroundList[rnd(targetBackgroundList.length)]}.jpg), linear-gradient(#303030, grey)`;
+    node.style.background = `url(${targetBackgroundList[rnd(targetBackgroundList.length)]}.jpg), #303030`;
     node.style.backgroundAttachment = 'fixed';
     node.style.backgroundRepeat = 'no-repeat';
     node.style.backgroundPosition = 'center';

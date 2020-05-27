@@ -1,7 +1,7 @@
 import { getTranslateCity } from './services/translate-service';
 import { translateDataRU, translateDataEN, translateDataBE } from './data/translate-data';
 
-export const ControlBlockModule = (function () {
+export default (function ControlBlockModule() {
   const targetNode = document.querySelector('.control-block');
   const node = (
     `<div class="control-block__switcher">
@@ -14,6 +14,9 @@ export const ControlBlockModule = (function () {
     </div>
     <div class="control-block__search-form">
         <input class="control-block__search-form__input">
+        <button class ="control-block__search-form__mic">
+          <img class ="control-block__search-form__mic__img" src="./assets/mic.svg">
+        </button>
         <button data-i18n ="search" class="control-block__search-form__btn">Search</button>
     </div>`);
 
@@ -25,24 +28,19 @@ export const ControlBlockModule = (function () {
     const TempThreeDayNode = document.querySelector('.weather__three-days-weather__one-day__temp3');
     const btnF = document.querySelector('.control-block__switche__btn-F');
     const btnC = document.querySelector('.control-block__switche__btn-C');
-    const fellsLikeTemp = document.querySelector('.weather__description__summary__feels-like__temp')
-    const arrayBefore = [mainTempNode.innerText, TempOneDayNode.innerText, 
-    TempTwoDayNode.innerText, TempThreeDayNode.innerText, fellsLikeTemp.innerText];
-    console.log(arrayBefore)
+    const fellsLikeTemp = document.querySelector('.weather__description__summary__feels-like__temp');
+    const arrayBefore = [mainTempNode.innerText, TempOneDayNode.innerText,
+      TempTwoDayNode.innerText, TempThreeDayNode.innerText, fellsLikeTemp.innerText];
     let arrayAfter;
     if (targetUnit === 'f') {
-      arrayAfter = arrayBefore.map((el) => {
-        el = Math.round(Number(el.substring(0, el.length - 1)) * 1.8 + 32);
-        return el;
-      });
+      arrayAfter = arrayBefore.map(el => Math.round(Number(el.substring(0, el.length - 1))
+      * 1.8 + 32));
       btnC.classList.remove('active');
       btnF.classList.add('active');
     }
     if (targetUnit === 'c') {
-      arrayAfter = arrayBefore.map((el) => {
-        el = Math.round((Number(el.substring(0, el.length - 1)) - 32) / 1.8);
-        return el;
-      });
+      arrayAfter = arrayBefore.map(el => Math.round((Number(el.substring(0, el.length - 1)) - 32)
+      / 1.8));
       btnF.classList.remove('active');
       btnC.classList.add('active');
     }
@@ -51,7 +49,7 @@ export const ControlBlockModule = (function () {
     TempOneDayNode.innerText = `${arrayAfter[1]}°`;
     TempTwoDayNode.innerText = `${arrayAfter[2]}°`;
     TempThreeDayNode.innerText = `${arrayAfter[3]}°`;
-    fellsLikeTemp.innerText = `${arrayAfter[4]}°`;
+    fellsLikeTemp.innerHTML = `&nbsp${arrayAfter[4]}°`;
     state.unit = targetUnit;
     sessionStorage.setItem('state', JSON.stringify(state));
   };
@@ -63,7 +61,7 @@ export const ControlBlockModule = (function () {
         unit: 'c',
         lang: 'en',
         date: '',
-        request: 'samara'
+        request: 'samara',
       };
       sessionStorage.setItem('state', JSON.stringify(state));
     }
@@ -101,11 +99,16 @@ export const ControlBlockModule = (function () {
         btnRU.classList.remove('active');
         btnEN.classList.remove('active');
         break;
+      default:
+        return;
     }
     nodes.forEach((el) => {
       switch (el.className) {
         case 'weather__description__summary__wind':
           el.textContent = `${translateData[el.dataset.i18n]}:${el.textContent.split(':')[1].split(' ')[0]} ${translateData.ms}`;
+          break;
+        case 'error-msg':
+          el.textContent = translateData[el.dataset.i18n];
           break;
         case 'weather__title__date__date':
           el.textContent = `${translateData.days[date.getDay()]} ${date.getDate()} ${translateData.months[date.getMonth()]}`;
@@ -125,10 +128,6 @@ export const ControlBlockModule = (function () {
         case 'weather__description__summary__description':
           el.textContent = translateData[el.dataset.i18n];
           break;
-        case 'weather__title__date__date':
-          el.textContent = translateData.days[translateData.days.indexOf(el.textContent.split(' ')[0])] + el.textContent.split(' ')[1]
-          + translateData.months[translateData.months.indexOf(el.textContent.split(' ')[2])];
-          break;
         case 'weather__description__summary__feels-like__text':
           el.textContent = translateData[el.dataset.i18n];
           break;
@@ -138,9 +137,23 @@ export const ControlBlockModule = (function () {
     });
   };
 
+  const speech = (innerlang) => {
+    const input = document.querySelector('.control-block__search-form__input');
+    const btnSearch = document.querySelector('.control-block__search-form__btn');
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = innerlang;
+    recognition.start();
+    recognition.onresult = (event) => {
+      input.value = event.results[0][0].transcript;
+      btnSearch.click();
+    };
+  };
+
   return {
     render: renderControlBlock,
     transformTemperature,
     translate,
+    speech,
+
   };
 }());

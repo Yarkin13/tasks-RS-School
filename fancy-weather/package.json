@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ./src/js",
-    "lint:fix": "eslint ./src/js --fix",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix",
     "dev": "webpack --mode development",
     "prod": "webpack --mode production"
   },
@@ -16,7 +16,7 @@
     "@babel/preset-env": "^7.9.6",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
-    "eslint": "^7.0.0",
+    "eslint": "^7.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "file-loader": "^6.0.0",

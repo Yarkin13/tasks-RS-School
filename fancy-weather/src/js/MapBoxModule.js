@@ -2,7 +2,7 @@ import mapboxgl from 'mapbox-gl';
 import { getCurrentlyNameCity, getGeoData } from './services/geolocation-service';
 import { getTranslateSearch } from './services/translate-service';
 
-export const MapBoxModule = (function () {
+export default (function MapBoxModule() {
   const renderStructure = () => {
     const node = (
       `<div class="map-box">
@@ -21,9 +21,12 @@ export const MapBoxModule = (function () {
       center: [lat, lng],
       zoom: 10,
     });
+    // need for map box
+    /* eslint-disable no-unused-vars */
     const marker = new mapboxgl.Marker()
       .setLngLat([lat, lng])
       .addTo(map);
+      /* eslint-disable no-unused-vars */
   };
 
   const renderCoordinate = (lng, lat) => {
@@ -39,19 +42,22 @@ export const MapBoxModule = (function () {
     const currentlyNameCity = await getCurrentlyNameCity();
     const geoData = await getGeoData(currentlyNameCity);
     renderMap(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
-    renderCoordinate(geoData.results[0].annotations.DMS.lng, geoData.results[0].annotations.DMS.lat);
+    renderCoordinate(geoData.results[0].annotations.DMS.lng,
+      geoData.results[0].annotations.DMS.lat);
   };
   const renderRequestedMap = async (searchValue) => {
     renderStructure();
     if (/[a-zA-Z]/.test(searchValue)) {
       const geoData = await getGeoData(searchValue);
       renderMap(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
-      renderCoordinate(geoData.results[0].annotations.DMS.lng, geoData.results[0].annotations.DMS.lat);
+      renderCoordinate(geoData.results[0].annotations.DMS.lng,
+        geoData.results[0].annotations.DMS.lat);
     } else {
       const translate = await getTranslateSearch(searchValue);
       const geoData = await getGeoData(translate.text[0]);
       renderMap(geoData.results[0].geometry.lat, geoData.results[0].geometry.lng);
-      renderCoordinate(geoData.results[0].annotations.DMS.lng, geoData.results[0].annotations.DMS.lat);
+      renderCoordinate(geoData.results[0].annotations.DMS.lng,
+        geoData.results[0].annotations.DMS.lat);
     }
   };
   return {

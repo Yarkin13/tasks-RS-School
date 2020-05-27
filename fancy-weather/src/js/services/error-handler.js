@@ -1,4 +1,4 @@
-export function errorHandler() {
+export default function errorHandler() {
   const errorNode = document.querySelector('.error-msg');
   errorNode.classList.add('show-msg');
   const hide = () => {

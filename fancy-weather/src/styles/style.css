@@ -70,10 +70,12 @@ body{
   border-radius: 0 10px 10px 0;
   transition-duration: 0.5s;
   cursor: pointer;
+  opacity: 0.9;
 }
 
 .control-block__switche__btn-BE:hover {
   background-color: #353636;
+  opacity: 1
 }
 
 .control-block__switche__btn-RU {
@@ -87,10 +89,12 @@ body{
   border-radius: 10px 0 0 10px;
   transition-duration: 0.5s;
   cursor: pointer;
+  opacity: 0.9;
 }
 
 .control-block__switche__btn-RU:hover {
   background-color: #353636;
+  opacity: 1
 }
 
 .control-block__switche__btn-EN {
@@ -103,10 +107,12 @@ body{
   background-color: grey;
   transition-duration: 0.5s;
   cursor: pointer;
+  opacity: 0.9;
 }
 
 .control-block__switche__btn-EN:hover {
   background-color: #353636;
+  opacity: 1
 }
 
 .control-block__switche__btn-F {
@@ -120,14 +126,17 @@ body{
   background-color: grey;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
+  opacity: 0.9;
 }
 
 .control-block__switche__btn-F:hover {
   background-color: #353636;
+  opacity: 1
 }
 
 .control-block__switche__btn-C:hover {
   background-color: #353636;
+  opacity: 1
 }
 
 .control-block__switche__btn-C {
@@ -141,10 +150,20 @@ body{
   background-color: grey;
   border-radius: 10px 0 0 10px;
   cursor: pointer;
+  opacity: 0.9;
+}
+
+button:active, button:focus {
+  outline: none;
+}
+
+input {
+  outline: none;
 }
 
 .active {
-  background-color: #5b5e60
+  background-color: #5b5e60;
+  opacity: 1;
 }
 
 
@@ -158,7 +177,30 @@ body{
   color: #ffffff;
   padding: 0;
   border: solid grey 1px;
-  width: 70%;
+  width: 60%;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.control-block__search-form__mic {
+  width: 10%;
+  background-color: gray;
+  background-size: 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  border: 0;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.control-block__search-form__mic__img {
+  width: 100%;
+  height: 70%;
+}
+
+.control-block__search-form__mic__img:hover {
+  filter: brightness(0.2) sepia(1) hue-rotate(180deg) saturate(0);
 }
 
 .control-block__search-form {
@@ -170,13 +212,20 @@ body{
   padding: 0;
   padding-left: 5px;
   padding-right: 5px;
-  height: 57px;
+  height: 100%;
   background-color: #5b5e60;
   border-radius: 0 10px 10px 0;
   font-size: 30px;
   border: 0;
   color: #ffffff;
   width: 30%;
+  cursor: pointer;
+  transition-duration: 0.5s;
+}
+
+.control-block__search-form__btn:hover {
+  background-color: #353636;
+  opacity: 1;
 }
 
 .weather {
@@ -184,6 +233,15 @@ body{
   margin-left: 10vw;
 }
 
+.weather__title__date__time {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.weather__title__date__date {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 .weather__title__city {
   font-family: 'Lato', sans-serif;
@@ -257,6 +315,7 @@ body{
 }
 
 .weather__three-days-weather{
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -274,6 +333,7 @@ body{
   font-size: 30px;
   color: #ffffff;
 }
+
 #map {
   width: 100%;
   height: 50vh;
@@ -282,6 +342,8 @@ body{
 }
 .mapboxgl-canvas{
   border-radius: 5%;
+  width: 100%;
+  height: 100%;
 }
 
 .map-box {
@@ -364,38 +426,25 @@ position: relative;
   .weather {
     margin: 0 auto;
   }
-}
 
-@media (max-width: 1146px) {
   .control-block {
-    padding-left: 10vw;
-    padding-right: 10vw;
-  }
-
-  .control-block__search-form {
-    width: 400px;
+    margin: 0 auto;
   }
 
 }
 
-@media (max-width: 958px) {
+@media (max-width: 903px) {
   .control-block{
     justify-content: center;
   }
 
   .control-block__search-form{
-    margin-top: 30px;
+    padding-top: 30px;
+    margin: 0 auto;
   }
 }
 
 
-@media (max-width: 761px) {
-
-  .control-block__search-form__input {
-    width: 50vw;
-  }
-
-}
 
 @media (max-width: 646px) {
   .weather__title{
@@ -412,10 +461,7 @@ position: relative;
 }
 
 @media (max-width: 497px) {
-  .control-block__search-form__input {
-    width: 50vw;
-  }
-  
+
   .control-block__search-form__btn {
     width: auto;
   }
@@ -489,10 +535,6 @@ position: relative;
   }
   
   .control-block__search-form__input{
-    height: 45px;
-  }
-
-  .control-block__search-form__btn{
     height: 45px;
   }
 }
