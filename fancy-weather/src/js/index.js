@@ -31,6 +31,11 @@ async function startApplication() {
   document.querySelector('.control-block__search-form__btn').addEventListener('click', () => {
     clearInterval(tickId);
   });
+  document.addEventListener('keydown', async (event) => {
+    if (event.key === 'Enter') {
+      clearInterval(tickId);
+    }
+  });
 }
 
 startApplication();
@@ -45,8 +50,7 @@ const btnBE = document.querySelector('.control-block__switche__btn-BE');
 const btnUpdate = document.querySelector('.control-block__switche__btn-update');
 const btnVoice = document.querySelector('.control-block__search-form__mic');
 
-
-btnSearch.addEventListener('click', async () => {
+async function searchWether() {
   try {
     if (input.value === '') return;
     const date = new Date(JSON.parse(sessionStorage.getItem('state')).date);
@@ -79,9 +83,23 @@ btnSearch.addEventListener('click', async () => {
     btnSearch.addEventListener('click', () => {
       clearInterval(tickId);
     });
+    document.addEventListener('keydown', async (event) => {
+      if (event.key === 'Enter') {
+        clearInterval(tickId);
+      }
+    });
   }
+}
+
+btnSearch.addEventListener('click', async () => {
+  searchWether();
 });
 
+document.addEventListener('keydown', async (event) => {
+  if (event.key === 'Enter') {
+    searchWether();
+  }
+});
 
 btnF.addEventListener('click', () => {
   const state = JSON.parse(sessionStorage.getItem('state'));

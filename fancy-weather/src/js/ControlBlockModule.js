@@ -73,7 +73,10 @@ export default (function ControlBlockModule() {
     const btnBE = document.querySelector('.control-block__switche__btn-BE');
     const cityNode = document.querySelector('.weather__title__city');
     const translateCity = await getTranslateCity(cityNode.textContent, targetLang);
+    // did not understand how to destruct
+    /* eslint-disable prefer-destructuring */
     cityNode.textContent = translateCity.text[0];
+    /* eslint-disable prefer-destructuring */
     const date = new Date(JSON.parse(sessionStorage.getItem('state')).date);
     const nodes = document.querySelectorAll('[data-i18n]');
     const state = JSON.parse(sessionStorage.getItem('state'));
@@ -102,6 +105,8 @@ export default (function ControlBlockModule() {
       default:
         return;
     }
+    /* eslint-disable no-param-reassign */
+    // could not fix
     nodes.forEach((el) => {
       switch (el.className) {
         case 'weather__description__summary__wind':
@@ -133,21 +138,27 @@ export default (function ControlBlockModule() {
           break;
         default:
           el.textContent = `${translateData[el.dataset.i18n]}:${el.textContent.split(':')[1]}`;
+          /* eslint-disable no-param-reassign */
       }
     });
   };
 
-  const speech = (innerlang) => {
+  /* eslint-disable new-cap */
+  /* eslint-disable no-undef */
+  // why does he swear on built-in classes?
+  const speech = (innerLang) => {
     const input = document.querySelector('.control-block__search-form__input');
     const btnSearch = document.querySelector('.control-block__search-form__btn');
     const recognition = new webkitSpeechRecognition();
-    recognition.lang = innerlang;
+    recognition.lang = innerLang;
     recognition.start();
     recognition.onresult = (event) => {
       input.value = event.results[0][0].transcript;
       btnSearch.click();
     };
   };
+  /* eslint-disable new-cap */
+  /* eslint-disable no-undef */
 
   return {
     render: renderControlBlock,

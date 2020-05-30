@@ -11,11 +11,14 @@ export default (function BackgroundModule() {
     summer: [['./assets/background/summer/summer-day-1', './assets/background/summer/summer-day-2', './assets/background/summer/summer-day-3',
       './assets/background/summer/summer-day-4', './assets/background/summer/summer-day-5', './assets/background/summer/summer-day-6',
       './assets/background/summer/summer-day-7', './assets/background/summer/summer-day-8', './assets/background/summer/summer-day-9',
-      './assets/background/summer/summer-day-10', './assets/background/summer/summer-day-11', './assets/background/summer/summer-day-12'],
+      './assets/background/summer/summer-day-10', './assets/background/summer/summer-day-11', './assets/background/summer/summer-day-12',
+      './assets/background/summer/summer-day-13', './assets/background/summer/summer-day-14', './assets/background/summer/summer-day-15',
+      './assets/background/summer/summer-day-16'],
     ['./assets/background/summer/summer-night-1', './assets/background/summer/summer-night-2',
       './assets/background/summer/summer-night-3', './assets/background/summer/summer-night-4', './assets/background/summer/summer-night-5',
       './assets/background/summer/summer-night-6', './assets/background/summer/summer-night-7', './assets/background/summer/summer-night-8',
-      './assets/background/summer/summer-night-9']],
+      './assets/background/summer/summer-night-9', './assets/background/summer/summer-night-10', './assets/background/summer/summer-night-11',
+      './assets/background/summer/summer-night-12', './assets/background/summer/summer-night-13']],
     autumn: [['./assets/background/autumn/autumn-day-1', './assets/background/autumn/autumn-day-2', './assets/background/autumn/autumn-day-3',
       './assets/background/autumn/autumn-day-4', './assets/background/autumn/autumn-day-5', './assets/background/autumn/autumn-day-6',
       './assets/background/autumn/autumn-day-7'],
@@ -42,10 +45,12 @@ export default (function BackgroundModule() {
     let targetBackgroundList;
     // for define in console logic background
     /* eslint-disable no-console */
+    /* eslint-disable prefer-destructuring */
+    // did not understand how to destruct
     if ((month >= 0 && month <= 2) || month === '12') {
       if ((hour >= 0 && hour < 6) || hour >= 21) {
         console.log('winter night');
-        [targetBackgroundList] = backgroundList.winter[1];
+        targetBackgroundList = backgroundList.winter[1];
       } else {
         console.log('winter day');
         targetBackgroundList = backgroundList.winter[0];
@@ -78,6 +83,7 @@ export default (function BackgroundModule() {
         targetBackgroundList = backgroundList.autumn[0];
       }
       /* eslint-disable no-console */
+      /* eslint-disable prefer-destructuring */
     }
     return targetBackgroundList;
   };
@@ -85,7 +91,11 @@ export default (function BackgroundModule() {
 
   const renderBackground = async () => {
     const targetBackgroundList = await initBackgroundList();
-    node.style.background = `url(${targetBackgroundList[rnd(targetBackgroundList.length)]}.jpg), #303030`;
+    const bgImg = new Image();
+    bgImg.onload = function waitLoadBg() {
+      node.style.backgroundImage = `url(${bgImg.src})`;
+    };
+    bgImg.src = `${targetBackgroundList[rnd(targetBackgroundList.length)]}.jpg`;
     node.style.backgroundAttachment = 'fixed';
     node.style.backgroundRepeat = 'no-repeat';
     node.style.backgroundPosition = 'center';
