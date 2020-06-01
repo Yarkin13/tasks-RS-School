@@ -143,13 +143,13 @@ export default (function ControlBlockModule() {
     });
   };
 
-  /* eslint-disable new-cap */
-  /* eslint-disable no-undef */
+
   // why does he swear on built-in classes?
   const speech = (innerLang) => {
     const input = document.querySelector('.control-block__search-form__input');
     const btnSearch = document.querySelector('.control-block__search-form__btn');
-    const recognition = new webkitSpeechRecognition();
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
     recognition.lang = innerLang;
     recognition.start();
     recognition.onresult = (event) => {
@@ -157,8 +157,7 @@ export default (function ControlBlockModule() {
       btnSearch.click();
     };
   };
-  /* eslint-disable new-cap */
-  /* eslint-disable no-undef */
+
 
   return {
     render: renderControlBlock,

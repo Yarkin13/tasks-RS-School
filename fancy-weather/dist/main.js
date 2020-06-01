@@ -3988,17 +3988,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return function translate(_x) {
       return _ref.apply(this, arguments);
     };
-  }();
-  /* eslint-disable new-cap */
-
-  /* eslint-disable no-undef */
-  // why does he swear on built-in classes?
+  }(); // why does he swear on built-in classes?
 
 
   var speech = function speech(innerLang) {
     var input = document.querySelector('.control-block__search-form__input');
     var btnSearch = document.querySelector('.control-block__search-form__btn');
-    var recognition = new webkitSpeechRecognition();
+    var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    var recognition = new SpeechRecognition();
     recognition.lang = innerLang;
     recognition.start();
 
@@ -4007,10 +4004,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       btnSearch.click();
     };
   };
-  /* eslint-disable new-cap */
-
-  /* eslint-disable no-undef */
-
 
   return {
     render: renderControlBlock,
