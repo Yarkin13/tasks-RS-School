@@ -7,29 +7,17 @@ export async function getWords(page = 0, group = 0) {
   const arrayWords = await data.map(el => ({
     word: el.word,
     example: el.textExample.split(' '),
-    randomSequenceExample: el.textExample.split(' ').sort(() => Math.random() - 0.5),
-    endPuzzles: el.textExample.split(' ').length,
+    translate: el.textExampleTranslate,
+    audioSrc: el.audioExample,
   }));
 
 
-  let exampleFiltered = arrayWords.map((element, index) => {
-    return element.example.map(el => {
-      return el.replace(/<b>/gm, '').replace(/<\/b>/gm,'')
-    })
+  const exampleFiltered = arrayWords.map(element => element.example.map(el => el.replace(/<b>/gm, '').replace(/<\/b>/gm, '')));
+  arrayWords.forEach((el, index) => {
+    el.example = exampleFiltered[index];
   });
-  let randomSequenceExampleFiltered = arrayWords.map((element, index) => {
-    return element.randomSequenceExample.map(el => {
-      return el.replace(/<b>/gm, '').replace(/<\/b>/gm,'')
-    })
-  });
-  arrayWords.forEach((el, index)=> {
-    el.example = exampleFiltered[index]
-  })
-  arrayWords.forEach((el, index)=> {
-    el.randomSequenceExample = randomSequenceExampleFiltered[index]
-  })
-  state.currentExample = 1;
+
+  state.words = arrayWords;
   localStorage.setItem('state', JSON.stringify(state));
-  console.log(arrayWords)
   return arrayWords;
 }
