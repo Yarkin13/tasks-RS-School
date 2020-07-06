@@ -5249,7 +5249,7 @@ function _getOneDayWeatherData() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            url = "https://api.weatherbit.io/v2.0/forecast/hourly?&lat=".concat(lat, "&lon=").concat(lon, "&units=M&lang=EN&key=0b2e737dad394c418bcf5dba243da700&hours=48");
+            url = "https://api.weatherbit.io/v2.0/forecast/hourly?&lat=".concat(lat, "&lon=").concat(lon, "&units=M&lang=EN&key=c8e43f620d1241c6b4571e34e8707069&hours=48");
             _context.next = 3;
             return fetch(url);
 
@@ -5283,7 +5283,7 @@ function _getThreeDayWeatherData() {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            url = "https://api.weatherbit.io/v2.0/forecast/daily?&lat=".concat(lat, "&lon=").concat(lon, "&days=16&units=M&lang=EN&key=0b2e737dad394c418bcf5dba243da700");
+            url = "https://api.weatherbit.io/v2.0/forecast/daily?&lat=".concat(lat, "&lon=").concat(lon, "&days=16&units=M&lang=EN&key=c8e43f620d1241c6b4571e34e8707069");
             _context2.next = 3;
             return fetch(url);
 
